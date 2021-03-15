@@ -8,5 +8,3 @@ npm install
 
 
 Ife Ajibola – ife.jibola@gmail.com
-
-Distributed under the XYZ license. See LICENSE for more information.
