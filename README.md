@@ -7,4 +7,8 @@ NPM Version : 7.5.4
 npm install 
 
 
+# Starting/Running App:
+
+nodemon
+
 Ife Ajibola – ife.jibola@gmail.com
