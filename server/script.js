@@ -87,7 +87,7 @@ server.get('*', (req, res, next) => {
 //         console.log(err)
 //     }
 // })
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
 
     console.log("Drop and re-sync db..")
     server.listen(devConfig.port, () => {

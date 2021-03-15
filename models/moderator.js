@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     // Model Attributes 
     email: { type: Sequelize.STRING, allowNull: false },
     password: { type: Sequelize.STRING, allowNull: false, get() { return () => this.getDataValue('password') } },
-    salt: { type: Sequelize.STRING, allowNull: false, get() { return () => this.getDataValue('salt') } },
+    salt: { type: Sequelize.STRING, allowNull: true, get() { return () => this.getDataValue('salt') } },
     company: { type: Sequelize.STRING, allowNull: true },
     name: { type: Sequelize.STRING, allowNull: true },
     registered: { type: Sequelize.DATE, allowNull: true },
@@ -30,5 +30,6 @@ module.exports = (sequelize, DataTypes) => {
     freezeTableName: true // Model tableName will be the same as the model name 
 
   });
+
   return Moderator;
 };
