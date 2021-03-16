@@ -20,7 +20,7 @@ const signin = async (req, res) => {
             return res.status('401').json({
                 error: 'User not found'
             })
-        if (!mod.correctPassword(req.body.password)) {
+        if (!correctPassword(req.body.password)) {
             return res.status('401').send({
                 error: "Email and password don't match."
             })
