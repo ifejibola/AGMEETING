@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-// import {signin} from './api-mod'
+import { signin } from '../auth/api-auth'
 
 const moderatorLogin = (props) => {
 
@@ -18,15 +18,17 @@ const moderatorLogin = (props) => {
             password: values.password || undefined
         }
 
-        // signin(user).then((data) => {
-        //     if (data.error) {
-        //         setValues({ ...values, error: data.error })
-        //     } else{
-        //         auth.authenticate(data, ()=>{
-        //             setValues({...values, error: '', redirectToReferrer: true})
-        //         })
-        //     }
-        // })
+        signin(user).then((data) => {
+            if (data.error) {
+                setValues({ ...values, error: data.error })
+            } else {
+                auth.authenticate(data, () => {
+                    setValues({ ...values, error: '', redirectToReferrer: true })
+                })
+                alert('user in')
+
+            }
+        })
     }
 
     const handleChange = name => event => {
@@ -46,16 +48,16 @@ const moderatorLogin = (props) => {
         <Form inline>
             <FormGroup className="mb-2 me-sm-2 mb-sm-0">
                 <Label for="exampleEmail" className="me-sm-2">Email</Label>
-                <Input type="email" name="email" id="exampleEmail" placeholder="something@idk.cool" />
+                <Input type="email" name="email" id="email" value={values.email} onChange={handleChange('email')} placeholder="something@idk.cool" />
             </FormGroup>
             <FormGroup className="mb-2 me-sm-2 mb-sm-0">
                 <Label for="examplePassword" className="me-sm-2">Password</Label>
-                <Input type="password" name="password" id="password" placeholder="don't tell!" />
+                <Input type="password" name="password" id="password" value={values.password} onChange={handleChange('password')} placeholder="don't tell!" />
             </FormGroup>
             <br />{
                 values.error && (<span><h3>Error! {values.error}</h3></span>)
             }
-            <Button onClick={clickSubmit}>Submit</Button>
+            <Button type='submit' onClick={clickSubmit}>Submit</Button>
         </Form>
     );
 }

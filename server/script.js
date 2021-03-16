@@ -10,6 +10,7 @@ import helmet from 'helmet'
 
 import userRoutes from './routes/user.routes'
 import modRoutes from './routes/mod.routes'
+import modAuth from './routes/mod.auth.routes'
 import db from '../models';
 //SSR
 import React from 'react'
@@ -48,7 +49,7 @@ server.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 
 server.use('/', userRoutes)
 server.use('/', modRoutes)
-
+server.use('/', modAuth)
 
 
 server.get('*', (req, res, next) => {
@@ -87,7 +88,7 @@ server.get('*', (req, res, next) => {
 //         console.log(err)
 //     }
 // })
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync().then(() => {
 
     console.log("Drop and re-sync db..")
     server.listen(devConfig.port, () => {
