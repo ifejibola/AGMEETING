@@ -2,12 +2,51 @@ import { Moderator } from '../../models'
 import jwt from 'jsonwebtoken'
 import expressJwt from 'express-jwt'
 import config from './../../config/devConfig'
+import crypto from 'crypto'
 
+//Salt generation & encryption helper func
+Moderator.generateSalt = function () {
+    return crypto.randomBytes(16).toString('base64')
+}
+
+Moderator.encryptPassword = function (plainText, salt) {
+    if (!plainText) return ''
+    try {
+        return crypto
+            .createHmac('sha1', salt)
+            .update(plainText)
+            .digest('hex')
+    } catch (err) {
+        return ''
+    }
+}
+// Moderator.encryptPassword = function (plainText, salt) {
+//     return crypto
+//         .createHash('RSA-SHA256')
+//         .update(plainText)
+//         .update(salt)
+//         .digest('hex')
+// }
+
+// automatic password encryption using Sequelize hooks
+const setSaltAndPassword = mod => {
+    if (mod.changed('password')) {
+        mod.salt = Moderator.generateSalt()
+        mod.password = Moderator.encryptPassword(mod.password(), mod.salt())
+    }
+}
+
+Moderator.beforeCreate(setSaltAndPassword)
+Moderator.beforeUpdate(setSaltAndPassword)
 
 // Validate password
-Moderator.prototype.correctPassword = function (enteredPassword) {
-    return Moderator.encryptPassword(enteredPassword, this.salt()) === this.password()
+const correctPassword = function (enteredPassword, mod) {
+    return Moderator.encryptPassword(enteredPassword, mod.salt()) === mod.password()
 }
+// Moderator.prototype.correctPassword = (enteredPassword) => {
+//     return Moderator.encryptPassword(enteredPassword, Moderator.salt()) === Moderator.password()
+// }
+
 const signin = async (req, res) => {
     try {
         let mod = await Moderator.findOne({
@@ -20,7 +59,8 @@ const signin = async (req, res) => {
             return res.status('401').json({
                 error: 'User not found'
             })
-        if (!correctPassword(req.body.password)) {
+        // mod.correctPassword(req.body.password)
+        if (!correctPassword(req.body.password, mod)) {
             return res.status('401').send({
                 error: "Email and password don't match."
             })
@@ -50,7 +90,8 @@ const signin = async (req, res) => {
 const requireSignin = expressJwt({
     secret: config.jwtSecret,
     userProperty: 'auth',
-    algorithms: ['RS256']
+    algorithms: ['sha1']
+    // algorithms: ['sha1']
 })
 
 const hasAuthorization = (req, res, next) => {

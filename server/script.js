@@ -80,14 +80,14 @@ server.get('*', (req, res, next) => {
     }))
 
 })
-// server.use((err, req, res, next) => {
-//     if (err.name === 'UnauthorizedError') {
-//         res.status(401).json({ "error": err.name + ": " + err.message })
-//     } else if (err) {
-//         res.status(400).json({ "error": err.name + ": " + err.message })
-//         console.log(err)
-//     }
-// })
+server.use((err, req, res, next) => {
+    if (err.name === 'UnauthorizedError') {
+        res.status(401).json({ "error": err.name + ": " + err.message })
+    } else if (err) {
+        res.status(400).json({ "error": err.name + ": " + err.message })
+        console.log(err)
+    }
+})
 db.sequelize.sync().then(() => {
 
     console.log("Drop and re-sync db..")
@@ -96,8 +96,3 @@ db.sequelize.sync().then(() => {
         console.log(`Listening on port: ${devConfig.port}`);
     })
 })
-
-// server.listen(devConfig.port, () => {
-//     // console.log('%s listening at %s', server.name, server.url);
-//     console.log(`Listening on port: ${devConfig.port}`);
-// })

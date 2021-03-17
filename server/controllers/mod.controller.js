@@ -9,34 +9,6 @@ import crypto from 'crypto'
 
 // const Moderator = require('../../models/moderator')
 
-//Salt generation & encryption helper func
-Moderator.generateSalt = function () {
-    return crypto.randomBytes(16).toString('base64')
-}
-
-Moderator.encryptPassword = function (plainText, salt) {
-    return crypto
-        .createHash('RSA-SHA256')
-        .update(plainText)
-        .update(salt)
-        .digest('hex')
-}
-
-// automatic password encryption using Sequelize hooks
-const setSaltAndPassword = mod => {
-    if (mod.changed('password')) {
-        mod.salt = Moderator.generateSalt()
-        mod.password = Moderator.encryptPassword(mod.password(), mod.salt())
-    }
-}
-
-Moderator.beforeCreate(setSaltAndPassword)
-Moderator.beforeUpdate(setSaltAndPassword)
-
-// Validate password
-Moderator.prototype.correctPassword = function (enteredPassword) {
-    return Moderator.encryptPassword(enteredPassword, this.salt()) === this.password()
-}
 
 const create = async (req, res) => {
 

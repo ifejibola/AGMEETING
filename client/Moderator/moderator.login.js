@@ -22,9 +22,11 @@ const moderatorLogin = (props) => {
             if (data.error) {
                 setValues({ ...values, error: data.error })
             } else {
+
                 auth.authenticate(data, () => {
                     setValues({ ...values, error: '', redirectToReferrer: true })
                 })
+                console.log('im in from front end ')
                 alert('user in')
 
             }
