@@ -19,11 +19,11 @@ const isPartActive = (history, path) => {
 
 const Menu = withRouter(({ history }) => (
 
-  <nav class="navbar navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" aria-current="page" href="#"><span class="navbar-brand mb-0 h1">AGMEETING</span></a>
+  <nav className="navbar navbar-light bg-light">
+    <div className="container-fluid">
+      <a className="navbar-brand" href="/home"><span className="navbar-brand mb-0 h1">AGMEETING</span></a>
     </div>
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
       {
         !auth.isAuthenticated() && (<span>
           <Link to="/signup">
@@ -36,6 +36,7 @@ const Menu = withRouter(({ history }) => (
           </Link>
         </span>)
       }
+
     </ul>
   </nav>
 

@@ -9,6 +9,7 @@ Moderator.generateSalt = function () {
     return crypto.randomBytes(16).toString('base64')
 }
 
+// generate an encrypted hash from the plainText password and a unique salt value
 Moderator.encryptPassword = function (plainText, salt) {
     if (!plainText) return ''
     try {
@@ -40,12 +41,12 @@ Moderator.beforeCreate(setSaltAndPassword)
 Moderator.beforeUpdate(setSaltAndPassword)
 
 // Validate password
-const correctPassword = function (enteredPassword, mod) {
+// const correctPassword = function (enteredPassword, mod) {
+//     return Moderator.encryptPassword(enteredPassword, mod.salt()) === mod.password()
+// }
+Moderator.prototype.correctPassword = (enteredPassword, mod) => {
     return Moderator.encryptPassword(enteredPassword, mod.salt()) === mod.password()
 }
-// Moderator.prototype.correctPassword = (enteredPassword) => {
-//     return Moderator.encryptPassword(enteredPassword, Moderator.salt()) === Moderator.password()
-// }
 
 const signin = async (req, res) => {
     try {
@@ -55,16 +56,23 @@ const signin = async (req, res) => {
             }
         })
 
+        // verify existence of email 
         if (!mod)
             return res.status('401').json({
                 error: 'User not found'
             })
-        // mod.correctPassword(req.body.password)
-        if (!correctPassword(req.body.password, mod)) {
+
+        // Verify password 
+        if (!mod.correctPassword(req.body.password, mod)) {
             return res.status('401').send({
                 error: "Email and password don't match."
             })
         }
+        // if (!correctPassword(req.body.password, mod)) {
+        //     return res.status('401').send({
+        //         error: "Email and password don't match."
+        //     })
+        // }
 
         const token = jwt.sign({
             _id: mod._id
@@ -86,6 +94,11 @@ const signin = async (req, res) => {
     }
 }
 
+/*
+
+    Verify that the incoming request has a valid jwt in the Auth header.
+        If valid, apped modID in the 'auth' key to the req object
+*/
 
 const requireSignin = expressJwt({
     secret: config.jwtSecret,

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { signin } from '../auth/api-auth'
+import auth from '../auth/auth-helper'
 
 const moderatorLogin = (props) => {
 

@@ -37,6 +37,7 @@ const create = async (req, res) => {
 
 /*
     Load mod and append to req
+        fetches and loads the user based on user ID into the request object
 */
 const modByID = async (req, res, next, id) => {
     try {
@@ -55,7 +56,9 @@ const modByID = async (req, res, next, id) => {
     }
 }
 
-
+/*
+    executes modById to load the user by the userId value, then read func
+*/
 const read = (req, res) => {
     //remove sensitive information when loading profile
     req.profile.hashed_password = undefined
