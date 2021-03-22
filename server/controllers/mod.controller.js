@@ -61,7 +61,7 @@ const modByID = async (req, res, next, id) => {
 */
 const read = (req, res) => {
     //remove sensitive information when loading profile
-    req.profile.hashed_password = undefined
+    req.profile.password = undefined
     req.profile.salt = undefined
     return res.json(res.profile)
 }

@@ -5,16 +5,17 @@ import ModeratorLogin from './Moderator/moderator.login'
 import signup from './Moderator/signup.js';
 import test from './Moderator/test.js';
 import Menu from './core/Menu'
+import ModHome from './Moderator/Home'
 
 
 const MainRouter = () => {
     return (<div>
         <Menu />
         <Switch>
-            <Route exact path="/home" component={Home} />
+            <Route exact path="/" component={Home} />
             <Route path="/msignup" component={signup} />
             <Route path="/signin" component={ModeratorLogin} />
-            <Route path="/test" component={test} />
+            <Route path="/mhome" component={ModHome} />
 
         </Switch>
     </div>)

@@ -21,6 +21,7 @@ const moderatorLogin = (props) => {
 
         signin(user).then((data) => {
             if (data.error) {
+                alert("you didnt login")
                 setValues({ ...values, error: data.error })
             } else {
 

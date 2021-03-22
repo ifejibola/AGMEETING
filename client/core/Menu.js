@@ -21,23 +21,25 @@ const Menu = withRouter(({ history }) => (
 
   <nav className="navbar navbar-light bg-light">
     <div className="container-fluid">
-      <a className="navbar-brand" href="/home"><span className="navbar-brand mb-0 h1">AGMEETING</span></a>
-    </div>
-    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-      {
-        !auth.isAuthenticated() && (<span>
-          <Link to="/signup">
-            <Button style={isActive(history, "/msignup")}>Sign up
+      <a className="navbar-brand" href="/"><span className="navbar-brand mb-0 h1">AGMEETING</span></a>
+      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+        {
+          !auth.isAuthenticated() && (<span>
+            <Link to="/signup">
+              <Button style={isActive(history, "/msignup"), { float: 'right' }}>Sign up
             </Button>
-          </Link>
-          <Link to="/signin">
-            <Button style={isActive(history, "/signin")}>Sign In
-            </Button>
-          </Link>
-        </span>)
-      }
+            </Link>
 
-    </ul>
+            <Link to="/signin">
+              <Button style={isActive(history, "/signin"), { float: 'right' }}>Sign In
+            </Button>
+            </Link>
+          </span>)
+        }
+
+      </ul>
+    </div>
+
   </nav>
 
 ))
