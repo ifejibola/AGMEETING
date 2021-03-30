@@ -26,7 +26,7 @@ const config = {
             "stream": require.resolve("stream-browserify"),
             "buffer": require.resolve("buffer/"),
         },
-        // extensions: ['.js', '.jsx']
+        extensions: ['.js', '.jsx']
     },
     externals: ["fs"],
     stats: 'errors-only',

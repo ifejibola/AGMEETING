@@ -1,5 +1,5 @@
+
 import express from 'express'
-import { Sequelize, Model, DataType } from 'sequelize'
 import path from 'path'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
@@ -16,6 +16,7 @@ import db from '../models';
 import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
+import { ServerStyleSheet, StyleSheetManager } from 'styled-components'
 
 
 import devBundle from './devBundle'
@@ -23,9 +24,8 @@ import devBundle from './devBundle'
 import devConfig from '../config/devConfig'
 import config from '../config/devConfig'
 import Template from '../template'
-import Home from '../client/core/Home'
-import theme from '../client/theme'
 import MainRouter from '../client/MainRouter'
+import css from '../styles.js'
 import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles'
 
 
@@ -53,30 +53,23 @@ server.use('/', modAuth)
 
 
 server.get('*', (req, res, next) => {
-    // const sheets = new ServerStyleSheets()
+    const sheet = new ServerStyleSheet()
     const context = {}
-    // const markup = ReactDOMServer.renderToString(
-    //     sheets.collect(
-    //         <StaticRouter location={req.url} context={context}>
-    //             <ThemeProvider theme={theme}>
-    //                 <MainRouter />
-    //             </ThemeProvider>
-    //         </StaticRouter>
-    //     )
-    // )
+
     const markup = ReactDOMServer.renderToString(
+
 
         <StaticRouter location={req.url} context={context}>
             <MainRouter />
         </StaticRouter>
+
     )
     if (context.url) {
         return res.redirect(303, context.url)
     }
-    // const css = sheets.toString()
+
     res.status(200).send(Template({
         markup: markup,
-        // css: css
     }))
 
 })

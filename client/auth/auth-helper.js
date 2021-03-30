@@ -1,4 +1,4 @@
-
+import { signout } from './api-auth.js'
 
 const auth = {
     isAuthenticated() {
@@ -21,7 +21,9 @@ const auth = {
             sessionStorage.removeItem('jwt')
         cb()
         //optional
-
+        signout().then((data) => {
+            document.cookie = "t=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+        })
     },
     updateMod(mod, cb) {
         if (typeof window !== "undefined") {
