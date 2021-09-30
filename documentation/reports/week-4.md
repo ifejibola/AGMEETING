@@ -27,3 +27,12 @@ This week we mainly focused on documentation and learning about how to use the s
 - Vault function enables participants to readily access any documents shared by the moderator or administrator.
 - Administrators ensure the meeting is setup properly and oversees issues with participants, but are unable to participate unless they login under a different account.
 - Administrators are able to adjust many general features, such as Event Name, Number of Comments per User, and Time for the Voting Session.
+
+### Ryan 
+
+- AGMeeting is designed to be used on any device with a mobile browser and, can be used for any type of meeting based on the user's needs/preferences
+- Meeting minutes can be saved at any point by any role within the meeting using the save meeting log button in the in session tab
+- Any time buttons allow users to suggest actions taken during the meeting which the administrator or moderator can use or discard
+- Automated buttons allow users to motion agenda items and vote on them accordingly, these options ar only available when designated by the administrator/moderator
+- When a user logs in and out a red popup message appears in the top right corner of the administrator's screen
+
