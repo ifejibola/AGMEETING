@@ -23,4 +23,4 @@ report/presentation.
 - When a voting item is taking place on the agenda, the moderator has the option to designate a certain time period for the vote as well as the items to be voted on
 - When an AnyTime button request is made the moderator recieves a popup window which remaind until the issue is resolved.
 - To start an agenda itme the moderator presses the `Presentation in Progress` button and the In Session and Agenda fields update to reflect the change.
-- At the end of the meeting , the meeting structure can be reset for use in another meeting or cleared.
+- At the end of the meeting, the meeting structure can be reset for use in another meeting or cleared.
