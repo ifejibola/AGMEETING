@@ -1,8 +1,7 @@
 # Week 6 Team Report
 
-This week was spent on recording and compiling the video presentation, completing all the group evaluations, as well
-  as preparing the written report for submission next week.
-
+This week was spent on recording and compiling the video presentation, completing all the group evaluations, as well as
+preparing the written report for submission next week.
 
 ### Carson's Tasks
 
