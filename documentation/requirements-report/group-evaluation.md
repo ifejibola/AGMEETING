@@ -42,6 +42,14 @@ All members of the team contributed to each of the group evaluations.
 
 ### woo woo network
 
+- It seemed that your requirements are well-developed, although as a group we were unsure what the current issues are
+  with the backend. Will you be required to write the entire backend from scratch, or will you be modifying the existing
+  backend to improve it? If the backend is being written from scratch what made you choose to go with PHP for the
+  language?
+- The testing was fairly straightforward and will ensure your code behaves as expected. The only section that we were
+  unsure about is how you were going to implement integration for your testing. Were you planning on implementing
+  continuous integration in GitLab/Digital Ocean?
+
 ### woo woo network (1)
 
 ### woo woo network (2)
