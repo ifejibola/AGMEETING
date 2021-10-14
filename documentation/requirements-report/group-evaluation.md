@@ -42,6 +42,15 @@ All members of the team contributed to each of the group evaluations.
 
 ### Cyclops (2)
 
+- The differences between the target user groups were presented clearly, it was very clear what users should be able to
+  do, and what the administrators should be able to do. It was unclear what the difference is between individual users
+  and organizations, this was mentioned as two categories of the user group but was not elaborated upon. How do these
+  two groups differ in terms of what they are able to do in the app?
+- The different types of testing were clearly explained in the presentation, automated testing was mentioned and the
+  different types were explained. The group mentioned that continuous integration would be used. It was not clear what
+  types of automated testing the group is planning on using in the project, or if they plan on using multiple types. How
+  will continuous integration be implemented to ensure the code works as expected before merging in new features?
+
 ### Ethics Dashboard
 
 ### Ethics Dashboard (1)
