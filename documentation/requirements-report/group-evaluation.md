@@ -61,3 +61,11 @@ All members of the team contributed to each of the group evaluations.
   to implement to ensure that everything remains secure?
 
 ### woo woo network (2)
+
+- The presentation was clear that the users will be able to request a booking. How are these bookings managed within the
+  system? What will prevent other users from booking an appointment at the same time? Will this be handled by a human,
+  or by software?
+- The presentation very clearly stated the processes the team will follow for all aspects of testing. It mentioned the
+  technologies that would be used for back-end testing. What framework/technologies will be used to test the front-end?
+  Will you be automating the regression testing or will it be done manually?
+
