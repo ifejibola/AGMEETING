@@ -52,4 +52,12 @@ All members of the team contributed to each of the group evaluations.
 
 ### woo woo network (1)
 
+- The presentation provided a very clear description of the target user groups, and how they will interact with the
+  website. The presentation mentioned that both user groups can register/log in. Will there be any measures in place to
+  ensure that only verified healers can register as healers on the website?
+- The presentation presented all the technologies that will be used for the project. In terms of security, it was
+  mentioned stripe would be used for payments. How does stripe handle security and ensures that a user’s payment details
+  remain secure? How will the website ensure a patient’s health records remain secure? Is there anything you will need
+  to implement to ensure that everything remains secure?
+
 ### woo woo network (2)
