@@ -31,6 +31,15 @@ All members of the team contributed to each of the group evaluations.
 
 ### Cyclops (1)
 
+- The visual of the eco-tracker was helpful and made the purpose of the mobile app much clearer. In terms of the
+  eco-tracker, security is important when it comes to a user’s data. What data will need to be collected for the
+  eco-tracker to work as expected? How will the software ensure security and protect the user’s data? What
+  authentication will be used to protect it?
+- It was interesting that Ruby on Rails provides options for easy unit testing of the group’s code. It was mentioned
+  that code would need to be reviewed before being merged which greatly helps with preventing bugs, and other issues. It
+  was not as clear what other forms of testing would be implemented in the project. Will continuous integration be
+  implemented to ensure that new code does not break the main build? Will integration testing be implemented?
+
 ### Cyclops (2)
 
 ### Ethics Dashboard
