@@ -16,3 +16,9 @@ preparing the written report for submission next week.
 - Edited and improved the Program description and User group sections of the written report
 - Compiled requirements video
 - Contributed to group evaluaton for other groups' requirements presentation
+
+### Garry's Tasks
+
+- Recorded the data flow diagram section of the requirements presentation.
+- Worked on improving non-functional requirements and level 0 and level 1 data flow diagrams of the written report.
+- Contributed to the group evaluations of other team's presentations in the class.
