@@ -22,3 +22,9 @@ preparing the written report for submission next week.
 - Recorded the data flow diagram section of the requirements presentation.
 - Worked on improving non-functional requirements and level 0 and level 1 data flow diagrams of the written report.
 - Contributed to the group evaluations of other team's presentations in the class.
+
+## Chester's Tasks
+- Recorded functional and non-functional requirement presentation.
+- Contributed to the group evaluations of other team's presentations in the class.
+- Compiled and organized minutes.
+- Worked on functional requirements report.
