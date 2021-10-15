@@ -77,7 +77,13 @@ All members of the team contributed to each of the group evaluations.
 
 ### Medical Image Matching
 
+- Everyone presented at a clear and concise pace. The presentation had a nice, simple, and consistent theme. The tech stack section of the presentation shows that your team did research before making an informed decision and the data flow diagram was detailed and accurately represents the flow of data. Functional and non-functional requirements are well formulated; however, the unit testing part of the presentation was too cluttered with text. 
+- Who are your user groups and how will different user groups interact with the application? Is there a security aspect to matching medical images if it involves patient data?
+
 ### Medical Image Matching (1)
+
+- Nice, clean, simple theme for the presentation, and everything was well articulated and easy to follow. The introduction was strong and to the point. Pros and cons of each tech stack are well documented, demonstrating that much thought was put into researching tech stacks. The testing strategy of the presentation documents a clear progression for the development of the project. The data flow diagram could be more detailed. The non-functional requirements section of the video presentation seemed short and could be further expanded upon. 
+- Which library will you actually be using for the project? How will you ensure your data is secure? 
 
 ### Medical Image De-Identification
 
