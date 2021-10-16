@@ -19,7 +19,22 @@ All members of the team contributed to each of the group evaluations.
 
 ### AGMEETING
 
+- We would have liked to see a more in depth analysis of the user groups for this software. Is everyone using the 
+  software going to be interacting with it in the same way? HOw will different meeting sizes affect usage of the app? 
+  How will users be using the app for different meeting types?
+- When talking about scalability in the non fucntional requirments section we were curious about your group's aproach to handling
+  the participation limits for the meetings. Is there a cartain capacity threshold that the application should support? How will 
+  your group be handling larger meeting sizes?
+
 ### AGMEETING (2)
+
+- We would have liked to see more detail for your target user groups. You mentioned that this software would be used 
+  by any kind of company looking for a meeting supplement. How are different sized companies going to use the software 
+  differently? Is there any other potential users other than companies?
+- The functional requirements were outlined well in this video.
+- In your testing strategy you mention that TravisCI will improve performance and efficiency but there is no further 
+  elaboration on the techniques used. How will TravisCI improve efficiency? Is there any other tecniques used other 
+  than automating testing and building?
 
 ### CHECKLICK
 
@@ -71,9 +86,27 @@ All members of the team contributed to each of the group evaluations.
 
 ### Ethics Dashboard
 
+- We were unsure about the testing strategy mantioned in the video. Will your group be solely relying on rollbacks to combat 
+  code conflicts? Is there any type of continuous integration tool that will be used? How will incoming code be tested before it 
+  can be merged into the existing codebase?
+- In your functional requirements section the requirements for the dashboard were well organized into the milestones listed. However, 
+  the project description mentioned that teachers would be able to grade and review student work and this feature did not appear in any 
+  of the milestones listed. When and how do you plan on implementing this feature?
+
 ### Ethics Dashboard (1)
 
+- The tech stack indicated was well explained and documented, however, there was no alternatives supplied or reasoning as to why these specific 
+  languages/frameworks were chosen. Is there any other options that your team discussed for the tech stack? Why did your team make the decisions you did?
+- It is mentioned in your DFD that potential users of the app will go through a login phase in order to access their own specific dashboards. 
+  How will the non functional requirement of security be handled? what steps will your group take in order to ensure that the databases for student work, 
+  as well as their login credentials, are protected?
+
 ### Ethics Dashboard (2)
+
+- We would have liked to see a bit more explanation into the chosen tech stack, especially the rationale behind the chosen frameworks/languages. Is 
+  there other options that your group considered? How will the chosen tech stack be the best possible option for your client?
+- The level 0 DFD is HUGE. Consider scaling back a bit as this level of DFD is meant to only show one node containing the process and its connection 
+  to externalities (client, admin, etc.) Too much information here.
 
 ### Medical Image Matching
 
