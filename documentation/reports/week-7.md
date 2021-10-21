@@ -29,4 +29,5 @@ stories due to communication issues.
 
 - Created user stories for the `Participant` role.
 - Incorporated feedback from the requirements presentation into the level 0 and level 1 data flow diagrams and non-functional requirements of the report.
+- Prepared issues to present to the client during the meeting.
 - Created and submitted peer evaluations.
