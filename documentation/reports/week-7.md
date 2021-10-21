@@ -10,3 +10,10 @@ stories due to communication issues.
 - Created user stories for the `Administrator` role.
 - Incorporated feedback from the requirements' presentation into the tech stack and testing sections of the report.
 - Created and submitted peer evaluations.
+
+### Ryan's Tasks
+
+- Created user storie for the `Moderator` role.
+- Incorporated feedback for Project Descriptions and Target User Groups into the Requirements report.
+- Reviewed and Submitted Requirements report.
+- Created and submitted peer evaluations.
