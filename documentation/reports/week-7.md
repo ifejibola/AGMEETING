@@ -13,7 +13,14 @@ stories due to communication issues.
 
 ### Ryan's Tasks
 
-- Created user storie for the `Moderator` role.
+- Created user stories for the `Moderator` role.
 - Incorporated feedback for Project Descriptions and Target User Groups into the Requirements report.
 - Reviewed and Submitted Requirements report.
 - Created and submitted peer evaluations.
+
+### Chester's Tasks
+
+- Added additional user stories for 'Administrator', 'Moderator' and 'Participants'.
+- Incorporated feedback from requirements presentation into functional requirements and Q&A of report.
+- Created and submitted peer evaluations.
+- Created meeting minutes report.
