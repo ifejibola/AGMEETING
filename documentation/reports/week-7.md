@@ -24,3 +24,9 @@ stories due to communication issues.
 - Incorporated feedback from requirements presentation into functional requirements and Q&A of report.
 - Created and submitted peer evaluations.
 - Created meeting minutes report.
+
+### Garry's Tasks
+
+- Created user stories for the `Participant` role.
+- Incorporated feedback from the requirements presentation into the level 0 and level 1 data flow diagrams and non-functional requirements of the report.
+- Created and submitted peer evaluations.
