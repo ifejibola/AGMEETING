@@ -1,22 +1,10 @@
 import React from "react";
-import { Outlet } from "react-router";
 
-function About() {
+export default function About() {
 
     return (
         <>
-
-            <br />
-            <br />
-            <br />
-            <br />
-            This is ABout PAGE Componenet is passed as an Outlet.
-            {/* <DashboardLayout /> */}
-
-            {/* <Outlet /> */}
-
+            This is an About PAGE Component.
         </>
     )
 };
-
-export default About;

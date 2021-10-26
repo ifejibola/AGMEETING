@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import {Link as RouterLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { AppBar, Box, IconButton, Toolbar } from '@mui/material';
-import { experimentalStyled } from "@mui/material";
+import {AppBar, Box, IconButton, Toolbar} from '@mui/material';
+import {experimentalStyled} from "@mui/material";
 // import MenuIcon from '../../icons/Menu';
 // import AccountPopover from './AccountPopover';
 // import ContactsPopover from './ContactsPopover';
@@ -11,7 +11,7 @@ import { experimentalStyled } from "@mui/material";
 // import Logo from '../Logo';
 // import NotificationsPopover from './NotificationsPopover';
 
-const DashboardNavbarRoot = experimentalStyled(AppBar)(({ theme }) => ({
+const DashboardNavbarRoot = experimentalStyled(AppBar)(({theme}) => ({
     ...(theme.palette.mode === 'light' && {
         backgroundColor: theme.palette.primary.main,
         boxShadow: 'none',
@@ -26,11 +26,11 @@ const DashboardNavbarRoot = experimentalStyled(AppBar)(({ theme }) => ({
 }));
 
 const NavBar = (props) => {
-    const { onSidebarMobileOpen, ...other } = props;
+    const {onSidebarMobileOpen, ...other} = props;
 
     return (
         <DashboardNavbarRoot {...other}>
-            <Toolbar sx={{ minHeight: 64 }}>
+            <Toolbar sx={{minHeight: 64}}>
                 <IconButton
                     color="inherit"
                     onClick={onSidebarMobileOpen}
@@ -61,16 +61,16 @@ const NavBar = (props) => {
                     }}
                 />
                 {/* <LanguagePopover /> */}
-                <Box sx={{ ml: 1 }}>
+                <Box sx={{ml: 1}}>
                     {/* <ContentSearch /> */}
                 </Box>
-                <Box sx={{ ml: 1 }}>
+                <Box sx={{ml: 1}}>
                     {/* <ContactsPopover /> */}
                 </Box>
-                <Box sx={{ ml: 1 }}>
+                <Box sx={{ml: 1}}>
                     {/* <NotificationsPopover /> */}
                 </Box>
-                <Box sx={{ ml: 2 }}>
+                <Box sx={{ml: 2}}>
                     {/* <AccountPopover /> */}
                 </Box>
             </Toolbar>

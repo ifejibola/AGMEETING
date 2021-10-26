@@ -1,13 +1,12 @@
 import React from "react";
-import { useState } from "react";
-import { Link, Outlet } from 'react-router-dom'
-import { experimentalStyled } from "@mui/material";
+import {useState} from "react";
+import {experimentalStyled} from "@mui/material";
 
 import NavBar from './NavBar';
 import DashboardSidebar from "./DashboardSidebar";
 
 
-const DashboardLayoutRoot = experimentalStyled('div')(({ theme }) => ({
+const DashboardLayoutRoot = experimentalStyled('div')(({theme}) => ({
     backgroundColor: theme.palette.background.default,
     display: 'flex',
     height: '100%',
@@ -15,7 +14,7 @@ const DashboardLayoutRoot = experimentalStyled('div')(({ theme }) => ({
     width: '100%',
 }));
 
-const DashboardLayoutWrapper = experimentalStyled('div')(({ theme }) => ({
+const DashboardLayoutWrapper = experimentalStyled('div')(({theme}) => ({
     display: 'flex',
     flex: '1 1 auto',
     overflow: 'hidden',
@@ -44,7 +43,7 @@ const DashboardLayout = () => {
 
     return (
         <DashboardLayoutRoot>
-            <NavBar onSidebarMobileOpen={() => setIsSidebarMobileOpen(true)} />
+            <NavBar onSidebarMobileOpen={() => setIsSidebarMobileOpen(true)}/>
             <DashboardSidebar
                 onMobileClose={() => setIsSidebarMobileOpen(false)}
                 openMobile={isSidebarMobileOpen}
@@ -52,7 +51,7 @@ const DashboardLayout = () => {
             <DashboardLayoutWrapper>
                 <DashboardLayoutContainer>
                     <DashboardLayoutContent>
-                        <Outlet />
+                        <Outlet/>
                     </DashboardLayoutContent>
                 </DashboardLayoutContainer>
             </DashboardLayoutWrapper>

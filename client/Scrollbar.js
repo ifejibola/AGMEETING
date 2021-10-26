@@ -1,37 +1,37 @@
 import React from "react";
-import { forwardRef } from 'react';
+import {forwardRef} from 'react';
 import PropTypes from 'prop-types';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-import { Box } from '@mui/material';
+import {Box} from '@mui/material';
 
 const Scrollbar = forwardRef((props, ref) => {
-  const { children, ...other } = props;
+    const {children, ...other} = props;
 
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-  if (isMobile) {
+    if (isMobile) {
+        return (
+            <Box
+                ref={ref}
+                sx={{overflowX: 'auto'}}
+            >
+                {children}
+            </Box>
+        );
+    }
+
     return (
-      <Box
-        ref={ref}
-        sx={{ overflowX: 'auto' }}
-      >
-        {children}
-      </Box>
+        <PerfectScrollbar
+            ref={ref}
+            {...other}
+        >
+            {children}
+        </PerfectScrollbar>
     );
-  }
-
-  return (
-    <PerfectScrollbar
-      ref={ref}
-      {...other}
-    >
-      {children}
-    </PerfectScrollbar>
-  );
 });
 
 Scrollbar.propTypes = {
-  children: PropTypes.node
+    children: PropTypes.node
 };
 
 export default Scrollbar;
