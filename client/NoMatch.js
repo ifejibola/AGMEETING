@@ -1,5 +1,6 @@
 import React from "react";
-function NoMatch() {
+
+export default function NoMatch() {
 
     return (
         <>
@@ -7,5 +8,3 @@ function NoMatch() {
         </>
     )
 };
-
-export default NoMatch;

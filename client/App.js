@@ -1,11 +1,13 @@
 import React from "react";
+import {Route, Switch} from "react-router-dom";
+import Land from "./Land";
+import About from "./About";
 
-function App(props) {
+export default function App() {
     return (
-        <>
-            FRONT-END
-        </>
+        <Switch>
+            <Route exact path="/" component={Land}/>
+            <Route exact path="/about" component={About}/>
+        </Switch>
     );
 };
-
-export default App;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
     Box,
     Button,
@@ -10,7 +10,7 @@ import {
     Tooltip,
     Typography
 } from '@material-ui/core';
-import { THEMES } from '../config/theme/constants';
+import {THEMES} from '../config/theme/constants';
 import useSettings from './hooks/useSettings';
 // import AdjustmentsIcon from '../icons/Adjustments';
 
@@ -23,7 +23,7 @@ const getValues = (settings) => ({
 });
 
 const SettingsDrawer = () => {
-    const { settings, saveSettings } = useSettings();
+    const {settings, saveSettings} = useSettings();
     const [open, setOpen] = useState(false);
     const [values, setValues] = useState(getValues(settings));
 
@@ -86,14 +86,14 @@ const SettingsDrawer = () => {
                 >
                     Settings
                 </Typography>
-                <Box sx={{ mt: 3 }}>
+                <Box sx={{mt: 3}}>
                     <TextField
                         fullWidth
                         label="Theme"
                         name="theme"
                         onChange={(event) => handleChange('theme', event.target.value)}
                         select
-                        SelectProps={{ native: true }}
+                        SelectProps={{native: true}}
                         value={values.theme}
                         variant="outlined"
                     >
@@ -232,7 +232,7 @@ const SettingsDrawer = () => {
                         )}
                     />
                 </Box>
-                <Box sx={{ mt: 3 }}>
+                <Box sx={{mt: 3}}>
                     <Button
                         color="primary"
                         fullWidth
