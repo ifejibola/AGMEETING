@@ -20,6 +20,10 @@ app.get("/", (req, res) => {
     });
 });
 
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../public', 'index.html'));
+});
+
 
 app.listen(port, () => {
     console.log(`The app server is running on port: ${port}`);
