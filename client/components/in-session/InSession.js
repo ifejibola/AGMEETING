@@ -2,8 +2,6 @@ import React, {useState} from "react";
 import {
     Box,
     Card,
-    CardHeader,
-    Divider,
     Table, TableBody, TableCell,
     TableHead,
     TableRow,
@@ -20,39 +18,47 @@ const items = [
             'ETC...'
         ]
     },
+    {
+        title: 'Second Section',
+        items: [
+            'Meeting Stuff',
+            'Motion',
+            'ETC...'
+        ]
+    }
 ];
 
 const statusOptions = ['In Progress', 'Standing By for Motion', 'Standing by for Second', 'Approved', 'Closed'];
 
 const content = items.map((item) =>
-    <Table>
+    <Table key={item.title}>
         <TableHead>
             <TableRow>
-                <TableCell key={item.title}>
+                <TableCell>
                     <Typography color="textPrimary" variant="h5">{item.title}</Typography>
                 </TableCell>
             </TableRow>
         </TableHead>
-        {item.items.map((item) =>
-            <TableBody>
+        <TableBody>
+            {item.items.map((item) =>
                 <TableRow>
                     <TableCell key={item}>
                         <Typography color="textPrimary" variant="subtitle1">{item}</Typography>
                     </TableCell>
                 </TableRow>
-            </TableBody>
-        )}
+            )}
+        </TableBody>
     </Table>
 );
 
 const InSession = () => {
-    const [status, setStatus] = useState(statusOptions[0]);
+        const [status, setStatus] = useState(statusOptions[0]);
 
-    const handleChange = (event) => {
-        setStatus(event.target.value);
-    };
+        const handleChange = (event) => {
+            setStatus(event.target.value);
+        };
 
-    return (
+        return (
             <Box sx={{
                 backgroundColor: 'background.default',
                 minHeight: '100%',
@@ -62,7 +68,8 @@ const InSession = () => {
                     {content}
                 </Card>
             </Box>
-    );
-};
+        );
+    }
+;
 
 export default InSession;
