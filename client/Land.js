@@ -4,9 +4,7 @@ export default function Land() {
 
     return (
         <>
-            <h1>
-                LANDING PAGE!
-            </h1>
+            <h1>LANDING PAGE!</h1>
         </>
     );
 };
