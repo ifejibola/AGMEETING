@@ -4,6 +4,7 @@ import {experimentalStyled} from "@mui/material";
 
 import NavBar from './NavBar';
 import DashboardSidebar from "./DashboardSidebar";
+import {Outlet} from "react-router-dom";
 
 
 const DashboardLayoutRoot = experimentalStyled('div')(({theme}) => ({

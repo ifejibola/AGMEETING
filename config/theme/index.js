@@ -262,8 +262,6 @@ export const createCustomTheme = (config = {}) => {
     }
     ));
 
-    console.log(theme)
-
     if (config.responsiveFontSizes) {
         theme = responsiveFontSizes(theme);
     }

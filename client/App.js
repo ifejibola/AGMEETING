@@ -1,22 +1,40 @@
-import React from "react";
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
-import Land from "./Land";
-import About from "./About";
-import InSession from "./components/in-session/InSession";
-import NoMatch from "./NoMatch";
+import React, {useEffect} from "react";
+import routes from "./routes";
+import {ThemeProvider} from '@mui/material/styles';
+import {createCustomTheme} from '../config/theme';
+import RTL from './RTL'
+import ErrorBoundary from "./Errorbound";
+import useSettings from "./hooks/useSettings";
+import {useRoutes} from "react-router";
 
 export default function App() {
+
+    const {settings} = useSettings();
+
+    const theme = createCustomTheme({
+        direction: settings.direction,
+        responsiveFontSizes: settings.responsiveFontSizes,
+        roundedCorners: settings.roundedCorners,
+        theme: settings.theme
+    });
+
+    const content = useRoutes(routes);
+
+    useEffect(() => {
+    })
+
     return (
-        <Router>
-            <Link to="/">Landing Page</Link><br/>
-            <Link to="/session">In Session Page</Link><br/>
-            <Link to="/about">About Page</Link><br/>
-            <Switch>
-                <Route exact path="/" component={Land}/>
-                <Route exact path="/about" component={About}/>
-                <Route exact path="/session" component={InSession}/>
-                <Route component={NoMatch}/>
-            </Switch>
-        </Router>
+        <ErrorBoundary>
+            <ThemeProvider theme={theme}>
+                <RTL direction={settings.direction}>
+                    {/* <CssBaseline /> */}
+                    {/* <Toaster position="top-center" /> */}
+                    {/* <SettingsDrawer /> */}
+                    {content}
+                    {/* Declarative route */}
+                    {/* <Routes /> */}
+                </RTL>
+            </ThemeProvider>
+        </ErrorBoundary>
     );
 };
