@@ -21,10 +21,6 @@ const RTL = (props) => {
     }, [direction]);
 
     if (direction === 'rtl') {
-        console.log('direction?? ', direction)
-        console.log('children?? ', children)
-        // console.log('children?? ', children)
-        console.log('props?? ', props)
         return (
             <CacheProvider value={styleCache()}>
                 {children}

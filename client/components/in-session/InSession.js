@@ -7,6 +7,7 @@ import {
     TableRow,
     Typography
 } from '@material-ui/core';
+import {Outlet} from "@material-ui/icons";
 
 const items = [
     {
