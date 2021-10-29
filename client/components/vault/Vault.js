@@ -57,11 +57,6 @@ const elems = [
 
 const statusOptions = ['In Progress', 'Standing By for Motion', 'Approved', 'Closed'];
 
-const labelColorsMap = {
-    draft: 'secondary',
-    active: 'success',
-    stopped: 'error'
-};
 
 const content = (
     <Box
