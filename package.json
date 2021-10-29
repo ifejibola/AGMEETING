@@ -4,8 +4,9 @@
   "description": "",
   "main": "server/server.js",
   "scripts": {
-    "build-client": "webpack --config webpack.client.js --watch",
-    "dev": "nodemon server/server.js",
+    "all": "npm-run-all --parallel dev:*",
+    "dev:build-client": "webpack --config webpack.client.js --watch",
+    "dev:start": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Ife Ajibola",

@@ -1,22 +1,59 @@
-import React from "react";
-import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
-import Land from "./Land";
-import About from "./About";
-import InSession from "./components/in-session/InSession";
-import NoMatch from "./NoMatch";
+import React, { useEffect } from "react";
+// import { ThemeProvider } from '@mui/material/styles';
 
-export default function App() {
+//Routes
+import Routes from "./routes";
+// import routes from './routes'
+import { useRoutes } from "react-router";
+
+
+//Material UI
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline } from "@mui/material";
+import { createCustomTheme } from '../config/theme';
+import { Toaster } from "react-hot-toast";
+
+import RTL from './RTL'
+import SettingsDrawer from './SettingsDrawer'
+import { THEMES } from '../config/theme/constants';
+import ErrorBoundary from "./Errorbound";
+import useSettings from "./hooks/useSettings";
+
+function App(props) {
+
+    const { settings } = useSettings();
+
+    // const theme = createCustomTheme({
+    //     theme: THEMES.LIGHT
+    // });
+
+    const theme = createCustomTheme({
+        direction: settings.direction,
+        responsiveFontSizes: settings.responsiveFontSizes,
+        roundedCorners: settings.roundedCorners,
+        theme: settings.theme
+    });
+
+    const content = useRoutes(Routes);
+
+    useEffect(() => {
+        console.log('app.js')
+    })
+
     return (
-        <Router>
-            <Link to="/">Landing Page</Link><br/>
-            <Link to="/session">In Session Page</Link><br/>
-            <Link to="/about">About Page</Link><br/>
-            <Switch>
-                <Route exact path="/" component={Land}/>
-                <Route exact path="/about" component={About}/>
-                <Route exact path="/session" component={InSession}/>
-                <Route component={NoMatch}/>
-            </Switch>
-        </Router>
+        <ErrorBoundary>
+            <ThemeProvider theme={theme}>
+                <RTL direction={settings.direction}>
+                    {/* <CssBaseline /> */}
+                    {/* <Toaster position="top-center" /> */}
+                    {/* <SettingsDrawer /> */}
+                    {content}
+                    {/* Declarative route */}
+                    {/* <Routes /> */}
+                </RTL>
+            </ThemeProvider>
+        </ErrorBoundary>
     );
 };
+
+export default App;
