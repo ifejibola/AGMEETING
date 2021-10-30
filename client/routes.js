@@ -5,6 +5,7 @@ import NoMatch from './NoMatch';
 import DashboardLayout from "./components/dashboard/Layout";
 import InSession from "./components/in-session/InSession";
 import Vault from "./components/vault/Vault.js";
+import Agenda from "./components/agenda/Agenda.js";
 import Interactions from "./components/interactions/Interactions.js";
 
 const routes = [
@@ -25,6 +26,10 @@ const routes = [
               path: '/vault',
               element: <Vault/>,
             },
+            {
+                path: '/agenda',
+                element: <Agenda/>,
+              },
             {
                 path: '/interactions',
                 element: <Interactions/>,
