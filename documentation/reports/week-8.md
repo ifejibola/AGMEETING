@@ -9,3 +9,8 @@ need more work as we found out more information about their expected behaviour.
 - Worked on refactoring/cleanup of the repo.
 - Spent time working on the `In Session` page of the project.
 - Spend time getting familiar with the pre-built components for Material UI.
+
+### Ryan's Tasks 
+
+- Created `Vault` page and updated routing
+- Reviewed documentataion for styling in future weeks
