@@ -20,3 +20,9 @@ need more work as we found out more information about their expected behaviour.
 - Worked on weekly meeting minutes.
 - Spent time working on the 'Interactions' page of the project.
 - Spent time getting familiar with React as well as material-UI.
+
+### Garry's Tasks
+
+- Created `Agenda` page and updated routing.
+- Spent time re-acquainting to using React and familiarizing with material-UI.
+- Worked on group meeting minutes.
