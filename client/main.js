@@ -1,16 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+import {BrowserRouter} from 'react-router-dom';
 import App from './App';
-// import "./styles.scss";
+import {SettingsProvider} from './contexts/SettingsContext';
+import {StyledEngineProvider} from '@mui/styled-engine';
 
-const routes = (
-    <Router>
-        <Switch>
-            <Route exact path="/" component={App} />
-        </Switch>
-    </Router>
-);
-
-ReactDOM.render(routes, document.getElementById("root"));
+ReactDOM.render(
+    <StyledEngineProvider injectFirst>
+        <SettingsProvider>
+            <BrowserRouter>
+                <App/>
+            </BrowserRouter>
+        </SettingsProvider>
+    </StyledEngineProvider>, document.getElementById("root"));
