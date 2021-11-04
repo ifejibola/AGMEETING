@@ -1,8 +1,9 @@
 import React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {AppBar, Box, IconButton, Toolbar} from '@mui/material';
+import {AppBar, Box, IconButton, Toolbar, Typography, Button, Menu, MenuItem} from '@mui/material';
 import {experimentalStyled} from "@mui/material";
+
 // import MenuIcon from '../../icons/Menu';
 // import AccountPopover from './AccountPopover';
 // import ContactsPopover from './ContactsPopover';
@@ -10,6 +11,7 @@ import {experimentalStyled} from "@mui/material";
 // import LanguagePopover from './LanguagePopover';
 // import Logo from '../Logo';
 // import NotificationsPopover from './NotificationsPopover';
+
 
 const DashboardNavbarRoot = experimentalStyled(AppBar)(({theme}) => ({
     ...(theme.palette.mode === 'light' && {
@@ -42,18 +44,21 @@ const NavBar = (props) => {
                 >
                     {/* <MenuIcon fontSize="small" /> */}
                 </IconButton>
-                <RouterLink to="/">
+                <RouterLink to="/" style={{ textDecoration: 'none' , color: '#FFF' }}>
                     {/* <Logo
-            sx={{
-              display: {
-                lg: 'inline',
-                xs: 'none'
-              },
-              height: 40,
-              width: 40
-            }}
-          /> */}
+                      sx={{
+                        display: {
+                        lg: 'inline',
+                         xs: 'none'
+                        },
+                    height: 40,
+                     width: 40
+                     }}
+                    /> */}
+            <Typography color="textPrimary" variant="h2">AGMEETING</Typography>
+            
                 </RouterLink>
+                
                 <Box
                     sx={{
                         flexGrow: 1,
@@ -61,18 +66,27 @@ const NavBar = (props) => {
                     }}
                 />
                 {/* <LanguagePopover /> */}
-                <Box sx={{ml: 1}}>
-                    {/* <ContentSearch /> */}
+
+
+
+                <Box sx={{ml: 2}} style={{}}>
+                    <Button ><Typography>File</Typography></Button>
+
                 </Box>
-                <Box sx={{ml: 1}}>
-                    {/* <ContactsPopover /> */}
-                </Box>
-                <Box sx={{ml: 1}}>
-                    {/* <NotificationsPopover /> */}
-                </Box>
+
                 <Box sx={{ml: 2}}>
-                    {/* <AccountPopover /> */}
+                    <Button><Typography>Edit</Typography></Button>
                 </Box>
+
+                <Box sx={{ml: 2}}>
+                     <Button><Typography>View</Typography></Button>
+                </Box>
+
+                <Box sx={{ml: 2}}>
+                    <Button><Typography>Help</Typography></Button>
+                </Box>
+
+
             </Toolbar>
         </DashboardNavbarRoot>
     );
