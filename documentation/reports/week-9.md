@@ -12,3 +12,8 @@ This week we spent time on creating the side bar, header, home page and dark mod
 
 - Spent some more time familiarizing with Material UI components.
 - Added a WIP login component to the landing page.
+
+### Carson's Tasks
+
+- Spent time working on the sidebar and linking it with the other created pages.
+- Spent some time refactoring and merging with the upstream repo to ensure we had everything required on our fork.
