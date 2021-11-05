@@ -1,5 +1,5 @@
 # AGMEETING
-NPM Version : 7.5.4
+NPM Version : 12.18.2
 
 
 # Installation
@@ -12,4 +12,4 @@ npm run build-client
 
 npm run dev
 
-Ife Ajibola – ife.jibola@gmail.com
+Ife Ajibola – ife@ncra.ca

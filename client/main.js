@@ -1,16 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './routes';
 import App from './App';
 // import "./styles.scss";
 
-const routes = (
-    <Router>
-        <Switch>
-            <Route exact path="/" component={App} />
-        </Switch>
-    </Router>
-);
+import { StrictMode } from 'react'
+// import LocalizationProvider from '@material'
+import { SettingsProvider } from './contexts/SettingsContext';
+import { StyledEngineProvider } from '@mui/styled-engine';
 
-ReactDOM.render(routes, document.getElementById("root"));
+ReactDOM.render(
+    <StyledEngineProvider injectFirst>
+
+        <SettingsProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </SettingsProvider>
+    </StyledEngineProvider>
+    , document.getElementById("root"));
