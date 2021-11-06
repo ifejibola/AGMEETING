@@ -17,3 +17,9 @@ This week we spent time on creating the side bar, header, home page and dark mod
 
 - Spent time working on the sidebar and linking it with the other created pages.
 - Spent some time refactoring and merging with the upstream repo to ensure we had everything required on our fork.
+
+## Ryan's Tasks
+- Added Settings Component to app page as well as CssBaseline to extend background to full page.
+- Tried to fix dark theme not being applied to all components, still WIP.
+- Researched more about mui componenets as well as styling
+
