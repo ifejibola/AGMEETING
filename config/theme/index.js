@@ -246,7 +246,7 @@ export const createCustomTheme = (config = {}) => {
 
 
     if (!themeOptions) {
-        console.warn(new Error(`The theme ${config.theme} is not vlaid`));
+        console.warn(new Error(`The theme ${config.theme} is not valid`));
         // themeOptions = themesOptions['LIGHT'];
         themeOptions = themesOptions[THEMES.LIGHT];
     }
