@@ -7,7 +7,7 @@ const initialSettings = {
     direction: 'ltr',
     responsiveFontSizes: true,
     roundedCorners: true,
-    theme: THEMES.DARK
+    theme: THEMES.LIGHT
 };
 
 export const restoreSettings = () => {

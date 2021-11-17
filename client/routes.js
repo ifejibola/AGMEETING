@@ -7,6 +7,8 @@ import InSession from "./components/in-session/InSession";
 import Vault from "./components/vault/Vault.js";
 import Agenda from "./components/agenda/Agenda.js";
 import Interactions from "./components/interactions/Interactions.js";
+import RegisteredUsers from "./components/users-list/RegisteredUsers";
+import LoggedInUsers from "./components/users-list/LoggedInUsers";
 
 const routes = [
     {
@@ -33,6 +35,14 @@ const routes = [
             {
                 path: '/interactions',
                 element: <Interactions/>,
+            },
+            {
+                path: '/registered-users',
+                element: <RegisteredUsers/>
+            },
+            {
+                path: '/logged-in-users',
+                element: <LoggedInUsers/>
             },
             {path: "*", element: <NoMatch/>}
         ]
