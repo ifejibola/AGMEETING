@@ -14,24 +14,22 @@ import {
 } from "@material-ui/core";
 
 
-const countries = [
-    { text: 'Jersey', value: 'JE' },
-    { text: 'Jordan', value: 'JO' },
-    { text: 'Kazakhstan', value: 'KZ' },
-    { text: 'Kenya', value: 'KE' },
-    { text: 'Kiribati', value: 'KI' },
-    { text: 'Korea, Democratic People\'S Republic of', value: 'KP' },
-    { text: 'Korea, Republic of', value: 'KR' },
-    { text: 'Kuwait', value: 'KW' },
-    { text: 'Kyrgyzstan', value: 'KG' },
-    { text: 'Lao People\'S Democratic Republic', value: 'LA' }
-];
-
-
 const MainSettingsPage = () => {
 
     const [chair, setChair] = React.useState('');
     const [location, setLocation] = React.useState('');
+    const [numComment, setNumComment] = React.useState('');
+    const [forComment, setFor] = React.useState('');
+    const [commentTime, setCommentTime] = React.useState('');
+    const [againstComment, setAgainst] = React.useState('');
+    const [commentsPerItem, setCommentsPerItem] = React.useState('');
+    const [voteTime, setVoteTime] = React.useState('');
+    const [commentSessionTime, setCommentSessionTime] = React.useState('');
+    const [percent, setPercent] = React.useState('');
+
+
+
+
 
     const handleChairChange = (event) => {
         setChair(event.target.value);
@@ -39,6 +37,31 @@ const MainSettingsPage = () => {
     const handleLocationChange = (event) => {
         setLocation(event.target.value);
     };
+    const handleNumCommentChange = (event) => {
+        setNumComment(event.target.value);
+    };
+    const handleForChange = (event) => {
+        setFor(event.target.value);
+    };
+    const handleCommentTimeChange = (event) => {
+        setCommentTime(event.target.value);
+    };
+    const handleAgainstChange = (event) => {
+        setAgainst(event.target.value);
+    };
+    const handleCommentPerItemChange = (event) => {
+        setCommentsPerItem(event.target.value);
+    };
+    const handleVoteTimeChange = (event) => {
+        setVoteTime(event.target.value);
+    };
+    const handleCommentSessionTimeChange = (event) => {
+        setCommentSessionTime(event.target.value);
+    };
+    const handlePercentChange = (event) => {
+        setPercent(event.target.value);
+    };
+
 
 
     return (
@@ -70,7 +93,7 @@ const MainSettingsPage = () => {
                             </Grid>
                             <Grid
                                 item
-                                md={6}
+                                md={4}
                                 xs={12}
                             >
                                 <FormControl fullWidth>
@@ -88,7 +111,7 @@ const MainSettingsPage = () => {
                             </Grid>
                             <Grid
                                 item
-                                md={6}
+                                md={4}
                                 xs={12}
                             >
                                 <FormControl fullWidth>
@@ -106,108 +129,162 @@ const MainSettingsPage = () => {
                             </Grid>
                             <Grid
                                 item
-                                md={6}
+                                md={4}
                                 xs={12}
                             >
-                                <TextField
-                                    fullWidth
-                                    label="Phone Number"
-                                    name="phone"
-                                    variant="outlined"
-                                />
+                                <FormControl fullWidth>
+                                    <InputLabel># of Comments Per User</InputLabel>
+                                    <Select
+                                        value={numComment}
+                                        label="# of Comments Per User"
+                                        onChange={handleNumCommentChange}
+                                    >
+                                        <MenuItem value={1}>1</MenuItem>
+                                        <MenuItem value={2}>2</MenuItem>
+                                        <MenuItem value={3}>3</MenuItem>
+                                        <MenuItem value={4}>4</MenuItem>
+                                        <MenuItem value={5}>5</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Grid>
                             <Grid
                                 item
                                 md={6}
                                 xs={12}
                             >
-                                <Autocomplete
-                                    getOptionLabel={(option) => option.text}
-                                    options={countries}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            fullWidth
-                                            label="Country"
-                                            name="country"
-                                            variant="outlined"
-                                            {...params}
-                                        />
-                                    )}
-                                />
+                                <FormControl fullWidth>
+                                    <InputLabel>Maximum Number of FOR</InputLabel>
+                                    <Select
+                                        value={forComment}
+                                        label="Maximum Number of FOR"
+                                        onChange={handleForChange}
+                                    >
+                                        <MenuItem value={1}>1 Comment</MenuItem>
+                                        <MenuItem value={2}>2 Comments</MenuItem>
+                                        <MenuItem value={3}>3 Comments</MenuItem>
+                                        <MenuItem value={4}>4 Comments</MenuItem>
+                                        <MenuItem value={5}>5 Comments</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Grid>
                             <Grid
                                 item
                                 md={6}
                                 xs={12}
                             >
-                                <TextField
-                                    fullWidth
-                                    label="State/Region"
-                                    name="state"
-                                    variant="outlined"
-                                />
+                                <FormControl fullWidth>
+                                    <InputLabel>Time for Each Comment</InputLabel>
+                                    <Select
+                                        value={commentTime}
+                                        label="Time for Each Comment"
+                                        onChange={handleCommentTimeChange}
+                                    >
+                                        <MenuItem value={1}>1 Minute </MenuItem>
+                                        <MenuItem value={2}>2 Minutes</MenuItem>
+                                        <MenuItem value={3}>3 Minutes </MenuItem>
+                                        <MenuItem value={4}>4 Minutes</MenuItem>
+                                        <MenuItem value={5}>5 Minutes</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Grid>
                             <Grid
                                 item
                                 md={6}
                                 xs={12}
                             >
-                                <TextField
-                                    fullWidth
-                                    label="City"
-                                    name="city"
-                                    variant="outlined"
-                                />
+                                <FormControl fullWidth>
+                                    <InputLabel>Maximum Number of AGAINST</InputLabel>
+                                    <Select
+                                        value={againstComment}
+                                        label="Maximum Number of AGAINST"
+                                        onChange={handleAgainstChange}
+                                    >
+                                        <MenuItem value={1}>1 Comment</MenuItem>
+                                        <MenuItem value={2}>2 Comments</MenuItem>
+                                        <MenuItem value={3}>3 Comments</MenuItem>
+                                        <MenuItem value={4}>4 Comments</MenuItem>
+                                        <MenuItem value={5}>5 Comments</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Grid>
                             <Grid
                                 item
                                 md={6}
                                 xs={12}
                             >
-                                <Typography
-                                    color="textPrimary"
-                                    gutterBottom
-                                    variant="subtitle2"
-                                >
-                                    Public Profile
-                                </Typography>
-                                <Typography
-                                    color="textSecondary"
-                                    variant="body2"
-                                >
-                                    Means that anyone viewing your profile will
-                                    be able to see your contacts details
-                                </Typography>
-                                <Switch
-                                    color="primary"
-                                    edge="start"
-                                    name="isPublic"
-                                />
+                                <FormControl fullWidth>
+                                    <InputLabel>Number of Comments per User per Item</InputLabel>
+                                    <Select
+                                        value={commentsPerItem}
+                                        label="Number of Comments per User per Item"
+                                        onChange={handleCommentPerItemChange}
+                                    >
+                                        <MenuItem value={1}>1 Comment per Item </MenuItem>
+                                        <MenuItem value={2}>2 Comments per Item</MenuItem>
+                                        <MenuItem value={3}>3 Comments per Item </MenuItem>
+                                        <MenuItem value={4}>4 Comments per Item</MenuItem>
+                                        <MenuItem value={5}>5 Comments per Item</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Grid>
                             <Grid
                                 item
                                 md={6}
                                 xs={12}
                             >
-                                <Typography
-                                    color="textPrimary"
-                                    gutterBottom
-                                    variant="subtitle2"
-                                >
-                                    Available to hire
-                                </Typography>
-                                <Typography
-                                    color="textSecondary"
-                                    variant="body2"
-                                >
-                                    Toggling this will let your teammates know
-                                    that you are available for acquiring new projects
-                                </Typography>
-                                <Switch
-                                    color="primary"
-                                    edge="start"
-                                    name="canHire"
-                                />
+                                <FormControl fullWidth>
+                                    <InputLabel>Time for the Voting Session</InputLabel>
+                                    <Select
+                                        value={voteTime}
+                                        label="Time for the Voting Session"
+                                        onChange={handleVoteTimeChange}
+                                    >
+                                        <MenuItem value={1}>1 Minute</MenuItem>
+                                        <MenuItem value={2}>2 Minutes</MenuItem>
+                                        <MenuItem value={3}>3 Minutes</MenuItem>
+                                        <MenuItem value={4}>4 Minutes</MenuItem>
+                                        <MenuItem value={5}>5 Minutes</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid
+                                item
+                                md={6}
+                                xs={12}
+                            >
+                                <FormControl fullWidth>
+                                    <InputLabel>Maximum Time for Comment Session</InputLabel>
+                                    <Select
+                                        value={commentSessionTime}
+                                        label="Maximum Time for Comment Session"
+                                        onChange={handleCommentSessionTimeChange}
+                                    >
+                                        <MenuItem value={1}>1 Minute</MenuItem>
+                                        <MenuItem value={2}>2 Minutes</MenuItem>
+                                        <MenuItem value={3}>3 Minutes</MenuItem>
+                                        <MenuItem value={4}>4 Minutes</MenuItem>
+                                        <MenuItem value={5}>5 Minutes</MenuItem>
+                                    </Select>
+                                </FormControl>
+                            </Grid>
+                            <Grid
+                                item
+                                md={6}
+                                xs={12}
+                            >
+                                <FormControl fullWidth>
+                                    <InputLabel>% of Participants to Call for a Vote</InputLabel>
+                                    <Select
+                                        value={percent}
+                                        label="% of Participants to Call for a Vote"
+                                        onChange={handlePercentChange}
+                                    >
+                                        <MenuItem value={1}>25% Participants</MenuItem>
+                                        <MenuItem value={2}>50% Participants</MenuItem>
+                                        <MenuItem value={3}>75% Participants</MenuItem>
+                                        <MenuItem value={4}>100% Participants</MenuItem>
+                                    </Select>
+                                </FormControl>
                             </Grid>
                         </Grid>
                     </CardContent>
