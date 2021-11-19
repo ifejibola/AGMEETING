@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {Box, Divider, Drawer, useMediaQuery} from '@mui/material';
 import NavSection from '../../NavSection';
 import Scrollbar from '../../Scrollbar';
-import {AccountBalance, EventNote, PanTool, Person, VerifiedUser, VpnKey, Settings} from "@mui/icons-material";
+import {AccountBalance, EventNote, PanTool, Person, VerifiedUser, VpnKey, Settings, Chat} from "@mui/icons-material";
 
 const sections = [
     {
@@ -44,6 +44,11 @@ const sections = [
                 title: 'Logged In Users',
                 path: '/logged-in-users',
                 icon: <VerifiedUser fontSize="small"/>
+            },
+            {
+                title: 'Content Message',
+                path: '/ContentMessage',
+                icon: <Chat fontSize="small"/>
             }
         ]
     },
