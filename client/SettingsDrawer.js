@@ -12,7 +12,6 @@ import {
 } from '@material-ui/core';
 import {THEMES} from '../config/theme/constants';
 import useSettings from './hooks/useSettings';
-// import AdjustmentsIcon from '../icons/Adjustments';
 
 const getValues = (settings) => ({
     compact: settings.compact,
