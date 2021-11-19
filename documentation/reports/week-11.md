@@ -13,3 +13,7 @@ need to show for peer testing, we can expand this after our meeting with the pro
 ### Ryan's Tasks
 - Added the Settings Page and updated routing
 - Fixed small issues with the vault page
+
+### Chester's Tasks
+- Worked on the content message page and updated routing
+- Created minutes for November 19 2021.
