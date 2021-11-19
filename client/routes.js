@@ -10,6 +10,7 @@ import Interactions from "./components/interactions/Interactions.js";
 import RegisteredUsers from "./components/users-list/RegisteredUsers";
 import LoggedInUsers from "./components/users-list/LoggedInUsers";
 import MainSettingsPage from "./components/settings/MainSettingsPage";
+import RollCall from "./components/roll-call/RollCall";
 
 const routes = [
     {
@@ -48,6 +49,10 @@ const routes = [
             {
                 path: '/settings',
                 element: <MainSettingsPage/>,
+            },
+            {
+                path: '/roll-call',
+                element: <RollCall/>
             },
             {path: "*", element: <NoMatch/>}
         ]

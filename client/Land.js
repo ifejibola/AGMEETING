@@ -15,8 +15,6 @@ import {
 } from '@material-ui/core';
 import { Label } from "@material-ui/icons";
 
-
-
 const content = (
     <Box
         sx={{
@@ -26,7 +24,7 @@ const content = (
         }}>
         <Card variant="outlined"
         sx={{
-            width: 300,
+            width: 500,
             height: 300,
         }}>
             <CardHeader title="Login" align="Center" />
@@ -36,6 +34,7 @@ const content = (
             <Grid item>
             <div>
             <TextField
+                fullWidth
                 label="Login"
                 id="login"
                 placeholder="Login"
@@ -44,6 +43,7 @@ const content = (
             <Grid item>
             <div>
             <TextField
+            fullWidth
                 label="Password"
                 type="password"
                 id="password"
@@ -59,7 +59,7 @@ const content = (
             <Box textAlign="Right">
                 <Button color="primary"
                     size="large"
-                    variant="outlined">Send</Button></Box>
+                    variant="outlined">Login</Button></Box>
         </Card>
     </Box>
 );
@@ -68,7 +68,6 @@ export default function Land() {
 
     return (
         <>
-            <h1>LANDING PAGE!</h1>
             <Card>{content}</Card>
         </>
     );
