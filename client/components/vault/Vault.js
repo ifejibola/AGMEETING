@@ -59,111 +59,99 @@ const statusOptions = ['In Progress', 'Standing By for Motion', 'Approved', 'Clo
 
 
 const content = (
-    <Box
-        sx={{
-            backgroundColor: 'background.default',
-            minHeight: '100%',
-            p: 3
-        }}
-    >
-        <Card>
-            <CardHeader title="Vault" />
-            <Divider />
-            <Table>
-                <TableBody>
-                    {elems.map((campaign) => (
-                        <TableRow
-                            key={campaign.id}
+    <Table>
+        <TableBody>
+            {elems.map((campaign) => (
+                <TableRow
+                    key={campaign.id}
+                    sx={{
+                        '&:last-child td': {
+                            border: 0
+                        }
+                    }}
+                >
+                    <TableCell>
+                        <Typography
+                            color="textPrimary"
+                            sx={{cursor: 'pointer'}}
+                            variant="subtitle2"
+                        >
+                            {campaign.name}
+                        </Typography>
+                        <Box
                             sx={{
-                                '&:last-child td': {
-                                    border: 0
-                                }
+                                alignItems: 'center',
+                                display: 'flex',
+                                mt: 1
                             }}
                         >
-                            <TableCell>
-                                <Typography
-                                    color="textPrimary"
-                                    sx={{ cursor: 'pointer' }}
-                                    variant="subtitle2"
-                                >
-                                    {campaign.name}
-                                </Typography>
-                                <Box
-                                    sx={{
-                                        alignItems: 'center',
-                                        display: 'flex',
-                                        mt: 1
-                                    }}
-                                >
-                                    <Typography
-                                        color="textSecondary"
-                                        variant="body2"
-                                    >
-                                        {campaign.filetype}
-                                    </Typography>
-                                </Box>
-                            </TableCell>
-                            <TableCell>
-                                <Typography
-                                    color="textPrimary"
-                                    variant="subtitle2"
-                                >
-                                    Author
-                                </Typography>
-                                <Typography
-                                    color="textSecondary"
-                                    sx={{ mt: 1 }}
-                                    variant="body2"
-                                >
-                                    {campaign.author}
-                                </Typography>
-                            </TableCell>
-                            <TableCell>
-                                <Typography
-                                    color="textPrimary"
-                                    variant="subtitle2"
-                                >
-                                    Agenda Item
-                                </Typography>
-                                <Typography
-                                    color="textSecondary"
-                                    sx={{ mt: 1 }}
-                                    variant="body2"
-                                >
-                                    {campaign.agendaItem}
-                                </Typography>
-                            </TableCell>
-                            <TableCell>
-                                <Typography
-                                    color="textPrimary"
-                                    variant="subtitle2"
-                                >
+                            <Typography
+                                color="textSecondary"
+                                variant="body2"
+                            >
+                                {campaign.filetype}
+                            </Typography>
+                        </Box>
+                    </TableCell>
+                    <TableCell>
+                        <Typography
+                            color="textPrimary"
+                            variant="subtitle2"
+                        >
+                            Author
+                        </Typography>
+                        <Typography
+                            color="textSecondary"
+                            sx={{mt: 1}}
+                            variant="body2"
+                        >
+                            {campaign.author}
+                        </Typography>
+                    </TableCell>
+                    <TableCell>
+                        <Typography
+                            color="textPrimary"
+                            variant="subtitle2"
+                        >
+                            Agenda Item
+                        </Typography>
+                        <Typography
+                            color="textSecondary"
+                            sx={{mt: 1}}
+                            variant="body2"
+                        >
+                            {campaign.agendaItem}
+                        </Typography>
+                    </TableCell>
+                    <TableCell>
+                        <Typography
+                            color="textPrimary"
+                            variant="subtitle2"
+                        >
 
-                                    Viewed?
-                                </Typography>
-                                <Typography
-                                    color="textSecondary"
-                                    sx={{ mt: 1 }}
-                                    variant="body2"
-                                >
-                                    {campaign.viewed}
-                                </Typography>
-                            </TableCell>
-                            <TableCell align="right">
-                                <Button
-                                    color="primary"
-                                    size="small"
-                                    variant="outlined"
-                                >
-                                    View
-                                </Button>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </Card>
-    </Box>
+                            Viewed?
+                        </Typography>
+                        <Typography
+                            color="textSecondary"
+                            sx={{mt: 1}}
+                            variant="body2"
+                        >
+                            {campaign.viewed}
+                        </Typography>
+                    </TableCell>
+                    <TableCell align="right">
+                        <Button
+                            color="primary"
+                            size="small"
+                            variant="outlined"
+                        >
+                            View
+                        </Button>
+                    </TableCell>
+                </TableRow>
+            ))}
+        </TableBody>
+    </Table>
 );
 
 const Vault = () => {
@@ -180,6 +168,8 @@ const Vault = () => {
                 p: 3
             }}>
                 <Card>
+                    <CardHeader title="Vault"/>
+                    <Divider/>
                     {content}
                 </Card>
             </Box>
