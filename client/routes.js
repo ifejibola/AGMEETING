@@ -9,6 +9,7 @@ import Agenda from "./components/agenda/Agenda.js";
 import Interactions from "./components/interactions/Interactions.js";
 import RegisteredUsers from "./components/users-list/RegisteredUsers";
 import LoggedInUsers from "./components/users-list/LoggedInUsers";
+import MainSettingsPage from "./components/settings/MainSettingsPage";
 
 const routes = [
     {
@@ -43,6 +44,10 @@ const routes = [
             {
                 path: '/logged-in-users',
                 element: <LoggedInUsers/>
+            },
+            {
+                path: '/settings',
+                element: <MainSettingsPage/>,
             },
             {path: "*", element: <NoMatch/>}
         ]
