@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import {Box, Divider, Drawer, useMediaQuery} from '@mui/material';
 import NavSection from '../../NavSection';
 import Scrollbar from '../../Scrollbar';
-import {AccountBalance, EventNote, PanTool, Person, VerifiedUser, VpnKey, Settings, HowToReg} from "@mui/icons-material";
+import {AccountBalance, EventNote, PanTool, Person, VerifiedUser, VpnKey, Settings, HowToReg, Chat} from "@mui/icons-material";
+
 
 const sections = [
     {
@@ -49,6 +50,11 @@ const sections = [
                 title: 'Roll Call',
                 path: 'roll-call',
                 icon: <HowToReg fontSize="small"/>
+            }, 
+            {
+                title: 'Content Message',
+                path: '/ContentMessage',
+                icon: <Chat fontSize="small"/>
             }
         ]
     },

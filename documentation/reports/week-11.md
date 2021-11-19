@@ -13,3 +13,11 @@ need to show for peer testing, we can expand this after our meeting with the pro
 ### Ryan's Tasks
 - Added the Settings Page and updated routing
 - Fixed small issues with the vault page
+
+### Chester's Tasks
+- Worked on the content message page and updated routing
+- Created minutes for November 19 2021.
+
+### Garry's Tasks
+- Worked on the roll call page/component and updated routing
+- Made a minor change to the landing page login component, more styling changes needed

@@ -11,6 +11,7 @@ import RegisteredUsers from "./components/users-list/RegisteredUsers";
 import LoggedInUsers from "./components/users-list/LoggedInUsers";
 import MainSettingsPage from "./components/settings/MainSettingsPage";
 import RollCall from "./components/roll-call/RollCall";
+import Message from './components/ContentMessage/Message';
 
 const routes = [
     {
@@ -53,6 +54,10 @@ const routes = [
             {
                 path: '/roll-call',
                 element: <RollCall/>
+            },
+            {
+                path: '/ContentMessage',
+                element: <Message/>,
             },
             {path: "*", element: <NoMatch/>}
         ]
