@@ -9,3 +9,7 @@ need to show for peer testing, we can expand this after our meeting with the pro
 - Worked on the registered/logged-in users pages.
 - Worked on creating the Google form.
 - Improved some styling on the agenda page.
+
+### Ryan's Tasks
+- Added the Settings Page and updated routing
+- Fixed small issues with the vault page
