@@ -8,7 +8,6 @@ npm install
 
 
 # Starting/Running App:
-npm install
 
 npm run dev:build-client
 
