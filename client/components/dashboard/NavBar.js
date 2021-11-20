@@ -44,7 +44,7 @@ const NavBar = (props) => {
                 >
                     {/* <MenuIcon fontSize="small" /> */}
                 </IconButton>
-                <RouterLink to="/" style={{ textDecoration: 'none' , color: '#FFF' }}>
+                <RouterLink to="/" style={{textDecoration: 'none', color: '#FFF'}}>
                     {/* <Logo
                       sx={{
                         display: {
@@ -55,10 +55,10 @@ const NavBar = (props) => {
                      width: 40
                      }}
                     /> */}
-            <Typography color="textPrimary" variant="h2">AGMEETING</Typography>
-            
+                    <Typography color="textPrimary" variant="h2">AGMEETING</Typography>
+
                 </RouterLink>
-                
+
                 <Box
                     sx={{
                         flexGrow: 1,
@@ -67,23 +67,36 @@ const NavBar = (props) => {
                 />
                 {/* <LanguagePopover /> */}
 
+                <Box sx={{ml: 2}}>
+                    <RouterLink
+                        to="/login"
+                    >
+                        <Button><Typography color="textPrimary">Login</Typography></Button>
+                    </RouterLink>
+                </Box>
 
+                <Box sx={{ml: 2}}>
+                    <RouterLink
+                        to="/register"
+                    >
+                        <Button><Typography color="textPrimary">Register</Typography></Button>
+                    </RouterLink>
+                </Box>
 
                 <Box sx={{ml: 2}} style={{}}>
-                    <Button ><Typography>File</Typography></Button>
-
+                    <Button><Typography color="textPrimary">File</Typography></Button>
                 </Box>
 
                 <Box sx={{ml: 2}}>
-                    <Button><Typography>Edit</Typography></Button>
+                    <Button><Typography color="textPrimary">Edit</Typography></Button>
                 </Box>
 
                 <Box sx={{ml: 2}}>
-                     <Button><Typography>View</Typography></Button>
+                    <Button><Typography color="textPrimary">View</Typography></Button>
                 </Box>
 
                 <Box sx={{ml: 2}}>
-                    <Button><Typography>Help</Typography></Button>
+                    <Button><Typography color="textPrimary">Help</Typography></Button>
                 </Box>
 
 
