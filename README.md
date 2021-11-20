@@ -1,5 +1,5 @@
 # AGMEETING
-NPM Version : 7.5.4
+NPM Version : 12.18.2
 
 
 # Installation
@@ -8,8 +8,10 @@ npm install
 
 
 # Starting/Running App:
-npm run build-client
+npm install
 
-npm run dev
+npm run dev:build-client
 
-Ife Ajibola – ife.jibola@gmail.com
+npm run dev:start
+
+Ife Ajibola – ife@ncra.ca
