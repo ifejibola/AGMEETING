@@ -40,11 +40,14 @@
     "@mui/material": "^5.0.5",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.3.0",
+    "formik": "^2.2.9",
     "html-loader": "^2.1.2",
     "prop-types": "^15.7.2",
+    "react-helmet-async": "^1.1.2",
     "sass-loader": "^12.1.0",
     "style-loader": "^3.3.0",
     "webpack": "^5.54.0",
-    "webpack-cli": "^4.8.0"
+    "webpack-cli": "^4.8.0",
+    "yup": "^0.32.11"
   }
 }
