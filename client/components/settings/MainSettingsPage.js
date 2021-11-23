@@ -97,7 +97,7 @@ const MainSettingsPage = () => {
                                 xs={12}
                             >
                                 <FormControl fullWidth>
-                                    <InputLabel >Age</InputLabel>
+                                    <InputLabel >Meeting Chair</InputLabel>
                                     <Select
                                         value={chair}
                                         label="Meeting Chair"
