@@ -22,3 +22,9 @@
 - Change the text direction for the page using the side bar.
 - Navigate to the Interactions page.
 - Navigate to the Roll Call page and perform a roll call.
+
+- Navigate to the agenda page.
+- Navigate to the content message page.
+- From the content message page, select a destination option and upload a file.
+- Navigate to the settings page and change the time for the voting session to 3 minutes.
+- In the settings page, change the % of participants to call for a vote to 50%.
