@@ -30,10 +30,9 @@ export default function App() {
     return (
         <ErrorBoundary>
             <ThemeProvider theme={theme}>
-
                 <CssBaseline/>
+                {/* <CssBaseline /> */}
                 <RTL direction={settings.direction}>
-                    {/* <CssBaseline /> */}
                     {/* <Toaster position="top-center" /> */}
                     <SettingsDrawer/>
                     {/* <SettingsDrawer /> */}
