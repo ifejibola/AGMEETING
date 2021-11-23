@@ -16,3 +16,9 @@
 - Navigate to the in-session page.
 - Navigate to the registered users page.
 - Navigate to the logged-in users page.
+
+- Navigate to the page settings side bar.
+- Change the current theme of the page using the side bar.
+- Change the text direction for the page using the side bar.
+- Navigate to the Interactions page.
+- Navigate to the Roll Call page and perform a roll call.
