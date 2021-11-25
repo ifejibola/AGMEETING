@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import {Box, Divider, Drawer, useMediaQuery} from '@mui/material';
 import NavSection from '../../NavSection';
 import Scrollbar from '../../Scrollbar';
-import {AccountBalance, EventNote, PanTool, VpnKey} from "@mui/icons-material";
+import {AccountBalance, EventNote, PanTool, Person, VerifiedUser, VpnKey, Settings, HowToReg, Chat} from "@mui/icons-material";
+
 
 const sections = [
     {
@@ -30,6 +31,41 @@ const sections = [
                 path: '/interactions',
                 icon: <PanTool fontSize="small"/>
             }
+        ]
+    },
+    {
+        title: 'For Peer Testing Purposes',
+        items: [
+            {
+                title: 'Registered Users',
+                path: '/registered-users',
+                icon: <Person fontSize="small"/>
+            },
+            {
+                title: 'Logged In Users',
+                path: '/logged-in-users',
+                icon: <VerifiedUser fontSize="small"/>
+            },
+            {
+                title: 'Roll Call',
+                path: 'roll-call',
+                icon: <HowToReg fontSize="small"/>
+            }, 
+            {
+                title: 'Content Message',
+                path: '/ContentMessage',
+                icon: <Chat fontSize="small"/>
+            }
+        ]
+    },
+    {
+        title: 'Accessibility',
+        items: [
+            {
+                title: 'Settings',
+                path: '/settings',
+                icon: <Settings fontSize="small"/>
+            },
         ]
     }
 ];

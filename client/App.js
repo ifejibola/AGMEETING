@@ -11,10 +11,6 @@ import {CssBaseline} from "@mui/material";
 import SettingsDrawer from "./SettingsDrawer";
 
 
-
-
-
-
 export default function App() {
 
     const {settings} = useSettings();
@@ -34,10 +30,9 @@ export default function App() {
     return (
         <ErrorBoundary>
             <ThemeProvider theme={theme}>
-
-                <CssBaseline />
+                <CssBaseline/>
+                {/* <CssBaseline /> */}
                 <RTL direction={settings.direction}>
-                    {/* <CssBaseline /> */}
                     {/* <Toaster position="top-center" /> */}
                     <SettingsDrawer/>
                     {/* <SettingsDrawer /> */}
