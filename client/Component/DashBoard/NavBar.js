@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { AppBar, Box, IconButton, Toolbar } from '@mui/material';
 import { experimentalStyled } from "@mui/material";
+import { Button, ButtonGroup } from '@mui/material';
 // import MenuIcon from '../../icons/Menu';
 // import AccountPopover from './AccountPopover';
 // import ContactsPopover from './ContactsPopover';
@@ -73,6 +74,12 @@ const NavBar = (props) => {
                 <Box sx={{ ml: 2 }}>
                     {/* <AccountPopover /> */}
                 </Box>
+                <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                    <Button href='/file'>File</Button>
+                    <Button href='/edit'>Edit</Button>
+                    <Button href='/view'>View</Button>
+                    <Button href='/help'>Help</Button>
+                </ButtonGroup>
             </Toolbar>
         </DashboardNavbarRoot>
     );

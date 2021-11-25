@@ -8,7 +8,7 @@ import DashboardSidebar from "./DashboardSidebar";
 
 
 const DashboardLayoutRoot = experimentalStyled('div')(({ theme }) => ({
-    backgroundColor: theme.palette.background.default,
+    backgroundColor: theme.palette.background.paper,
     display: 'flex',
     height: '100%',
     overflow: 'hidden',
@@ -19,6 +19,7 @@ const DashboardLayoutWrapper = experimentalStyled('div')(({ theme }) => ({
     display: 'flex',
     flex: '1 1 auto',
     overflow: 'hidden',
+    height: '100%',
     paddingTop: '64px',
     [theme.breakpoints.up('lg')]: {
         paddingLeft: '280px'
@@ -28,7 +29,8 @@ const DashboardLayoutWrapper = experimentalStyled('div')(({ theme }) => ({
 const DashboardLayoutContainer = experimentalStyled('div')({
     display: 'flex',
     flex: '1 1 auto',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    height: '100%'
 });
 
 const DashboardLayoutContent = experimentalStyled('div')({
