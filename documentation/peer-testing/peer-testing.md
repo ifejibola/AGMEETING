@@ -51,3 +51,10 @@
 - Meeting settings can be hard to find.
 - Content message was a little more difficult than it should have been to find.
 - Dark mode issues.
+- Some visual clutter.
+- Changing event name.
+- If there will be a welcome screen, make it easier to find/access.
+- Lists were confusing, use cards instead.
+- When there are many different data fields, section them instead of listing them.
+- Settings page should be sectioned, so options are not as overwhelming.
+- Settings sidebar was difficult to find.
