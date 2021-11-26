@@ -11,3 +11,9 @@ report.
 - Worked on generating tasks for peer testing.
 - Added login/register page.
 - Began working on peer testing report.
+
+### Chester's Tasks
+- Worked on improving content messages and interactions pages.
+- Created team minutes for week 12.
+- Added additional comments from peer testing.
+- Added tasks for peer testing.
