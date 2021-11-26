@@ -58,3 +58,8 @@
 - When there are many different data fields, section them instead of listing them.
 - Settings page should be sectioned, so options are not as overwhelming.
 - Settings sidebar was difficult to find.
+- Icon needed for settings sidebar
+- Agenda items attached to vault items somewhat unclear
+- No clear way back to homepage
+- RTL switches text in settings dropdown lists
+- On RTL change sidebar text should stay on left side of sidebar 
