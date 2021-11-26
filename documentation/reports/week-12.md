@@ -11,3 +11,9 @@ report.
 - Worked on generating tasks for peer testing.
 - Added login/register page.
 - Began working on peer testing report.
+
+### Garry's Tasks
+- Worked on improving roll call
+- Added peer testing tasks
+- Added feedback from peer testing sessions to `peer-testing.md`
+- Started working on the peer testing report
