@@ -3,6 +3,13 @@
 ### Google Form for Heuristic Evaluation
 [https://forms.gle/Uf2dDcCMAnW2cTcp9](https://forms.gle/Uf2dDcCMAnW2cTcp9)
 
+### Session Notes
+
+- Meeting settings can be hard to find.
+- Icon missing from website settings pop-up.
+- Content message was a little more difficult than it should have been to find.
+- Dark mode issues.
+
 ### Peer Testing Tasks
 
 - Navigate to the Settings page and change the meeting place to kelowna
