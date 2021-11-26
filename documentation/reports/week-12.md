@@ -12,6 +12,12 @@ report.
 - Added login/register page.
 - Began working on peer testing report.
 
+### Garry's Tasks
+- Worked on improving roll call
+- Added peer testing tasks
+- Added feedback from peer testing sessions to `peer-testing.md`
+- Started working on the peer testing report
+
 ### Chester's Tasks
 - Worked on improving content messages and interactions pages.
 - Created team minutes for week 12.
@@ -23,3 +29,4 @@ report.
  - Added peer testing tasks
  - Updated welcome page for peer testing
  - Added comments from peer testing
+
