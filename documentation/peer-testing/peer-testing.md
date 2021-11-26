@@ -1,6 +1,7 @@
 # Peer Testing
 
 ### Google Form for Heuristic Evaluation
+
 [https://forms.gle/Uf2dDcCMAnW2cTcp9](https://forms.gle/Uf2dDcCMAnW2cTcp9)
 
 ### Peer Testing Tasks
@@ -31,10 +32,8 @@
 
 ### Peer Testing Notes
 
-Thinkaloud Section 1
-
 - UI, hover is great.
-- Contrast can be improved upon, options for colour blind.
+- Contrast can be improved upon, options for colour-blind.
 - File, edit and view on the left to improve layout and align it with other applications.
 - Material UI familiar feel.
 - Link to terms and conditions would be ideal.
@@ -45,7 +44,10 @@ Thinkaloud Section 1
 - Vault looks great.
 - The placement of objects and how they interact with each other makes sense and is easy to learn.
 - Filter or sort when data fields are lengthier.
-- Interactions page is questionable. 
+- Interactions page is questionable.
 - Consistency between tables would be ideal.
 - Icons are amazing.
 - Settings page not obvious and is confusing with page settings.
+- Meeting settings can be hard to find.
+- Content message was a little more difficult than it should have been to find.
+- Dark mode issues.
