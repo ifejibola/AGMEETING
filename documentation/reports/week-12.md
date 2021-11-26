@@ -17,3 +17,16 @@ report.
 - Added peer testing tasks
 - Added feedback from peer testing sessions to `peer-testing.md`
 - Started working on the peer testing report
+
+### Chester's Tasks
+- Worked on improving content messages and interactions pages.
+- Created team minutes for week 12.
+- Added additional comments from peer testing.
+- Added tasks for peer testing.
+
+### Ryan's Tasks
+ - Created video for demo prototype
+ - Added peer testing tasks
+ - Updated welcome page for peer testing
+ - Added comments from peer testing
+
