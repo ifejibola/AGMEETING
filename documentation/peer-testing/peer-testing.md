@@ -3,13 +3,6 @@
 ### Google Form for Heuristic Evaluation
 [https://forms.gle/Uf2dDcCMAnW2cTcp9](https://forms.gle/Uf2dDcCMAnW2cTcp9)
 
-### Session Notes
-
-- Meeting settings can be hard to find.
-- Icon missing from website settings pop-up.
-- Content message was a little more difficult than it should have been to find.
-- Dark mode issues.
-
 ### Peer Testing Tasks
 
 - Navigate to the Settings page and change the meeting place to kelowna
@@ -35,3 +28,25 @@
 - From the content message page, select a destination option and upload a file.
 - Navigate to the settings page and change the time for the voting session to 3 minutes.
 - In the settings page, change the % of participants to call for a vote to 50%.
+
+### Peer Testing Notes
+
+- UI, hover is great.
+- Contrast can be improved upon, options for colour blind.
+- File, edit and view on the left to improve layout and align it with other applications.
+- Material UI familiar feel.
+- Link to terms and conditions would be ideal.
+- Register and Nature theme do not work.
+- Settings icon would be ideal for page settings.
+- In-session section more obvious would be great.
+- Expand data for Agenda fields.
+- Vault looks great.
+- The placement of objects and how they interact with each other makes sense and is easy to learn.
+- Filter or sort when data fields are lengthier.
+- Interactions page is questionable. 
+- Consistency between tables would be ideal.
+- Icons are amazing.
+- Settings page not obvious and is confusing with page settings.
+- Meeting settings can be hard to find.
+- Content message was a little more difficult than it should have been to find.
+- Dark mode issues.
