@@ -19,3 +19,8 @@ This week we completed the peer testing report as well as prepared for the clien
 - Worked on the list of discovered issues section of the report.
 - Finished peer evaluations.
 - Reviewed AGMeeting handbook.
+
+### Ryan's Tasks
+- Finished Peer Evaluations
+- Compiled list of pages completed/missing for client
+- Reviewed Peer Testing Report  
