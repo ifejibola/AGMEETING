@@ -14,3 +14,8 @@ This week we completed the peer testing report as well as prepared for the clien
 - Worked on weekly meeting minutes.
 - Reviewed AGMeeting handbook.
 - Worked on peer evaluations.
+
+### Garry's Tasks
+- Worked on the list of discovered issues section of the report.
+- Finished peer evaluations.
+- Reviewed AGMeeting handbook.
