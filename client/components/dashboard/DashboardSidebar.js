@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {Box, Divider, Drawer, useMediaQuery} from '@mui/material';
+import {Box, Divider, Drawer, useMediaQuery, Typography, Button, Modal} from '@mui/material';
 import NavSection from '../../NavSection';
 import Scrollbar from '../../Scrollbar';
 import {AccountBalance, EventNote, PanTool, Person, VerifiedUser, VpnKey, Settings, HowToReg, Chat} from "@mui/icons-material";
@@ -47,11 +47,6 @@ const sections = [
                 icon: <VerifiedUser fontSize="small"/>
             },
             {
-                title: 'Roll Call',
-                path: 'roll-call',
-                icon: <HowToReg fontSize="small"/>
-            }, 
-            {
                 title: 'Content Message',
                 path: '/ContentMessage',
                 icon: <Chat fontSize="small"/>
@@ -80,6 +75,22 @@ const DashboardSidebar = (props) => {
             onMobileClose();
         }
     }, [location.pathname]);
+
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: 400,
+        bgcolor: 'background.paper',
+        border: '2px solid #000',
+        boxShadow: 20,
+        p: 3,
+    };
 
     const content = (
         <Box
@@ -115,6 +126,39 @@ const DashboardSidebar = (props) => {
                             {...section}
                         />
                     ))}
+
+                    <Button onClick={handleOpen} startIcon={<HowToReg />}>Roll Call</Button>
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-title"
+                        aria-describedby="modal-description"
+                    >
+                        <Box sx={style}>
+                            <Typography id="modal-title" variant="h6" component="h2">
+                                Participant List
+                            </Typography>
+                            <Typography id="modal-description" sx={{ mt: 2 }}>
+                                <Typography>
+                                    1. Kim
+                                </Typography>
+                                <Typography>
+                                    2. Brian
+                                </Typography>
+                                <Typography>
+                                    3. Care
+                                </Typography>
+                                <Typography>
+                                    ...
+                                </Typography>
+                                <Typography>
+                                    Quorum: 11% / Minimum: 50%
+                                </Typography>
+                            </Typography>
+                            <Button onClick={handleClose}>Close</Button>
+                        </Box>
+                    </Modal>
+
                 </Box>
             </Scrollbar>
         </Box>
