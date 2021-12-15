@@ -11,7 +11,6 @@ import { useRoutes } from "react-router";
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from "@mui/material";
 import { createCustomTheme } from '../config/theme';
-import { Toaster } from "react-hot-toast";
 
 import RTL from './RTL'
 import SettingsDrawer from './SettingsDrawer'

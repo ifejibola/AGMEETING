@@ -24,7 +24,8 @@ export const restoreSettings = () => {
         direction: 'ltr',
         responsiveFontSizes: true,
         roundedCorners: true,
-        theme: window.matchMedia('(prefers-color-scheme: dark)').matches
+        // theme: window.matchMedia('(prefers-color-scheme: dark)').matches
+        theme: window.matchMedia('(prefers-color-scheme: light)').matches
           ? THEMES.DARK
           : THEMES.LIGHT
       };
