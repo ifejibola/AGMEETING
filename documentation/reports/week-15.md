@@ -19,3 +19,7 @@ This week we worked on updating pages that we had previously worked on while we 
 - Worked on updating the Agenda Page.
 - Worked on adding a Stats Page.
 - Worked on weekly scrum report.
+
+## Ryan's Tasks
+- Worked on adding Votes Modal
+- Worked on updating Vault Page
