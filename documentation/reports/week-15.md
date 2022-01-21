@@ -13,3 +13,9 @@ This week we worked on updating pages that we had previously worked on while we 
 - Worked on updating the NavBar.
 - Worked on changing Interactions page to a modal.
 - Worked on weekly meeting minutes.
+
+## Garry's Tasks
+
+- Worked on updating the Agenda Page.
+- Worked on adding a Stats Page.
+- Worked on weekly scrum report.
