@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {Box, Divider, Drawer, useMediaQuery, Typography, Button, Modal, Grid, Card} from '@mui/material';
 import NavSection from '../../NavSection';
 import Scrollbar from '../../Scrollbar';
-import {AccountBalance, EventNote, PanTool, Person, VerifiedUser, VpnKey, Settings, HowToReg, Chat, PieChart} from "@mui/icons-material";
+import {AccountBalance, EventNote, PanTool, Person, VerifiedUser, VpnKey, Settings, HowToReg, Chat, PieChart, Ballot} from "@mui/icons-material";
 
 
 
@@ -133,7 +133,7 @@ const DashboardSidebar = (props) => {
                         />
                     ))}
    
-{/*
+
                     <Button onClick={handleOpen} startIcon={<HowToReg />}>Roll Call</Button>
                     <Modal
                         open={open}
@@ -165,7 +165,32 @@ const DashboardSidebar = (props) => {
                             <Button onClick={handleClose}>Close</Button>
                         </Box>
                     </Modal>
-*/}
+                    <Button onClick={handleOpen} startIcon={<Ballot />}>Votes</Button>
+                    <Modal
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-title2"
+                        aria-describedby="modal-description2"
+                    >
+                        <Box sx={style}>
+                            <Typography id="modal-title2" variant="h6" component="h2">
+                                Vote Count
+                            </Typography>
+                            <Typography id="modal-description2" sx={{ mt: 2 }}>
+                                <Typography>
+                                    VOTED YES: 44
+                                </Typography>
+                                <Typography>
+                                    VOTED NO: 55
+                                </Typography>
+                                <Typography>
+                                    ABSTAIN: 3
+                                </Typography>
+                            </Typography>
+                            <Button onClick={handleClose}>Close</Button>
+                        </Box>
+                    </Modal>
+
                     <Button 
                     color="primary"
                     onClick={handleOpen}
@@ -178,12 +203,13 @@ const DashboardSidebar = (props) => {
                         centered
                         open={open}
                         onClose={handleClose}
-                        aria-labelledby="modal-title"
-                        aria-describedby="modal-description"
+                        aria-labelledby="modal-title3"
+                        aria-describedby="modal-description3"
                     >
                         <Card >
                         <Box sx={style}>
                             <Typography
+                            id="modal-title3"
                             align="center"
                             color="textPrimary"
                             gutterBottom
@@ -191,7 +217,7 @@ const DashboardSidebar = (props) => {
                             >
                             Interaction
                             </Typography>
-                                <Box sx={{ flexGrow: 1 }}>
+                                <Box id="modal-description3" sx={{ flexGrow: 1 }}>
                                 <Grid container spacing={2}>
                                     <Grid item xs={6}>
                                     <Button variant="contained" fullWidth="true">
