@@ -44,19 +44,14 @@ const NavBar = (props) => {
                 >
                     {/* <MenuIcon fontSize="small" /> */}
                 </IconButton>
-                <RouterLink to="/" style={{textDecoration: 'none', color: '#FFF'}}>
-                    {/* <Logo
-                      sx={{
-                        display: {
-                        lg: 'inline',
-                         xs: 'none'
-                        },
-                    height: 40,
-                     width: 40
-                     }}
-                    /> */}
+{/*             <RouterLink to="/" style={{textDecoration: 'none', color: '#FFF'}}>
                     <Typography color="textPrimary" variant="h2">AGMEETING</Typography>
-
+                </RouterLink>
+                */}
+                <RouterLink to="/">
+                    <h2  style={{fontFamily: 'Times New Roman'}}>
+                        AGMEETING
+                    </h2>
                 </RouterLink>
 
                 <Box
@@ -82,7 +77,7 @@ const NavBar = (props) => {
                         <Button><Typography color="textPrimary">Register</Typography></Button>
                     </RouterLink>
                 </Box>
-
+{/*
                 <Box sx={{ml: 2}} style={{}}>
                     <Button><Typography color="textPrimary">File</Typography></Button>
                 </Box>
@@ -98,7 +93,7 @@ const NavBar = (props) => {
                 <Box sx={{ml: 2}}>
                     <Button><Typography color="textPrimary">Help</Typography></Button>
                 </Box>
-
+*/}
 
             </Toolbar>
         </DashboardNavbarRoot>
