@@ -13,6 +13,7 @@ import MainSettingsPage from "./components/settings/MainSettingsPage";
 import Message from './components/ContentMessage/Message';
 import Login from "./components/authentication/login/Login";
 import Register from "./components/authentication/register/Register";
+import Stats from "./components/stats/stats.js";
 
 const routes = [
     {
@@ -63,6 +64,10 @@ const routes = [
             {
                 path: '/register',
                 element: <Register/>,
+            },
+            {
+                path: '/stats',
+                element: <Stats/>,
             },
             {path: "*", element: <NoMatch/>}
         ]
