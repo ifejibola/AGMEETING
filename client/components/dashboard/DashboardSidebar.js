@@ -132,8 +132,8 @@ const DashboardSidebar = (props) => {
                             {...section}
                         />
                     ))}
-   
 
+                    {/*}
                     <Button onClick={handleOpen} startIcon={<HowToReg />}>Roll Call</Button>
                     <Modal
                         open={open}
@@ -190,7 +190,7 @@ const DashboardSidebar = (props) => {
                             <Button onClick={handleClose}>Close</Button>
                         </Box>
                     </Modal>
-
+*/}
                     <Button 
                     color="primary"
                     onClick={handleOpen}
