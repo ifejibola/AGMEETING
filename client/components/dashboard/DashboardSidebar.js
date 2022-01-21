@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {Box, Divider, Drawer, useMediaQuery, Typography, Button, Modal} from '@mui/material';
+import {Box, Divider, Drawer, useMediaQuery, Typography, Button, Modal, Grid, Card} from '@mui/material';
 import NavSection from '../../NavSection';
 import Scrollbar from '../../Scrollbar';
 import {AccountBalance, EventNote, PanTool, Person, VerifiedUser, VpnKey, Settings, HowToReg, Chat, PieChart} from "@mui/icons-material";
+
 
 
 const sections = [
@@ -25,12 +26,12 @@ const sections = [
                 title: 'Vault',
                 path: '/vault',
                 icon: <VpnKey fontSize="small"/>
-            },
+            }/*,
             {
                 title: 'Interactions',
                 path: '/interactions',
                 icon: <PanTool fontSize="small"/>
-            }
+            }*/
         ]
     },
     {
@@ -131,7 +132,8 @@ const DashboardSidebar = (props) => {
                             {...section}
                         />
                     ))}
-
+   
+{/*
                     <Button onClick={handleOpen} startIcon={<HowToReg />}>Roll Call</Button>
                     <Modal
                         open={open}
@@ -163,7 +165,114 @@ const DashboardSidebar = (props) => {
                             <Button onClick={handleClose}>Close</Button>
                         </Box>
                     </Modal>
-
+*/}
+                    <Button 
+                    color="primary"
+                    onClick={handleOpen}
+                    fullWidth
+                    sx={{ mt: 2 }}
+                    to="#"
+                    variant="contained"
+                    >Interactions</Button>
+                    <Modal
+                        centered
+                        open={open}
+                        onClose={handleClose}
+                        aria-labelledby="modal-title"
+                        aria-describedby="modal-description"
+                    >
+                        <Card >
+                        <Box sx={style}>
+                            <Typography
+                            align="center"
+                            color="textPrimary"
+                            gutterBottom
+                            variant="h4"
+                            >
+                            Interaction
+                            </Typography>
+                                <Box sx={{ flexGrow: 1 }}>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={6}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Motion Item
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Second Item
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Comment FOR
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={6}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Comment AGAINST
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Withdraw Comment
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Point of Information
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Point of Privilege
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Point of Order
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Recess
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Table
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Amend
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Ready to Vote
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Vote YES
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Vote NO
+                                    </Button>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                    <Button variant="contained" fullWidth="true">
+                                        Abstain
+                                    </Button>
+                                    </Grid>
+                                </Grid>
+                                </Box>
+                            </Box>
+                            </Card>
+                    </Modal>
                 </Box>
             </Scrollbar>
         </Box>
