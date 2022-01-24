@@ -14,9 +14,7 @@ import GroupedList3 from './Component/Session/Session';
 import Agenda from './Component/Agenda/agenda'
 import Vault from './Component/Vault/vault'
 
-import About from './About';
 import NoMatch from './NoMatch';
-import Testpg from './anothertestpg';
 
 import LoggedinUsers from './Component/AdminComponents/LoggedInUsers';
 import RegisteredUsers from './Component/AdminComponents/RegisteredUsers';
