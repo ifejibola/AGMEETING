@@ -116,15 +116,12 @@ const tasks = [
 
 const getDeadline = (task) => {
     let deadline = '';
-
     if (task.deadline) {
         const deadlineDate = task.deadline;
-
         if (isAfter(deadlineDate, now) && differenceInDays(deadlineDate, now) < 3) {
             deadline = `${differenceInDays(deadlineDate, now)} days remaining`;
         }
     }
-
     return deadline;
 };
 
@@ -151,7 +148,7 @@ const Session = () => (
                         {tasks.map((task, i) => (
                             <ListItem
                                 key={task.id}
-                                divider={i < tasks.length - 1}
+                                divider={true}
                             >
                                 <ListItemText
                                     primary={(
@@ -183,7 +180,7 @@ const Session = () => (
                         {tasks.map((task, i) => (
                             <ListItem
                                 key={task.id}
-                                divider={i < tasks.length - 1}
+                                divider={true}
                             >
                                 <ListItemText
                                     primary={(
@@ -211,7 +208,6 @@ const Session = () => (
                             </ListItem>
                         ))}
                     </List>
-
                     {/* VOTES */}
                     <Votes/>
                 </Box>
