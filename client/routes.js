@@ -11,7 +11,7 @@ import DashboardLayout from './Component/DashBoard/Layout';
 //Session Components
 import Land from './Land';
 import GroupedList3 from './Component/Session/Session';
-import Agenda from './Component/Agenda/agenda'
+import Agenda from './Component/Agenda/Agenda'
 import Vault from './Component/Vault/vault'
 
 import NoMatch from './NoMatch';
