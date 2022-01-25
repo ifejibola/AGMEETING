@@ -1,78 +1,99 @@
 import React from 'react';
+// import { BrowserRouter as Router, Route, Switch, useRoutes } from 'react-router-dom';
+// import { useRoutes } from 'react-router-dom'; //v5
+import { ThemeProvider } from '@mui/material/styles';
+
+import App from './App';
+
+//Layout
+import DashboardLayout from './Component/DashBoard/Layout';
+
+//Session Components
 import Land from './Land';
-import About from './About';
+import GroupedList3 from './Component/Session/Session';
+import Agenda from './Component/Agenda/agenda'
+import Vault from './Component/Vault/vault'
+
 import NoMatch from './NoMatch';
-import DashboardLayout from "./components/dashboard/Layout";
-import InSession from "./components/in-session/InSession";
-import Vault from "./components/vault/Vault.js";
-import Agenda from "./components/agenda/Agenda.js";
-import Interactions from "./components/interactions/Interactions.js";
-import RegisteredUsers from "./components/users-list/RegisteredUsers";
-import LoggedInUsers from "./components/users-list/LoggedInUsers";
-import MainSettingsPage from "./components/settings/MainSettingsPage";
-import Message from './components/ContentMessage/Message';
-import Login from "./components/authentication/login/Login";
-import Register from "./components/authentication/register/Register";
-import Stats from "./components/stats/stats.js";
+
+import LoggedinUsers from './Component/AdminComponents/LoggedInUsers';
+import RegisteredUsers from './Component/AdminComponents/RegisteredUsers';
+import Stats from './Component/AdminComponents/Stats/Stats';
+import Settings from './Component/AdminComponents/Settings/Settings'
+import Login from './Login/Login'
+
+import SignIn from './Login/signin'
+import SignUp from './Login/signup'
 
 const routes = [
     {
         path: '/',
         element: <DashboardLayout/>,
         children: [
-            {index: true, element: <Land/>},
+            { index: true, element: <GroupedList3 /> },
             {
-                path: '/about',
-                element: <About/>,
-            },
-            {
-                path: '/session',
-                element: <InSession/>,
+                path: '/agenda',
+                element: <Agenda />,
             },
             {
                 path: '/vault',
-                element: <Vault/>,
+                element: <Vault />,
+                // children: [
+                //     { index: true, element: <Testpg/> },
+                // ]x
             },
             {
-                path: '/agenda',
-                element: <Agenda/>,
+                path: '/loggedinUsers',
+                element: <LoggedinUsers />
             },
             {
-                path: '/interactions',
-                element: <Interactions/>,
-            },
-            {
-                path: '/registered-users',
-                element: <RegisteredUsers/>
-            },
-            {
-                path: '/logged-in-users',
-                element: <LoggedInUsers/>
-            },
-            {
-                path: '/settings',
-                element: <MainSettingsPage/>,
-            },
-            {
-                path: '/ContentMessage',
-                element: <Message/>,
-            },
-            {
-                path: '/login',
-                element: <Login/>,
-            },
-            {
-                path: '/register',
-                element: <Register/>,
+                path: '/registeredusers',
+                element: <RegisteredUsers />
             },
             {
                 path: '/stats',
-                element: <Stats/>,
+                element: <Stats />
             },
-            {path: "*", element: <NoMatch/>}
+            {
+                path: '/settings',
+                element: <Settings />
+            },
+
+            { path: "*", element: <NoMatch /> }
         ]
     },
-    {path: "*", element: <NoMatch/>}
-];
+    {
+        path: '/login',
+        element: <Login />
+    },
+    {
+        path: '/login2',
+        element: <SignIn />
+    },
+    {
+        path: '/signup',
+        element: <SignUp />
+    },
+    // },
+    // // {
+    //     path: '/about',
+    //     element: <About />,
 
+    //     children: [
+    //         { index: true, element: <Testpg /> },
+    //         {
+    //             path: '/about',
+    //             element: <About />,
+    //             children: [
+    //                 { index: true, element: <About /> },
+    //             ]
+    //         },
+    //         { path: "*", element: <NoMatch /> }
+    //     ]
+
+    // },
+
+
+    { path: "*", element: <NoMatch /> }
+]
 export default routes;

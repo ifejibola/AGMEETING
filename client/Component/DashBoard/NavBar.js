@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { AppBar, Box, IconButton, Toolbar } from '@mui/material';
-import { experimentalStyled } from "@mui/material";
+import {AppBar, Box, IconButton, Toolbar} from '@mui/material';
+import {experimentalStyled} from "@mui/material";
 import MenuIcon from '../../icons/Menu';
 import AccountPopover from './AccountPopover';
 // import ContactsPopover from './ContactsPopover';
@@ -10,7 +10,6 @@ import AccountPopover from './AccountPopover';
 // import LanguagePopover from './LanguagePopover';
 // import Logo from '../Logo';
 import NotificationsPopover from './NotificationsPopover';
-
 
 const DashboardNavbarRoot = experimentalStyled(AppBar)(({theme}) => ({
     ...(theme.palette.mode === 'light' && {
@@ -41,7 +40,7 @@ const NavBar = (props) => {
                         }
                     }}
                 >
-                    <MenuIcon fontSize="small" />
+                    <MenuIcon fontSize="small"/>
                 </IconButton>
                 <RouterLink to="/">
                     <h1>
@@ -65,27 +64,17 @@ const NavBar = (props) => {
                     }}
                 />
                 {/* <LanguagePopover /> */}
-
+                <Box sx={{ml: 1}}>
+                    {/* <ContentSearch /> */}
+                </Box>
+                <Box sx={{ml: 1}}>
+                    {/* <ContactsPopover /> */}
+                </Box>
+                <Box sx={{ml: 1}}>
+                    <NotificationsPopover/>
+                </Box>
                 <Box sx={{ml: 2}}>
-                    <RouterLink
-                        to="/login"
-                    >
-                        <Button><Typography color="textPrimary">Login</Typography></Button>
-                    </RouterLink>
-                </Box>
-
-                <Box sx={{ml: 2}}>
-                    <RouterLink
-                        to="/register"
-                    >
-                        <Button><Typography color="textPrimary">Register</Typography></Button>
-                    </RouterLink>
-                </Box>
-                <Box sx={{ ml: 1 }}>
-                    <NotificationsPopover />
-                </Box>
-                <Box sx={{ ml: 2 }}>
-                    <AccountPopover />
+                    <AccountPopover/>
                 </Box>
             </Toolbar>
         </DashboardNavbarRoot>
