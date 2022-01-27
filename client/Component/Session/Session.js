@@ -1,5 +1,5 @@
 import React from 'react'
-import { addDays, addHours, differenceInDays, isAfter } from 'date-fns';
+import {addDays, addHours, differenceInDays, isAfter} from 'date-fns';
 import {
     Avatar,
     AvatarGroup,
@@ -116,15 +116,12 @@ const tasks = [
 
 const getDeadline = (task) => {
     let deadline = '';
-
     if (task.deadline) {
         const deadlineDate = task.deadline;
-
         if (isAfter(deadlineDate, now) && differenceInDays(deadlineDate, now) < 3) {
             deadline = `${differenceInDays(deadlineDate, now)} days remaining`;
         }
     }
-
     return deadline;
 };
 
@@ -139,26 +136,26 @@ const Session = () => (
             <CardHeader
                 action={(
                     <IconButton>
-                        <DotsHorizontalIcon fontSize="small" />
+                        <DotsHorizontalIcon fontSize="small"/>
                     </IconButton>
                 )}
                 title="Session"
             />
-            <Divider />
+            <Divider/>
             <Scrollbar>
-                <Box sx={{ minWidth: 400 }}>
+                <Box sx={{minWidth: 400}}>
                     <List>
                         {tasks.map((task, i) => (
                             <ListItem
                                 key={task.id}
-                                divider={i < tasks.length - 1}
+                                divider={true}
                             >
                                 <ListItemText
                                     primary={(
                                         <Link
                                             color="textPrimary"
                                             noWrap
-                                            sx={{ cursor: 'pointer' }}
+                                            sx={{cursor: 'pointer'}}
                                             variant="subtitle2"
                                         >
                                             {task.title}
@@ -172,7 +169,7 @@ const Session = () => (
                                             key={member.name}
                                             title="View"
                                         >
-                                            <Avatar src={member.avatar} />
+                                            <Avatar src={member.avatar}/>
                                         </Tooltip>
                                     ))}
                                 </AvatarGroup>
@@ -183,14 +180,14 @@ const Session = () => (
                         {tasks.map((task, i) => (
                             <ListItem
                                 key={task.id}
-                                divider={i < tasks.length - 1}
+                                divider={true}
                             >
                                 <ListItemText
                                     primary={(
                                         <Link
                                             color="textPrimary"
                                             noWrap
-                                            sx={{ cursor: 'pointer' }}
+                                            sx={{cursor: 'pointer'}}
                                             variant="subtitle2"
                                         >
                                             {task.title}
@@ -204,16 +201,15 @@ const Session = () => (
                                             key={member.name}
                                             title="View"
                                         >
-                                            <Avatar src={member.avatar} />
+                                            <Avatar src={member.avatar}/>
                                         </Tooltip>
                                     ))}
                                 </AvatarGroup>
                             </ListItem>
                         ))}
                     </List>
-
                     {/* VOTES */}
-                    <Votes />
+                    <Votes/>
                 </Box>
             </Scrollbar>
         </Card>
