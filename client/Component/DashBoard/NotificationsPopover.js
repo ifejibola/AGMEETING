@@ -1,21 +1,7 @@
 import React from 'react'
-import {useRef, useState} from 'react';
-import {subDays, subHours} from 'date-fns';
-import {
-    Avatar,
-    Badge,
-    Box,
-    Button,
-    IconButton,
-    Link,
-    List,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
-    Popover,
-    Tooltip,
-    Typography
-} from "@mui/material";
+import { useRef, useState } from 'react';
+import { subDays, subHours } from 'date-fns';
+import { Avatar, Badge, Box, Button, IconButton, Link, List, ListItem, ListItemAvatar, ListItemText, Popover, Tooltip, Typography} from "@mui/material";
 import BellIcon from '../../icons/Bell';
 import ChatAltIcon from '../../icons/ChatAlt';
 import CreditCardIcon from '../../icons/CreditCard';
@@ -84,7 +70,7 @@ const NotificationsPopover = () => {
                         color="error"
                         badgeContent={4}
                     >
-                        <BellIcon fontSize="small"/>
+                        <BellIcon fontSize="small" />
                     </Badge>
                 </IconButton>
             </Tooltip>
@@ -97,10 +83,10 @@ const NotificationsPopover = () => {
                 onClose={handleClose}
                 open={open}
                 PaperProps={{
-                    sx: {width: 320}
+                    sx: { width: 320 }
                 }}
             >
-                <Box sx={{p: 2}}>
+                <Box sx={{ p: 2 }}>
                     <Typography
                         color="textPrimary"
                         variant="h6"
@@ -110,7 +96,7 @@ const NotificationsPopover = () => {
                 </Box>
                 {notifications.length === 0
                     ? (
-                        <Box sx={{p: 2}}>
+                        <Box sx={{ p: 2 }}>
                             <Typography
                                 color="textPrimary"
                                 variant="subtitle2"
@@ -137,14 +123,14 @@ const NotificationsPopover = () => {
                                                         color: 'primary.contrastText'
                                                     }}
                                                 >
-                                                    <Icon fontSize="small"/>
+                                                    <Icon fontSize="small" />
                                                 </Avatar>
                                             </ListItemAvatar>
                                             <ListItemText
                                                 primary={(
                                                     <Link
                                                         color="textPrimary"
-                                                        sx={{cursor: 'pointer'}}
+                                                        sx={{ cursor: 'pointer' }}
                                                         underline="none"
                                                         variant="subtitle2"
                                                     >

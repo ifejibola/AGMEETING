@@ -3,14 +3,11 @@ import PropTypes from "prop-types";
 import toast from "react-hot-toast";
 import Grid from "@mui/material/Grid";
 import {
-    Avatar,
     Box,
     Button,
     Dialog,
-    TextField,
     Typography,
 } from "@mui/material";
-// import getInitials from '../../../utils/getInitials';
 
 const Modal = (props) => {
     const {authorAvatar, authorName, onApply, onClose, open, ...other} = props;
