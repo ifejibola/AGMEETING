@@ -1,6 +1,6 @@
 import React from 'react'
 import numeral from 'numeral';
-import { format, subMinutes, subSeconds } from 'date-fns';
+import {format, subMinutes, subSeconds} from 'date-fns';
 import {
     Box,
     Card,
@@ -73,9 +73,7 @@ const getStatusLabel = (paymentStatus) => {
             text: 'Rejected'
         }
     };
-
-    const { text, color } = map[paymentStatus];
-
+    const {text, color} = map[paymentStatus];
     return (
         <Label color={color}>
             {text}
@@ -94,19 +92,18 @@ const Vault = () => (
             <CardHeader
                 action={(
                     <IconButton>
-                        <DotsHorizontalIcon fontSize="small" />
+                        <DotsHorizontalIcon fontSize="small"/>
                     </IconButton>
                 )}
                 title="Vault"
             />
-            <Divider />
+            <Divider/>
             <Scrollbar>
-                <Box sx={{ minWidth: 1150 }}>
+                <Box sx={{minWidth: 1150}}>
                     <Table>
                         <TableHead>
                             <TableRow>
                                 <TableCell padding="checkbox">
-                                    <Checkbox color="primary" />
                                 </TableCell>
                                 <TableCell>
                                     Number
@@ -135,7 +132,7 @@ const Vault = () => (
                                     key={order.id}
                                 >
                                     <TableCell padding="checkbox">
-                                        <Checkbox color="primary" />
+                                        <Checkbox color="primary"/>
                                     </TableCell>
                                     <TableCell>
                                         <Typography
@@ -177,10 +174,10 @@ const Vault = () => (
                                     </TableCell>
                                     <TableCell align="right">
                                         <IconButton>
-                                            <PencilAltIcon fontSize="small" />
+                                            <PencilAltIcon fontSize="small"/>
                                         </IconButton>
                                         <IconButton>
-                                            <ArrowRightIcon fontSize="small" />
+                                            <ArrowRightIcon fontSize="small"/>
                                         </IconButton>
                                     </TableCell>
                                 </TableRow>
