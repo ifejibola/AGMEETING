@@ -7,8 +7,8 @@ This week we continued integrating code from our client into our current build a
 
 
 ## Chester's Tasks
-
-
+- Cleaned up the code under Component/Dashboard/.
+- Improved readability of Votes component.
 
 ## Garry's Tasks
 
