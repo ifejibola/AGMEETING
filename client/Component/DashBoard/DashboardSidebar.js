@@ -1,31 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Avatar, Box, Button, Divider, Drawer, Link, Typography, useMediaQuery } from '@mui/material';
-import { experimentalStyled } from "@mui/material";
-
-// import useMediaQuery from '@material-ui/core/useMediaQuery';
-// import ReceiptIcon from '@material-ui/icons/Receipt';
-// import useAuth from '../../hooks/useAuth';
-// ReceiptIcon
-import BriefcaseIcon from '../../icons/Briefcase';
-import CalendarIcon from '../../icons/Calendar';
+import { Box, Button, Divider, Drawer, Link, Typography, useMediaQuery } from '@mui/material';
 import ChartPieIcon from '../../icons/ChartPie';
 import ChartSquareBarIcon from '../../icons/ChartSquareBar';
-import ChatAltIcon from '../../icons/ChatAlt';
-import ClipboardListIcon from '../../icons/ClipboardList';
-import FolderOpenIcon from '../../icons/FolderOpen';
-import MailIcon from '../../icons/Mail';
-import ShareIcon from '../../icons/Share';
 import ShoppingBagIcon from '../../icons/ShoppingBag';
-import ShoppingCartIcon from '../../icons/ShoppingCart';
-import UserIcon from '../../icons/User';
 import UsersIcon from '../../icons/Users';
 import Logo from '../../Logo';
 import NavSection from '../../NavSection';
 import Scrollbar from '../../Scrollbar';
-// import { Receipt } from '@material-ui/icons';
-
 import Modal from './Interactions'
 const sections = [
   {
@@ -45,12 +28,7 @@ const sections = [
         title: 'Vault',
         path: '/Vault',
         icon: <ShoppingBagIcon fontSize="small" />
-      },
-      // {
-      //   title: 'Account',
-      //   path: '/dashboard/account',
-      //   icon: <UserIcon fontSize="small" />
-      // }
+      }
     ]
   },
 
@@ -73,139 +51,21 @@ const sections = [
           {
             title: 'Stats',
             path: '/stats'
-          },
-          // {
-          //   title: 'Edit',
-          //   path: '/dashboard/customers/1/edit'
-          // }
+          }
         ]
       },
       {
         title: 'General Settings',
         path: '/settings',
         icon: <ShoppingBagIcon fontSize="small" />
-      },
-
-      // {
-      //   title: 'Products',
-      //   path: '/dashboard/products',
-      //   icon: <ShoppingCartIcon fontSize="small" />,
-      //   children: [
-      //     {
-      //       title: 'List',
-      //       path: '/dashboard/products'
-      //     },
-      //     {
-      //       title: 'Create',
-      //       path: '/dashboard/products/new'
-      //     }
-      //   ]
-      // },
-      // {
-      //   title: 'Orders',
-      //   icon: <FolderOpenIcon fontSize="small" />,
-      //   path: '/dashboard/orders',
-      //   children: [
-      //     {
-      //       title: 'List',
-      //       path: '/dashboard/orders'
-      //     },
-      //     {
-      //       title: 'Details',
-      //       path: '/dashboard/orders/1'
-      //     }
-      //   ]
-      // },
-      // {
-      //   title: 'Invoices',
-      //   path: '/dashboard/invoices',
-      //   icon: <FolderOpenIcon fontSize="small" />,
-      //   children: [
-      //     {
-      //       title: 'List',
-      //       path: '/dashboard/invoices'
-      //     },
-      //     {
-      //       title: 'Details',
-      //       path: '/dashboard/invoices/1'
-      //     }
-      //   ]
-      // }
+      }
     ]
-  },
-
-  // {
-  //   title: 'Platforms',
-  //   items: [
-  //     {
-  //       title: 'Projects',
-  //       path: '/dashboard/projects',
-  //       icon: <BriefcaseIcon fontSize="small" />,
-  //       children: [
-  //         {
-  //           title: 'Browse',
-  //           path: '/dashboard/projects/browse'
-  //         },
-  //         {
-  //           title: 'Details',
-  //           path: '/dashboard/projects/1'
-  //         },
-  //         {
-  //           title: 'Create',
-  //           path: '/dashboard/projects/new'
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       title: 'Social',
-  //       path: '/dashboard/social',
-  //       icon: <ShareIcon fontSize="small" />,
-  //       children: [
-  //         {
-  //           title: 'Profile',
-  //           path: '/dashboard/social/profile'
-  //         },
-  //         {
-  //           title: 'Feed',
-  //           path: '/dashboard/social/feed'
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // },
-
-  // {
-  //   title: 'Apps',
-  //   items: [
-  //     {
-  //       title: 'Kanban',
-  //       path: '/dashboard/kanban',
-  //       icon: <ClipboardListIcon fontSize="small" />
-  //     },
-  //     {
-  //       title: 'Mail',
-  //       path: '/dashboard/mail',
-  //       icon: <MailIcon fontSize="small" />
-  //     },
-  //     {
-  //       title: 'Chat',
-  //       path: '/dashboard/chat',
-  //       icon: <ChatAltIcon fontSize="small" />
-  //     },
-  //     {
-  //       title: 'Calendar',
-  //       path: '/dashboard/calendar',
-  //       icon: <CalendarIcon fontSize="small" />
-  //     }
-  //   ]
-  // }
-
+  }
 ];
 
 const DashboardSidebar = (props) => {
   const { onMobileClose, openMobile } = props;
   const location = useLocation();
-  // const { user } = useAuth();
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
 
   useEffect(() => {
@@ -214,13 +74,10 @@ const DashboardSidebar = (props) => {
     }
   }, [location.pathname]);
 
-  // Inter new
   const [isApplicationOpen, setIsApplicationOpen] = useState(false);
-  // temp
   const handleApplyModalOpen = () => {
     setIsApplicationOpen(true);
   };
-  // temp
   const handleApplyModalClose = () => {
     setIsApplicationOpen(false);
   };
@@ -352,8 +209,6 @@ const DashboardSidebar = (props) => {
             Interactions
           </Button>
           <Modal
-            // authorAvatar={project.author.avatar}
-            // authorName={project.author.name}
             onApply={handleApplyModalClose}
             onClose={handleApplyModalClose}
             open={isApplicationOpen}
@@ -400,8 +255,6 @@ const DashboardSidebar = (props) => {
         {content}
       </Drawer>
       <Modal
-        // authorAvatar={project.author.avatar}
-        // authorName={project.author.name}
         onApply={handleApplyModalClose}
         onClose={handleApplyModalClose}
         open={isApplicationOpen}
