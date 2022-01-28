@@ -10,14 +10,12 @@ import {
     IconButton,
     InputAdornment,
     Link,
-    Tab,
     Table,
     TableBody,
     TableCell,
     TableHead,
     TablePagination,
     TableRow,
-    Tabs,
     TextField,
     Typography
 } from '@mui/material'
@@ -25,9 +23,7 @@ import Scrollbar from '../../Scrollbar';
 import ArrowRightIcon from '../../icons/ArrowRight';
 import PencilAltIcon from '../../icons/PencilAlt';
 import SearchIcon from '../../icons/Search';
-
 import Comments from './Comments';
-
 const now = new Date();
 
 const customers = [
@@ -113,25 +109,6 @@ const customers = [
     }
 ];
 
-const tabs = [
-    {
-        label: 'All',
-        value: 'all'
-    },
-    {
-        label: 'Accepts Marketing',
-        value: 'hasAcceptedMarketing'
-    },
-    {
-        label: 'Prospect',
-        value: 'isProspect'
-    },
-    {
-        label: 'Returning',
-        value: 'isReturning'
-    }
-];
-
 const sortOptions = [
     {
         label: 'Last update (newest)',
@@ -159,22 +136,7 @@ const RegisteredUsers = () => (
         }}
     >
         <Card>
-            {/* <Tabs
-                indicatorColor="primary"
-                scrollButtons="auto"
-                textColor="primary"
-                value="all"
-                variant="scrollable"
-            >
-                {tabs.map((tab) => (
-                    <Tab
-                        key={tab.value}
-                        label={tab.label}
-                        value={tab.value}
-                    />
-                ))}
-            </Tabs> */}
-            <Divider />
+            <Divider/>
             <Box
                 sx={{
                     alignItems: 'center',
@@ -327,8 +289,7 @@ const RegisteredUsers = () => (
                 rowsPerPage={5}
                 rowsPerPageOptions={[5, 10, 25]}
             />
-
-            <Comments />
+            <Comments/>
         </Card>
     </Box>
 );
