@@ -6,9 +6,8 @@ const Stats = () => {
 
     return (
         <>
-            <Comments />
-
-            <ReadyToVote />
+            <Comments/>
+            <ReadyToVote/>
         </>
     )
 };

@@ -20,7 +20,6 @@ import ChevronDownIcon from '../../../icons/ChevronDown';
 import ChevronUpIcon from '../../../icons/ChevronUp';
 import DotsHorizontalIcon from '../../../icons/DotsHorizontal'
 
-
 const connections = [
     {
         id: '5e887ac47eed253091be10cb',
@@ -34,7 +33,7 @@ const connections = [
         avatar: '/static/mock-images/avatars/avatar-fran_perez.png',
         commonConnections: 8,
         name: 'Fran Perez',
-        status: 'pending'
+        status: 'Pending'
     },
     {
         id: '5e86805e2bafd54f66cc95c3',
@@ -108,7 +107,7 @@ const CommentsList = () => (
                                 </Button>
                             </Box>
                             <IconButton>
-                                <DotsHorizontalIcon fontSize="small" />
+                                <DotsHorizontalIcon fontSize="small"/>
                             </IconButton>
                         </Box>
                     </Paper>
@@ -117,9 +116,9 @@ const CommentsList = () => (
         </Grid>
     </Box>
 );
+
 const Comments = () => {
     const theme = useTheme();
-
     const chartOptions = {
         chart: {
             background: 'transparent',
@@ -149,9 +148,7 @@ const Comments = () => {
             mode: theme.palette.mode
         }
     };
-
     const chartSeries = [83];
-
     return (
         <Box
             sx={{
@@ -197,13 +194,13 @@ const Comments = () => {
                                     </Typography>
                                     <Typography
                                         color="textPrimary"
-                                        sx={{ mt: 1 }}
+                                        sx={{mt: 1}}
                                         variant="subtitle2"
                                     >
                                         Comments For
                                     </Typography>
                                 </Box>
-                                <Box sx={{ flexGrow: 1 }} />
+                                <Box sx={{flexGrow: 1}}/>
                                 <Avatar
                                     sx={{
                                         backgroundColor: alpha(theme.palette.success.main, 0.08),
@@ -211,7 +208,7 @@ const Comments = () => {
                                     }}
                                     variant="rounded"
                                 >
-                                    <ChevronUpIcon fontSize="small" />
+                                    <ChevronUpIcon fontSize="small"/>
                                 </Avatar>
                             </Box>
                         </CardContent>
@@ -219,7 +216,7 @@ const Comments = () => {
                         <CardActions>
                             <Button
                                 color="primary"
-                                endIcon={<ArrowRightIcon fontSize="small" />}
+                                endIcon={<ArrowRightIcon fontSize="small"/>}
                                 variant="text"
                             >
                                 Comments For
@@ -261,13 +258,13 @@ const Comments = () => {
                                     </Typography>
                                     <Typography
                                         color="textPrimary"
-                                        sx={{ mt: 1 }}
+                                        sx={{mt: 1}}
                                         variant="subtitle2"
                                     >
                                         Comments Against
                                     </Typography>
                                 </Box>
-                                <Box sx={{ flexGrow: 1 }} />
+                                <Box sx={{flexGrow: 1}}/>
                                 <Avatar
                                     sx={{
                                         backgroundColor: alpha(theme.palette.error.main, 0.08),
@@ -275,15 +272,15 @@ const Comments = () => {
                                     }}
                                     variant="rounded"
                                 >
-                                    <ChevronDownIcon fontSize="small" />
+                                    <ChevronDownIcon fontSize="small"/>
                                 </Avatar>
                             </Box>
                         </CardContent>
-                        <Divider />
+                        <Divider/>
                         <CardActions>
                             <Button
                                 color="primary"
-                                endIcon={<ArrowRightIcon fontSize="small" />}
+                                endIcon={<ArrowRightIcon fontSize="small"/>}
                                 variant="text"
                             >
                                 Comments Against
@@ -292,15 +289,9 @@ const Comments = () => {
                     </Card>
                 </Grid>
             </Grid>
-            <CommentsList />
+            <CommentsList/>
         </Box>
     );
 };
 
 export default Comments;
-
-// import { Avatar, Box, Button, Grid, IconButton, Link, Paper, Typography } from '@material-ui/core';
-// import DotsHorizontalIcon from '../../../icons/DotsHorizontal';
-
-
-// export default GridList6;
