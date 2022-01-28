@@ -11,7 +11,7 @@ import {
     Grid,
     Typography
 } from '@mui/material'
-import { alpha, useTheme } from '@mui/material'
+import {alpha, useTheme} from '@mui/material'
 import ArrowRightIcon from '../../icons/ArrowRight';
 import ChevronDownIcon from '../../icons/ChevronDown';
 import ChevronUpIcon from '../../icons/ChevronUp';
@@ -114,7 +114,7 @@ const Comments = () => {
                                 </Avatar>
                             </Box>
                         </CardContent>
-                        <Divider />
+                        <Divider/>
                         <CardActions>
                             <Button
                                 color="primary"
@@ -174,7 +174,7 @@ const Comments = () => {
                                     }}
                                     variant="rounded"
                                 >
-                                    <ChevronDownIcon fontSize="small" />
+                                    <ChevronDownIcon fontSize="small"/>
                                 </Avatar>
                             </Box>
                         </CardContent>
@@ -182,7 +182,7 @@ const Comments = () => {
                         <CardActions>
                             <Button
                                 color="primary"
-                                endIcon={<ArrowRightIcon fontSize="small" />}
+                                endIcon={<ArrowRightIcon fontSize="small"/>}
                                 variant="text"
                             >
                                 Comments Against
