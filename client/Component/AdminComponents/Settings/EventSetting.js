@@ -66,14 +66,14 @@ const fields = [
 
 ];
 
-const emailOptions = [
-    'Resend last invoice',
-    'Send password reset',
-    'Send verification'
+const voteOptions = [
+    'Option1',
+    'Option2',
+    'Option3'
 ];
 
 const EventSetting = () => {
-    const [emailOption, setEmailOption] = useState(emailOptions[0]);
+    const [voteOption, setVoteOption] = useState(voteOptions[0]);
 
     return (
         <Box
@@ -90,13 +90,13 @@ const EventSetting = () => {
                     <TextField
                         fullWidth
                         name="option"
-                        onChange={(event) => setEmailOption(event.target.value)}
+                        onChange={(event) => setVoteOption(event.target.value)}
                         select
                         SelectProps={{native:true}}
-                        value={emailOption}
+                        value={voteOption}
                         variant="outlined"
                     >
-                        {emailOptions.map((option) => (
+                        {voteOptions.map((option) => (
                             <option
                                 key={option}
                                 value={option}
@@ -122,13 +122,13 @@ const EventSetting = () => {
                                             <TextField
                                                 fullWidth
                                                 name="option"
-                                                onChange={(event) => setEmailOption(event.target.value)}
+                                                onChange={(event) => setVoteOption(event.target.value)}
                                                 select
                                                 SelectProps={{ native: true }}
-                                                value={emailOption}
+                                                value={voteOption}
                                                 variant="outlined"
                                             >
-                                                {emailOptions.map((option) => (
+                                                {voteOptions.map((option) => (
                                                     <option
                                                         key={option}
                                                         value={option}
