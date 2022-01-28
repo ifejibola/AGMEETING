@@ -18,7 +18,7 @@ import Scrollbar from '../../../Scrollbar';
 const orderItems = [
     {
         id: '5ecb8abbdd6dfb1f9d6bf98b',
-        billingCycle: 'monthly',
+        billingCycle: 'Monthly',
         currency: '$',
         name: 'Project Points',
         quantity: 25,
@@ -26,7 +26,7 @@ const orderItems = [
     },
     {
         id: '5ecb8ac10f116d04bed990eb',
-        billingCycle: 'monthly',
+        billingCycle: 'Monthly',
         currency: '$',
         name: 'Freelancer Subscription',
         quantity: 1,
@@ -43,10 +43,10 @@ const ApprovalTable = () => (
         }}
     >
         <Card>
-            <CardHeader title="Intro and approval of the Chair Voting Session" />
-            <Divider />
+            <CardHeader title="Intro and approval of the Chair Voting Session"/>
+            <Divider/>
             <Scrollbar>
-                <Box sx={{ minWidth: 700 }}>
+                <Box sx={{minWidth: 700}}>
                     <Table>
                         <TableHead>
                             <TableRow>

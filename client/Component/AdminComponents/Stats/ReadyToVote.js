@@ -3,31 +3,22 @@ import Chart from 'react-apexcharts';
 import {
     Avatar,
     Box,
-    Button,
     Card,
-    CardActions,
     CardContent,
     Divider,
     Grid,
-    Paper,
     Typography,
-    Link,
     IconButton,
     CardHeader
 } from '@mui/material'
 import { alpha, useTheme } from '@mui/material'
-import ArrowRightIcon from '../../../icons/ArrowRight';
 import ChevronDownIcon from '../../../icons/ChevronDown';
 import ChevronUpIcon from '../../../icons/ChevronUp';
-import DotsHorizontalIcon from '../../../icons/DotsHorizontal'
-
-import Label from '../../../Label';
-
+import DotsHorizontalIcon from '../../../icons/DotsHorizontal';
 import ApprovalTable from './ApprovalTable';
 
 const ReadyToVote = () => {
     const theme = useTheme();
-
     const chartOptions = {
         chart: {
             background: 'transparent',
@@ -57,15 +48,13 @@ const ReadyToVote = () => {
             mode: theme.palette.mode
         }
     };
-
     const chartSeries = [83];
-
     return (
         <>
             <CardHeader
                 action={(
                     <IconButton>
-                        <DotsHorizontalIcon fontSize="small" />
+                        <DotsHorizontalIcon fontSize="small"/>
                     </IconButton>
                 )}
                 title="Ready To Vote Statistics"
@@ -76,7 +65,6 @@ const ReadyToVote = () => {
                     p: 3
                 }}
             >
-
                 <Grid
                     container
                     spacing={3}
@@ -87,15 +75,12 @@ const ReadyToVote = () => {
                         xs={12}
                     >
                         <Card>
-
                             <CardContent
                                 sx={{
                                     alignItems: 'center',
                                     display: 'flex'
                                 }}
                             >
-
-
                                 <Chart
                                     height="160"
                                     options={chartOptions}
@@ -124,7 +109,7 @@ const ReadyToVote = () => {
                                             READY
                                         </Typography>
                                     </Box>
-                                    <Box sx={{ flexGrow: 1 }} />
+                                    <Box sx={{flexGrow: 1}}/>
                                     <Avatar
                                         sx={{
                                             backgroundColor: alpha(theme.palette.success.main, 0.08),
@@ -132,20 +117,11 @@ const ReadyToVote = () => {
                                         }}
                                         variant="rounded"
                                     >
-                                        <ChevronUpIcon fontSize="small" />
+                                        <ChevronUpIcon fontSize="small"/>
                                     </Avatar>
                                 </Box>
                             </CardContent>
-                            <Divider />
-                            {/* <CardActions>
-                            <Button
-                                color="primary"
-                                endIcon={<ArrowRightIcon fontSize="small" />}
-                                variant="text"
-                            >
-                                Comments For
-                            </Button>
-                        </CardActions> */}
+                            <Divider/>
                         </Card>
                     </Grid>
                     <Grid
@@ -182,13 +158,13 @@ const ReadyToVote = () => {
                                         </Typography>
                                         <Typography
                                             color="textPrimary"
-                                            sx={{ mt: 1 }}
+                                            sx={{mt: 1}}
                                             variant="subtitle2"
                                         >
                                             NOT READY
                                         </Typography>
                                     </Box>
-                                    <Box sx={{ flexGrow: 1 }} />
+                                    <Box sx={{flexGrow: 1}}/>
                                     <Avatar
                                         sx={{
                                             backgroundColor: alpha(theme.palette.error.main, 0.08),
@@ -196,27 +172,16 @@ const ReadyToVote = () => {
                                         }}
                                         variant="rounded"
                                     >
-                                        <ChevronDownIcon fontSize="small" />
+                                        <ChevronDownIcon fontSize="small"/>
                                     </Avatar>
                                 </Box>
                             </CardContent>
-                            <Divider />
-                            {/* <CardActions>
-                            <Button
-                                color="primary"
-                                endIcon={<ArrowRightIcon fontSize="small" />}
-                                variant="text"
-                            >
-                                Not Ready
-                            </Button>
-                        </CardActions> */}
+                            <Divider/>
                         </Card>
                     </Grid>
                 </Grid>
             </Box>
-
             {/* Approval */}
-
             <ApprovalTable />
         </>
     );
