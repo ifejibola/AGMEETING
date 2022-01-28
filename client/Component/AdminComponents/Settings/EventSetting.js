@@ -1,9 +1,7 @@
 import React from 'react'
-import { useState } from 'react';
-import { format, subDays, subHours, subMinutes } from 'date-fns';
+import {useState} from 'react';
 import {
     Box,
-    Button,
     Card,
     CardContent,
     CardHeader,
@@ -15,11 +13,8 @@ import {
     TextField,
     Typography
 } from '@mui/material';
-import MailIcon from '../../../icons/Mail';
 
-const now = new Date();
-
-const emails = [
+const fields = [
     {
         id: '5ece2ce3613486d95ffaea58',
         Title: 'Meeting Chair'
@@ -97,7 +92,7 @@ const EventSetting = () => {
                         name="option"
                         onChange={(event) => setEmailOption(event.target.value)}
                         select
-                        SelectProps={{ native: true }}
+                        SelectProps={{native:true}}
                         value={emailOption}
                         variant="outlined"
                     >
@@ -110,26 +105,17 @@ const EventSetting = () => {
                             </option>
                         ))}
                     </TextField>
-                    {/* <Box sx={{ mt: 2 }}>
-                        <Button
-                            color="primary"
-                            startIcon={<MailIcon fontSize="small" />}
-                            variant="contained"
-                        >
-                            Send email
-                        </Button>
-                    </Box> */}
                     <Box sx={{ mt: 2 }}>
                         <Table>
                             <TableBody>
-                                {emails.map((email) => (
-                                    <TableRow key={email.id}>
+                                {fields.map((field) => (
+                                    <TableRow key={field.id}>
                                         <TableCell>
                                             <Typography
                                                 color="textPrimary"
                                                 variant="subtitle2"
                                             >
-                                                {email.Title}
+                                                {field.Title}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
