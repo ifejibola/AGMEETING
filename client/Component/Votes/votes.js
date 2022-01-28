@@ -25,6 +25,7 @@ const data = {
 };
 
 const Votes = () => {
+    
     const theme = useTheme();
 
     const chartOptions = {
