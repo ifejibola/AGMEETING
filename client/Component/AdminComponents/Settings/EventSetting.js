@@ -1,9 +1,7 @@
 import React from 'react'
-import { useState } from 'react';
-import { format, subDays, subHours, subMinutes } from 'date-fns';
+import {useState} from 'react';
 import {
     Box,
-    Button,
     Card,
     CardContent,
     CardHeader,
@@ -15,11 +13,8 @@ import {
     TextField,
     Typography
 } from '@mui/material';
-import MailIcon from '../../../icons/Mail';
 
-const now = new Date();
-
-const emails = [
+const fields = [
     {
         id: '5ece2ce3613486d95ffaea58',
         Title: 'Meeting Chair'
@@ -71,14 +66,14 @@ const emails = [
 
 ];
 
-const emailOptions = [
-    'Resend last invoice',
-    'Send password reset',
-    'Send verification'
+const voteOptions = [
+    'Option1',
+    'Option2',
+    'Option3'
 ];
 
 const EventSetting = () => {
-    const [emailOption, setEmailOption] = useState(emailOptions[0]);
+    const [voteOption, setVoteOption] = useState(voteOptions[0]);
 
     return (
         <Box
@@ -95,13 +90,13 @@ const EventSetting = () => {
                     <TextField
                         fullWidth
                         name="option"
-                        onChange={(event) => setEmailOption(event.target.value)}
+                        onChange={(event) => setVoteOption(event.target.value)}
                         select
-                        SelectProps={{ native: true }}
-                        value={emailOption}
+                        SelectProps={{native:true}}
+                        value={voteOption}
                         variant="outlined"
                     >
-                        {emailOptions.map((option) => (
+                        {voteOptions.map((option) => (
                             <option
                                 key={option}
                                 value={option}
@@ -110,39 +105,30 @@ const EventSetting = () => {
                             </option>
                         ))}
                     </TextField>
-                    {/* <Box sx={{ mt: 2 }}>
-                        <Button
-                            color="primary"
-                            startIcon={<MailIcon fontSize="small" />}
-                            variant="contained"
-                        >
-                            Send email
-                        </Button>
-                    </Box> */}
                     <Box sx={{ mt: 2 }}>
                         <Table>
                             <TableBody>
-                                {emails.map((email) => (
-                                    <TableRow key={email.id}>
+                                {fields.map((field) => (
+                                    <TableRow key={field.id}>
                                         <TableCell>
                                             <Typography
                                                 color="textPrimary"
                                                 variant="subtitle2"
                                             >
-                                                {email.Title}
+                                                {field.Title}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
                                             <TextField
                                                 fullWidth
                                                 name="option"
-                                                onChange={(event) => setEmailOption(event.target.value)}
+                                                onChange={(event) => setVoteOption(event.target.value)}
                                                 select
                                                 SelectProps={{ native: true }}
-                                                value={emailOption}
+                                                value={voteOption}
                                                 variant="outlined"
                                             >
-                                                {emailOptions.map((option) => (
+                                                {voteOptions.map((option) => (
                                                     <option
                                                         key={option}
                                                         value={option}
