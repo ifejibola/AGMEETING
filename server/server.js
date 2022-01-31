@@ -7,6 +7,7 @@ const port = process.env.PORT || 3000;
 const indexRoutes = require("./controllers/index.controller")
 const DIST_DIR = path.join(__dirname, "public");
 const HTML_FILE = path.join(DIST_DIR, "index.html");
+const db = require('./models');
 
 
 app.use(express.json());
