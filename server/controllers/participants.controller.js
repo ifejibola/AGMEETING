@@ -1,5 +1,5 @@
 const db = require('../models');
-const Participant = db.participant;
+const Participant = db.Participant;
 
 exports.findAll = (req, res) => {
     Participant.findAll()

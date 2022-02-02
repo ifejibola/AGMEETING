@@ -1,9 +1,7 @@
 const express = require("express");
-// var fallback = require('express-history-api-fallback')
 const app = express();
 const path = require("path");
 const port = process.env.PORT || 3000;
-// import routes from "../client/routes";
 const indexRoutes = require("./controllers/index.controller")
 const DIST_DIR = path.join(__dirname, "public");
 const HTML_FILE = path.join(DIST_DIR, "index.html");
