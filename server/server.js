@@ -15,6 +15,7 @@ app.use(express.static(path.join(__dirname, "../dist")));
 app.use(bodyParser.json());
 
 require('./routes/participant.routes')(app);
+require('./routes/admin.routes')(app);
 
 // app.use(express.static("helper"));
 // app.use("/", indexRoutes)
