@@ -21,6 +21,7 @@
     "@material-ui/system": "5.0.0-alpha.34",
     "@mui/icons-material": "^5.0.4",
     "@mui/styled-engine": "^5.0.2",
+    "bcrypt": "^5.0.1",
     "date-fns": "^2.25.0",
     "express": "^4.17.1",
     "history": "^5.0.1",
