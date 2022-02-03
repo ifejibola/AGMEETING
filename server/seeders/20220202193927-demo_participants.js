@@ -17,6 +17,12 @@ module.exports = {
                 password: '$321!pass!123$',
                 createdAt: new Date(),
                 updatedAt: new Date()
+            },
+            {
+                email: 'demo2@demo.com',
+                password: '$321!pass!123$',
+                createdAt: new Date(),
+                updatedAt: new Date()
             }
         ], {});
     },
