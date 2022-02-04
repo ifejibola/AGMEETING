@@ -20,3 +20,10 @@ This week we worked on implementing Sequelize on the backend as well as implemen
  - Created item model
  - Created GET and POST APIs for both meeting and item tables
  - Updated .gitignore
+
+# Garry's Tasks
+
+- Created a moderator model.
+- Created GET and POST APIs for the moderator table.
+- Worked on weekly scrum report.
+
