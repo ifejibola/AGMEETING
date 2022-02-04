@@ -13,3 +13,10 @@ This week we worked on implementing Sequelize on the backend as well as implemen
 - Created an admin model.
 - Created GET and POST APIs for the Admin table.
 - Worked on weekly meeting minutes.
+
+## Ryan's Tasks
+
+ - Created meeting model
+ - Created item model
+ - Created GET and POST APIs for both meeting and item tables
+ - Updated .gitignore
