@@ -3,4 +3,4 @@
 .idea
 .DS_Store
 dist
-.sqlite3
+*.sqlite3
