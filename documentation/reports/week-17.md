@@ -13,3 +13,9 @@ This week we worked on implementing Sequelize on the backend as well as implemen
 - Created an admin model.
 - Created GET and POST APIs for the Admin table.
 - Worked on weekly meeting minutes.
+
+# Garry's Tasks
+
+- Created a moderator model.
+- Created GET and POST APIs for the moderator table.
+- Worked on weekly scrum report.
