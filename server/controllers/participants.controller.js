@@ -1,46 +1,86 @@
 const db = require('../models');
 const Participant = db.Participant;
+const bcrypt = require('bcrypt');
 
 exports.create = (req, res) => {
     // Validate request.
-    console.log(req.body);
-    if (!req.body.email && !req.body.password && !req.body.meetingId) {
+    if (!req.body.email) {
         res.status(400).send({
-            message: "Content can not be empty!"
+            message: "An email is required for participant creation."
+        });
+        return;
+    }
+    if (!req.body.password) {
+        res.status(400).send({
+            message: "A password is required for participant creation."
+        });
+        return;
+    }
+    if (!req.body.meetingId) {
+        res.status(400).send({
+            message: "A meeting id is required for participant creation."
         });
         return;
     }
 
+    const meetingId = req.body.meetingId;
+    const email = req.body.email;
+    const password = bcrypt.hashSync(req.body.password, 10);
+
     // Create a Participant.
     const participant = {
-        email: req.body.email,
-        password: req.body.password,
-        meetingId: req.body.meetingId,
+        email: email,
+        password: password,
+        meetingId: meetingId,
         createdAt: Date.now(),
         updatedAt: Date.now()
     };
 
     // Save Participant in the database
     Participant.create(participant)
-        .then(data => {
+        .then((data) => {
             res.send(data);
         })
-        .catch(err => {
+        .catch((err) => {
             res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating the Participant."
+                message: err.message || "Some error occurred while creating the Participant."
             });
         });
 };
 
 exports.findAll = (req, res) => {
-    Participant.findAll()
+    Participant.findAll({
+        attributes: {
+            exclude: ['password']
+        }
+    })
         .then((data) => {
             res.send(data);
         })
         .catch((err) => {
-            res.send({
+            res.status(500).send({
                 message: err.message || 'There was an issue retrieving the participants.'
+            });
+        });
+};
+
+exports.delete = (req, res) => {
+    const id = parseInt(req.params.id);
+    Participant.destroy({
+        where: {
+            id: id
+        }
+    })
+        .then((num) => {
+            if (num === 1) {
+                res.send('Participant was deleted successfully.')
+            } else {
+                res.send(`Cannot delete participant with id=${id}.`)
+            }
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || 'There was an issue deleting the participant.'
             });
         });
 };
