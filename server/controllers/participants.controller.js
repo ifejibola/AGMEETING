@@ -4,7 +4,7 @@ const Participant = db.Participant;
 exports.create = (req, res) => {
     // Validate request.
     console.log(req.body);
-    if (!req.body.email && !req.body.password) {
+    if (!req.body.email && !req.body.password && !req.body.meetingId) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
@@ -15,6 +15,7 @@ exports.create = (req, res) => {
     const participant = {
         email: req.body.email,
         password: req.body.password,
+        meetingId: req.body.meetingId,
         createdAt: Date.now(),
         updatedAt: Date.now()
     };
@@ -38,7 +39,7 @@ exports.findAll = (req, res) => {
             res.send(data);
         })
         .catch((err) => {
-            res.status.send({
+            res.send({
                 message: err.message || 'There was an issue retrieving the participants.'
             });
         });
