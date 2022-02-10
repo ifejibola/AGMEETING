@@ -49,9 +49,13 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
+    const { Op } = require("sequelize");
     Participant.findAll({
         attributes: {
             exclude: ['password']
+        }, 
+            where: {
+            [Op.and]:{meetingId: req.query.meetingId}
         }
     })
         .then((data) => {
