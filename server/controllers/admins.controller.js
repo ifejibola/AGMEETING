@@ -32,8 +32,13 @@ exports.create = (req, res) => {
         });
 };
 
-exports.findAll = (req, res) => {
-    Admin.findAll()
+exports.findOne = (req, res) => {
+    const { Op } = require("sequelize");
+    Admin.findOne({
+        where: {
+            [Op.and]:[{email: req.query.email},{password: req.query.password}]
+        }
+    })
         .then((data) => {
             res.send(data);
         })
