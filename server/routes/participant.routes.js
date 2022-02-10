@@ -6,6 +6,8 @@ module.exports = app => {
 
     router.get('/', participants.findAll);
 
+    router.get('/', participants.findAllForMeeting);
+
     router.delete('/:id', participants.delete);
 
     app.use('/api/participants', router);
