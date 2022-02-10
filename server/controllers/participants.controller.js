@@ -49,6 +49,22 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
+    Participant.findAll({
+        attributes: {
+            exclude: ['password']
+        }
+    })
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || 'There was an issue retrieving the participants.'
+            });
+        });
+};
+
+exports.findAllForMeeting = (req, res) => {
     const { Op } = require("sequelize");
     Participant.findAll({
         attributes: {
