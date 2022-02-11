@@ -21,3 +21,8 @@ various APIs.
 - Updated ER diagram
 - Created GET API for moderator (email and password)
 - Worked on weekly scrum report
+
+# Ryan's Tasks
+
+- Created GET API for mpoderator based on meeting ID
+- Updated Meeting Model
