@@ -3,8 +3,8 @@ module.exports = app => {
     const router = require('express').Router();
 
     router.post('/', moderators.create);
-
     router.get('/', moderators.findAll);
+    router.get('/', moderators.findOne);
 
     app.use('/api/moderators', router);
 }
