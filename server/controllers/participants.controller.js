@@ -64,6 +64,26 @@ exports.findAll = (req, res) => {
         });
 };
 
+exports.findAllForMeeting = (req, res) => {
+    const { Op } = require("sequelize");
+    Participant.findAll({
+        attributes: {
+            exclude: ['password']
+        }, 
+            where: {
+            [Op.and]:{meetingId: req.query.meetingId}
+        }
+    })
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || 'There was an issue retrieving the participants.'
+            });
+        });
+};
+
 exports.delete = (req, res) => {
     const id = parseInt(req.params.id);
     Participant.destroy({
