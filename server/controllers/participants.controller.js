@@ -48,6 +48,41 @@ exports.create = (req, res) => {
         });
 };
 
+exports.find = (req, res) => {
+    // Validate request.
+    if (!req.query.email) {
+        res.status(400).send({
+            message: "An email is required to get participant."
+        });
+        return;
+    }
+    if (!req.query.password) {
+        res.status(400).send({
+            message: "A password is required to get participant."
+        });
+        return;
+    }
+
+    const email = req.query.email;
+    const password = req.query.password;
+
+    Participant.findOne({
+        where: {
+            email: email
+        }
+    }).then((data) => {
+        if (bcrypt.compareSync(password, data.password)) {
+            res.send(data);
+        } else {
+            res.status(400).send('The password is not valid.');
+        }
+    }).catch((err) => {
+        res.status(500).send({
+            message: err.message || 'There was an issue retrieving the participant.'
+        });
+    });
+};
+
 exports.findAll = (req, res) => {
     Participant.findAll({
         attributes: {
@@ -65,13 +100,13 @@ exports.findAll = (req, res) => {
 };
 
 exports.findAllForMeeting = (req, res) => {
-    const { Op } = require("sequelize");
+    const {Op} = require("sequelize");
     Participant.findAll({
         attributes: {
             exclude: ['password']
-        }, 
-            where: {
-            [Op.and]:{meetingId: req.query.meetingId}
+        },
+        where: {
+            [Op.and]: {meetingId: req.query.meetingId}
         }
     })
         .then((data) => {
