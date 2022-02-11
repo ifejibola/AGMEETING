@@ -5,6 +5,7 @@ module.exports = app => {
     router.post('/', moderators.create);
     router.get('/', moderators.findAll);
     router.get('/', moderators.findOne);
+    router.get('/', moderators.findFromMeeting)
 
     app.use('/api/moderators', router);
 }
