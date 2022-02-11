@@ -15,7 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   Meeting.init({
     moderatorId: DataTypes.INTEGER,
-    adminId: DataTypes.INTEGER
+    description: DataTypes.STRING(2000),
+    organization: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Meeting',

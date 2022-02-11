@@ -11,8 +11,11 @@ module.exports = {
       moderatorId: {
         type: Sequelize.INTEGER
       },
-      adminId: {
-        type: Sequelize.INTEGER
+      description:{
+        type: Sequelize.STRING(2000)
+      },
+      organization:{
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
