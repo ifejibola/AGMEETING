@@ -4,6 +4,8 @@ module.exports = app => {
 
     router.post('/', participants.create);
 
+    router.get('/login', participants.find);
+
     router.get('/', participants.findAll);
 
     router.get('/', participants.findAllForMeeting);
