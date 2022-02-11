@@ -32,6 +32,18 @@ exports.create = (req, res) => {
         });
 };
 
+exports.findAll = (req, res) => {
+    Admin.findAll()
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((err) => {
+            res.status.send({
+                message: err.message || 'There was an issue retrieving the admins.'
+            });
+        });
+};
+
 exports.findOne = (req, res) => {
     const { Op } = require("sequelize");
     Admin.findOne({
