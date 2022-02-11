@@ -82,3 +82,21 @@ exports.findOne = (req, res) => {
             });
         });
 };
+
+exports.findFromMeeting = (req, res) => {
+    const { Op } = require("sequelize");
+    const meetingId = req.query.meetingId;
+    Moderator.findOne({
+        where: {
+            meetingId: meetingId
+        }
+    })
+        .then((data) => {
+                res.send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                message: err.message || 'There was an issue retrieving the moderators.'
+            });
+        });
+};
