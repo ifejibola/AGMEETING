@@ -1,33 +1,42 @@
 const db = require('../models');
 const Admin = db.Admin;
+const bcrypt = require('bcrypt');
 
 exports.create = (req, res) => {
     // Validate request.
-    console.log(req.body);
-    if (!req.body.email && !req.body.password) {
+
+    if (!req.body.email) {
         res.status(400).send({
-            message: "Content can not be empty!"
+            message: "An email is required for admin creation."
+        });
+        return;
+    }
+    if (!req.body.password) {
+        res.status(400).send({
+            message: "A password is required for admin creation."
         });
         return;
     }
 
+    const email = req.body.email;
+    const password = bcrypt.hashSync(req.body.password, 10);
+
     // Create an Admin.
     const admin = {
-        email: req.body.email,
-        password: req.body.password,
+        email: email,
+        password: password,
         createdAt: Date.now(),
         updatedAt: Date.now()
     };
 
     // Save Admin in the database
     Admin.create(admin)
-        .then(data => {
+        .then((data) => {
             res.send(data);
         })
-        .catch(err => {
+        .catch((err) => {
             res.status(500).send({
-                message:
-                    err.message || "Some error occurred while creating an Admin."
+                message: err.message || "Some error occurred while creating an Admin."
             });
         });
 };
@@ -38,25 +47,31 @@ exports.findAll = (req, res) => {
             res.send(data);
         })
         .catch((err) => {
-            res.status.send({
+            res.status(500).send({
                 message: err.message || 'There was an issue retrieving the admins.'
             });
         });
 };
 
 exports.findOne = (req, res) => {
-    const { Op } = require("sequelize");
     Admin.findOne({
         where: {
-            [Op.and]:[{email: req.query.email},{password: req.query.password}]
+            email: req.query.email
         }
-    })
-        .then((data) => {
-            res.send(data);
-        })
-        .catch((err) => {
-            res.status.send({
-                message: err.message || 'There was an issue retrieving the admins.'
-            });
+    }).then(data => {
+        bcrypt.compare(req.query.password, data.password, (err, same) => {
+            if (err) throw err
+
+            if (same) {
+                res.send(data);
+            } else {
+                res.status(400).send('The password is invalid.');
+            }
         });
+    })
+    .catch((err) => {
+        res.status(500).send({
+            message: err.message || 'There was an issue retrieving the admins.'
+        });
+    });
 };
