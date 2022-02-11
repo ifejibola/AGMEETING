@@ -15,3 +15,9 @@ various APIs.
 - Updated POST API for Participant to hash password.
 - Created DELETE API for Participant.
 - Created GET API for Participant (email + password).
+
+# Garry's Tasks
+
+- Updated ER diagram
+- Created GET API for moderator (email and password)
+- Worked on weekly scrum report
