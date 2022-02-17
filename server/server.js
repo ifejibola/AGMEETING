@@ -7,12 +7,20 @@ const indexRoutes = require("./controllers/index.controller")
 const DIST_DIR = path.join(__dirname, "public");
 const HTML_FILE = path.join(DIST_DIR, "index.html");
 const db = require('./models');
+const passport = require('passport');
+const localStrategy = require('passport-local');
+const session = require('express-session');
 db.sequelize.sync();
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.static(path.join(__dirname, "../dist")));
 app.use(bodyParser.json());
+
+// For passport
+app.use(session({secret: 'keyboard cat', resave: true, saveUninitialized: true})); // session secret
+app.use(passport.initialize());
+app.use(passport.session()); // persistent login sessions
 
 require('./routes/participant.routes')(app);
 require('./routes/admin.routes')(app);
