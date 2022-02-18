@@ -10,7 +10,6 @@ const db = require('./models');
 const passport = require('passport');
 const localStrategy = require('passport-local');
 const session = require('express-session');
-db.sequelize.sync();
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
@@ -41,6 +40,8 @@ app.get("*", (req, res) => {
     // res.sendFile(path.join(__dirname + '/public/index.html'))
 });
 
-app.listen(port, () => {
-    console.log(`The app server is running on port: ${port}`);
+db.sequelize.sync().then(() => {
+    app.listen(port, () => {
+        console.log(`The app server is running on port: ${port}`);
+    });
 });
