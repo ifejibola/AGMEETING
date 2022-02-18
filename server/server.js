@@ -26,6 +26,7 @@ require('./routes/participant.routes')(app);
 require('./routes/admin.routes')(app);
 require('./routes/moderator.routes')(app);
 require('./routes/meeting.routes')(app);
+require('./routes/item.routes')(app);
 
 // app.use(express.static("helper"));
 // app.use("/", indexRoutes)
