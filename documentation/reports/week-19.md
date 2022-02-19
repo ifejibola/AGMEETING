@@ -14,3 +14,8 @@
 
 - Worked on peer testing usability tasks
 - Created weekly minutes report
+
+### Garry's Tasks
+
+- Worked on peer testing usability tasks
+- Created weekly scrum report
