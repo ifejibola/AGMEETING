@@ -9,7 +9,7 @@ const indexRoutes = require("./controllers/index.controller");
 const DIST_DIR = path.join(__dirname, "public");
 const HTML_FILE = path.join(DIST_DIR, "index.html");
 
-const db = require("./config/db");
+const db = require("../models");
 
 const Participant = require("./participant/models/participant");
 
@@ -21,8 +21,6 @@ const meetingController = require("./meeting/meeting-controller");
 
 const itemController = require("./item/item-controller");
 const administratorController = require("./admin/admin-controller");
-//db
-const db = require("../models");
 
 //passport
 const passport = require("passport");
@@ -42,7 +40,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 try {
-  db.authenticate().then(() => {
+  db.sequelize.authenticate().then(() => {
     console.log("Connection has been established successfully.");
     Participant.findAll().then((results) => {
       console.log(results);
