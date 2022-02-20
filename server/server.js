@@ -21,11 +21,13 @@ app.use(session({secret: 'keyboard cat', resave: true, saveUninitialized: true})
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
-require('./routes/participant.routes')(app);
+require('./routes/participant.routes')(app, passport);
 require('./routes/admin.routes')(app);
 require('./routes/moderator.routes')(app);
 require('./routes/meeting.routes')(app);
 require('./routes/item.routes')(app);
+
+require('./config/passport')(passport, db.Participant);
 
 // app.use(express.static("helper"));
 // app.use("/", indexRoutes)
