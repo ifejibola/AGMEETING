@@ -139,3 +139,10 @@ exports.delete = (req, res) => {
             });
         });
 };
+
+exports.logout = (req, res) => {
+    req.session.destroy();
+    res.status(200).send({
+        message: 'The user was logged out successfully.'
+    });
+};

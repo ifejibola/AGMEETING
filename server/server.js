@@ -27,7 +27,7 @@ require('./routes/moderator.routes')(app);
 require('./routes/meeting.routes')(app);
 require('./routes/item.routes')(app);
 
-require('./config/passport')(passport, db.Participant);
+require('./config/passport-participants')(passport, db.Participant);
 
 // app.use(express.static("helper"));
 // app.use("/", indexRoutes)

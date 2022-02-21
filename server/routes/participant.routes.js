@@ -4,13 +4,15 @@ module.exports = (app, passport) => {
 
     router.post('/register', passport.authenticate('local-signup'));
 
-    router.get('/login', participants.find);
+    router.post('/login', passport.authenticate('local-signin'));
 
     router.get('/', participants.findAll);
 
     router.get('/', participants.findAllForMeeting);
 
     router.delete('/:id', participants.delete);
+
+    router.get('/logout', participants.logout);
 
     app.use('/api/participants', router);
 }
