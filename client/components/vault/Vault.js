@@ -55,126 +55,111 @@ const elems = [
     }
 ];
 
-const statusOptions = ['In Progress', 'Standing By for Motion', 'Approved', 'Closed'];
 
-
-const content = (
-    <Table>
-        <TableBody>
-            {elems.map((campaign) => (
-                <TableRow
-                    key={campaign.id}
-                    sx={{
-                        '&:last-child td': {
-                            border: 0
-                        }
-                    }}
-                >
-                    <TableCell>
-                        <Typography
-                            color="textPrimary"
-                            sx={{cursor: 'pointer'}}
-                            variant="subtitle2"
-                        >
-                            {campaign.name}
-                        </Typography>
-                        <Box
-                            sx={{
-                                alignItems: 'center',
-                                display: 'flex',
-                                mt: 1
-                            }}
-                        >
-                            <Typography
-                                color="textSecondary"
-                                variant="body2"
-                            >
-                                {campaign.filetype}
-                            </Typography>
-                        </Box>
-                    </TableCell>
-                    <TableCell>
-                        <Typography
-                            color="textPrimary"
-                            variant="subtitle2"
-                        >
-                            Author
-                        </Typography>
-                        <Typography
-                            color="textSecondary"
-                            sx={{mt: 1}}
-                            variant="body2"
-                        >
-                            {campaign.author}
-                        </Typography>
-                    </TableCell>
-                    <TableCell>
-                        <Typography
-                            color="textPrimary"
-                            variant="subtitle2"
-                        >
-                            Agenda Item
-                        </Typography>
-                        <Typography
-                            color="textSecondary"
-                            sx={{mt: 1}}
-                            variant="body2"
-                        >
-                            {campaign.agendaItem}
-                        </Typography>
-                    </TableCell>
-                    <TableCell>
-                        <Typography
-                            color="textPrimary"
-                            variant="subtitle2"
-                        >
-
-                            Viewed?
-                        </Typography>
-                        <Typography
-                            color="textSecondary"
-                            sx={{mt: 1}}
-                            variant="body2"
-                        >
-                            {campaign.viewed}
-                        </Typography>
-                    </TableCell>
-                    <TableCell align="right">
-                        <Button
-                            color="primary"
-                            size="small"
-                            variant="outlined"
-                        >
-                            View
-                        </Button>
-                    </TableCell>
-                </TableRow>
-            ))}
-        </TableBody>
-    </Table>
-);
-
-const Vault = () => {
-        const [status, setStatus] = useState(statusOptions[0]);
-
-        const handleChange = (event) => {
-            setStatus(event.target.value);
-        };
-
-        return (
+const Vault = () => (
             <Box sx={{
                 backgroundColor: 'background.default',
-                minHeight: '100%',
                 p: 3
             }}>
                 <Card>
                     <CardHeader title="Vault"/>
-                    <Divider/>
-                    {content}
+                    <Table>
+                        <TableBody>
+                            {elems.map((campaign) => (
+                                <TableRow
+                                    key={campaign.id}
+                                    sx={{
+                                        '&:last-child td': {
+                                            border: 0
+                                        }
+                                    }}
+                                >
+                                    <TableCell>
+                                        <Typography
+                                            color="textPrimary"
+                                            sx={{cursor: 'pointer'}}
+                                            variant="subtitle2"
+                                        >
+                                            {campaign.name}
+                                        </Typography>
+                                        <Box
+                                            sx={{
+                                                alignItems: 'center',
+                                                display: 'flex',
+                                                mt: 1
+                                            }}
+                                        >
+                                            <Typography
+                                                color="textSecondary"
+                                                variant="body2"
+                                            >
+                                                {campaign.filetype}
+                                            </Typography>
+                                        </Box>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography
+                                            color="textPrimary"
+                                            variant="subtitle2"
+                                        >
+                                            Author
+                                        </Typography>
+                                        <Typography
+                                            color="textSecondary"
+                                            sx={{mt: 1}}
+                                            variant="body2"
+                                        >
+                                            {campaign.author}
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography
+                                            color="textPrimary"
+                                            variant="subtitle2"
+                                        >
+                                            Agenda Item
+                                        </Typography>
+                                        <Typography
+                                            color="textSecondary"
+                                            sx={{mt: 1}}
+                                            variant="body2"
+                                        >
+                                            {campaign.agendaItem}
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell>
+                                        <Typography
+                                            color="textPrimary"
+                                            variant="subtitle2"
+                                        >
+
+                                            Viewed?
+                                        </Typography>
+                                        <Typography
+                                            color="textSecondary"
+                                            sx={{mt: 1}}
+                                            variant="body2"
+                                        >
+                                            {campaign.viewed}
+                                        </Typography>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <Button
+                                            color="primary"
+                                            size="small"
+                                            variant="outlined"
+                                        >
+                                            View
+                                        </Button>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
                 </Card>
             </Box>
-        );
-    }
+
+    )
 ;
 
 export default Vault;

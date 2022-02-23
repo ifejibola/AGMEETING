@@ -1,16 +1,15 @@
 import React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {AppBar, Box, IconButton, Toolbar, Typography, Button, Menu, MenuItem} from '@mui/material';
-import {experimentalStyled} from "@mui/material";
-
-// import MenuIcon from '../../icons/Menu';
-// import AccountPopover from './AccountPopover';
+import { AppBar, Box, IconButton, Toolbar } from '@mui/material';
+import { experimentalStyled } from "@mui/material";
+import MenuIcon from '../../icons/Menu';
+import AccountPopover from './AccountPopover';
 // import ContactsPopover from './ContactsPopover';
 // import ContentSearch from './ContentSearch';
 // import LanguagePopover from './LanguagePopover';
 // import Logo from '../Logo';
-// import NotificationsPopover from './NotificationsPopover';
+import NotificationsPopover from './NotificationsPopover';
 
 
 const DashboardNavbarRoot = experimentalStyled(AppBar)(({theme}) => ({
@@ -42,23 +41,23 @@ const NavBar = (props) => {
                         }
                     }}
                 >
-                    {/* <MenuIcon fontSize="small" /> */}
+                    <MenuIcon fontSize="small" />
                 </IconButton>
-                <RouterLink to="/" style={{textDecoration: 'none', color: '#FFF'}}>
+                <RouterLink to="/">
+                    <h1>
+                        AGMEETING
+                    </h1>
                     {/* <Logo
-                      sx={{
-                        display: {
-                        lg: 'inline',
-                         xs: 'none'
-                        },
-                    height: 40,
-                     width: 40
-                     }}
-                    /> */}
-                    <Typography color="textPrimary" variant="h2">AGMEETING</Typography>
-
+            sx={{
+              display: {
+                lg: 'inline',
+                xs: 'none'
+              },
+              height: 40,
+              width: 40
+            }}
+          /> */}
                 </RouterLink>
-
                 <Box
                     sx={{
                         flexGrow: 1,
@@ -82,24 +81,12 @@ const NavBar = (props) => {
                         <Button><Typography color="textPrimary">Register</Typography></Button>
                     </RouterLink>
                 </Box>
-
-                <Box sx={{ml: 2}} style={{}}>
-                    <Button><Typography color="textPrimary">File</Typography></Button>
+                <Box sx={{ ml: 1 }}>
+                    <NotificationsPopover />
                 </Box>
-
-                <Box sx={{ml: 2}}>
-                    <Button><Typography color="textPrimary">Edit</Typography></Button>
+                <Box sx={{ ml: 2 }}>
+                    <AccountPopover />
                 </Box>
-
-                <Box sx={{ml: 2}}>
-                    <Button><Typography color="textPrimary">View</Typography></Button>
-                </Box>
-
-                <Box sx={{ml: 2}}>
-                    <Button><Typography color="textPrimary">Help</Typography></Button>
-                </Box>
-
-
             </Toolbar>
         </DashboardNavbarRoot>
     );
