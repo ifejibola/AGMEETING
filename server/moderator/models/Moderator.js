@@ -2,11 +2,13 @@ const { Sequelize, DataTypes } = require("sequelize");
 const db = require("../../config/db");
 
 const Moderator = db.define(
-  "Moderator",
+  "moderator",
   {
-    modId: {
+    id: {
       type: DataTypes.INTEGER,
+      autoIncrement: true,
       allowNull: false,
+      primaryKey: true,
     },
     email: {
       type: DataTypes.STRING,

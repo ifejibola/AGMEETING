@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import validator from "validator";
+import { createAccount } from "../actions";
+import { connect, ReactReduxContext } from "react-redux";
 
 function Copyright(props) {
   return (
@@ -34,7 +36,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
+function SignUp() {
   const [signupError, setSignupError] = React.useState("");
 
   const handleSubmit = (event) => {
@@ -43,15 +45,24 @@ export default function SignUp() {
     // make sure email is valid
     if (!validator.isEmail(data.get("email"))) {
       setSignupError("Enter valid Email!");
+      console.log("here");
       return;
     }
     // check passwords are matching
-    if (data.get("password") != data.get("passwordAgain")) {
+    if (data.get("password") !== data.get("passwordAgain")) {
       setSignupError("Passwords must match");
+      console.log("here");
+      return;
+    }
+    //check both passwords have been entered
+    else if (!data.get("password") || !data.get("passwordAgain")) {
+      setSignupError("Please enter a password twice");
+      console.log("here");
+      return;
     } else {
       setSignupError("");
+      createAccount(data.get("email"), data.get("password"));
     }
-
     //
   };
 
@@ -133,3 +144,5 @@ export default function SignUp() {
     </ThemeProvider>
   );
 }
+
+export default connect(null, null)(SignUp);

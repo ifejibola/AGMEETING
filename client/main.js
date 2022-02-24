@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import Routes from "./routes";
@@ -14,6 +14,7 @@ import { SettingsProvider } from "./contexts/SettingsContext";
 import { StyledEngineProvider } from "@mui/styled-engine";
 
 //Contains app component wraps it in necessary context providers, and the router.
+
 ReactDOM.render(
   <Provider store={store}>
     <StyledEngineProvider injectFirst>

@@ -53,7 +53,7 @@ passport.use(
             console.log(" ");
             console.log(" ");
             console.log(" ");
-            console.log(`***** Welcome ${user.name} .... *****`);
+            console.log(`***** Welcome ${user.email} .... *****`);
 
             return done(null, user);
           })
