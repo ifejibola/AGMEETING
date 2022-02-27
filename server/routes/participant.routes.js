@@ -1,10 +1,10 @@
-module.exports = (app, passport) => {
+module.exports = (app) => {
     const participants = require('../controllers/participants.controller');
     const router = require('express').Router();
 
-    router.post('/register', passport.authenticate('local-signup'));
+    router.post('/register', participants.create);
 
-    router.post('/login', passport.authenticate('local-signin'));
+    router.post('/login', participants.login);
 
     router.get('/', participants.findAll);
 

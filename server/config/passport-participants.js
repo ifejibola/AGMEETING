@@ -1,95 +1,59 @@
+const passport = require('passport');
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local');
+const db = require('../models');
+const Participant = db.Participant;
 
-module.exports = (passport, participant) => {
-    const Participant = participant;
-    passport.use('local-signup', new LocalStrategy({
-            usernameField: 'email',
-            passwordField: 'password',
-            passReqToCallback: true
-        }, (req, email, password, done) => {
-            Participant.findOne({
-                where: {email: email}
-            }).then((participant) => {
-                if (participant) {
-                    return done(null, false, {
-                        message: 'That email is already in use.'
-                    });
-                } else {
-                    const hashedPassword = bcrypt.hashSync(password, 10);
-                    const data = {
-                        email: email,
-                        password: hashedPassword,
-                        meetingId: req.body.meetingId,
-                        createdAt: Date.now(),
-                        updatedAt: Date.now()
-                    }
-                    Participant.create(data).then((participant) => {
-                        if (!participant) {
-                            return done(null, false);
-                        }
-                        if (participant) {
-                            return done(null, participant);
-                        }
-                    });
-                }
-            });
+const findId = async (id, done) => {
+    await Participant.findOne({
+        where: {
+            id: id
         }
-    ));
-
-    passport.use('local-signin', new LocalStrategy({
-            usernameField: 'email',
-            passwordField: 'password',
-            pasReqToCallback: true
-        }, (req, email, password, done) => {
-            const Participant = participant;
-            const isValidPassword = (userPassword, password) => {
-                return bcrypt.compareSync(password, userPassword);
-            };
-
-            Participant.findOne({
-                where: {
-                    email: email
-                }
-            }).then((participant) => {
-               if (!participant) {
-                   return done(null, false, {
-                       message: 'The email does not exist.'
-                   });
-               }
-
-               if (!isValidPassword(participant.password, password)) {
-                   return done(null, false, {
-                       message: 'The password is incorrect.'
-                   });
-               }
-
-               const participantInfo = participant.get();
-               return done(null, participantInfo);
-            }).catch((err) => {
-                console.log(err);
-                return done(null, false, {
-                    message: 'Something went wrong with the login.'
-                });
-            });
-        }
-    ));
-
-    passport.serializeUser((participant, done) => {
-        done(null, participant.id);
-    });
-
-    passport.deserializeUser((id, done) => {
-        Participant.findOne({
-            where: {
-                id: id
-            }
-        }).then((participant) => {
-            if (participant) {
-                done(null, participant.get());
-            } else {
-                done(participant.errors, null);
-            }
-        });
+    }).then(async (user) => {
+        console.log(user.email);
+        return done(null, user.id);
     });
 };
+
+passport.use(new LocalStrategy(
+    {
+        usernameField: 'email',
+        passwordField: 'password'
+    }, (email, password, done) => {
+        const findEmail = async (data) => {
+            await Participant.findOne({
+                where: {
+                    email: data
+                }
+            }).then(async (user) => {
+                if (!user) {
+                    return done(null, false, {message: 'Incorrect email.'});
+                }
+                const match = await bcrypt.compare(password, user.password);
+                if (!match) {
+                    return done(null, false, {message: 'Incorrect password.'});
+                }
+                return done(null, user);
+            }).catch((err) => done(err));
+        };
+        findEmail(email);
+    }
+));
+
+passport.serializeUser((participant, done) => {
+    done(null, participant.id);
+});
+
+passport.deserializeUser((id, done) => {
+    Participant.findOne({
+        where: {
+            id: id
+        }
+    }).then((participant) => {
+        if (participant) {
+            done(null, participant.get());
+        } else {
+            done(participant.errors, null);
+        }
+    });
+});

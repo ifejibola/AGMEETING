@@ -1,6 +1,8 @@
 const db = require('../models');
 const Participant = db.Participant;
 const bcrypt = require('bcrypt');
+const passport = require('passport');
+require('../config/passport-participants');
 
 exports.create = (req, res) => {
     // Validate request.
@@ -48,39 +50,30 @@ exports.create = (req, res) => {
         });
 };
 
-exports.find = (req, res) => {
+exports.login = (req, res, next) => {
     // Validate request.
-    if (!req.query.email) {
+    if (!req.body.email) {
         res.status(400).send({
             message: "An email is required to get participant."
         });
         return;
     }
-    if (!req.query.password) {
+    if (!req.body.password) {
         res.status(400).send({
             message: "A password is required to get participant."
         });
         return;
     }
 
-    const email = req.query.email;
-    const password = req.query.password;
-
-    Participant.findOne({
-        where: {
-            email: email
+    passport.authenticate('local', (err, user, info) => {
+        if (err) throw err;
+        if (!user) res.status(400).send({message: 'There is no matching user.'});
+        else {
+            req.logIn(user, (err) => {
+                if (err) throw err;
+            });
         }
-    }).then((data) => {
-        if (bcrypt.compareSync(password, data.password)) {
-            res.send(data);
-        } else {
-            res.status(400).send('The password is not valid.');
-        }
-    }).catch((err) => {
-        res.status(500).send({
-            message: err.message || 'There was an issue retrieving the participant.'
-        });
-    });
+    })(req, res, next);
 };
 
 exports.findAll = (req, res) => {
