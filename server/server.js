@@ -8,8 +8,8 @@ const DIST_DIR = path.join(__dirname, "public");
 const HTML_FILE = path.join(DIST_DIR, "index.html");
 const db = require('./models');
 const passport = require('passport');
-const localStrategy = require('passport-local');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
@@ -17,15 +17,17 @@ app.use(express.static(path.join(__dirname, "../dist")));
 app.use(bodyParser.json());
 
 // For passport
-app.use(session({secret: 'keyboard cat', resave: true, saveUninitialized: true})); // session secret
+app.use(session({secret: 'keyboard cat', resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
+app.use(passport.session());
+app.use(cookieParser('keyboard cat'));
 
 require('./routes/participant.routes')(app);
 require('./routes/admin.routes')(app);
 require('./routes/moderator.routes')(app);
 require('./routes/meeting.routes')(app);
 require('./routes/item.routes')(app);
+
 
 // app.use(express.static("helper"));
 // app.use("/", indexRoutes)
