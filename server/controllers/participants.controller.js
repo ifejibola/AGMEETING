@@ -72,6 +72,7 @@ exports.login = (req, res, next) => {
             req.logIn(user, (err) => {
                 if (err) throw err;
             });
+            res.status(200).send('Successful login.');
         }
     })(req, res, next);
 };
