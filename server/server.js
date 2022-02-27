@@ -17,7 +17,7 @@ app.use(express.static(path.join(__dirname, "../dist")));
 app.use(bodyParser.json());
 
 // For passport
-app.use(session({secret: 'keyboard cat', resave: true, saveUninitialized: true}));
+app.use(session({secret: 'keyboard cat', resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser('keyboard cat'));
