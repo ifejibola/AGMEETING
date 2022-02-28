@@ -10,11 +10,13 @@ const db = require('./models');
 const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.static(path.join(__dirname, "../dist")));
 app.use(bodyParser.json());
+app.use(cors());
 
 // For passport
 app.use(session({secret: 'keyboard cat', resave: false, saveUninitialized: true}));

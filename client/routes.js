@@ -1,10 +1,4 @@
 import React from 'react';
-// import { BrowserRouter as Router, Route, Switch, useRoutes } from 'react-router-dom';
-// import { useRoutes } from 'react-router-dom'; //v5
-import { ThemeProvider } from '@mui/material/styles';
-
-import App from './App';
-
 //Layout
 import DashboardLayout from './Component/DashBoard/Layout';
 
@@ -13,14 +7,11 @@ import Land from './Land';
 import GroupedList3 from './Component/Session/Session';
 import Agenda from './Component/Agenda/Agenda'
 import Vault from './Component/Vault/vault'
-
 import NoMatch from './NoMatch';
-
 import LoggedinUsers from './Component/AdminComponents/LoggedInUsers';
 import RegisteredUsers from './Component/AdminComponents/RegisteredUsers';
 import Stats from './Component/AdminComponents/Stats/Stats';
 import Settings from './Component/AdminComponents/Settings/Settings'
-import Login from './Login/Login'
 
 import SignIn from './Login/signin'
 import SignUp from './Login/signup'
@@ -30,70 +21,38 @@ const routes = [
         path: '/',
         element: <DashboardLayout/>,
         children: [
-            { index: true, element: <GroupedList3 /> },
+            {index: true, element: <GroupedList3/>},
             {
                 path: '/agenda',
-                element: <Agenda />,
+                element: <Agenda/>,
             },
             {
                 path: '/vault',
-                element: <Vault />,
-                // children: [
-                //     { index: true, element: <Testpg/> },
-                // ]x
+                element: <Vault/>
             },
             {
                 path: '/loggedinUsers',
-                element: <LoggedinUsers />
+                element: <LoggedinUsers/>
             },
             {
                 path: '/registeredusers',
-                element: <RegisteredUsers />
+                element: <RegisteredUsers/>
             },
             {
                 path: '/stats',
-                element: <Stats />
+                element: <Stats/>
             },
             {
                 path: '/settings',
-                element: <Settings />
+                element: <Settings/>
             },
-
-            { path: "*", element: <NoMatch /> }
+            {
+                path: '/login',
+                element: <SignIn/>
+            },
+            {path: "*", element: <NoMatch/>}
         ]
     },
-    {
-        path: '/login',
-        element: <Login />
-    },
-    {
-        path: '/login2',
-        element: <SignIn />
-    },
-    {
-        path: '/signup',
-        element: <SignUp />
-    },
-    // },
-    // // {
-    //     path: '/about',
-    //     element: <About />,
-
-    //     children: [
-    //         { index: true, element: <Testpg /> },
-    //         {
-    //             path: '/about',
-    //             element: <About />,
-    //             children: [
-    //                 { index: true, element: <About /> },
-    //             ]
-    //         },
-    //         { path: "*", element: <NoMatch /> }
-    //     ]
-
-    // },
-
-
-    { path: "*", element: <NoMatch /> }
+    {path: "*", element: <NoMatch/>}
 ]
 export default routes;
