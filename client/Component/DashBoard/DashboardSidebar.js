@@ -131,7 +131,7 @@ const DashboardSidebar = (props) => {
                   width: 48
                 }}
               /> */}
-              Avater
+              Avatar
             </RouterLink>
             <Box sx={{ ml: 2 }}>
               <Typography
@@ -139,21 +139,6 @@ const DashboardSidebar = (props) => {
                 variant="subtitle2"
               >
                 {/* {user.name} */} User Name
-              </Typography>
-              <Typography
-                color="textSecondary"
-                variant="body2"
-              >
-                Your plan:
-                {' '}
-                <Link
-                  color="primary"
-                  component={RouterLink}
-                  to="/pricing"
-                >
-                  {/* {user.plan} */}You plan....fjkldjskjfkdsjklfj
-                  lorem
-                </Link>
               </Typography>
             </Box>
           </Box>

@@ -18,19 +18,15 @@ import Scrollbar from '../../../Scrollbar';
 const orderItems = [
     {
         id: '5ecb8abbdd6dfb1f9d6bf98b',
-        billingCycle: 'Monthly',
-        currency: '$',
-        name: 'Project Points',
-        quantity: 25,
-        unitAmount: 50.25
+        votes: '12',
+        name: 'Chuck Norris',
+        percentage: '%60'
     },
     {
         id: '5ecb8ac10f116d04bed990eb',
-        billingCycle: 'Monthly',
-        currency: '$',
-        name: 'Freelancer Subscription',
-        quantity: 1,
-        unitAmount: 5.00
+        votes: '8',
+        name: 'Jason Bourne',
+        percentage: '%40'
     }
 ];
 
@@ -69,19 +65,19 @@ const ApprovalTable = () => (
                                             color="textPrimary"
                                             variant="subtitle2"
                                         >
-                                            {item.quantity}
-                                            {' '}
-                                            x
-                                            {' '}
                                             {item.name}
                                         </Typography>
                                     </TableCell>
                                     <TableCell>
-                                        {item.billingCycle}
+                                        {item.votes}
                                     </TableCell>
                                     <TableCell>
-                                        {numeral(item.unitAmount)
-                                            .format(`${item.currency}0,0.00`)}
+                                        <Typography
+                                            color="textPrimary"
+                                            variant="subtitle2"
+                                        >
+                                            {item.percentage}
+                                        </Typography>
                                     </TableCell>
                                 </TableRow>
                             ))}
