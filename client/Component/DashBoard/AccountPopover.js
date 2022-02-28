@@ -1,7 +1,7 @@
 import React from 'react'
 import {useRef, useState} from 'react';
 import {Link as RouterLink, useNavigate} from 'react-router-dom';
-import toast from 'react-hot-toast';
+import {toast} from 'material-react-toastify';
 import {
     Avatar,
     Box,
@@ -39,6 +39,7 @@ const AccountPopover = () => {
                 saveUser(null);
             }
             navigate('/');
+            toast.success('You have successfully logged out.');
         } catch (err) {
             console.error(err);
             toast.error('Unable to logout.');

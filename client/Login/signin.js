@@ -12,6 +12,7 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import useUser from "../hooks/useUser";
 import {useNavigate} from "react-router-dom";
+import {toast} from 'material-react-toastify';
 
 export default function SignIn() {
     const {saveUser} = useUser();
@@ -27,8 +28,10 @@ export default function SignIn() {
             console.log(response.data);
             saveUser(response.data);
             navigate('/');
+            toast.success('You have successfully logged in!');
         }).catch((err) => {
             console.log(err.response.data);
+            toast.error('There was an issue with logging in.');
         });
     };
 
