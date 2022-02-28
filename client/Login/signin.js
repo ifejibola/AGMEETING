@@ -9,12 +9,14 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import {createTheme} from '@mui/material/styles';
 import axios from 'axios';
-
-const theme = createTheme();
+import useUser from "../hooks/useUser";
+import {useNavigate} from "react-router-dom";
 
 export default function SignIn() {
+    const {saveUser} = useUser();
+    const navigate = useNavigate();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -23,6 +25,8 @@ export default function SignIn() {
             password: data.get('password')
         }, {withCredentials: true}).then((response) => {
             console.log(response.data);
+            saveUser(response.data);
+            navigate('/');
         }).catch((err) => {
             console.log(err.response.data);
         });
@@ -70,7 +74,6 @@ export default function SignIn() {
                 />
                 <Button
                     type="submit"
-                    href=""
                     fullWidth
                     variant="contained"
                     sx={{mt: 3, mb: 2}}
@@ -84,7 +87,7 @@ export default function SignIn() {
                         </Link>
                     </Grid>
                     <Grid item>
-                        <Link href="/signup" variant="body2">
+                        <Link href="/register" variant="body2">
                             {"Don't have an account? Sign Up"}
                         </Link>
                     </Grid>

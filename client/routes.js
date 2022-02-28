@@ -50,6 +50,10 @@ const routes = [
                 path: '/login',
                 element: <SignIn/>
             },
+            {
+                path: '/register',
+                element: <SignUp/>
+            },
             {path: "*", element: <NoMatch/>}
         ]
     },
