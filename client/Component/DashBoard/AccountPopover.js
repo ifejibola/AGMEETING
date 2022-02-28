@@ -82,13 +82,13 @@ const AccountPopover = () => {
                         variant="subtitle2"
                     >
                         {/* {user.name} */}
-                        USER
+                        USER #{user.id}
                     </Typography>
                     <Typography
                         color="textSecondary"
                         variant="subtitle2"
                     >
-                        Devias
+                        {user.email}
                     </Typography>
                 </Box>
                 <Divider/>
