@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import {THEMES} from '../config/theme/constants';
 import useSettings from './hooks/useSettings';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const getValues = (settings) => ({
     compact: settings.compact,
@@ -65,7 +66,7 @@ const SettingsDrawer = () => {
                         zIndex: (theme) => theme.zIndex.speedDial
                     }}
                 >
-                    {/* <AdjustmentsIcon fontSize="small" /> */}
+                    <SettingsIcon fontSize="small" />
                 </Fab>
             </Tooltip>
             <Drawer
