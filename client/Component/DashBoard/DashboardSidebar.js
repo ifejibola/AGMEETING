@@ -42,7 +42,7 @@ import { connect } from "react-redux";
 
 const mapStateToProps = (state) => {
   return {
-    currentUser: state.currentUser,
+    userReducer: state.userReducer,
   };
 };
 
@@ -226,7 +226,7 @@ const sections = [
 ];
 
 const DashboardSidebar = (props) => {
-  console.log(props.currentUser);
+  console.log(props.userReducer.email);
   const { onMobileClose, openMobile } = props;
   const location = useLocation();
   // const { user } = useAuth();
@@ -292,12 +292,12 @@ const DashboardSidebar = (props) => {
             <RouterLink to="/dashboard/account">Avatar</RouterLink>
             <Box sx={{ ml: 2 }}>
               <Typography color="textPrimary" variant="subtitle2">
-                {props.currentUser.username}
+                {props.userReducer.currentUser.email}
               </Typography>
               <Typography color="textSecondary" variant="body2">
                 Your plan:{" "}
                 <Link color="primary" component={RouterLink} to="/pricing">
-                  {props.currentUser.username}'s plan
+                  {props.userReducer.currentUser.email}'s plan
                 </Link>
               </Typography>
             </Box>

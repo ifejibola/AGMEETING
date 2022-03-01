@@ -7,21 +7,21 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 require("../../config/passport");
 
-router.get("/", (req, res) => {
-  res.send("hi");
-});
+router.get("/", (req, res) => {});
 
 router.post("/login", (req, res, next) => {
-  console.log("here");
   passport.authenticate("local", (err, user, info) => {
     console.log(info);
     if (err) throw err;
     if (!user) res.send("No user");
     else {
       req.logIn(user, (err) => {
-        console.log("here");
+        if (err) {
+          return;
+        }
       });
     }
+    res.send({ id: user.id, email: user.email });
   })(req, res, next);
 });
 

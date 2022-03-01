@@ -14,6 +14,9 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import { login } from "../actions";
+import store from "../redux/store";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -35,11 +38,13 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+const SignIn = (props) => {
+  let navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    login(data.get("email"), data.get("password"));
+    store.dispatch(login(data.get("email"), data.get("password")));
   };
 
   return (
@@ -117,4 +122,20 @@ export default function SignIn() {
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    userReducer: state.userReducer,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLogin: (email, password) => {
+      dispatch(login(email, password));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
