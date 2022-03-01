@@ -6,6 +6,7 @@ import {experimentalStyled} from "@mui/material";
 import MenuIcon from '../../icons/Menu';
 import AccountPopover from './AccountPopover';
 import NotificationsPopover from './NotificationsPopover';
+import useUser from "../../hooks/useUser";
 
 const DashboardNavbarRoot = experimentalStyled(AppBar)(({theme}) => ({
     ...(theme.palette.mode === 'light' && {
@@ -23,6 +24,7 @@ const DashboardNavbarRoot = experimentalStyled(AppBar)(({theme}) => ({
 
 const NavBar = (props) => {
     const {onSidebarMobileOpen, ...other} = props;
+    const {user} = useUser();
 
     return (
         <DashboardNavbarRoot {...other}>
@@ -59,9 +61,28 @@ const NavBar = (props) => {
                 <Box sx={{ml: 1}}>
                     <NotificationsPopover/>
                 </Box>
-                <Box sx={{ml: 2}}>
-                    <AccountPopover/>
-                </Box>
+                {user &&
+                    <Box sx={{ml: 2}}>
+                        <AccountPopover/>
+                    </Box>}
+                {!user &&
+                    <Box sx={{ml: 2}}>
+                        <RouterLink to="/login">
+                            <h4>
+                                Login
+                            </h4>
+                        </RouterLink>
+                    </Box>
+                }
+                {!user &&
+                    <Box sx={{ml: 2}}>
+                        <RouterLink to="/register">
+                            <h4>
+                                Register
+                            </h4>
+                        </RouterLink>
+                    </Box>
+                }
             </Toolbar>
         </DashboardNavbarRoot>
     );

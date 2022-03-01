@@ -65,14 +65,18 @@ exports.login = (req, res, next) => {
         return;
     }
 
-    passport.authenticate('local', (err, user, info) => {
+    passport.authenticate('local', (err, user) => {
         if (err) throw err;
         if (!user) res.status(400).send({message: 'There is no matching user.'});
         else {
             req.logIn(user, (err) => {
                 if (err) throw err;
             });
-            res.status(200).send('Successful login.');
+            res.status(200).send({
+                id: user.get().id,
+                email: user.get().email,
+                meetingId: user.get().meetingId
+            });
         }
     })(req, res, next);
 };

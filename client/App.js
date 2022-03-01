@@ -9,6 +9,9 @@ import {useRoutes} from "react-router";
 import {ThemeProvider} from "@mui/material/styles";
 import {CssBaseline} from "@mui/material";
 import SettingsDrawer from "./SettingsDrawer";
+import {ToastContainer} from "material-react-toastify";
+import 'material-react-toastify/dist/ReactToastify.css';
+import {Toaster} from "react-hot-toast";
 
 
 export default function App() {
@@ -30,6 +33,7 @@ export default function App() {
     return (
         <ErrorBoundary>
             <ThemeProvider theme={theme}>
+                <ToastContainer/>
                 <CssBaseline/>
                 <RTL direction={settings.direction}>
                     {/* <Toaster position="top-center" /> */}
