@@ -31,11 +31,9 @@ export default function App() {
         <ErrorBoundary>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
-                {/* <CssBaseline /> */}
                 <RTL direction={settings.direction}>
                     {/* <Toaster position="top-center" /> */}
                     <SettingsDrawer/>
-                    {/* <SettingsDrawer /> */}
                     {content}
                     {/* Declarative route */}
                     {/* <Routes /> */}

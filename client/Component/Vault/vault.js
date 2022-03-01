@@ -85,7 +85,8 @@ const Vault = () => (
     <Box
         sx={{
             backgroundColor: 'background.default',
-            p: 3
+            p: 3,
+            mt: 2
         }}
     >
         <Card>
