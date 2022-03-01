@@ -35,11 +35,9 @@ export default function App() {
             <ThemeProvider theme={theme}>
                 <ToastContainer/>
                 <CssBaseline/>
-                {/* <CssBaseline /> */}
                 <RTL direction={settings.direction}>
                     {/* <Toaster position="top-center" /> */}
                     <SettingsDrawer/>
-                    {/* <SettingsDrawer /> */}
                     {content}
                     {/* Declarative route */}
                     {/* <Routes /> */}

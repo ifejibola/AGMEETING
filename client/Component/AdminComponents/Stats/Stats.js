@@ -3,11 +3,10 @@ import Comments from './Comments';
 import ReadyToVote from './ReadyToVote';
 
 const Stats = () => {
-
     return (
         <>
-            <Comments/>
-            <ReadyToVote/>
+            <Comments />
+            <ReadyToVote />
         </>
     )
 };
