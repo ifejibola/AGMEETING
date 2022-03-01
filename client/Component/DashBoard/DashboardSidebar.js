@@ -111,40 +111,11 @@ const DashboardSidebar = (props) => {
             />
           </RouterLink>
         </Box>
-        <Box sx={{ p: 2 }}>
-          <Box
-            sx={{
-              alignItems: 'center',
-              backgroundColor: 'background.default',
-              borderRadius: 1,
-              display: 'flex',
-              overflow: 'hidden',
-              p: 2
-            }}
-          >
-            <RouterLink to="/dashboard/account">
-              {/* <Avatar
-                src={user.avatar}
-                sx={{
-                  cursor: 'pointer',
-                  height: 48,
-                  width: 48
-                }}
-              /> */}
-              Avatar
-            </RouterLink>
-            <Box sx={{ ml: 2 }}>
-              <Typography
-                color="textPrimary"
-                variant="subtitle2"
-              >
-                {/* {user.name} */} User Name
-              </Typography>
-            </Box>
-          </Box>
-        </Box>
         <Divider />
-        <Box sx={{ p: 2 }}>
+        <Box sx={{
+          p: 2,
+          mt: 2,
+          }}>
           {sections.map((section) => (
             <NavSection
               key={section.title}
