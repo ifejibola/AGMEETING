@@ -65,6 +65,11 @@ const sections = [
         path: "/Vault",
         icon: <ShoppingBagIcon fontSize="small" />,
       },
+      {
+        title: "Chat",
+        path: "/content",
+        icon: <ChartSquareBarIcon fontSize="small" />,
+      },
       // {
       //   title: 'Account',
       //   path: '/dashboard/account',
@@ -283,7 +288,13 @@ const DashboardSidebar = (props) => {
               p: 2,
             }}
           >
-            <RouterLink to="/dashboard/account">Avatar</RouterLink>
+            <RouterLink to="/dashboard/account">
+              <img
+                src="https://thispersondoesnotexist.com/image"
+                width="50"
+                height="50"
+              ></img>
+            </RouterLink>
             <Box sx={{ ml: 2 }}>
               <Typography color="textPrimary" variant="subtitle2">
                 {props.userReducer?.currentUser?.email}

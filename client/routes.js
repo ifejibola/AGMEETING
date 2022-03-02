@@ -23,6 +23,8 @@ import SignIn from "./Login/signin";
 import SignUp from "./Login/signup";
 import ProtectedRoute from "./ProtectedRoute";
 
+import ContentMessage from "./Component/ContentMessage.js";
+
 // // Declarative routing model
 // return (
 //     <Router>
@@ -46,6 +48,10 @@ const routes = [
       {
         path: "/agenda",
         element: <Agenda />,
+      },
+      {
+        path: "/content",
+        element: <ContentMessage />,
       },
       {
         path: "/vault",
