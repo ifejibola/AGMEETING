@@ -51,7 +51,11 @@ const NavBar = (props) => {
           <MenuIcon fontSize="small" />
         </IconButton>
         <RouterLink to="/">
-          <h1>AGMEETING</h1>
+          <img
+            src="https://agmeetingwpclone.ncra.ca/wp-content/uploads/2021/04/AGMeeting-logo-e1618257409213.png"
+            width="130"
+            height="60"
+          ></img>
         </RouterLink>
         <Box
           sx={{
