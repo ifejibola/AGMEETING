@@ -7,19 +7,19 @@ const bcrypt = require("bcrypt");
 const passport = require("passport");
 require("../../config/passport");
 
-router.get("/", (req, res) => {
-  res.send("hi");
-});
+router.get("/", (req, res) => {});
 
 router.post("/login", (req, res, next) => {
-  console.log("here");
   passport.authenticate("local", (err, user, info) => {
     console.log(info);
     if (err) throw err;
     if (!user) res.send("No user");
     else {
       req.logIn(user, (err) => {
-        console.log("here");
+        if (err) {
+          return;
+        }
+        res.send(user);
       });
     }
   })(req, res, next);
@@ -33,15 +33,15 @@ router.post("/register", (req, res) => {
         Moderator.create({
           email: req.body.email,
           password: hashedPassword,
+        }).then((moderator) => {
+          res.send(moderator);
         });
-        res.send("new moderator created");
       } else {
-        res.send(
-          "Error creating user, a user with the specified email already exists."
-        );
+        res.send("failure");
       }
     })
     .catch((err) => {
+      res.send("failure");
       console.log(err);
     });
 });

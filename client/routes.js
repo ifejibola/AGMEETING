@@ -21,6 +21,7 @@ import Login from "./Login/Login";
 
 import SignIn from "./Login/signin";
 import SignUp from "./Login/signup";
+import ProtectedRoute from "./ProtectedRoute";
 
 import ContentMessage from "./Component/ContentMessage.js";
 
@@ -37,7 +38,11 @@ import ContentMessage from "./Component/ContentMessage.js";
 const routes = [
   {
     path: "/",
-    element: <DashboardLayout />,
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
     children: [
       { index: true, element: <GroupedList3 /> },
       {
@@ -72,12 +77,12 @@ const routes = [
       { path: "*", element: <NoMatch /> },
     ],
   },
+  // {
+  //   path: "/login",
+  //   element: <Login />,
+  // },
   {
     path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/login2",
     element: <SignIn />,
   },
   {
