@@ -9,5 +9,6 @@
 
 ### Ryan's Tasks
 
--Improved UI elements
--Created Demo Video
+- Improved UI elements
+- Removed junk code that was no longer part of the build
+- Created Demo Video
