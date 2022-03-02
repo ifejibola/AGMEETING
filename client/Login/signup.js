@@ -1,29 +1,42 @@
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
+import axios from "axios";
+import {toast} from "material-react-toastify";
+import {useNavigate} from "react-router-dom";
 
-const theme = createTheme();
 
 export default function SignUp() {
+    const navigate = useNavigate();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        // eslint-disable-next-line no-console
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
+        const email = data.get('email');
+        const password = data.get('password');
+        const password2 = data.get('password2');
+        const meetingId = data.get('meetingId');
+
+        if (password == password2) {
+            axios.post('http://localhost:3000/api/participants/register', {
+                email: email,
+                password: password,
+                meetingId: meetingId
+            }, {withCredentials: true}).then((response) => {
+                navigate('/login');
+                console.log(response.data);
+                toast.success('You have registered successfully.');
+            }).catch((err) => {
+                console.log(err.response.data);
+                toast.error('There was an issue with registration.');
+            });
+        } else {
+            toast.error('The passwords must match.');
+        }
     };
 
     return (
@@ -66,16 +79,25 @@ export default function SignUp() {
                     margin="normal"
                     required
                     fullWidth
-                    name="password"
-                    label="Enter Password again"
+                    name="password2"
+                    label="Enter Password Again"
                     type="password"
-                    id="passwordAgain"
+                    id="password2"
                     autoComplete="current-password"
                 />
-
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    name="meetingId"
+                    label="Meeting Id"
+                    type="text"
+                    id="meetindId"
+                    autoComplete="meetingId"
+                />
                 <Button
                     type="submit"
-                    href="/"
+                    href=""
                     fullWidth
                     variant="contained"
                     sx={{mt: 3, mb: 2}}

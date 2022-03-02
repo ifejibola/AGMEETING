@@ -41,7 +41,11 @@ exports.create = (req, res) => {
     // Save Participant in the database
     Participant.create(participant)
         .then((data) => {
-            res.send(data);
+            res.status(200).send({
+                id: data.id,
+                email: data.email,
+                meetingId: data.meetingId
+            });
         })
         .catch((err) => {
             res.status(500).send({
