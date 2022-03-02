@@ -40,12 +40,6 @@ import Cog from "../../icons/Cog";
 // import { Receipt } from '@material-ui/icons';
 import { connect } from "react-redux";
 
-const mapStateToProps = (state) => {
-  return {
-    userReducer: state.userReducer,
-  };
-};
-
 import Modal from "./Interactions";
 const sections = [
   {
@@ -226,7 +220,7 @@ const sections = [
 ];
 
 const DashboardSidebar = (props) => {
-  console.log(props.userReducer.email);
+  console.log(props);
   const { onMobileClose, openMobile } = props;
   const location = useLocation();
   // const { user } = useAuth();
@@ -292,12 +286,12 @@ const DashboardSidebar = (props) => {
             <RouterLink to="/dashboard/account">Avatar</RouterLink>
             <Box sx={{ ml: 2 }}>
               <Typography color="textPrimary" variant="subtitle2">
-                {props.userReducer.currentUser.email}
+                {props.userReducer?.currentUser?.email}
               </Typography>
               <Typography color="textSecondary" variant="body2">
                 Your plan:{" "}
                 <Link color="primary" component={RouterLink} to="/pricing">
-                  {props.userReducer.currentUser.email}'s plan
+                  {props.userReducer?.currentUser?.email}'s plan
                 </Link>
               </Typography>
             </Box>
@@ -395,6 +389,12 @@ const DashboardSidebar = (props) => {
 DashboardSidebar.propTypes = {
   onMobileClose: PropTypes.func,
   openMobile: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    userReducer: state.userReducer,
+  };
 };
 
 export default connect(mapStateToProps)(DashboardSidebar);

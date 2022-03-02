@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import validator from "validator";
 import { createAccount } from "../actions";
 import { connect, ReactReduxContext } from "react-redux";
+import { useNavigate } from "react-router";
+import store from "../redux/store";
 
 function Copyright(props) {
   return (
@@ -38,6 +40,7 @@ const theme = createTheme();
 
 function SignUp() {
   const [signupError, setSignupError] = React.useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -61,7 +64,10 @@ function SignUp() {
       return;
     } else {
       setSignupError("");
-      createAccount(data.get("email"), data.get("password"));
+      store.dispatch(createAccount(data.get("email"), data.get("password")));
+      setTimeout(() => {
+        navigate("/");
+      }, 100);
     }
     //
   };

@@ -33,7 +33,8 @@ const AccountPopover = () => {
   const handleLogout = async () => {
     try {
       handleClose();
-      navigate("/");
+      localStorage.removeItem("isAuthenticated");
+      navigate("/login");
     } catch (err) {
       console.error(err);
       toast.error("Unable to logout.");

@@ -12,6 +12,10 @@ import store from "./redux/store";
 import { StrictMode } from "react";
 import { SettingsProvider } from "./contexts/SettingsContext";
 import { StyledEngineProvider } from "@mui/styled-engine";
+import { createBrowserHistory } from "history";
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+
+let history = createBrowserHistory();
 
 //Contains app component wraps it in necessary context providers, and the router.
 
@@ -19,9 +23,9 @@ ReactDOM.render(
   <Provider store={store}>
     <StyledEngineProvider injectFirst>
       <SettingsProvider>
-        <BrowserRouter>
+        <HistoryRouter history={history}>
           <App />
-        </BrowserRouter>
+        </HistoryRouter>
       </SettingsProvider>
     </StyledEngineProvider>
   </Provider>,

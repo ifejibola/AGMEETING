@@ -19,9 +19,9 @@ router.post("/login", (req, res, next) => {
         if (err) {
           return;
         }
+        res.send(user);
       });
     }
-    res.send({ id: user.id, email: user.email });
   })(req, res, next);
 });
 
@@ -33,15 +33,15 @@ router.post("/register", (req, res) => {
         Moderator.create({
           email: req.body.email,
           password: hashedPassword,
+        }).then((moderator) => {
+          res.send(moderator);
         });
-        res.send("new moderator created");
       } else {
-        res.send(
-          "Error creating user, a user with the specified email already exists."
-        );
+        res.send("failure");
       }
     })
     .catch((err) => {
+      res.send("failure");
       console.log(err);
     });
 });

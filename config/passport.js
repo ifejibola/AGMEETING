@@ -65,9 +65,6 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  console.log(" ");
-  console.log(" ");
-  console.log("serializeUser: ", user.id);
   done(null, user.id);
 });
 passport.deserializeUser((id, done) => {
@@ -76,15 +73,11 @@ passport.deserializeUser((id, done) => {
       id: id,
     },
   }).then((user) => {
-    console.log(" ");
-    console.log(" ");
-    console.log("name: ", user.name, " ready to be deserialize");
-    console.log(" ");
     return done(null, user);
   });
 
-  console.log("deserializeUser: ", id);
-  console.log(" ");
+  // console.log("deserializeUser: ", id);
+  // console.log(" ");
   // findId(id, done)
   // done(err, id)
 });

@@ -28,7 +28,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        AGMeeting
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -45,6 +45,9 @@ const SignIn = (props) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     store.dispatch(login(data.get("email"), data.get("password")));
+    setTimeout(() => {
+      navigate("/");
+    }, 100);
   };
 
   return (

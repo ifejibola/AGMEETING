@@ -1,24 +1,35 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
 import store from "../redux/store";
 
 const baseURL = "http://localhost:3000";
 
 export const createAccount = (email, password) => {
-  const req = axios.post(baseURL + "/authentication/register", {
-    email,
-    password,
-  });
-  return (dispatch) => {
-    req.then(({ data }) => {
-      console.log(data);
-      dispatch({ type: "CREATE_ACCOUNT", payload: data });
-    });
+  return async (dispatch) => {
+    dispatch({ type: "CREATE_ACCOUNT_REQUEST" });
+    const req = axios
+      .post(baseURL + "/authentication/register", {
+        email,
+        password,
+      })
+      .then(({ data }) => {
+        console.log(data);
+        dispatch({ type: "CREATE_ACCOUNT_SUCCESS", payload: data });
+        if (data !== "failure") {
+          localStorage.setItem("isAuthenticated", true);
+          return;
+        } else {
+          localStorage.removeItem("isAuthenticated");
+        }
+      })
+      .catch((err) => {
+        dispatch({ type: "CREATE_ACCOUNT_FAILURE" });
+        localStorage.removeItem("isAuthenticated");
+      });
   };
 };
 
 export const login = (email, password) => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch({ type: "LOGIN_REQUEST" });
     axios
       .post(baseURL + "/authentication/login", {
@@ -27,9 +38,17 @@ export const login = (email, password) => {
       })
       .then(({ data }) => {
         dispatch({ type: "LOGIN_SUCCESS", payload: data });
+        console.log("the data", data);
+        if (data !== "No user") {
+          localStorage.setItem("isAuthenticated", true);
+          return;
+        } else {
+          localStorage.removeItem("isAuthenticated");
+        }
       })
       .catch((err) => {
         dispatch("LOGIN_FAILURE");
+        localStorage.removeItem("isAuthenticated");
       });
   };
 };
