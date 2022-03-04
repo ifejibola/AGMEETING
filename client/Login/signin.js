@@ -17,6 +17,7 @@ import { login } from "../actions";
 import store from "../redux/store";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Copyright(props) {
   return (
@@ -39,15 +40,19 @@ function Copyright(props) {
 const theme = createTheme();
 
 const SignIn = (props) => {
+  useEffect(() => {
+    if (localStorage.getItem("isAuthenticated")) {
+      localStorage.removeItem("isAuthenticated");
+    }
+  }, []);
   let navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    store.dispatch(login(data.get("email"), data.get("password")));
-    setTimeout(() => {
+    props.onLogin(data.get("email"), data.get("password"), () => {
       navigate("/");
-    }, 100);
+    });
   };
 
   return (
@@ -135,8 +140,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLogin: (email, password) => {
-      dispatch(login(email, password));
+    onLogin: (email, password, callback) => {
+      dispatch(login(email, password, callback));
     },
   };
 };

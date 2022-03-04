@@ -38,7 +38,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function SignUp() {
+function SignUp(props) {
   const [signupError, setSignupError] = React.useState("");
   const navigate = useNavigate();
 
@@ -64,10 +64,9 @@ function SignUp() {
       return;
     } else {
       setSignupError("");
-      store.dispatch(createAccount(data.get("email"), data.get("password")));
-      setTimeout(() => {
-        navigate("/");
-      }, 100);
+      props.onCreateAccount(data.get("email"), data.get("password"), () => {
+        navigate("/login");
+      });
     }
     //
   };
@@ -151,4 +150,12 @@ function SignUp() {
   );
 }
 
-export default connect(null, null)(SignUp);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onCreateAccount: (email, password, callback) => {
+      dispatch(createAccount(email, password, callback));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SignUp);

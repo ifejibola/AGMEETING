@@ -14,6 +14,7 @@ import { SettingsProvider } from "./contexts/SettingsContext";
 import { StyledEngineProvider } from "@mui/styled-engine";
 import { createBrowserHistory } from "history";
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+import { CustomRouter } from "./CustomRouter";
 
 let history = createBrowserHistory();
 
@@ -23,9 +24,9 @@ ReactDOM.render(
   <Provider store={store}>
     <StyledEngineProvider injectFirst>
       <SettingsProvider>
-        <HistoryRouter history={history}>
+        <CustomRouter history={history}>
           <App />
-        </HistoryRouter>
+        </CustomRouter>
       </SettingsProvider>
     </StyledEngineProvider>
   </Provider>,

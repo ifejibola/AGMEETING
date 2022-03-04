@@ -1,9 +1,10 @@
 import axios from "axios";
 import store from "../redux/store";
+import { history } from "../Helpers/history";
 
 const baseURL = "http://localhost:3000";
 
-export const createAccount = (email, password) => {
+export const createAccount = (email, password, callback) => {
   return async (dispatch) => {
     dispatch({ type: "CREATE_ACCOUNT_REQUEST" });
     const req = axios
@@ -16,6 +17,7 @@ export const createAccount = (email, password) => {
         dispatch({ type: "CREATE_ACCOUNT_SUCCESS", payload: data });
         if (data !== "failure") {
           localStorage.setItem("isAuthenticated", true);
+          callback();
           return;
         } else {
           localStorage.removeItem("isAuthenticated");
@@ -28,7 +30,7 @@ export const createAccount = (email, password) => {
   };
 };
 
-export const login = (email, password) => {
+export const login = (email, password, callback) => {
   return async (dispatch) => {
     dispatch({ type: "LOGIN_REQUEST" });
     axios
@@ -37,13 +39,15 @@ export const login = (email, password) => {
         password,
       })
       .then(({ data }) => {
-        dispatch({ type: "LOGIN_SUCCESS", payload: data });
         console.log("the data", data);
         if (data !== "No user") {
           localStorage.setItem("isAuthenticated", true);
+          dispatch({ type: "LOGIN_SUCCESS", payload: data });
+          callback();
           return;
         } else {
           localStorage.removeItem("isAuthenticated");
+          return dispatch({ type: "LOGIN_SUCCESS", payload: data });
         }
       })
       .catch((err) => {
