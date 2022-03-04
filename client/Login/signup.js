@@ -38,7 +38,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-function SignUp() {
+function SignUp(props) {
   const [signupError, setSignupError] = React.useState("");
   const navigate = useNavigate();
 
@@ -64,10 +64,10 @@ function SignUp() {
       return;
     } else {
       setSignupError("");
-      store.dispatch(createAccount(data.get("email"), data.get("password")));
-      setTimeout(() => {
-        navigate("/");
-      }, 100);
+      //pass in the navigate function from the useNavigate hook with the route you want to navigate to to the action creator so that the callback can be called from the redux action creator
+      props.onCreateAccount(data.get("email"), data.get("password"), () => {
+        navigate("/login");
+      });
     }
     //
   };
@@ -151,4 +151,13 @@ function SignUp() {
   );
 }
 
-export default connect(null, null)(SignUp);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    //Make sure you have the callback function in here so that you can pass the navigate funtion through to the action creator
+    onCreateAccount: (email, password, callback) => {
+      dispatch(createAccount(email, password, callback));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SignUp);
