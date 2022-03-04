@@ -24,6 +24,7 @@ ReactDOM.render(
   <Provider store={store}>
     <StyledEngineProvider injectFirst>
       <SettingsProvider>
+        {/*im using this custom router component with this history from create browser history at the moment because I thought this might fix the navigation issue but I think we could probably just use the regular browser router component*/}
         <CustomRouter history={history}>
           <App />
         </CustomRouter>
