@@ -2,15 +2,14 @@ const passport = require('passport');
 const bcrypt = require('bcrypt');
 const LocalStrategy = require('passport-local');
 const db = require('../models');
-const Participant = db.Participant;
+const User = db.User;
 
 const findId = async (id, done) => {
-    await Participant.findOne({
+    await User.findOne({
         where: {
             id: id
         }
     }).then(async (user) => {
-        console.log(user.email);
         return done(null, user.id);
     });
 };
@@ -21,7 +20,7 @@ passport.use(new LocalStrategy(
         passwordField: 'password'
     }, (email, password, done) => {
         const findEmail = async (data) => {
-            await Participant.findOne({
+            await User.findOne({
                 where: {
                     email: data
                 }
@@ -40,20 +39,20 @@ passport.use(new LocalStrategy(
     }
 ));
 
-passport.serializeUser((participant, done) => {
-    done(null, participant.id);
+passport.serializeUser((user, done) => {
+    done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-    Participant.findOne({
+    User.findOne({
         where: {
             id: id
         }
-    }).then((participant) => {
-        if (participant) {
-            done(null, participant.get());
+    }).then((user) => {
+        if (user) {
+            done(null, user.get());
         } else {
-            done(participant.errors, null);
+            done(user.errors, null);
         }
     });
 });
