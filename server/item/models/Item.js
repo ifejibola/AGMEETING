@@ -4,11 +4,17 @@ const db = require("../../config/db");
 const Item = db.define(
   "item",
   {
-    meetingId: {
+    id: {
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
+      allowNull: false,
+      primaryKey: true,
+    },
+    meetingid: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    issueNum: {
+    issuenum: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -20,11 +26,11 @@ const Item = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    voteFor: {
+    votefor: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    voteAgainst: {
+    voteagainst: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
