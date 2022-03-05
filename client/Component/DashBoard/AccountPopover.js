@@ -17,6 +17,7 @@ import {
 import CogIcon from '../../icons/Cog';
 import UserIcon from '../../icons/User';
 import useAuthentication from "../../hooks/useAuthentication";
+import axios from "axios";
 
 const AccountPopover = () => {
     const anchorRef = useRef(null);
@@ -36,10 +37,17 @@ const AccountPopover = () => {
         try {
             handleClose();
             if (user) {
-                saveUser(null);
+                axios.get('http://localhost:3000/api/users/logout', {withCredentials: true}).then(() => {
+                    saveUser(null);
+                    navigate('/');
+                    toast.success('You have successfully logged out.');
+                }).catch((err) => {
+                    console.log(err.response.data);
+                    toast.error(err.response.data.message || 'There was an issue logging out.');
+                });
+            } else {
+                toast.error('You are currently not logged in.');
             }
-            navigate('/');
-            toast.success('You have successfully logged out.');
         } catch (err) {
             console.error(err);
             toast.error('Unable to logout.');
