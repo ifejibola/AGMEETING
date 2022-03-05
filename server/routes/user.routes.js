@@ -10,7 +10,7 @@ module.exports = (app) => {
 
     router.get('/', users.findAllForMeeting);
 
-    router.delete('/:id', users.delete);
+    router.delete('/delete', users.delete);
 
     router.get('/logout', users.logout);
 

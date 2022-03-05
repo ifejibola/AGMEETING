@@ -124,7 +124,7 @@ exports.findAllForMeeting = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-    const id = parseInt(req.params.id);
+    const id = parseInt(req.query.id);
     User.destroy({
         where: {
             id: id
