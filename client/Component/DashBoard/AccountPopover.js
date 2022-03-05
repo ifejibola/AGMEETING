@@ -16,13 +16,13 @@ import {
 } from "@mui/material";
 import CogIcon from '../../icons/Cog';
 import UserIcon from '../../icons/User';
-import useUser from "../../hooks/useUser";
+import useAuthentication from "../../hooks/useAuthentication";
 
 const AccountPopover = () => {
     const anchorRef = useRef(null);
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
-    const {user, saveUser} = useUser();
+    const {user, saveUser} = useAuthentication();
 
     const handleOpen = () => {
         setOpen(true);

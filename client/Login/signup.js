@@ -21,11 +21,15 @@ export default function SignUp() {
         const password2 = data.get('password2');
         const meetingId = data.get('meetingId');
 
-        if (password == password2) {
-            axios.post('http://localhost:3000/api/participants/register', {
+        if (password === password2) {
+            axios.post('http://localhost:3000/api/users/register', {
+                firstName: '',
+                lastName: '',
                 email: email,
                 password: password,
-                meetingId: meetingId
+                meetingId: meetingId,
+                isAdmin: false,
+                isModerator: false
             }, {withCredentials: true}).then((response) => {
                 navigate('/login');
                 console.log(response.data);
