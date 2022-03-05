@@ -19,37 +19,54 @@ exports.create = (req, res) => {
         return;
     }
 
-    // Create a User object.
-    const user = {
-        email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 10),
-        firstName: req.body.firstName ? req.body.firstName : null,
-        lastName: req.body.lastName ? req.body.lastName : null,
-        meetingId: req.body.meetingId ? req.body.meetingId : null,
-        isAdmin: req.body.isAdmin ? req.body.isAdmin : false,
-        isModerator: req.body.isModerator ? req.body.isModerator : false,
-        createdAt: Date.now(),
-        updatedAt: Date.now()
-    };
+    // Check if the email already exists in the database.
+    User.findOne({
+        where: {
+            email: req.body.email
+        }
+    }).then((user) => {
+        if (user) {
+            res.status(400).send({
+                message: "A user already exists with this email."
+            });
+        } else {
+            // Create a User object.
+            const user = {
+                email: req.body.email,
+                password: bcrypt.hashSync(req.body.password, 10),
+                firstName: req.body.firstName ? req.body.firstName : null,
+                lastName: req.body.lastName ? req.body.lastName : null,
+                meetingId: req.body.meetingId ? req.body.meetingId : null,
+                isAdmin: req.body.isAdmin ? req.body.isAdmin : false,
+                isModerator: req.body.isModerator ? req.body.isModerator : false,
+                createdAt: Date.now(),
+                updatedAt: Date.now()
+            };
 
-    // Save the User object in the database.
-    User.create(user)
-        .then((data) => {
-            res.status(200).send({
-                id: data.id,
-                firstName: data.firstName,
-                lastName: data.lastName,
-                email: data.email,
-                meetingId: data.meetingId,
-                isAdmin: data.isAdmin,
-                isModerator: data.isModerator
-            });
-        })
-        .catch((err) => {
-            res.status(500).send({
-                message: err.message || "An error occurred during user registration."
-            });
+            // Save the User object in the database.
+            User.create(user)
+                .then((data) => {
+                    res.status(200).send({
+                        id: data.id,
+                        firstName: data.firstName,
+                        lastName: data.lastName,
+                        email: data.email,
+                        meetingId: data.meetingId,
+                        isAdmin: data.isAdmin,
+                        isModerator: data.isModerator
+                    });
+                })
+                .catch((err) => {
+                    res.status(500).send({
+                        message: err.message || "An error occurred during user registration."
+                    });
+                });
+        }
+    }).catch((err) => {
+        res.status(500).send({
+            message: err.message || "An error occurred during user registration."
         });
+    });
 };
 
 exports.login = (req, res, next) => {

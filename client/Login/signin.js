@@ -31,7 +31,7 @@ export default function SignIn() {
             toast.success('You have successfully logged in!');
         }).catch((err) => {
             console.log(err.response.data);
-            toast.error('There was an issue logging in.');
+            toast.error(err.response.data.message || 'There was an issue logging in.');
         });
     };
 

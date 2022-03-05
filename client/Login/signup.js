@@ -8,14 +8,30 @@ import Typography from '@mui/material/Typography';
 import axios from "axios";
 import {toast} from "material-react-toastify";
 import {useNavigate} from "react-router-dom";
+import {Grid} from "@mui/material";
+import {useState} from "react";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 
 
 export default function SignUp() {
     const navigate = useNavigate();
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isModerator, setIsModerator] = useState(false);
+
+    const handleAdminChanged = (event) => {
+        setIsAdmin(event.target.checked);
+    }
+
+    const handleModeratorChanged = (event) => {
+        setIsModerator(event.target.checked);
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
+        const firstName = data.get('firstName');
+        const lastName = data.get('lastName');
         const email = data.get('email');
         const password = data.get('password');
         const password2 = data.get('password2');
@@ -23,20 +39,20 @@ export default function SignUp() {
 
         if (password === password2) {
             axios.post('http://localhost:3000/api/users/register', {
-                firstName: '',
-                lastName: '',
+                firstName: firstName,
+                lastName: lastName,
                 email: email,
                 password: password,
                 meetingId: meetingId,
-                isAdmin: false,
-                isModerator: false
+                isAdmin: isAdmin,
+                isModerator: isModerator
             }, {withCredentials: true}).then((response) => {
                 navigate('/login');
                 console.log(response.data);
                 toast.success('You have registered successfully.');
             }).catch((err) => {
                 console.log(err.response.data);
-                toast.error('There was an issue with registration.');
+                toast.error(err.response.data.message || 'There was an issue with registration.');
             });
         } else {
             toast.error('The passwords must match.');
@@ -58,56 +74,100 @@ export default function SignUp() {
             <Typography component="h1" variant="h5">
                 Sign Up
             </Typography>
-            <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    autoFocus
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password2"
-                    label="Enter Password Again"
-                    type="password"
-                    id="password2"
-                    autoComplete="current-password"
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="meetingId"
-                    label="Meeting Id"
-                    type="text"
-                    id="meetindId"
-                    autoComplete="meetingId"
-                />
-                <Button
-                    type="submit"
-                    href=""
-                    fullWidth
-                    variant="contained"
-                    sx={{mt: 3, mb: 2}}
-                >
-                    Sign Up
-                </Button>
+            <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1, ml: 6, mr: 6}}>
+                <Grid container spacing={3}>
+                    <Grid item xs={6}>
+                        <TextField
+                            margin="normal"
+                            fullWidth
+                            name="firstName"
+                            label="First Name"
+                            type="text"
+                            id="firstName"
+                            autoComplete="firstName"
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <TextField
+                            margin="normal"
+                            fullWidth
+                            name="lastName"
+                            label="Last Name"
+                            type="text"
+                            id="lastName"
+                            autoComplete="lastName"
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email Address"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password2"
+                            label="Enter Password Again"
+                            type="password"
+                            id="password2"
+                            autoComplete="current-password"
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <FormControlLabel
+                            control={<Checkbox checked={isAdmin} color="primary" onChange={handleAdminChanged}/>}
+                            label="Admin"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox checked={isModerator} color="primary"
+                                               onChange={handleModeratorChanged}/>}
+                            label="Moderator"
+                        />
+                    </Grid>
+                    <Grid item xs={6}>
+                        <TextField
+                            margin="normal"
+                            fullWidth
+                            name="meetingId"
+                            label="Meeting Id"
+                            type="text"
+                            id="meetindId"
+                            autoComplete="meetingId"
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button
+                            type="submit"
+                            href=""
+                            fullWidth
+                            variant="contained"
+                            sx={{mt: 3, mb: 2}}
+                        >
+                            Sign Up
+                        </Button>
+                    </Grid>
+                </Grid>
             </Box>
         </Box>
     );
