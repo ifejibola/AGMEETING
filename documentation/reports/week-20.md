@@ -14,6 +14,13 @@
 - Created Demo Video
 
 ### Chester's Tasks
+
 - Reviewed peer testing usablity tasks.
 - Created weekly meeting minutes.
 - Ensured application was presentable for participants.
+
+### Garry's Tasks
+
+- Updated Peer Testing usability tasks based on the TA's suggestions
+- Created Heuristic Evaluation Google form for Peer Testing
+- Ensured application was presentable for participants
