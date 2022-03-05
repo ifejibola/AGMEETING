@@ -13,7 +13,7 @@ const Participant = db.define(
     },
     meetingid: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -21,6 +21,10 @@ const Participant = db.define(
     },
     password: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    ismod: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
     },
   },

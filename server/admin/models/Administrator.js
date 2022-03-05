@@ -4,9 +4,11 @@ const db = require("../../config/db");
 const Administrator = db.define(
   "Administrator",
   {
-    adminId: {
+    id: {
       type: DataTypes.INTEGER,
+      autoIncrement: true,
       allowNull: false,
+      primaryKey: true,
     },
     email: {
       type: DataTypes.STRING,

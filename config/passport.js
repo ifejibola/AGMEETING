@@ -1,14 +1,14 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const bcrypt = require("bcrypt");
-const Moderator = require("../server/moderator/models/Moderator");
+const Participant = require("../server/participant/models/participant");
 // middleware for  login endpoint
 /**
  * Look up user info in the request body and try to find corresponding use, then see if the
  * password given to the user was valid
  */
 const findId = async (id, done) => {
-  await Moderator.findOne({
+  await Participant.findOne({
     where: {
       id: id,
     },
@@ -28,7 +28,7 @@ passport.use(
     (email, password, done) => {
       // findEmail(email, password, done)
       const findEmail = async (data) => {
-        await Moderator.findOne({
+        await Participant.findOne({
           where: {
             email: data,
           },
@@ -68,7 +68,7 @@ passport.serializeUser((user, done) => {
   done(null, user.id);
 });
 passport.deserializeUser((id, done) => {
-  Moderator.findOne({
+  Participant.findOne({
     where: {
       id: id,
     },
