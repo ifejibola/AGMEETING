@@ -31,24 +31,20 @@ https://forms.gle/RZJ3DZQEGm4oqjmL8
 
 ### Peer Testing 2 Notes
 
-- Visually very pleasing and clear
-- UI is easy to follow. Alert system attracts attention and the login and registration popups are appreciated. simple,
-  intuitive, resembles other design practices
-- UI design is very well made and visually appealing. Buttons and features are placed intuitively.
-- Login page is very consistent with other applications.
-- It's got a very pleasing design and is quite consistent. The functions that are implemented so far work as expected.
-- UI follows convention, looks clean.
-- layout most minus agenda new button. colors are snappy.
-- There were like 3 settings buttons all with the same icon which is a tad confusing but overall no complaints
-- Could use a pi chart in the agenda voting screen.
-- coloring - purple on blue. location of the add button on the agenda page. certain names such as "vault" were unclear.
-- I advise revamping the interactions menu. Perhaps break some of them up and add more buttons to the side bar,
-  particularly the voting system
-- Clicking the "check all" button on the list doesn't select all items in the menu
-- Either more intuitive ways of accomplishing tasks or documentation/manual
-- some of the element names can be confusing to someone using the page for the first time (item/session). The function
-  of the interactions button is not immediately clear
-- all icons need to be changed to represent the actual function. new agenda button RTL needs to be removed. you arent
-  supporting laguages that need RTL so it can go.
+- Lots of space around the add item button on the agenda page
+- Fix theme selection background after changing it to the dark mode
+- Interactions can be hard to find.
+- Switching text direction caused a slowdown on the website.
+- Hyperlink color for login/Register/AGMEETING needs to be changed
+- Session page is unclear and cluttered, could use an explanation/documentation
+- Votes component needs to specify item being voted on
+- Vault page needs explanation/documentation for users. Page is unclear
+- Interactions modal cluttered and color scheme is too unified.
+- Interactions makes no sense.
+- RTL very laggy and the purpose doesn’t make much sense.
+- The difference between session and agenda page doesn’t make sense.
+- Icons for sidebar are misleading, should be updated
+- Comments in logged in/ registered users super unnecessary… doesn’t make sense why they are there
+
 
 
