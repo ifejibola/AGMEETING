@@ -25,6 +25,13 @@ const AccountPopover = () => {
     const [open, setOpen] = useState(false);
     const {user, saveUser} = useAuthentication();
 
+    let userName;
+    if (user.firstName || user.lastName) {
+        userName = (user.firstName ? user.firstName : '') + (user.lastName ? ' ' + user.lastName : '');
+    } else {
+        userName = 'USER #' + user.id;
+    }
+
     const handleOpen = () => {
         setOpen(true);
     };
@@ -90,8 +97,7 @@ const AccountPopover = () => {
                         color="textPrimary"
                         variant="subtitle2"
                     >
-                        {/* {user.name} */}
-                        USER #{user.id}
+                        {userName}
                     </Typography>
                     <Typography
                         color="textSecondary"
