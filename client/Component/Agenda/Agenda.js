@@ -138,7 +138,7 @@ const Agenda = () => {
                 sx={{
                     backgroundColor: 'background.default',
                     minHeight: '100%',
-                    py: 8
+                    py: 2
                 }}
             >
                 <Container maxWidth={settings.compact ? 'xl' : false}>
@@ -147,10 +147,8 @@ const Agenda = () => {
                         justifyContent="space-between"
                         spacing={3}
                     >
-
                         <Grid item>
                             <Box sx={{m: -1}}>
-
                                 <Button
                                     color="primary"
                                     onClick={handleApplyModalOpen}
@@ -163,9 +161,9 @@ const Agenda = () => {
                             </Box>
                         </Grid>
                     </Grid>
-
                 </Container>
             </Box>
+            
             {/* AGENDA */}
             <Card>
                 <CardHeader
