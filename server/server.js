@@ -24,25 +24,16 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser('keyboard cat'));
 
-require('./routes/participant.routes')(app);
-require('./routes/admin.routes')(app);
-require('./routes/moderator.routes')(app);
+require('./routes/user.routes')(app);
 require('./routes/meeting.routes')(app);
 require('./routes/item.routes')(app);
 
-
-// app.use(express.static("helper"));
-// app.use("/", indexRoutes)
 app.get("*", (req, res) => {
-
     res.sendFile(path.join(__dirname, '../dist', 'index.html'), function (err) {
         if (err) {
             res.status(500).send(err);
         }
     });
-
-    // do not use this
-    // res.sendFile(path.join(__dirname + '/public/index.html'))
 });
 
 db.sequelize.sync().then(() => {

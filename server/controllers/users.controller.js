@@ -1,55 +1,53 @@
 const db = require('../models');
-const Participant = db.Participant;
+const User = db.User;
 const bcrypt = require('bcrypt');
 const passport = require('passport');
-require('../config/passport-participants');
+require('../config/passport');
 
 exports.create = (req, res) => {
     // Validate request.
     if (!req.body.email) {
         res.status(400).send({
-            message: "An email is required for participant creation."
+            message: "An email is required for user creation."
         });
         return;
     }
     if (!req.body.password) {
         res.status(400).send({
-            message: "A password is required for participant creation."
-        });
-        return;
-    }
-    if (!req.body.meetingId) {
-        res.status(400).send({
-            message: "A meeting id is required for participant creation."
+            message: "A password is required for user creation."
         });
         return;
     }
 
-    const meetingId = req.body.meetingId;
-    const email = req.body.email;
-    const password = bcrypt.hashSync(req.body.password, 10);
-
-    // Create a Participant.
-    const participant = {
-        email: email,
-        password: password,
-        meetingId: meetingId,
+    // Create a User object.
+    const user = {
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, 10),
+        firstName: req.body.firstName ? req.body.firstName : null,
+        lastName: req.body.lastName ? req.body.lastName : null,
+        meetingId: req.body.meetingId ? req.body.meetingId : null,
+        isAdmin: req.body.isAdmin ? req.body.isAdmin : false,
+        isModerator: req.body.isModerator ? req.body.isModerator : false,
         createdAt: Date.now(),
         updatedAt: Date.now()
     };
 
-    // Save Participant in the database
-    Participant.create(participant)
+    // Save the User object in the database.
+    User.create(user)
         .then((data) => {
             res.status(200).send({
                 id: data.id,
+                firstName: data.firstName,
+                lastName: data.lastName,
                 email: data.email,
-                meetingId: data.meetingId
+                meetingId: data.meetingId,
+                isAdmin: data.isAdmin,
+                isModerator: data.isModerator
             });
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || "Some error occurred while creating the Participant."
+                message: err.message || "An error occurred during user registration."
             });
         });
 };
@@ -58,52 +56,56 @@ exports.login = (req, res, next) => {
     // Validate request.
     if (!req.body.email) {
         res.status(400).send({
-            message: "An email is required to get participant."
+            message: "An email is required to login."
         });
         return;
     }
     if (!req.body.password) {
         res.status(400).send({
-            message: "A password is required to get participant."
+            message: "A password is required to login."
         });
         return;
     }
 
     passport.authenticate('local', (err, user) => {
         if (err) throw err;
-        if (!user) res.status(400).send({message: 'There is no matching user.'});
+        if (!user) res.status(406).send({message: 'There is no user that matches these credentials.'});
         else {
             req.logIn(user, (err) => {
                 if (err) throw err;
             });
             res.status(200).send({
-                id: user.get().id,
-                email: user.get().email,
-                meetingId: user.get().meetingId
+                id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                meetingId: user.meetingId,
+                isAdmin: user.isAdmin,
+                isModerator: user.isModerator
             });
         }
     })(req, res, next);
 };
 
 exports.findAll = (req, res) => {
-    Participant.findAll({
+    User.findAll({
         attributes: {
             exclude: ['password']
         }
     })
         .then((data) => {
-            res.send(data);
+            res.status(200).send(data);
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || 'There was an issue retrieving the participants.'
+                message: err.message || 'There was an issue retrieving the users.'
             });
         });
 };
 
 exports.findAllForMeeting = (req, res) => {
     const {Op} = require("sequelize");
-    Participant.findAll({
+    User.findAll({
         attributes: {
             exclude: ['password']
         },
@@ -112,7 +114,7 @@ exports.findAllForMeeting = (req, res) => {
         }
     })
         .then((data) => {
-            res.send(data);
+            res.status(200).send(data);
         })
         .catch((err) => {
             res.status(500).send({
@@ -122,22 +124,22 @@ exports.findAllForMeeting = (req, res) => {
 };
 
 exports.delete = (req, res) => {
-    const id = parseInt(req.params.id);
-    Participant.destroy({
+    const id = parseInt(req.query.id);
+    User.destroy({
         where: {
             id: id
         }
     })
         .then((num) => {
             if (num === 1) {
-                res.send('Participant was deleted successfully.')
+                res.status(200).send('The user was deleted successfully.')
             } else {
-                res.send(`Cannot delete participant with id=${id}.`)
+                res.status(500).send(`Cannot delete user with id=${id}.`)
             }
         })
         .catch((err) => {
             res.status(500).send({
-                message: err.message || 'There was an issue deleting the participant.'
+                message: err.message || 'There was an issue deleting the user.'
             });
         });
 };
