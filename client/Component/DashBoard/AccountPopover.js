@@ -16,13 +16,21 @@ import {
 } from "@mui/material";
 import CogIcon from '../../icons/Cog';
 import UserIcon from '../../icons/User';
-import useUser from "../../hooks/useUser";
+import useAuthentication from "../../hooks/useAuthentication";
+import axios from "axios";
 
 const AccountPopover = () => {
     const anchorRef = useRef(null);
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
-    const {user, saveUser} = useUser();
+    const {user, saveUser} = useAuthentication();
+
+    let userName;
+    if (user.firstName || user.lastName) {
+        userName = (user.firstName ? user.firstName : '') + (user.lastName ? ' ' + user.lastName : '');
+    } else {
+        userName = 'USER #' + user.id;
+    }
 
     const handleOpen = () => {
         setOpen(true);
@@ -36,10 +44,17 @@ const AccountPopover = () => {
         try {
             handleClose();
             if (user) {
-                saveUser(null);
+                axios.get('http://localhost:3000/api/users/logout', {withCredentials: true}).then(() => {
+                    saveUser(null);
+                    navigate('/');
+                    toast.success('You have successfully logged out.');
+                }).catch((err) => {
+                    console.log(err.response.data);
+                    toast.error(err.response.data.message || 'There was an issue logging out.');
+                });
+            } else {
+                toast.error('You are currently not logged in.');
             }
-            navigate('/');
-            toast.success('You have successfully logged out.');
         } catch (err) {
             console.error(err);
             toast.error('Unable to logout.');
@@ -82,8 +97,7 @@ const AccountPopover = () => {
                         color="textPrimary"
                         variant="subtitle2"
                     >
-                        {/* {user.name} */}
-                        USER #{user.id}
+                        {userName}
                     </Typography>
                     <Typography
                         color="textSecondary"

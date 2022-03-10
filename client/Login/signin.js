@@ -10,18 +10,18 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
-import useUser from "../hooks/useUser";
+import useAuthentication from "../hooks/useAuthentication";
 import {useNavigate} from "react-router-dom";
 import {toast} from 'material-react-toastify';
 
 export default function SignIn() {
-    const {saveUser} = useUser();
+    const {saveUser} = useAuthentication();
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        axios.post('http://localhost:3000/api/participants/login', {
+        axios.post('http://localhost:3000/api/users/login', {
             email: data.get('email'),
             password: data.get('password')
         }, {withCredentials: true}).then((response) => {
@@ -31,7 +31,7 @@ export default function SignIn() {
             toast.success('You have successfully logged in!');
         }).catch((err) => {
             console.log(err.response.data);
-            toast.error('There was an issue with logging in.');
+            toast.error(err.response.data.message || 'There was an issue logging in.');
         });
     };
 
@@ -48,7 +48,7 @@ export default function SignIn() {
                 <LockOutlinedIcon/>
             </Avatar>
             <Typography component="h1" variant="h5">
-                Sign in
+                Sign In
             </Typography>
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
                 <TextField
