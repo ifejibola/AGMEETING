@@ -1,6 +1,7 @@
 import { applyMiddleware, compose, createStore } from "redux";
 import thunk from "redux-thunk";
-import userReducer from "./reducers";
+import rootReducer from "./reducers/rootReducer";
+import { configureStore } from "@reduxjs/toolkit";
 
 const composedEnhancer = compose(
   applyMiddleware(thunk),
@@ -9,8 +10,9 @@ const composedEnhancer = compose(
 
 const initialState = {
   currentUser: {
-    username: "",
+    id: "",
+    email: "",
   },
 };
 
-export default createStore(userReducer, initialState, composedEnhancer);
+export default createStore(rootReducer, initialState, composedEnhancer);

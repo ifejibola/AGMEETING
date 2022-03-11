@@ -33,7 +33,8 @@ const AccountPopover = () => {
   const handleLogout = async () => {
     try {
       handleClose();
-      navigate("/");
+      localStorage.removeItem("isAuthenticated");
+      navigate("/login");
     } catch (err) {
       console.error(err);
       toast.error("Unable to logout.");
@@ -56,6 +57,7 @@ const AccountPopover = () => {
             height: 32,
             width: 32,
           }}
+          src="https://thispersondoesnotexist.com/image"
         />
       </Box>
       <Popover
@@ -76,7 +78,7 @@ const AccountPopover = () => {
             USER
           </Typography>
           <Typography color="textSecondary" variant="subtitle2">
-            Devias
+            Username
           </Typography>
         </Box>
         <Divider />

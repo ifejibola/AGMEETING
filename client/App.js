@@ -17,6 +17,7 @@ import SettingsDrawer from "./SettingsDrawer";
 import { THEMES } from "../config/theme/constants";
 import ErrorBoundary from "./Errorbound";
 import useSettings from "./hooks/useSettings";
+import { io } from "socket.io-client";
 
 const mapStateToProps = (state) => {
   return {
@@ -25,6 +26,9 @@ const mapStateToProps = (state) => {
 };
 
 function App({ currentUser }) {
+  useEffect(() => {
+    var socket = io();
+  });
   const { settings } = useSettings();
 
   // const theme = createCustomTheme({

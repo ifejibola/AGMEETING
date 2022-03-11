@@ -40,12 +40,6 @@ import Cog from "../../icons/Cog";
 // import { Receipt } from '@material-ui/icons';
 import { connect } from "react-redux";
 
-const mapStateToProps = (state) => {
-  return {
-    currentUser: state.currentUser,
-  };
-};
-
 import Modal from "./Interactions";
 const sections = [
   {
@@ -70,6 +64,11 @@ const sections = [
         title: "Vault",
         path: "/Vault",
         icon: <ShoppingBagIcon fontSize="small" />,
+      },
+      {
+        title: "Chat",
+        path: "/content",
+        icon: <ChartSquareBarIcon fontSize="small" />,
       },
       // {
       //   title: 'Account',
@@ -226,7 +225,7 @@ const sections = [
 ];
 
 const DashboardSidebar = (props) => {
-  console.log(props.currentUser);
+  console.log(props);
   const { onMobileClose, openMobile } = props;
   const location = useLocation();
   // const { user } = useAuth();
@@ -289,15 +288,21 @@ const DashboardSidebar = (props) => {
               p: 2,
             }}
           >
-            <RouterLink to="/dashboard/account">Avatar</RouterLink>
+            <RouterLink to="/dashboard/account">
+              <img
+                src="https://thispersondoesnotexist.com/image"
+                width="50"
+                height="50"
+              ></img>
+            </RouterLink>
             <Box sx={{ ml: 2 }}>
               <Typography color="textPrimary" variant="subtitle2">
-                {props.currentUser.username}
+                {props.userReducer?.currentUser?.email}
               </Typography>
               <Typography color="textSecondary" variant="body2">
                 Your plan:{" "}
                 <Link color="primary" component={RouterLink} to="/pricing">
-                  {props.currentUser.username}'s plan
+                  {props.userReducer?.currentUser?.email}'s plan
                 </Link>
               </Typography>
             </Box>
@@ -395,6 +400,12 @@ const DashboardSidebar = (props) => {
 DashboardSidebar.propTypes = {
   onMobileClose: PropTypes.func,
   openMobile: PropTypes.bool,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    userReducer: state.userReducer,
+  };
 };
 
 export default connect(mapStateToProps)(DashboardSidebar);

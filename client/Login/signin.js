@@ -12,6 +12,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import axios from "axios";
+import { login } from "../actions";
+import store from "../redux/store";
+import { connect } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Copyright(props) {
   return (
@@ -23,7 +29,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        AGMeeting
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -33,14 +39,19 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn() {
+const SignIn = (props) => {
+  useEffect(() => {
+    if (localStorage.getItem("isAuthenticated")) {
+      localStorage.removeItem("isAuthenticated");
+    }
+  }, []);
+  let navigate = useNavigate();
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+    props.onLogin(data.get("email"), data.get("password"), () => {
+      navigate("/");
     });
   };
 
@@ -94,7 +105,7 @@ export default function SignIn() {
             />
             <Button
               type="submit"
-              href="/"
+              // href="/"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
@@ -119,4 +130,20 @@ export default function SignIn() {
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+const mapStateToProps = (state) => {
+  return {
+    userReducer: state.userReducer,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLogin: (email, password, callback) => {
+      dispatch(login(email, password, callback));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

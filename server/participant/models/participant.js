@@ -7,12 +7,13 @@ const Participant = db.define(
     // Model attributes are defined here
     id: {
       type: DataTypes.INTEGER,
+      autoIncrement: true,
       allowNull: false,
       primaryKey: true,
     },
     meetingid: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     email: {
       type: DataTypes.STRING,
@@ -20,6 +21,10 @@ const Participant = db.define(
     },
     password: {
       type: DataTypes.STRING,
+      allowNull: false,
+    },
+    ismod: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
     },
   },

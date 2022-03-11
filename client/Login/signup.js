@@ -13,6 +13,10 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import validator from "validator";
+import { createAccount } from "../actions";
+import { connect, ReactReduxContext } from "react-redux";
+import { useNavigate } from "react-router";
+import store from "../redux/store";
 
 function Copyright(props) {
   return (
@@ -34,8 +38,9 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignUp() {
+function SignUp(props) {
   const [signupError, setSignupError] = React.useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -43,15 +48,27 @@ export default function SignUp() {
     // make sure email is valid
     if (!validator.isEmail(data.get("email"))) {
       setSignupError("Enter valid Email!");
+      console.log("here");
       return;
     }
     // check passwords are matching
-    if (data.get("password") != data.get("passwordAgain")) {
+    if (data.get("password") !== data.get("passwordAgain")) {
       setSignupError("Passwords must match");
+      console.log("here");
+      return;
+    }
+    //check both passwords have been entered
+    else if (!data.get("password") || !data.get("passwordAgain")) {
+      setSignupError("Please enter a password twice");
+      console.log("here");
+      return;
     } else {
       setSignupError("");
+      //pass in the navigate function from the useNavigate hook with the route you want to navigate to to the action creator so that the callback can be called from the redux action creator
+      props.onCreateAccount(data.get("email"), data.get("password"), () => {
+        navigate("/login");
+      });
     }
-
     //
   };
 
@@ -133,3 +150,14 @@ export default function SignUp() {
     </ThemeProvider>
   );
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    //Make sure you have the callback function in here so that you can pass the navigate funtion through to the action creator
+    onCreateAccount: (email, password, callback) => {
+      dispatch(createAccount(email, password, callback));
+    },
+  };
+};
+
+export default connect(null, mapDispatchToProps)(SignUp);
