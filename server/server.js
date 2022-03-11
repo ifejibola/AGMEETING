@@ -8,37 +8,32 @@ const DIST_DIR = path.join(__dirname, "public");
 const HTML_FILE = path.join(DIST_DIR, "index.html");
 const db = require('./models');
 const passport = require('passport');
-const localStrategy = require('passport-local');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.static(path.join(__dirname, "../dist")));
 app.use(bodyParser.json());
+app.use(cors());
 
 // For passport
-app.use(session({secret: 'keyboard cat', resave: true, saveUninitialized: true})); // session secret
+app.use(session({secret: 'keyboard cat', resave: false, saveUninitialized: true}));
 app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
+app.use(passport.session());
+app.use(cookieParser('keyboard cat'));
 
-require('./routes/participant.routes')(app);
-require('./routes/admin.routes')(app);
-require('./routes/moderator.routes')(app);
+require('./routes/user.routes')(app);
 require('./routes/meeting.routes')(app);
 require('./routes/item.routes')(app);
 
-// app.use(express.static("helper"));
-// app.use("/", indexRoutes)
 app.get("*", (req, res) => {
-
     res.sendFile(path.join(__dirname, '../dist', 'index.html'), function (err) {
         if (err) {
             res.status(500).send(err);
         }
     });
-
-    // do not use this
-    // res.sendFile(path.join(__dirname + '/public/index.html'))
 });
 
 db.sequelize.sync().then(() => {

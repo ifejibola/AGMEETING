@@ -1,7 +1,7 @@
 import React from 'react'
-import { useRef, useState } from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import {useRef, useState} from 'react';
+import {Link as RouterLink, useNavigate} from 'react-router-dom';
+import {toast} from 'material-react-toastify';
 import {
     Avatar,
     Box,
@@ -16,11 +16,21 @@ import {
 } from "@mui/material";
 import CogIcon from '../../icons/Cog';
 import UserIcon from '../../icons/User';
+import useAuthentication from "../../hooks/useAuthentication";
+import axios from "axios";
 
 const AccountPopover = () => {
     const anchorRef = useRef(null);
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
+    const {user, saveUser} = useAuthentication();
+
+    let userName;
+    if (user.firstName || user.lastName) {
+        userName = (user.firstName ? user.firstName : '') + (user.lastName ? ' ' + user.lastName : '');
+    } else {
+        userName = 'USER #' + user.id;
+    }
 
     const handleOpen = () => {
         setOpen(true);
@@ -33,7 +43,18 @@ const AccountPopover = () => {
     const handleLogout = async () => {
         try {
             handleClose();
-            navigate('/');
+            if (user) {
+                axios.get('http://localhost:3000/api/users/logout', {withCredentials: true}).then(() => {
+                    saveUser(null);
+                    navigate('/');
+                    toast.success('You have successfully logged out.');
+                }).catch((err) => {
+                    console.log(err.response.data);
+                    toast.error(err.response.data.message || 'There was an issue logging out.');
+                });
+            } else {
+                toast.error('You are currently not logged in.');
+            }
         } catch (err) {
             console.error(err);
             toast.error('Unable to logout.');
@@ -68,32 +89,31 @@ const AccountPopover = () => {
                 onClose={handleClose}
                 open={open}
                 PaperProps={{
-                    sx: { width: 240 }
+                    sx: {width: 240}
                 }}
             >
-                <Box sx={{ p: 2 }}>
+                <Box sx={{p: 2}}>
                     <Typography
                         color="textPrimary"
                         variant="subtitle2"
                     >
-                        {/* {user.name} */}
-                        USER
+                        {userName}
                     </Typography>
                     <Typography
                         color="textSecondary"
                         variant="subtitle2"
                     >
-                        Devias
+                        {user.email}
                     </Typography>
                 </Box>
-                <Divider />
-                <Box sx={{ mt: 2 }}>
+                <Divider/>
+                <Box sx={{mt: 2}}>
                     <MenuItem
                         component={RouterLink}
                         to="/dashboard/social/profile"
                     >
                         <ListItemIcon>
-                            <UserIcon fontSize="small" />
+                            <UserIcon fontSize="small"/>
                         </ListItemIcon>
                         <ListItemText
                             primary={(
@@ -111,7 +131,7 @@ const AccountPopover = () => {
                         to="/dashboard/account"
                     >
                         <ListItemIcon>
-                            <CogIcon fontSize="small" />
+                            <CogIcon fontSize="small"/>
                         </ListItemIcon>
                         <ListItemText
                             primary={(
@@ -125,7 +145,7 @@ const AccountPopover = () => {
                         />
                     </MenuItem>
                 </Box>
-                <Box sx={{ p: 2 }}>
+                <Box sx={{p: 2}}>
                     <Button
                         color="primary"
                         fullWidth
