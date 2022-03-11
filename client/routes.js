@@ -1,18 +1,29 @@
 import React from "react";
-// import { BrowserRouter as Router, Route, Switch, useRoutes } from 'react-router-dom';
-// import { useRoutes } from 'react-router-dom'; //v5
-import { ThemeProvider } from "@mui/material/styles";
 
-import App from "./App";
+//Layout
+import DashboardLayout from "./Component/DashBoard/Layout";
 
-import Land from './Land';
-import DashboardLayout from './Component/DashBoard/Layout';
-import NoMatch from './NoMatch';
-import Session from './Component/Session';
-import Interactions from './Component/DashBoard/Interactions';
-import Table1 from "./Component/Table1";
-import Vault from "./Component/Vault";
-import Settings from "./Component/GeneralSettings";
+//Session Components
+import Land from "./Land";
+import GroupedList3 from "./Component/Session/Session";
+import Agenda from "./Component/Agenda/agenda";
+import Vault from "./Component/Vault/vault";
+
+import About from "./About";
+import NoMatch from "./NoMatch";
+import Testpg from "./anothertestpg";
+
+import LoggedinUsers from "./Component/AdminComponents/LoggedInUsers";
+import RegisteredUsers from "./Component/AdminComponents/RegisteredUsers";
+import Stats from "./Component/AdminComponents/Stats/Stats";
+import Settings from "./Component/AdminComponents/Settings/Settings";
+import Login from "./Login/Login";
+
+import SignIn from "./Login/signin";
+import SignUp from "./Login/signup";
+import ProtectedRoute from "./ProtectedRoute";
+
+import ContentMessage from "./Component/ContentMessage.js";
 
 // // Declarative routing model
 // return (
@@ -23,44 +34,60 @@ import Settings from "./Component/GeneralSettings";
 //     </Router>
 // )
 
-//Programmatic routing model
-const Welcome = <h1>Welcome To AGMEETING</h1>;
+//Programmatic routing model this basically contains all the routes for the applications, new routes must be added to this array after the components are created.
 const routes = [
-  { path: "/", element: <Land /> },
   {
-    path: "dashboard",
-    element: <DashboardLayout />,
+    path: "/",
+    element: (
+      <ProtectedRoute>
+        <DashboardLayout />
+      </ProtectedRoute>
+    ),
     children: [
+      { index: true, element: <GroupedList3 /> },
       {
-          path:"",
-          element: Welcome
-      },
-    //   {
-    //     path: "overview",
-    //     element: <Overview />,
-    //   },
-      {
-        path: "session",
-        element: <Session />,
+        path: "/agenda",
+        element: <Agenda />,
       },
       {
-        path: "agenda",
-        element: <Table1 />,
+        path: "/content",
+        element: <ContentMessage />,
       },
       {
-        path: "vault",
+        path: "/vault",
         element: <Vault />,
       },
       {
-        path: "interactions",
-        element: <Interactions />,
+        path: "/loggedinUsers",
+        element: <LoggedinUsers />,
       },
       {
-        path: "settings",
-        element: <Settings/>,
+        path: "/registeredusers",
+        element: <RegisteredUsers />,
       },
+      {
+        path: "/stats",
+        element: <Stats />,
+      },
+      {
+        path: "/settings",
+        element: <Settings />,
+      },
+
       { path: "*", element: <NoMatch /> },
     ],
+  },
+  // {
+  //   path: "/login",
+  //   element: <Login />,
+  // },
+  {
+    path: "/login",
+    element: <SignIn />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
   },
 
   { path: "*", element: <NoMatch /> },

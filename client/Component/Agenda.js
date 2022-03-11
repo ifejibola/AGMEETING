@@ -1,6 +1,8 @@
 import React from "react";
 import Scrollbar from '../Scrollbar';
 import { DataGrid } from '@mui/x-data-grid';
+import Box from '@mui/material/Box';
+import { Card, CardContent } from "@mui/material";
 
 /*
 Gave up on trying to implement sorting myself, much easier solution was to just
@@ -24,21 +26,30 @@ const rows = [
   { id: 2, item: "Marco Botton Tuttofare", descr: 38, status: null, start: null, end: null, voteYes: true, voteNo: false},
   { id: 3, item: "Mariah Maclachlan Better Half", descr: 41, status: "Patata", start: null, end: null, voteYes: false, voteNo: true},
   { id: 4, item: "Valerie Liberty Head Chef", descr: 70, status: "Val", start: null, end: null, voteYes: true, voteNo: true},
-  { id: 5, item: "Data Grid Documents", descr: null, status: null, start: null, end: null, voteYes: null, voteNo: null},
-  { id: 6, item: "{65L", descr: 0, status: "35", start: null, end: null, voteYes: null, voteNo: null},
+  // { id: 5, item: "Data Grid Documents", descr: null, status: null, start: null, end: null, voteYes: null, voteNo: null},
+  // { id: 6, item: "{65L", descr: 0, status: "35", start: null, end: null, voteYes: null, voteNo: null},
 ];
 
 export default function Agenda() {
   return (  
-    <div style={{ display: 'flex', height: 400, width: '90%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={10}
-        rowsPerPageOptions={[10]}
-        checkboxSelection
-        disableSelectionOnClick
-      />
-    </div>
+    <Box
+    sx={{
+      backgroundColor: "primary",
+      p: 3,
+    }}
+  >
+    <Card>
+      <CardContent sx={{ height: "300px", backgroundColor: "white" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          checkboxSelection
+          disableSelectionOnClick
+        />
+      </CardContent>
+      </Card>
+    </Box>
   );
 }

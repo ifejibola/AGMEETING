@@ -1,0 +1,71 @@
+Presentation will now be conducted on Feb 2nd, at 8:30-8:40 AM
+
+
+1. Each feature your team will implement for the 3rd and 4th milestone
+2. Smaller tasks for each one of the features in the 3rd and 4th milestone
+3. (Optional) who will be working on what.
+You can use a slide with a gantt chart for your presentation.
+
+
+*Must have*, *Should Have*, *Could have*, and *Don’t have (out of scope)*. 
+
+Peer Testing 2 - March 2nd and 4th
+
+Final Report - April 22nd
+
+
+FIRST REQUIREMENTS MILESTONE
+
+Peer Eval 2 (March 2nd, March 4th)
+ - We must have our final build. 
+ - We should have our final report planning started.
+ - We could have our final report structure finalized and begun writing.
+ - We don't have final sign off or a completed report.
+
+Final (April 22)
+ - We must have a complete report. 
+ - We should have nothing left to do.
+ - We could have some final work to do to finish up communication with the client.
+ - We don't have any more work to do :)
+
+NEW REQUIREMENTS MILESTONE
+
+Peer Eval 2 (March 2nd, March 4th)
+ - We must have our service functional.
+ - We should have little to no remaining work, mostly focused on fixing issues from the second peer test.
+ - We could have final deployment and not be running locally.
+ - We don't have much in the way of the final report, but that's alright.
+
+Final (April 22)
+ - We must have a complete report. 
+ - We should have nothing left to do but add the work we've done to our portfolios!
+ - We could have some discussion with the prof and client about what we've done, what went well, and what didn't.
+ - We don't have any more class work to do, only wrapping up our finals and other classes.
+
+Specifically, I believe the next few weeks will look like this:
+
+Jan 31 - Feb 4: Database implementation, hopefully Ife has a PSQL database for us to work with. Presentation on Wed.
+Feb 7 - Feb 11: Socket integration, clients might be able to connect by the end of the week but may need more work.
+Feb 14 - Feb 18: Finishing socket integration, making sure the service is functional but not bug free.
+Feb 21 - Feb 25: Reading week, no work expected.
+Feb 28 - March 4: Prep for Peer Eval 2, as well as conducting evaluations. No work is likely to get done this week. Video demo due.
+March 7 - March 11: Work on report and peer evaluation analysis, not much work is likely to get done on the project this week either.
+March 14 - March 18: Work on fixing issues that came up during peer evaluation 2
+March 21 - March 25: Testing, looking for edge cases. Work should continue on wrapping
+March 28 - April 1: We should be considering how the final report will look at this point, as well as either deploying the service or cleaning up the repo.
+April 4 - April 8: Code should be complete by this point, what that will mean will become apparent as we get closer to the date. Work on report.
+April 8 - 25: Exams and Easter may take up most of our time, final work on report, video, and evaluations should be wrapping up.
+
+Hopefully this is adequate for us to create a gantt chart from, as well as give us an idea of what we're going to need to ask Ife for each week. GHopefully *crosses fingers*
+
+
+
+
+
+
+
+
+
+
+
+

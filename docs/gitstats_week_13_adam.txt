@@ -1,0 +1,4 @@
+Gitstats week 13
+
+This week I spent time working on our report, and also merged in the upstream changes from
+Ife's main branch into our repository. 

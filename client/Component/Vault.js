@@ -7,7 +7,7 @@ const columns = [
   { field: "item", headerName: "Item Name (job title)", width: 400 },
   { field: "age", headerName: "Age", width: 150 },
   { field: "type", headerName: "Type", width: 150 },
-  { field: "viewed", headerName: "Viewed", type: "singleSelect", width: 110 },
+  { field: "viewed", headerName: "Viewed", type: "singleSelect", width: 150 },
 ];
 
 const rows = [
@@ -18,7 +18,13 @@ const rows = [
     type: "Peldi",
     viewed: null,
   },
-  { id: 2, item: "Marco Botton Tuttofare", age: 38, type: null, viewed: null },
+  {
+    id: 2,
+    item: "Marco Botton Tuttofare",
+    age: 38,
+    type: null,
+    viewed: null,
+  },
   {
     id: 3,
     item: "Mariah Maclachlan Better Half",
@@ -33,11 +39,23 @@ const rows = [
     type: "Val",
     viewed: null,
   },
-  { id: 5, item: "Data Grid Documents", age: null, type: null, viewed: null },
-  { id: 6, item: "{65L", age: 0, type: "35", viewed: null },
+  {
+    id: 5,
+    item: "Data Grid Documents",
+    age: null,
+    type: null,
+    viewed: null,
+  },
+  {
+    id: 6,
+    item: "{65L",
+    age: 0,
+    type: "35",
+    viewed: null,
+  },
 ];
 
-export default function Vault() {  
+export default function Vault() {
   return (
     <Box
       sx={{
@@ -46,18 +64,16 @@ export default function Vault() {
       }}
     >
       <Card>
-        <CardContent sx={{height: "300px", backgroundColor: "white"}}>
-      {/* <div style={{ display: "flex", height: 400, width: "90%" }}> */}
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          pageSize={10}
-          rowsPerPageOptions={[10]}
-          checkboxSelection
-          disableSelectionOnClick
-        />
+        <CardContent sx={{ height: "300px", backgroundColor: "white" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            pageSize={10}
+            rowsPerPageOptions={[10]}
+            checkboxSelection
+            disableSelectionOnClick
+          />
         </CardContent>
-      {/* </div> */}
       </Card>
     </Box>
   );

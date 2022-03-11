@@ -2,13 +2,18 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, Outlet, Routes, Route, BrowserRouter } from "react-router-dom";
 import { experimentalStyled } from "@mui/material";
-import {Box} from '@mui/system'
+import { Box } from "@mui/system";
 
 import NavBar from "./NavBar";
 import DashboardSidebar from "./DashboardSidebar";
 import About from "../../About";
 import Session from "../Session";
-
+import { connect } from "react-redux";
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.currentUser,
+  };
+};
 
 const DashboardLayoutRoot = experimentalStyled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
@@ -34,27 +39,25 @@ const DashboardLayoutContainer = experimentalStyled("div")({
   overflow: "hidden",
 });
 
-const DashboardLayoutContent = experimentalStyled('div')({
-    flex: '1 1 auto',
-    height: '100vh',
-    width: '100vw',
-    overflow: 'auto',
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems:'center',
-    WebkitOverflowScrolling: 'touch'
+const DashboardLayoutContent = experimentalStyled("div")({
+  flex: "1 1 auto",
+  height: "100vh",
+  width: "100vw",
+  overflow: "auto",
+  position: "relative",
+  justifyContent: "center",
+  alignItems: "center",
+  WebkitOverflowScrolling: "touch",
 });
 
-const DashboardLayout = () => {
+const DashboardLayout = ({ currentUser }) => {
   const [isSidebarMobileOpen, setIsSidebarMobileOpen] = useState(false);
-  // let { path, url } = useRouteMatch();
-  // useEffect(() => {
-  //   console.log(path);
-  // });
 
   return (
     <DashboardLayoutRoot>
-      <NavBar onSidebarMobileOpen={() => setIsSidebarMobileOpen(true)} />
+      <NavBar
+        onSidebarMobileOpen={() => setIsSidebarMobileOpen(!isSidebarMobileOpen)}
+      />
       <DashboardSidebar
         onMobileClose={() => setIsSidebarMobileOpen(false)}
         openMobile={isSidebarMobileOpen}
@@ -62,7 +65,7 @@ const DashboardLayout = () => {
       <DashboardLayoutWrapper>
         <DashboardLayoutContainer>
           <DashboardLayoutContent>
-           <Outlet></Outlet>
+            <Outlet></Outlet>
           </DashboardLayoutContent>
         </DashboardLayoutContainer>
       </DashboardLayoutWrapper>
@@ -70,4 +73,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+export default connect(mapStateToProps)(DashboardLayout);

@@ -1,48 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-// import { BrowserRouter as Router, Route, Switch, DefaultRoute } from 'react-router-dom';
+import React, { useEffect } from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import Routes from "./routes";
+import App from "./App";
+import Land from "./Land";
+import "../public/theme/styles.css";
 
-// import App from './App';
-// import DashboardLayout from './Component/DashBoard/Layout';
-// import Land from './Land';
-// // import "./styles.scss";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
-// const routes = (
-//     /*Main.js will server as the "base" compoent for the rest of the application, Route components can be added in here to specify which components should be rendered for different routes 
-//     https://reactrouter.com/web/guides/quick-start the documentation for react router is pretty good*/
-//     <Router>
-//         <Switch>
-//             <Route exact path="/" component={App}>
-//             </Route>
-//             <Route path="/dashboard" component={DashboardLayout}>
-//             </Route>
-//             <Route path="/landing">
-//                 {/*what a route renders can also be specified like this, allowing you to pass props etc*/}
-//                 <Land testProp={"test"}></Land>
-//             </Route>
-//             {/* <Route path='/session'>
-//             </Route> */}
-//         </Switch>
-//     </Router>
-// );
-import { BrowserRouter } from 'react-router-dom';
-import Routes from './routes';
-import App from './App';
-import Land from './Land';
+import { StrictMode } from "react";
+import { SettingsProvider } from "./contexts/SettingsContext";
+import { StyledEngineProvider } from "@mui/styled-engine";
+import { createBrowserHistory } from "history";
+import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
+import { CustomRouter } from "./CustomRouter";
 
-// import "./styles.scss";
+let history = createBrowserHistory();
 
-import { StrictMode } from 'react'
-// import LocalizationProvider from '@material'
-import { SettingsProvider } from './contexts/SettingsContext';
-import { StyledEngineProvider } from '@mui/styled-engine';
+//Contains app component wraps it in necessary context providers, and the router.
 
 ReactDOM.render(
+  <Provider store={store}>
     <StyledEngineProvider injectFirst>
-        <SettingsProvider>
-            <BrowserRouter>
-                <App />
-            </BrowserRouter>
-        </SettingsProvider>
+      <SettingsProvider>
+        {/*im using this custom router component with this history from create browser history at the moment because I thought this might fix the navigation issue but I think we could probably just use the regular browser router component*/}
+        <CustomRouter history={history}>
+          <App />
+        </CustomRouter>
+      </SettingsProvider>
     </StyledEngineProvider>
-    , document.getElementById("root"));
+  </Provider>,
+  document.getElementById("root")
+);

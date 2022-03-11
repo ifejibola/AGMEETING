@@ -1,6 +1,5 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
 import {
   Box,
   Button,
@@ -12,20 +11,7 @@ import {
   Grid,
   Typography
 } from '@material-ui/core';
-import OverviewWeeklyEarnings from './overview/OverviewWeeklyEarnings';
-import OverviewTotalTransactions from './overview/OverviewTotalTransactions';
-import OverviewTotalBalance from './overview/OverviewTotalBalance';
-import OverviewPrivateWallet from './overview/OverviewPrivateWallet';
-import OverviewLatestTransactions from './overview/OverviewLatestTransactions';
-import OverviewInbox from './overview/OverviewInbox';
 import useSettings from '../../hooks/useSettings';
-import ArrowRightIcon from '../../icons/ArrowRight'
-import BriefcaseIcon from '../../icons/Briefcase';
-import DownloadIcon from '../../icons/Download';
-import ExternalLinkIcon from '../../icons/ExternalLink';
-import InformationCircleIcon from '../../icons/InformationCircle';
-import PlusIcon from '../../icons/Plus';
-import UsersIcon from '../../icons/Users';
 import gtm from '../../lib/gtm'
 
 const Overview = () => {
@@ -62,18 +48,20 @@ const Overview = () => {
             >
                <Grid item>
                 <Typography
-                  variant="overline"
+                  variant="h4"
+                  color="secondary"
                 >
                   Overview
                 </Typography>
                 <Typography
-                  variant="h5"
-                  color="secondary"
+                  variant="h3"
+                  color="white"
                 >
                   Good Morning, Jane
                 </Typography>
                 <Typography
-                  variant="subtitle2"
+                  variant="h4"
+                  color="secondary"
                 >
                   Here&apos;s what&apos;s happening with your projects
                   today
