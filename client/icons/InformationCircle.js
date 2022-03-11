@@ -1,5 +1,4 @@
 import createSvgIcon from '@material-ui/core/utils/createSvgIcon';
-import React from 'react';
 
 const InformationCircle = createSvgIcon(
   <svg

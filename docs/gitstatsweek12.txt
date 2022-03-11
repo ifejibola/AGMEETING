@@ -1,3 +1,0 @@
-Researched and set up a Redux store for the AGMeeting application. Used the store to implement 
-a rudimentary login system, this was done in another pr. Group members spent the week
-implementing features for peer testing and working on the video.

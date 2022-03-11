@@ -108,7 +108,7 @@ const themesOptions = {
       },
       mode: 'light',
       primary: {
-        contrastText: '#000000',
+        contrastText: '#ffffff',
         main: '#5664d2'
       },
       success: {
