@@ -1,0 +1,54 @@
+Promise based Node.js ORM, we will be using it in conjunction with postgresql 
+
+Can be used to automate table creation
+
+Uses the concept of models, which are abstract representaions of tables in our database.
+
+
+Installation for sequelize: 
+    npm install --save sequelize
+
+    npm install --save pg pg-hstore # Installation for postgres driver
+
+
+usage: 
+    const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname') // Example for postgres
+
+    // Option 3: Passing parameters separately (other dialects)
+    const sequelize = new Sequelize('database', 'username', 'password', {
+    host: 'localhost',
+    dialect: /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */
+    });
+
+    try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
+        } catch (error) {
+        console.error('Unable to connect to the database:', error);
+    }
+
+
+model creation example:
+
+    const { Sequelize, DataTypes, Model } = require('sequelize');
+
+    class User extends Model {}
+
+    User.init({
+    // Model attributes are defined here
+    firstName: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    lastName: {
+        type: DataTypes.STRING
+        // allowNull defaults to true
+    }
+    }, {
+    // Other model options go here
+    sequelize, // We need to pass the connection instance
+    modelName: 'User' // We need to choose the model name
+    });
+
+    // the defined model is the class itself
+    console.log(User === sequelize.models.User); // true

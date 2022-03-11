@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "ife",
-    "password": null,
-    "database": "agmeeting",
-    "host": "127.0.0.1",
+    "username": "postgres",
+    "password": "password",
+    "database": "local_agmeeting_database",
+    "host": "localhost",
     "dialect": "postgres"
   },
   "test": {

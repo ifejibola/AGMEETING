@@ -1,9 +1,10 @@
+import { Typography } from "@mui/material";
 import React from "react";
 function NoMatch() {
 
     return (
         <>
-            NO MATCH!
+            <Typography variant="h2">This route does not exist.</Typography>
         </>
     )
 };

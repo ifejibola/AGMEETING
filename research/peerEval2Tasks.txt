@@ -1,0 +1,40 @@
+Usability Tasks Peer Evaluation 2 
+March 2, March 4
+
+Database / Passport.JS
+
+-Sign in using provided credentials (user) (Maybe just have them make an account?)
+-Sign in using provided credentials (moderator)
+-Create a new account
+-Sign out
+-Sign back in with new account credentials
+-Observe changes when using moderator/admin account v. user
+
+SocketIO / Chat functions
+
+-Send message in the meetings chat
+-Check that messages are sending correctly (send messages in multiple windows/clients)
+-Use the private message feature to send a message to only one user
+
+User tasks
+
+-Ask them to navigate the changes Ife has made
+-If we have anyone from the first time, ask them if they prefer the new version
+-Try to manually access a moderator/admin only page (should reject or redirect to home)
+-Check all items on the agenda
+-Voting system won’t likely be done in time, but if so we could have the user try to vote
+
+Moderator tasks
+
+-Create a new meeting
+-Add item to Agenda
+-Upload text file? 
+
+Admin tasks 
+
+-Add a new user to an organisation 
+-View all users and their roles
+-Delete account
+
+
+
