@@ -4,6 +4,7 @@ const app = express();
 
 const path = require("path");
 const port = process.env.PORT || 3000;
+
 // import routes from "../client/routes";
 const indexRoutes = require("./controllers/index.controller");
 const DIST_DIR = path.join(__dirname, "public");
@@ -26,6 +27,27 @@ const authController = require("./auth/authController");
 const session = require("express-session");
 
 const cookieParser = require("cookie-parser");
+
+// import and initialize multer
+const multer = require("multer");
+
+const fileStorageEngine = multer.diskStorage({
+  destination: (req, file, cb) => {
+    // where to store the file
+    cb(null, "./uploadedFiles");
+  },
+  filename: (req, file, cb) => {
+    // name file date + original name
+    cb(null, Date.now() + "--" + file.originalname);
+  },
+});
+
+const upload = multer({ storage: fileStorageEngine });
+
+app.post("/upload", upload.single("uploaded_file"), (req, res) => {
+  console.log(req.file);
+  res.send("single File upload sucess");
+});
 // After you declare "app"
 app.use(
   session({ secret: "some-secret", resave: false, saveUninitialized: true })
