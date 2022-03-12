@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import numeral from 'numeral';
 import {format, subMinutes, subSeconds} from 'date-fns';
 import {
@@ -19,8 +19,10 @@ import {
 import Label from '../../Label';
 import Scrollbar from '../../Scrollbar';
 import ArrowRightIcon from '../../icons/ArrowRight';
-import DotsHorizontalIcon from '../../icons/DotsHorizontal';
 import PencilAltIcon from '../../icons/PencilAlt';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import VaultHelpModal from "./VaultHelpModal";
+
 
 const now = new Date();
 
@@ -81,125 +83,144 @@ const getStatusLabel = (paymentStatus) => {
     );
 };
 
-const Vault = () => (
-    <Box
-        sx={{
-            backgroundColor: 'background.default',
-            p: 3,
-            mt: 2
-        }}
-    >
-        <Card>
-            <CardHeader
-                action={(
-                    <IconButton>
-                        <DotsHorizontalIcon fontSize="small"/>
-                    </IconButton>
-                )}
-                title="Vault"
-            />
-            <Divider/>
-            <Scrollbar>
-                <Box sx={{minWidth: 1150}}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell padding="checkbox">
-                                </TableCell>
-                                <TableCell>
-                                    Number
-                                </TableCell>
-                                <TableCell>
-                                    File Name
-                                </TableCell>
-                                <TableCell>
-                                    Type
-                                </TableCell>
-                                <TableCell>
-                                    Size
-                                </TableCell>
-                                <TableCell>
-                                    Status
-                                </TableCell>
-                                <TableCell align="right">
-                                    Actions
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {orders.map((order) => (
-                                <TableRow
-                                    hover
-                                    key={order.id}
-                                >
+const Vault = () => {
+
+
+    const [isHelpApplicationOpen, setIsHelpApplicationOpen] = useState(false);
+    const handleApplyHelpModalOpen = () => {
+        setIsHelpApplicationOpen(true);
+    };
+
+    const handleApplyHelpModalClose = () => {
+        setIsHelpApplicationOpen(false);
+    };
+    return (
+        <Box
+            sx={{
+                backgroundColor: 'background.default',
+                p: 3,
+                mt: 2
+            }}
+        >
+            <Card>
+                <CardHeader
+                    action={(
+                        <IconButton
+                            onClick={handleApplyHelpModalOpen}
+                        >
+                            <HelpOutlineIcon fontSize="small"/>
+                        </IconButton>
+                    )}
+                    title="Vault"
+                />
+                <Divider/>
+                <Scrollbar>
+                    <Box sx={{minWidth: 1150}}>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
                                     <TableCell padding="checkbox">
-                                        <Checkbox color="primary"/>
                                     </TableCell>
                                     <TableCell>
-                                        <Typography
-                                            color="textPrimary"
-                                            variant="subtitle2"
-                                        >
-                                            {order.number}
-                                        </Typography>
-                                        <Typography
-                                            color="textSecondary"
-                                            variant="body2"
-                                        >
-                                            {format(order.createdAt, 'dd MMM yyyy | HH:mm')}
-                                        </Typography>
+                                        Number
                                     </TableCell>
                                     <TableCell>
-                                        <Typography
-                                            color="textPrimary"
-                                            variant="subtitle2"
-                                        >
-                                            {order.customer.name}
-                                        </Typography>
-                                        <Typography
-                                            color="textSecondary"
-                                            variant="body2"
-                                        >
-                                            {order.customer.email}
-                                        </Typography>
+                                        File Name
                                     </TableCell>
                                     <TableCell>
-                                        {order.paymentMethod}
+                                        Type
                                     </TableCell>
                                     <TableCell>
-                                        {numeral(order.totalAmount)
-                                            .format(`${order.currency}0,0.00`)}
+                                        Size
                                     </TableCell>
                                     <TableCell>
-                                        {getStatusLabel(order.status)}
+                                        Status
                                     </TableCell>
                                     <TableCell align="right">
-                                        <IconButton>
-                                            <PencilAltIcon fontSize="small"/>
-                                        </IconButton>
-                                        <IconButton>
-                                            <ArrowRightIcon fontSize="small"/>
-                                        </IconButton>
+                                        Actions
                                     </TableCell>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </Box>
-            </Scrollbar>
-            <TablePagination
-                component="div"
-                count={orders.length}
-                onPageChange={() => {
-                }}
-                onRowsPerPageChange={() => {
-                }}
-                page={0}
-                rowsPerPage={5}
-                rowsPerPageOptions={[5, 10, 25]}
-            />
-        </Card>
-    </Box>
-);
+                            </TableHead>
+                            <TableBody>
+                                {orders.map((order) => (
+                                    <TableRow
+                                        hover
+                                        key={order.id}
+                                    >
+                                        <TableCell padding="checkbox">
+                                            <Checkbox color="primary"/>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography
+                                                color="textPrimary"
+                                                variant="subtitle2"
+                                            >
+                                                {order.number}
+                                            </Typography>
+                                            <Typography
+                                                color="textSecondary"
+                                                variant="body2"
+                                            >
+                                                {format(order.createdAt, 'dd MMM yyyy | HH:mm')}
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography
+                                                color="textPrimary"
+                                                variant="subtitle2"
+                                            >
+                                                {order.customer.name}
+                                            </Typography>
+                                            <Typography
+                                                color="textSecondary"
+                                                variant="body2"
+                                            >
+                                                {order.customer.email}
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            {order.paymentMethod}
+                                        </TableCell>
+                                        <TableCell>
+                                            {numeral(order.totalAmount)
+                                                .format(`${order.currency}0,0.00`)}
+                                        </TableCell>
+                                        <TableCell>
+                                            {getStatusLabel(order.status)}
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <IconButton>
+                                                <PencilAltIcon fontSize="small"/>
+                                            </IconButton>
+                                            <IconButton>
+                                                <ArrowRightIcon fontSize="small"/>
+                                            </IconButton>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </Box>
+                </Scrollbar>
+                <TablePagination
+                    component="div"
+                    count={orders.length}
+                    onPageChange={() => {
+                    }}
+                    onRowsPerPageChange={() => {
+                    }}
+                    page={0}
+                    rowsPerPage={5}
+                    rowsPerPageOptions={[5, 10, 25]}
+                />
+                <VaultHelpModal
+                    onApply={handleApplyHelpModalClose}
+                    onClose={handleApplyHelpModalClose}
+                    open={isHelpApplicationOpen}
+                />
+            </Card>
+        </Box>
+    )
+};
 
 export default Vault;
