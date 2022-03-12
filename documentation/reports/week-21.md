@@ -11,3 +11,9 @@
 - Replaced dummy data with registered users.
 - Created weekly meeting minutes.
 - Worked on participants and user group tasks of the report.
+
+### Garry's Tasks
+
+- Worked on description section of the report
+- Worked on list of issues discovered section of the report
+- Made a small change/fix to the agenda page 
