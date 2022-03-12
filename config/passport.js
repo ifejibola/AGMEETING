@@ -2,6 +2,10 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const bcrypt = require("bcrypt");
 const Participant = require("../server/participant/models/participant");
+const JWTstrategy = require("passport-jwt").Strategy;
+const ExtractJWT = require("passport-jwt").ExtractJwt;
+require("dotenv");
+
 // middleware for  login endpoint
 /**
  * Look up user info in the request body and try to find corresponding use, then see if the
@@ -20,6 +24,7 @@ const findId = async (id, done) => {
 };
 
 passport.use(
+  "login",
   new LocalStrategy(
     {
       usernameField: "email",
@@ -60,6 +65,24 @@ passport.use(
           .catch((err) => done(err));
       };
       findEmail(email);
+    }
+  )
+);
+
+passport.use(
+  new JWTstrategy(
+    {
+      secretOrKey: process.env.ACCESS_TOKEN_KEY,
+      jwtFromRequest: ExtractJWT.fromUrlQueryParameter("secret_token"),
+    },
+    async (token, done) => {
+      console.log("token is here", token);
+      try {
+        console.log("token is here", token);
+        return done(null, token.user);
+      } catch (error) {
+        done(error);
+      }
     }
   )
 );
