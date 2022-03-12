@@ -17,3 +17,9 @@
 - Worked on description section of the report
 - Worked on list of issues discovered section of the report
 - Made a small change/fix to the agenda page 
+
+### Ryan's Tasks
+
+- Added description modal to vault page
+- Added description modal to agenda page
+- Removed RTL setting
