@@ -21,14 +21,13 @@ import {
 } from '@material-ui/core';
 import Label from '../../Label';
 import Scrollbar from '../../Scrollbar';
-import ArrowRightIcon from '../../icons/ArrowRight';
-import DotsHorizontalIcon from '../../icons/DotsHorizontal';
-import PencilAltIcon from '../../icons/PencilAlt';
 import Plus from '../../icons/Plus';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 import useSettings from '../../hooks/useSettings';
 import Votes from '../Votes/votes';
 import Modal from './Modal'
+import AgendaHelpModal from "./AgendaHelpModal";
 
 const now = new Date();
 
@@ -126,6 +125,18 @@ const Agenda = () => {
     const handleApplyModalClose = () => {
         setIsApplicationOpen(false);
     };
+
+    //used for help modal
+    const [isHelpApplicationOpen, setIsHelpApplicationOpen] = useState(false);
+    const handleApplyHelpModalOpen = () => {
+        setIsHelpApplicationOpen(true);
+    };
+
+    const handleApplyHelpModalClose = () => {
+        setIsHelpApplicationOpen(false);
+    };
+
+
     return (
         <Box
             sx={{
@@ -158,8 +169,10 @@ const Agenda = () => {
             <Card>
                 <CardHeader
                     action={(
-                        <IconButton>
-                            <DotsHorizontalIcon fontSize="small"/>
+                        <IconButton
+                        onClick={handleApplyHelpModalOpen}
+                        >
+                            <HelpOutlineIcon fontSize="small"/>
                         </IconButton>
                     )}
                     title="Agenda"
@@ -292,6 +305,11 @@ const Agenda = () => {
                     onClose={handleApplyModalClose}
                     open={isApplicationOpen}
                 />
+                <AgendaHelpModal
+                    onApply={handleApplyHelpModalClose}
+                    onClose={handleApplyHelpModalClose}
+                    open={isHelpApplicationOpen}
+                    />
             </Card>
         </Box>
     )
