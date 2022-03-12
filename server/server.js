@@ -1,8 +1,11 @@
+const path = require("path");
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
+}
+
 const express = require("express");
 // var fallback = require('express-history-api-fallback')
 const app = express();
-
-const path = require("path");
 const port = process.env.PORT || 3000;
 
 // import routes from "../client/routes";
@@ -69,7 +72,11 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.static(path.join(__dirname, "../dist")));
 
 app.use("/participants", participantController);
-app.use("/meetings", meetingController);
+app.use(
+  "/meetings",
+  passport.authenticate("jwt", { session: false }),
+  meetingController
+);
 app.use("/items", itemController);
 app.use("/admins", administratorController);
 app.use("/authentication", authController);

@@ -40,7 +40,6 @@ export const login = (email, password, callback) => {
         password,
       })
       .then(({ data }) => {
-        console.log("the data", data);
         if (data !== "No user") {
           localStorage.setItem("isAuthenticated", true);
           dispatch({ type: "LOGIN_SUCCESS", payload: data });
