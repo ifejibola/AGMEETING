@@ -10,6 +10,7 @@ import Logo from '../../Logo';
 import NavSection from '../../NavSection';
 import Scrollbar from '../../Scrollbar';
 import Modal from './Interactions'
+import VotesModal from "../Votes/VotesModal";
 const sections = [
   {
     title: 'General',
@@ -82,6 +83,13 @@ const DashboardSidebar = (props) => {
     setIsApplicationOpen(false);
   };
 
+  const [isVotesApplicationOpen, setIsVotesApplication] = useState(false);
+  const handleApplyVotesModalClose = () => {
+    setIsVotesApplication(false);
+  };
+  const handleApplyVotesModalOpen =() => {
+    setIsVotesApplication(true);
+  };
 
   const content = (
     <Box
@@ -131,29 +139,6 @@ const DashboardSidebar = (props) => {
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
-          <Typography
-            color="textPrimary"
-            variant="subtitle2"
-          >
-            Need Help?
-          </Typography>
-          <Typography
-            color="textSecondary"
-            variant="body2"
-          >
-            Check our docs
-          </Typography>
-          {/* <Button
-            color="primary"
-            component={RouterLink}
-            fullWidth
-            sx={{ mt: 2 }}
-            to="/docs"
-            variant="contained"
-          >
-            Documentation
-          </Button> */}
-
           <Button
             color="primary"
             onClick={handleApplyModalOpen}
@@ -169,6 +154,49 @@ const DashboardSidebar = (props) => {
             onClose={handleApplyModalClose}
             open={isApplicationOpen}
           />
+          <Button
+              color="primary"
+              onClick={handleApplyVotesModalOpen}
+              fullWidth
+              sx={{
+                mt: 2,
+                mb: 4
+              }}
+              to="#"
+              variant="contained"
+          >
+            Current Votes
+          </Button>
+          <VotesModal
+              onApply={handleApplyVotesModalClose}
+              onClose={handleApplyVotesModalClose}
+              open={isVotesApplicationOpen}
+          />
+          <Divider/>
+          <Typography
+              color="textPrimary"
+              variant="subtitle2"
+              sx={{
+                color: 'text.primary',
+                fontSize: '0.75rem',
+                lineHeight: 2.5,
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                mt: 2
+              }}
+          >
+            Need Help?
+          </Typography>
+          <Button
+              color="primary"
+              // component={RouterLink}
+              fullWidth
+              sx={{ mt: 2 }}
+              to="#"
+              variant="contained"
+          >
+            Documentation
+          </Button>
         </Box>
       </Scrollbar>
     </Box>

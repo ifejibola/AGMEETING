@@ -17,8 +17,6 @@ import {
 import Scrollbar from '../../Scrollbar';
 import DotsHorizontalIcon from '../../icons/DotsHorizontal';
 
-import Votes from '../Votes/votes'
-
 const now = new Date();
 
 const tasks = [
@@ -209,8 +207,6 @@ const Session = () => (
                             </ListItem>
                         ))}
                     </List>
-                    {/* VOTES */}
-                    <Votes/>
                 </Box>
             </Scrollbar>
         </Card>
