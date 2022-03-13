@@ -58,7 +58,8 @@ const Votes = () => {
         <Box
             sx={{
                 backgroundColor: 'background.default',
-                p: 3
+                p: 3,
+                mt: 2
             }}
         >
             <Card>
@@ -68,7 +69,7 @@ const Votes = () => {
                             <DotsHorizontalIcon fontSize="small" />
                         </IconButton>
                     )}
-                    title="Votes"
+                    title="Current Votes"
                 />
                 <Divider />
                 <Box sx={{ p: 2 }}>

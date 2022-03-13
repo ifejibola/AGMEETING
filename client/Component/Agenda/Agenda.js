@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import numeral from 'numeral';
 import {format, subMinutes, subSeconds} from 'date-fns';
 import {
     Box,
@@ -25,7 +24,6 @@ import Plus from '../../icons/Plus';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 
 import useSettings from '../../hooks/useSettings';
-import Votes from '../Votes/votes';
 import Modal from './Modal'
 import AgendaHelpModal from "./AgendaHelpModal";
 
@@ -170,7 +168,7 @@ const Agenda = () => {
                 <CardHeader
                     action={(
                         <IconButton
-                        onClick={handleApplyHelpModalOpen}
+                            onClick={handleApplyHelpModalOpen}
                         >
                             <HelpOutlineIcon fontSize="small"/>
                         </IconButton>
@@ -178,13 +176,13 @@ const Agenda = () => {
                     title="Agenda"
                 />
                 <Button
-                color="primary"
-                onClick={handleApplyModalOpen}
-                startIcon={<Plus fontSize="small"/>}
-                sx={{m: 1}}
-                variant="contained"
+                    color="primary"
+                    onClick={handleApplyModalOpen}
+                    startIcon={<Plus fontSize="small"/>}
+                    sx={{m: 1}}
+                    variant="contained"
                 >
-                Add Item
+                    Add Item
                 </Button>
                 <Divider/>
                 <Scrollbar>
@@ -295,8 +293,6 @@ const Agenda = () => {
                     rowsPerPage={5}
                     rowsPerPageOptions={[5, 10, 25]}
                 />
-                {/* VOTES */}
-                <Votes/>
                 {/* Modal */}
                 <Modal
                     // authorAvatar={project.author.avatar}
@@ -309,7 +305,7 @@ const Agenda = () => {
                     onApply={handleApplyHelpModalClose}
                     onClose={handleApplyHelpModalClose}
                     open={isHelpApplicationOpen}
-                    />
+                />
             </Card>
         </Box>
     )
