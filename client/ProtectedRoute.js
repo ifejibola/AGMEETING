@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
+import { verifyToken } from "./actions";
 
 function ProtectedRoute({ children }) {
-  const isAuthenticated = localStorage.getItem("isAuthenticated");
+  const is_authenticated = localStorage.getItem("is_authenticated");
 
-  return isAuthenticated ? children : <Navigate to="/login" />;
+  // useEffect(async ()=>{
+  //   await verifyToken();
+  // }, [])
+
+  return is_authenticated ? children : <Navigate to="/login" />;
 }
 
 const mapStateToProps = (state) => {

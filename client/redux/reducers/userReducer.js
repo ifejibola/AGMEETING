@@ -7,6 +7,7 @@ import {
   CREATE_ACCOUNT_REQUEST,
   CREATE_ACCOUNT_SUCCESS,
   CREATE_ACCOUNT_FAILURE,
+  SET_USER_INFO,
 } from "../userTypes";
 const userReducer = (state = {}, action) => {
   switch (action.type) {
@@ -45,6 +46,13 @@ const userReducer = (state = {}, action) => {
     case CREATE_ACCOUNT_FAILURE:
       return { ...state, loading: false };
       break;
+
+    case SET_USER_INFO:
+      return {
+        ...state,
+        currentUser: { id: action.payload.id, email: action.payload.email },
+        loading: false,
+      };
     default:
       return state;
   }

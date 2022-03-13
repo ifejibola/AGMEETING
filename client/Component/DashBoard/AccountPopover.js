@@ -33,7 +33,9 @@ const AccountPopover = () => {
   const handleLogout = async () => {
     try {
       handleClose();
-      localStorage.removeItem("isAuthenticated");
+      localStorage.removeItem("is_authenticated");
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("refresh_token");
       navigate("/login");
     } catch (err) {
       console.error(err);

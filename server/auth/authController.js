@@ -11,6 +11,14 @@ const session = require("express-session");
 
 router.get("/", (req, res) => {});
 
+router.get(
+  "/verifyToken",
+  passport.authenticate("jwt", { session: false }),
+  (req, res, next) => {
+    res.send("success");
+  }
+);
+
 router.post("/login", (req, res, next) => {
   passport.authenticate("login", (err, user, info) => {
     if (err) throw err;
@@ -24,12 +32,12 @@ router.post("/login", (req, res, next) => {
         const accessToken = jwt.sign(
           { user: body },
           process.env.ACCESS_TOKEN_KEY,
-          { expiresIn: "1m" }
+          { expiresIn: "15m" }
         );
         const refreshToken = jwt.sign(
           { userId: user.id },
           process.env.REFRESH_TOKEN_KEY,
-          { expiresIn: "7d" }
+          { expiresIn: "1m" }
         );
         return res.json({ accessToken, refreshToken });
       });
