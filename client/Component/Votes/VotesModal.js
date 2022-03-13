@@ -81,8 +81,8 @@ const VotesModal = (props) => {
                     <Divider />
                     <Box sx={{
                         p: 2,
-                        pl: 12,
-                        pr: 12
+                        pl: 15,
+                        pr: 15
                     }}>
                         <Chart
                             height="300"
