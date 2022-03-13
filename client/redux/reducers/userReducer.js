@@ -21,7 +21,11 @@ const userReducer = (state = {}, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        currentUser: { id: action.payload.id, email: action.payload.email },
+        currentUser: {
+          id: action.payload.id,
+          email: action.payload.email,
+          isMod: action.payload.isMod,
+        },
         loading: false,
       };
       break;

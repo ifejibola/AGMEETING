@@ -52,6 +52,7 @@ passport.use(
             console.log("Match", match);
 
             if (!match) {
+              console.log("here");
               return done(null, false, { message: "Incorrect password." });
             }
             console.log("***** Login Success .... *****");
@@ -70,6 +71,7 @@ passport.use(
 );
 
 passport.use(
+  "jwt",
   new JWTstrategy(
     {
       secretOrKey: process.env.ACCESS_TOKEN_KEY,

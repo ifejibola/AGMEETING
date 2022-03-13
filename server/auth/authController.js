@@ -7,6 +7,7 @@ const passport = require("passport");
 require("../../config/passport");
 const jwt = require("jsonwebtoken");
 require("dotenv");
+const session = require("express-session");
 
 router.get("/", (req, res) => {});
 
@@ -22,9 +23,15 @@ router.post("/login", (req, res, next) => {
         const body = { id: user.id, email: user.email, isMod: user.isMod };
         const accessToken = jwt.sign(
           { user: body },
-          process.env.ACCESS_TOKEN_KEY
+          process.env.ACCESS_TOKEN_KEY,
+          { expiresIn: "1m" }
         );
-        return res.json({ accessToken });
+        const refreshToken = jwt.sign(
+          { userId: user.id },
+          process.env.REFRESH_TOKEN_KEY,
+          { expiresIn: "7d" }
+        );
+        return res.json({ accessToken, refreshToken });
       });
     }
   })(req, res, next);

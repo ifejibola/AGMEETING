@@ -1,8 +1,14 @@
 import axios from "axios";
 import store from "../redux/store";
 import { history } from "../Helpers/history";
+import jwtDecode from "jwt-decode";
 
 const baseURL = "http://localhost:3000";
+// const auth = {
+//   Authorization: {
+//     Bearer:
+//   }
+// }
 
 export const createAccount = (email, password, callback) => {
   return async (dispatch) => {
@@ -13,7 +19,6 @@ export const createAccount = (email, password, callback) => {
         password,
       })
       .then(({ data }) => {
-        console.log(data);
         dispatch({ type: "CREATE_ACCOUNT_SUCCESS", payload: data });
         if (data !== "failure") {
           localStorage.setItem("isAuthenticated", true);
@@ -42,7 +47,9 @@ export const login = (email, password, callback) => {
       .then(({ data }) => {
         if (data !== "No user") {
           localStorage.setItem("isAuthenticated", true);
-          dispatch({ type: "LOGIN_SUCCESS", payload: data });
+          const accessToken = jwtDecode(data.accessToken);
+          console.log(accessToken);
+          dispatch({ type: "LOGIN_SUCCESS", payload: accessToken.user });
           callback();
           return;
         } else {
