@@ -47,6 +47,7 @@ export const login = (email, password, callback) => {
       .then(({ data }) => {
         if (data !== "No user") {
           localStorage.setItem("isAuthenticated", true);
+          console.log(data);
           const accessToken = jwtDecode(data.accessToken);
           console.log(accessToken);
           dispatch({ type: "LOGIN_SUCCESS", payload: accessToken.user });

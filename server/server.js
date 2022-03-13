@@ -72,11 +72,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.static(path.join(__dirname, "../dist")));
 
 app.use("/participants", participantController);
-app.use(
-  "/meetings",
-  passport.authenticate("jwt", { session: false }),
-  meetingController
-);
+app.use("/meetings", meetingController);
 app.use("/items", itemController);
 app.use("/admins", administratorController);
 app.use("/authentication", authController);
