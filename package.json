@@ -48,6 +48,7 @@
     "react-router-dom": "^6.0.0-beta.8",
     "sequelize": "^6.16.1",
     "socket.io": "^4.4.1",
+    "socket.io-client": "^4.4.1",
     "sqlite3": "^5.0.2",
     "stylis-plugin-rtl": "^2.1.1",
     "webpack-merge": "^5.8.0"

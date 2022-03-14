@@ -11,10 +11,15 @@ const passport = require('passport');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const http = require('http');
+const http = require('http')
+const socketIo = require('socket.io');
 const server = http.createServer(app);
-const {Server} = require('socket.io');
-const io = new Server(server)
+
+const io = socketIo(server, {
+   cors: {
+       origin: 'http://localhost:3000'
+   }
+});
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
@@ -41,7 +46,11 @@ app.get("*", (req, res) => {
 });
 
 io.on('connection', (socket) => {
-    console.log('A user has connected');
+    console.log('A new client has connected.');
+    socket.join('chat-room');
+    socket.on('disconnect', (reason) => {
+        console.log(reason);
+    });
 });
 
 db.sequelize.sync().then(() => {
