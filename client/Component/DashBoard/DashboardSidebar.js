@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 import { Box, Button, Divider, Drawer, Link, Typography, useMediaQuery } from '@mui/material';
 import ChartPieIcon from '../../icons/ChartPie';
 import ChartSquareBarIcon from '../../icons/ChartSquareBar';
-import ShoppingBagIcon from '../../icons/ShoppingBag';
-import UsersIcon from '../../icons/Users';
 import Logo from '../../Logo';
 import NavSection from '../../NavSection';
 import Scrollbar from '../../Scrollbar';
 import Modal from './Interactions'
 import VotesModal from "../Votes/VotesModal";
+import { AdminPanelSettings, Event, SettingsAccessibility, Summarize, Work } from '@material-ui/icons';
 const sections = [
   {
     title: 'General',
@@ -18,17 +17,17 @@ const sections = [
       {
         title: 'Session',
         path: '/',
-        icon: <ChartSquareBarIcon fontSize="small" />
+        icon: <Summarize fontSize="small" />
       },
       {
         title: 'Agenda',
         path: '/agenda',
-        icon: <ChartPieIcon fontSize="small" />
+        icon: <Event fontSize="small" />
       },
       {
         title: 'Vault',
         path: '/Vault',
-        icon: <ShoppingBagIcon fontSize="small" />
+        icon: <Work fontSize="small" />
       }
     ]
   },
@@ -39,7 +38,7 @@ const sections = [
       {
         title: 'Users',
         path: '/LoggedinUsers',
-        icon: <UsersIcon fontSize="small" />,
+        icon: <AdminPanelSettings fontSize="small" />,
         children: [
           {
             title: 'Logged In Users',
@@ -58,7 +57,7 @@ const sections = [
       {
         title: 'General Settings',
         path: '/settings',
-        icon: <ShoppingBagIcon fontSize="small" />
+        icon: <SettingsAccessibility fontSize="small" />
       }
     ]
   }
