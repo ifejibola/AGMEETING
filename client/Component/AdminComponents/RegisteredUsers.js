@@ -156,7 +156,7 @@ const RegisteredUsers = () => (
                                 
                                 <TableRow
                                     hover
-                                    key={customers.id}
+                                    key={user.id}
                                 >
                                     <TableCell padding="checkbox">
                                         <Checkbox color="primary" />
