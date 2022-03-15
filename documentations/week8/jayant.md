@@ -1,0 +1,4 @@
+- added user roles
+- meeting with client
+- meeting with professor cancelled
+- had fun with life
