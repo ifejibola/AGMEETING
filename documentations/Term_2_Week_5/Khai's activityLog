@@ -1,0 +1,3 @@
+- Create models and relations using sequelize in the database
+- Make connection between front end and back end
+- Execute query from front end to back end using sequelize

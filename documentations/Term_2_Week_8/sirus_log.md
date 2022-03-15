@@ -1,0 +1,5 @@
+- work on peer evaluation
+- work on peer testing report
+- create different view for user with different roles in sidebar
+- fix issue where user cannot access other pages when not logged in
+- fix issue where null value of currentUser crashes the webpage

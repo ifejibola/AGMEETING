@@ -1,14 +1,17 @@
-let express = require('express')
+let express = require('express');
+const registerApi = require("./register.controller");
+const loginApi = require("./login.controller");
+const testingAuthApi = require("./testing.controller");
+
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get("/", (req, res) =>{
+    res.json({message: "Hello world"});
 
-    res.status(200).send("/ page")
 });
 
-router.get('/servering', (req, res) => {
-
-    res.status(200).send("/ page")
-});
+router.use(registerApi);
+router.use(loginApi);
+router.use(testingAuthApi);
 
 module.exports = router;
