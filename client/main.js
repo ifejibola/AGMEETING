@@ -4,15 +4,16 @@ import {BrowserRouter} from 'react-router-dom';
 import App from './App';
 import {SettingsProvider} from './contexts/SettingsContext';
 import {StyledEngineProvider} from '@mui/styled-engine';
-import {UserProvider} from "./contexts/UserContext";
+import {Provider} from "react-redux";
+import store from './store'
 
 ReactDOM.render(
     <StyledEngineProvider injectFirst>
-        <UserProvider>
+        <Provider store={store}>
             <SettingsProvider>
                 <BrowserRouter>
                     <App/>
                 </BrowserRouter>
             </SettingsProvider>
-        </UserProvider>
+        </Provider>
     </StyledEngineProvider>, document.getElementById("root"));

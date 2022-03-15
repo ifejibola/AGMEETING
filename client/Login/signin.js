@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import {Redirect, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {toast} from 'material-react-toastify';
 import {useDispatch, useSelector} from 'react-redux';
 import {login} from "../actions/auth";
@@ -28,9 +28,6 @@ export default function SignIn() {
             toast.success('You have successfully logged in!');
         });
     };
-    if (authenticated) {
-        return <Redirect to='/'/>;
-    }
     return (
         <Box
             sx={{

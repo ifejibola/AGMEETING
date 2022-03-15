@@ -28,7 +28,7 @@ export const login = (email, password) => (dispatch) => {
             payload: response.data
         });
     }, (error) => {
-        const message = err.response.data.message || 'There was an issue logging in.';
+        const message = error.response.data.message || 'There was an issue logging in.';
         dispatch({type: LOGIN_FAIL});
         dispatch({
             type: SET_MESSAGE,
@@ -41,5 +41,6 @@ export const login = (email, password) => (dispatch) => {
 export const logout = () => (dispatch) => {
     AuthService.logout();
     dispatch({type: LOGOUT});
+    return Promise.resolve();
 };
 

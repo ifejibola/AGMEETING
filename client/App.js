@@ -11,7 +11,6 @@ import {CssBaseline} from "@mui/material";
 import SettingsDrawer from "./SettingsDrawer";
 import {ToastContainer} from "material-react-toastify";
 import 'material-react-toastify/dist/ReactToastify.css';
-import {Toaster} from "react-hot-toast";
 
 
 export default function App() {
