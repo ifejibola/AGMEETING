@@ -16,7 +16,6 @@ import {login} from "../actions/auth";
 
 export default function SignIn() {
     const {authenticated} = useSelector(state => state.auth);
-    const {message} = useSelector(state => state.message);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
