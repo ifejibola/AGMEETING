@@ -15,6 +15,7 @@ import Settings from './Component/AdminComponents/Settings/Settings'
 
 import SignIn from './Login/signin'
 import SignUp from './Login/signup'
+import ProtectedRoute from "./ProtectedRoute";
 
 const routes = [
     {
@@ -24,7 +25,11 @@ const routes = [
             {index: true, element: <GroupedList3/>},
             {
                 path: '/agenda',
-                element: <Agenda/>,
+                element: (
+                    <ProtectedRoute>
+                        <Agenda/>
+                    </ProtectedRoute>
+                ),
             },
             {
                 path: '/vault',
