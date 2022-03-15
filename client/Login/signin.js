@@ -9,32 +9,28 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
-import axios from 'axios';
-import useAuthentication from "../hooks/useAuthentication";
-import {useNavigate} from "react-router-dom";
+import {Redirect, useNavigate} from "react-router-dom";
 import {toast} from 'material-react-toastify';
+import {useDispatch, useSelector} from 'react-redux';
+import {login} from "../actions/auth";
 
 export default function SignIn() {
-    const {saveUser} = useAuthentication();
+    const {authenticated} = useSelector(state => state.auth);
+    const {message} = useSelector(state => state.message);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        axios.post('http://localhost:3000/api/users/login', {
-            email: data.get('email'),
-            password: data.get('password')
-        }, {withCredentials: true}).then((response) => {
-            console.log(response.data);
-            saveUser(response.data);
+        dispatch(login(data.get('email'), data.get('password'))).then(() => {
             navigate('/');
             toast.success('You have successfully logged in!');
-        }).catch((err) => {
-            console.log(err.response.data);
-            toast.error(err.response.data.message || 'There was an issue logging in.');
         });
     };
-
+    if (authenticated) {
+        return <Redirect to='/'/>;
+    }
     return (
         <Box
             sx={{

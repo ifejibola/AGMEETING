@@ -6,7 +6,7 @@ import {experimentalStyled} from "@mui/material";
 import MenuIcon from '../../icons/Menu';
 import AccountPopover from './AccountPopover';
 import NotificationsPopover from './NotificationsPopover';
-import useAuthentication from "../../hooks/useAuthentication";
+import {useSelector} from "react-redux";
 
 const DashboardNavbarRoot = experimentalStyled(AppBar)(({theme}) => ({
     ...(theme.palette.mode === 'light' && {
@@ -24,7 +24,7 @@ const DashboardNavbarRoot = experimentalStyled(AppBar)(({theme}) => ({
 
 const NavBar = (props) => {
     const {onSidebarMobileOpen, ...other} = props;
-    const {user} = useAuthentication();
+    const {user} = useSelector((state) => state.auth);
 
     return (
         <DashboardNavbarRoot {...other}>
