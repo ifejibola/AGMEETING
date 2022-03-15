@@ -19,8 +19,8 @@ import ErrorBoundary from "./Errorbound";
 import useSettings from "./hooks/useSettings";
 
 // Service
-import { authenticationService } from "../server/services/authentication.service";
-import { Navigate, useNavigate, useLocation } from "react-router-dom";
+import {authenticationService} from "../server/services/authentication.service";
+import {Navigate, useNavigate, useLocation} from "react-router-dom";
 
 function App() {
   const { settings } = useSettings();
@@ -54,8 +54,9 @@ function App() {
 
     if (currentUser == null) {
       // not logged in so redirect to login page with the return url
-      if (location.pathname === "/signup" || location.pathname === "/index") {
-      } else {
+      if(location.pathname === "/signup" || location.pathname ==="/index"){}
+        
+      else {
         navigate("/login");
       }
     }
