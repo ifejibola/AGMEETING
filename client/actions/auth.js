@@ -22,7 +22,10 @@ export const register = (firstName, lastName, email, password, meetingId, isAdmi
 
 export const login = (email, password) => (dispatch) => {
     return AuthService.login(email, password).then((response) => {
-        dispatch({type: LOGIN_SUCCESS});
+        dispatch({
+            type: LOGIN_SUCCESS,
+            payload: response
+        });
         dispatch({
             type: SET_MESSAGE,
             payload: response.data

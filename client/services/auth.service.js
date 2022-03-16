@@ -24,7 +24,7 @@ const login = (email, password) => {
 
 const logout = () => {
     axios.get('http://localhost:3000/api/users/logout', {withCredentials: true}).then(() => {
-        localStorage.setItem('currentUser', JSON.stringify(null));
+        localStorage.setItem('currentUser', null);
     });
 };
 

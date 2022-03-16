@@ -2,9 +2,9 @@ import React from "react";
 import {Navigate} from "react-router-dom";
 import {connect, useSelector} from "react-redux";
 
-function ProtectedRoute({children}) {
+function AdminModeratorRoute({children}) {
     const {user} = useSelector((state) => state.auth);
-    return user ? children : <Navigate to="/login"/>;
+    return user.isAdmin || user.isModerator ? children : <Navigate to="/login"/>;
 }
 
 const mapStateToProps = (state) => {
@@ -13,4 +13,4 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, null)(ProtectedRoute);
+export default connect(mapStateToProps, null)(AdminModeratorRoute);
