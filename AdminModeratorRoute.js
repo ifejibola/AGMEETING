@@ -4,7 +4,7 @@ import {connect, useSelector} from "react-redux";
 
 function AdminModeratorRoute({children}) {
     const {user} = useSelector((state) => state.auth);
-    return user.isAdmin || user.isModerator ? children : <Navigate to="/login"/>;
+    return user && (user.isAdmin || user.isModerator) ? children : <Navigate to="/login"/>;
 }
 
 const mapStateToProps = (state) => {
