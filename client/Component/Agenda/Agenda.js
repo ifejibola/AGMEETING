@@ -180,7 +180,6 @@ const Agenda = () => {
                             <TableHead>
                                 <TableRow>
                                     <TableCell padding="checkbox">
-                                        <Checkbox color="primary"/>
                                     </TableCell>
                                     <TableCell>
                                         Item Name
