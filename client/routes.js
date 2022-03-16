@@ -16,7 +16,7 @@ import Settings from './Component/AdminComponents/Settings/Settings'
 import SignIn from './Login/signin'
 import SignUp from './Login/signup'
 import ProtectedRoute from "./ProtectedRoute";
-import AdminRoute from "../AdminModeratorRoute";
+import AdminModeratorRoute from "../AdminModeratorRoute";
 
 const routes = [
     {
@@ -43,17 +43,17 @@ const routes = [
             {
                 path: '/loggedinUsers',
                 element: (
-                    <AdminRoute>
+                    <AdminModeratorRoute>
                         <LoggedinUsers/>
-                    </AdminRoute>
+                    </AdminModeratorRoute>
                 )
             },
             {
                 path: '/registeredusers',
                 element: (
-                    <AdminRoute>
+                    <AdminModeratorRoute>
                         <RegisteredUsers/>
-                    </AdminRoute>
+                    </AdminModeratorRoute>
                 )
             },
             {
