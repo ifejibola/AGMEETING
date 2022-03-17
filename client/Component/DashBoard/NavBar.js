@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link as RouterLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {AppBar, Box, IconButton, Toolbar} from '@mui/material';
+import {AppBar, Box, IconButton, Toolbar, Typography} from '@mui/material';
 import {experimentalStyled} from "@mui/material";
 import MenuIcon from '../../icons/Menu';
 import AccountPopover from './AccountPopover';
@@ -40,10 +40,8 @@ const NavBar = (props) => {
                 >
                     <MenuIcon fontSize="small"/>
                 </IconButton>
-                <RouterLink to="/">
-                    <h1>
-                        AGMEETING
-                    </h1>
+                <RouterLink to="/" style={{textDecoration: 'none', color: '#FFF'}}>
+                    <Typography color="textPrimary" variant="h2">AGMEETING</Typography>
                 </RouterLink>
                 <Box
                     sx={{
@@ -67,7 +65,7 @@ const NavBar = (props) => {
                     </Box>}
                 {!user &&
                     <Box sx={{ml: 2}}>
-                        <RouterLink to="/login">
+                        <RouterLink to="/login"  style={{textDecoration: 'none', color: '#FFF'}}>
                             <h4>
                                 Login
                             </h4>
@@ -76,7 +74,7 @@ const NavBar = (props) => {
                 }
                 {!user &&
                     <Box sx={{ml: 2}}>
-                        <RouterLink to="/register">
+                        <RouterLink to="/register"  style={{textDecoration: 'none', color: '#FFF'}}>
                             <h4>
                                 Register
                             </h4>
