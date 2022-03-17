@@ -9,7 +9,7 @@ import {
     TextField,
     Tooltip,
     Typography
-} from '@material-ui/core';
+} from '@mui/material';
 import {THEMES} from '../config/theme/constants';
 import useSettings from './hooks/useSettings';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -76,6 +76,7 @@ const SettingsDrawer = () => {
                 PaperProps={{
                     sx: {
                         p: 2,
+                        pt: 13,
                         width: 320
                     }
                 }}
