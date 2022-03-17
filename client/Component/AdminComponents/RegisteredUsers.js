@@ -29,21 +29,22 @@ import axios from "axios";
 
 const customers = [];
 
-const populateData = (data) => {customers.push(data)} 
- 
-function axiosTest (populateData) {
+const populateData = (data) => {
+    customers.push(data)
+}
+
+function axiosTest(populateData) {
     axios.get('http://localhost:3000/api/users/')
-   .then(function(response){
-           populateData(response.data);
-    })
-    .catch(function(error){
-           console.log(error);
-     });
+        .then(function (response) {
+            populateData(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 
 axiosTest(populateData);
 customers.flat(Infinity);
-console.log(customers);
 const sortOptions = [
     {
         label: 'Last update (newest)',
@@ -94,7 +95,7 @@ const RegisteredUsers = () => (
                         InputProps={{
                             startAdornment: (
                                 <InputAdornment position="start">
-                                    <SearchIcon fontSize="small" />
+                                    <SearchIcon fontSize="small"/>
                                 </InputAdornment>
                             )
                         }}
@@ -112,7 +113,7 @@ const RegisteredUsers = () => (
                         label="Sort By"
                         name="sort"
                         select
-                        SelectProps={{ native: true }}
+                        SelectProps={{native: true}}
                         variant="outlined"
                     >
                         {sortOptions.map((option) => (
@@ -127,12 +128,12 @@ const RegisteredUsers = () => (
                 </Box>
             </Box>
             <Scrollbar>
-                <Box sx={{ minWidth: 700 }}>
+                <Box sx={{minWidth: 700}}>
                     <Table>
                         <TableHead>
                             <TableRow>
                                 <TableCell padding="checkbox">
-                                    <Checkbox color="primary" />
+                                    <Checkbox color="primary"/>
                                 </TableCell>
                                 <TableCell>
                                     Name
@@ -153,13 +154,13 @@ const RegisteredUsers = () => (
                         </TableHead>
                         <TableBody>
                             {customers.flat().map((user) => (
-                                
+
                                 <TableRow
                                     hover
                                     key={user.id}
                                 >
                                     <TableCell padding="checkbox">
-                                        <Checkbox color="primary" />
+                                        <Checkbox color="primary"/>
                                     </TableCell>
                                     <TableCell>
                                         <Box
@@ -175,14 +176,14 @@ const RegisteredUsers = () => (
                                                     width: 42
                                                 }}
                                             />
-                                            <Box sx={{ ml: 1 }}>
+                                            <Box sx={{ml: 1}}>
                                                 <Link
                                                     color="inherit"
                                                     variant="subtitle2"
                                                 >
-                                                     {user.firstName+" "+user.lastName}
+                                                    {user.firstName + " " + user.lastName}
                                                 </Link>
-                                                
+
                                             </Box>
                                         </Box>
                                     </TableCell>
@@ -197,10 +198,10 @@ const RegisteredUsers = () => (
                                     </TableCell>
                                     <TableCell align="right">
                                         <IconButton>
-                                            <PencilAltIcon fontSize="small" />
+                                            <PencilAltIcon fontSize="small"/>
                                         </IconButton>
                                         <IconButton>
-                                            <ArrowRightIcon fontSize="small" />
+                                            <ArrowRightIcon fontSize="small"/>
                                         </IconButton>
                                     </TableCell>
                                 </TableRow>

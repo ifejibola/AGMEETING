@@ -16,14 +16,15 @@ import {
 } from "@mui/material";
 import CogIcon from '../../icons/Cog';
 import UserIcon from '../../icons/User';
-import useAuthentication from "../../hooks/useAuthentication";
-import axios from "axios";
+import {useDispatch, useSelector} from 'react-redux';
+import {logout} from "../../actions/auth";
 
 const AccountPopover = () => {
     const anchorRef = useRef(null);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [open, setOpen] = useState(false);
-    const {user, saveUser} = useAuthentication();
+    const {user} = useSelector((state) => state.auth);
 
     let userName;
     if (user.firstName || user.lastName) {
@@ -44,13 +45,9 @@ const AccountPopover = () => {
         try {
             handleClose();
             if (user) {
-                axios.get('http://localhost:3000/api/users/logout', {withCredentials: true}).then(() => {
-                    saveUser(null);
+                dispatch(logout()).then(() => {
                     navigate('/');
                     toast.success('You have successfully logged out.');
-                }).catch((err) => {
-                    console.log(err.response.data);
-                    toast.error(err.response.data.message || 'There was an issue logging out.');
                 });
             } else {
                 toast.error('You are currently not logged in.');

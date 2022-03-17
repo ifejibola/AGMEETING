@@ -15,6 +15,8 @@ import Settings from './Component/AdminComponents/Settings/Settings'
 
 import SignIn from './Login/signin'
 import SignUp from './Login/signup'
+import ProtectedRoute from "./ProtectedRoute";
+import AdminModeratorRoute from "../AdminModeratorRoute";
 
 const routes = [
     {
@@ -24,27 +26,51 @@ const routes = [
             {index: true, element: <GroupedList3/>},
             {
                 path: '/agenda',
-                element: <Agenda/>,
+                element: (
+                    <ProtectedRoute>
+                        <Agenda/>
+                    </ProtectedRoute>
+                )
             },
             {
                 path: '/vault',
-                element: <Vault/>
+                element: (
+                    <ProtectedRoute>
+                        <Vault/>
+                    </ProtectedRoute>
+                )
             },
             {
                 path: '/loggedinUsers',
-                element: <LoggedinUsers/>
+                element: (
+                    <AdminModeratorRoute>
+                        <LoggedinUsers/>
+                    </AdminModeratorRoute>
+                )
             },
             {
                 path: '/registeredusers',
-                element: <RegisteredUsers/>
+                element: (
+                    <AdminModeratorRoute>
+                        <RegisteredUsers/>
+                    </AdminModeratorRoute>
+                )
             },
             {
                 path: '/stats',
-                element: <Stats/>
+                element: (
+                    <ProtectedRoute>
+                        <Stats/>
+                    </ProtectedRoute>
+                )
             },
             {
                 path: '/settings',
-                element: <Settings/>
+                element: (
+                    <ProtectedRoute>
+                        <Settings/>
+                    </ProtectedRoute>
+                )
             },
             {
                 path: '/login',
