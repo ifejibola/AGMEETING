@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {addDays, addHours, differenceInDays, isAfter} from 'date-fns';
 import {
     Avatar,
@@ -15,7 +15,8 @@ import {
     Tooltip
 } from '@mui/material';
 import Scrollbar from '../../Scrollbar';
-import DotsHorizontalIcon from '../../icons/DotsHorizontal';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
+import SessionHelpModal from "./SessionHelpModal";
 
 const now = new Date();
 
@@ -123,7 +124,19 @@ const getDeadline = (task) => {
     return deadline;
 };
 
-const Session = () => (
+const Session = () => {
+
+ //used for help modal
+ const [isHelpApplicationOpen, setIsHelpApplicationOpen] = useState(false);
+ const handleApplyHelpModalOpen = () => {
+     setIsHelpApplicationOpen(true);
+ };
+
+ const handleApplyHelpModalClose = () => {
+     setIsHelpApplicationOpen(false);
+ };
+    
+ return (
     <Box
         sx={{
             backgroundColor: 'background.default',
@@ -134,8 +147,10 @@ const Session = () => (
         <Card>
             <CardHeader
                 action={(
-                    <IconButton>
-                        <DotsHorizontalIcon fontSize="small"/>
+                        <IconButton
+                        onClick={handleApplyHelpModalOpen}
+                        >
+                            <HelpOutlineIcon fontSize="small"/>
                     </IconButton>
                 )}
                 title="Session"
@@ -209,8 +224,14 @@ const Session = () => (
                     </List>
                 </Box>
             </Scrollbar>
+            <SessionHelpModal
+                    onApply={handleApplyHelpModalClose}
+                    onClose={handleApplyHelpModalClose}
+                    open={isHelpApplicationOpen}
+                    />
         </Card>
     </Box>
-);
+)
+};
 
 export default Session;
