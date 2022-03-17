@@ -11,3 +11,9 @@
 - Installed Socket.io in the project.
 - Switched authentication from context-based to use React-Redux.
 - Setup role-based authentication.
+
+### Chester's Tasks
+
+- Worked on weekly minutes report.
+- Updated NavBar and side bar for improved clarity and visibility.
+- Fixed issues related to registered users from week 21.
