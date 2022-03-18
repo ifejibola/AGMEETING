@@ -14,30 +14,12 @@ import {
   SET_USER_INFO,
 } from "../redux/userTypes";
 
-const baseURL = "http://localhost:3000";
+export const baseURL = "http://localhost:3000";
 // const auth = {
 //   Authorization: {
 //     Bearer:
 //   }
 // }
-
-export const verifyToken = async () => {
-  const req = axios
-    .get(baseURL + "/authentication/verifyToken", {
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("access_token"),
-      },
-    })
-    .then(({ data }) => {
-      if (data !== "Success") {
-        localStorage.setItem("is_authenticated", false);
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
-      } else {
-        localStorage.setItem("is_authenticated", true);
-      }
-    });
-};
 
 export const setCurrentUser = (userInfo) => {
   return async (dispatch) => {

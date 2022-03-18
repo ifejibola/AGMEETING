@@ -283,18 +283,31 @@ const DashboardSidebar = (props) => {
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
-          {sectionsMod.map((section) => (
-            <NavSection
-              key={section.title}
-              pathname={location.pathname}
-              sx={{
-                "& + &": {
-                  mt: 3,
-                },
-              }}
-              {...section}
-            />
-          ))}
+          {props.userReducer.currentUser?.isMod
+            ? sectionsMod.map((section) => (
+                <NavSection
+                  key={section.title}
+                  pathname={location.pathname}
+                  sx={{
+                    "& + &": {
+                      mt: 3,
+                    },
+                  }}
+                  {...section}
+                />
+              ))
+            : sectionsUser.map((section) => (
+                <NavSection
+                  key={section.title}
+                  pathname={location.pathname}
+                  sx={{
+                    "& + &": {
+                      mt: 3,
+                    },
+                  }}
+                  {...section}
+                />
+              ))}
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
