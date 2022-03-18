@@ -19,6 +19,24 @@ router.get(
   }
 );
 
+router.post("/refreshToken", (req, res) => {
+  console.log(req.body);
+  let refreshToken = req.body.refreshToken;
+  refreshToken = jwt.decode(refreshToken);
+  let { exp } = refreshToken;
+  console.log(Date.now(), exp * 1000, Date.now() > exp * 1000);
+  if (Date.now() >= exp * 1000) {
+    console.log("here");
+    return res.status(401).send();
+  }
+  const newAccessToken = jwt.sign(
+    { userId: req.body.user.id },
+    process.env.ACCESS_TOKEN_KEY,
+    { expiresIn: "15m" }
+  );
+  return res.json({ accessToken: newAccessToken });
+});
+
 router.post("/login", (req, res, next) => {
   passport.authenticate("login", (err, user, info) => {
     if (err) throw err;

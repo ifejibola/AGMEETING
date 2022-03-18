@@ -115,6 +115,8 @@ io.on("connection", (socket) => {
   console.log("a user connected");
 });
 
+module.exports = app;
+
 // app.listen(port, () => {
 //     console.log(`The app server is running on port: ${port}`);
 // });
