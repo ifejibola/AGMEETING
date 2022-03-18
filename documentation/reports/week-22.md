@@ -17,3 +17,9 @@
 - Worked on weekly minutes report.
 - Updated NavBar and side bar for improved clarity and visibility.
 - Fixed issues related to registered users from week 21.
+
+### Garry's Tasks
+
+- Added description modal to session page
+- Removed comments on logged-in and registered users pages
+- Re-worked interactions modal
