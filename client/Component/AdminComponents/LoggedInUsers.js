@@ -25,8 +25,6 @@ import ArrowRightIcon from '../../icons/ArrowRight';
 import PencilAltIcon from '../../icons/PencilAlt';
 import SearchIcon from '../../icons/Search';
 
-import Comments from './Comments';
-
 const now = new Date();
 
 const customers = [
@@ -166,7 +164,7 @@ const LoggedinUsers = () => (
                                 </InputAdornment>
                             )
                         }}
-                        placeholder="Search customers"
+                        placeholder="Search users"
                         variant="outlined"
                     />
                 </Box>
@@ -293,7 +291,6 @@ const LoggedinUsers = () => (
                 rowsPerPage={5}
                 rowsPerPageOptions={[5, 10, 25]}
             />
-            <Comments/>
         </Card>
     </Box>
 );

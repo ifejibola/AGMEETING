@@ -23,7 +23,6 @@ import Scrollbar from '../../Scrollbar';
 import ArrowRightIcon from '../../icons/ArrowRight';
 import PencilAltIcon from '../../icons/PencilAlt';
 import SearchIcon from '../../icons/Search';
-import Comments from './Comments';
 //const now = new Date();
 import axios from "axios";
 
@@ -99,7 +98,7 @@ const RegisteredUsers = () => (
                                 </InputAdornment>
                             )
                         }}
-                        placeholder="Search customers"
+                        placeholder="Search users"
                         variant="outlined"
                     />
                 </Box>
@@ -221,7 +220,6 @@ const RegisteredUsers = () => (
                 rowsPerPage={5}
                 rowsPerPageOptions={[5, 10, 25]}
             />
-            <Comments/>
         </Card>
     </Box>
 );
