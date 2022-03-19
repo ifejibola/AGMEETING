@@ -75,12 +75,10 @@ passport.use(
   new JWTstrategy(
     {
       secretOrKey: process.env.ACCESS_TOKEN_KEY,
-      jwtFromRequest: ExtractJWT.fromUrlQueryParameter("secret_token"),
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     },
     async (token, done) => {
-      console.log("token is here", token);
       try {
-        console.log("token is here", token);
         return done(null, token.user);
       } catch (error) {
         done(error);

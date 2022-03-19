@@ -7,6 +7,7 @@ import {
   CREATE_ACCOUNT_REQUEST,
   CREATE_ACCOUNT_SUCCESS,
   CREATE_ACCOUNT_FAILURE,
+  SET_USER_INFO,
 } from "../userTypes";
 const userReducer = (state = {}, action) => {
   switch (action.type) {
@@ -17,7 +18,6 @@ const userReducer = (state = {}, action) => {
       break;
     case LOGIN_REQUEST:
       return { ...state, loading: true };
-      break;
     case LOGIN_SUCCESS:
       return {
         ...state,
@@ -28,23 +28,29 @@ const userReducer = (state = {}, action) => {
         },
         loading: false,
       };
-      break;
     case LOGIN_FAILURE:
       return { ...state, loading: false };
-      break;
     case CREATE_ACCOUNT_REQUEST:
       return { ...state, loading: true };
-      break;
     case CREATE_ACCOUNT_SUCCESS:
       return {
         ...state,
         currentUser: { id: action.payload.id, email: action.payload.email },
         loading: false,
       };
-      break;
     case CREATE_ACCOUNT_FAILURE:
       return { ...state, loading: false };
-      break;
+
+    case SET_USER_INFO:
+      return {
+        ...state,
+        currentUser: {
+          id: action.payload.id,
+          email: action.payload.email,
+          isMod: action.payload.isMod,
+        },
+        loading: false,
+      };
     default:
       return state;
   }

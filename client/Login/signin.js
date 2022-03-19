@@ -41,8 +41,8 @@ const theme = createTheme();
 
 const SignIn = (props) => {
   useEffect(() => {
-    if (localStorage.getItem("isAuthenticated")) {
-      localStorage.removeItem("isAuthenticated");
+    if (localStorage.getItem("is_authenticated")) {
+      localStorage.removeItem("is_authenticated");
     }
   }, []);
   let navigate = useNavigate();

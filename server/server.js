@@ -72,11 +72,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.static(path.join(__dirname, "../dist")));
 
 app.use("/participants", participantController);
-app.use(
-  "/meetings",
-  passport.authenticate("jwt", { session: false }),
-  meetingController
-);
+app.use("/meetings", meetingController);
 app.use("/items", itemController);
 app.use("/admins", administratorController);
 app.use("/authentication", authController);
@@ -118,6 +114,8 @@ db.sequelize.sync().then(() => {
 io.on("connection", (socket) => {
   console.log("a user connected");
 });
+
+module.exports = app;
 
 // app.listen(port, () => {
 //     console.log(`The app server is running on port: ${port}`);
