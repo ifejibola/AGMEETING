@@ -1,4 +1,5 @@
 const express = require("express");
+const morgan = require("morgan");
 // var fallback = require('express-history-api-fallback')
 const app = express();
 
@@ -10,23 +11,25 @@ const DIST_DIR = path.join(__dirname, "public");
 const HTML_FILE = path.join(DIST_DIR, "index.html");
 
 //controllers
-const indexController = require("./controllers/index.controller")
+const indexController = require("./controllers/index.controller");
 
 //passport
 const passport = require("passport");
-require('dotenv').config();
+require("dotenv").config();
 require("./config/passport");
-const session    = require('express-session');
-const bodyParser = require('body-parser');
+const session = require("express-session");
+const bodyParser = require("body-parser");
 
-//For BodyParser
+//Set middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-//For handleBars
-
 
 app.use(express.json());
-app.use(session({ secret: 'keyboard cat',resave: true, saveUninitialized:true})); // session secret
+// for file upload
+app.use(morgan("dev"));
+app.use(
+  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+); // session secret
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.static(path.join(__dirname, "../dist")));
 
@@ -37,21 +40,50 @@ app.use(passport.session());
 const db = require("./models/db");
 const allModels = require("./models/db");
 
+//multer object
+const multer = require("multer");
+// the dest attribute determines where the the uploaded file will be stored
+//const fileUpload = multer({
+//dest: "files",
+//});
+
 // backend api
 app.use("/api/v1", indexController);
+
+// File upload routes with multer middleware
+// use .single() to receive one file and .array() for multiple
+// app.post("/file", fileUpload.single("pdf"), (req, res) => {
+//   // multer stores relevant information to the file attribute in the req
+//   console.log(req.file);
+//   res.json("/file api");
+// });
+
+// File get routes
+// gets the created file
+// app.get("/file/:filename", (req, res) => {
+//   // gets the filename
+//   const { filename } = req.params;
+//   const dirname = path.resolve();
+//   const fullfilepath = path.join(dirname, "files/" + filename);
+//   res.json("/file/:filename api");
+//   // this will send back the file when requested
+//   return res.sendFile(fullfilepath);
+// });
 
 // Test database
 try {
   db.sequelize.authenticate().then(() => {
     console.log("Connection has been established successfully.");
-    allModels.client.findAll().then((results) => {
-      console.log(results);
-    }).catch(err => console.log(err));
+    allModels.client
+      .findAll()
+      .then((results) => {
+        console.log(results);
+      })
+      .catch((err) => console.log(err));
   });
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
-
 
 // app.use(express.static("helper"));
 // app.use("/", indexRoutes)
