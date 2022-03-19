@@ -13,6 +13,8 @@ import { useState } from "react";
 //import {Grid} from '@material-ui/core';
 import { Link as RouterLink, useLocation } from "react-router-dom";
 
+var textHolder = "";
+
 const defaultValues = {
   outText: "",
   inText: "",
@@ -28,8 +30,11 @@ const ContentMessage = () => {
   };
 
   const handleClick = (event) => {
+    textHolder = textHolder + ("Username: " + text.inText + "\n");
+    // Bad solution but at least multiple messages can be rendered now
+    // this approach might still work, but it's not ideal
     setText({
-      outText: "Username: " + text.inText,
+      outText: textHolder,
       inText: "",
     });
   };
