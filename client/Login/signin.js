@@ -43,6 +43,7 @@ const theme = createTheme();
 const SignIn = (props) => {
   const [emailError, setEmailError] = useState(false);
   const [failedLogin, setFailedLogin] = useState(false);
+  const [loginError, setLoginError] = useState(null);
   useEffect(() => {
     if (localStorage.getItem("is_authenticated")) {
       localStorage.removeItem("is_authenticated");
@@ -61,7 +62,7 @@ const SignIn = (props) => {
     props.onLogin(data.get("email"), data.get("password"), () => {
       navigate("/");
     });
-    setFailedLogin(true);
+    setLoginError("Incorrect user or password try again");
   };
 
   return (
@@ -83,11 +84,6 @@ const SignIn = (props) => {
             Sign in
           </Typography>
           <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
-            {failedLogin && (
-              <Typography sc={{ color: "red" }}>
-                Failed to login, check username and password
-              </Typography>
-            )}
             <TextField
               margin="normal"
               required
@@ -115,6 +111,16 @@ const SignIn = (props) => {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            <span
+              margin="normal"
+              style={{
+                fontWeight: "bold",
+                color: "red",
+                display: "block",
+              }}
+            >
+              {loginError}
+            </span>
             <Button
               type="submit"
               // href="/"
