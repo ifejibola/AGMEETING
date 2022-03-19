@@ -292,11 +292,11 @@ const DashboardSidebar = (props) => {
             }}
           >
             <RouterLink to="/dashboard/account">
-              <Avatar alt={currentUser.client_name} src='../../../misc/img.png' />
+              <Avatar alt={currentUser?.client_name} src='../../../misc/img.png' />
             </RouterLink>
             <Box sx={{ ml: 2 }}>
               <Typography color="textPrimary" variant="subtitle2">
-                 Welcome back {currentUser.client_name} !
+                 Welcome back {currentUser?.client_name} !
               </Typography>
               <Typography color="textSecondary" variant="body2">
                 Your plan:{" "}
@@ -309,7 +309,7 @@ const DashboardSidebar = (props) => {
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
-          {currentUser.role === "admin" || currentUser.role === "moderator" ?
+          {currentUser?.role === "admin" || currentUser?.role === "moderator" ?
               sectionsAdmin.map((section) => (
                 <NavSection
                   key={section.title}
