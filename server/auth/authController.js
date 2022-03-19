@@ -26,13 +26,12 @@ router.post("/refreshToken", (req, res) => {
   let { exp } = refreshToken;
   console.log(Date.now(), exp * 1000, Date.now() > exp * 1000);
   if (Date.now() >= exp * 1000) {
-    console.log("here");
     return res.status(401).send();
   }
   const newAccessToken = jwt.sign(
     { userId: req.body.user.id },
     process.env.ACCESS_TOKEN_KEY,
-    { expiresIn: "15m" }
+    { expiresIn: "4w" }
   );
   return res.json({ accessToken: newAccessToken });
 });
@@ -50,7 +49,7 @@ router.post("/login", (req, res, next) => {
         const accessToken = jwt.sign(
           { user: body },
           process.env.ACCESS_TOKEN_KEY,
-          { expiresIn: "15m" }
+          { expiresIn: "4w" }
         );
         const refreshToken = jwt.sign(
           { userId: user.id },

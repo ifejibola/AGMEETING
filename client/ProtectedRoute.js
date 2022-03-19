@@ -40,6 +40,10 @@ function ProtectedRoute(props) {
           }
         })
         .catch((err) => {
+          setIsAuthenticated(false);
+          return () => {
+            isAuthenticated;
+          };
           // let refreshToken = localStorage.getItem("refresh_token");
           // if(!refreshToken){
           //   setIsAuthenticated(false);
