@@ -17,7 +17,8 @@ import { login } from "../actions";
 import store from "../redux/store";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import isEmail from "validator/lib/isEmail";
 
 function Copyright(props) {
   return (
@@ -40,6 +41,8 @@ function Copyright(props) {
 const theme = createTheme();
 
 const SignIn = (props) => {
+  const [emailError, setEmailError] = useState(false);
+  const [failedLogin, setFailedLogin] = useState(false);
   useEffect(() => {
     if (localStorage.getItem("is_authenticated")) {
       localStorage.removeItem("is_authenticated");
@@ -50,9 +53,15 @@ const SignIn = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+    if (!isEmail(data.get("email"))) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
     props.onLogin(data.get("email"), data.get("password"), () => {
       navigate("/");
     });
+    setFailedLogin(true);
   };
 
   return (
@@ -73,12 +82,12 @@ const SignIn = (props) => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box
-            component="form"
-            onSubmit={handleSubmit}
-            noValidate
-            sx={{ mt: 1 }}
-          >
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+            {failedLogin && (
+              <Typography sc={{ color: "red" }}>
+                Failed to login, check username and password
+              </Typography>
+            )}
             <TextField
               margin="normal"
               required
@@ -87,6 +96,8 @@ const SignIn = (props) => {
               label="Email Address"
               name="email"
               autoComplete="email"
+              type="email"
+              error={emailError || failedLogin}
               autoFocus
             />
             <TextField
@@ -98,6 +109,7 @@ const SignIn = (props) => {
               type="password"
               id="password"
               autoComplete="current-password"
+              error={failedLogin}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
