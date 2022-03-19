@@ -1,0 +1,4 @@
+- implement agenda api, including migration, model, service, and controller
+- learn socket.io implementation
+- review database
+- learn multer
