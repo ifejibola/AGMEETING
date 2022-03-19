@@ -7,8 +7,14 @@
     "all": "npm-run-all --parallel dev:*",
     "dev:build-client": "webpack --config webpack.client.js --watch",
     "dev:start": "nodemon server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "prepare": "husky install"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "author": "Ife Ajibola",
   "license": "ISC",
@@ -35,6 +41,7 @@
     "history": "^5.3.0",
     "html-webpack-plugin": "^5.3.2",
     "husky": "^7.0.4",
+    "jest": "^27.5.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "multer": "^1.4.4",
@@ -61,7 +68,11 @@
     "socket.io": "^4.4.1",
     "socket.io-client": "^4.4.1",
     "stylis-plugin-rtl": "^2.1.1",
+
     "url": "^0.11.0",
+
+    "supertest": "^6.2.2",
+
     "validator": "^13.7.0",
     "webpack-merge": "^5.8.0"
   },

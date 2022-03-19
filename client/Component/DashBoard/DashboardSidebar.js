@@ -39,9 +39,10 @@ import Users from "../../icons/Users";
 import Cog from "../../icons/Cog";
 // import { Receipt } from '@material-ui/icons';
 import { connect } from "react-redux";
+import { MapStateToPropss } from "react-redux";
 
 import Modal from "./Interactions";
-const sections = [
+const sectionsMod = [
   {
     title: "General",
     items: [
@@ -157,75 +158,47 @@ const sections = [
       // }
     ],
   },
+];
 
-  // {
-  //   title: 'Platforms',
-  //   items: [
-  //     {
-  //       title: 'Projects',
-  //       path: '/dashboard/projects',
-  //       icon: <BriefcaseIcon fontSize="small" />,
-  //       children: [
-  //         {
-  //           title: 'Browse',
-  //           path: '/dashboard/projects/browse'
-  //         },
-  //         {
-  //           title: 'Details',
-  //           path: '/dashboard/projects/1'
-  //         },
-  //         {
-  //           title: 'Create',
-  //           path: '/dashboard/projects/new'
-  //         }
-  //       ]
-  //     },
-  //     {
-  //       title: 'Social',
-  //       path: '/dashboard/social',
-  //       icon: <ShareIcon fontSize="small" />,
-  //       children: [
-  //         {
-  //           title: 'Profile',
-  //           path: '/dashboard/social/profile'
-  //         },
-  //         {
-  //           title: 'Feed',
-  //           path: '/dashboard/social/feed'
-  //         }
-  //       ]
-  //     }
-  //   ]
-  // },
-  // {
-  //   title: 'Apps',
-  //   items: [
-  //     {
-  //       title: 'Kanban',
-  //       path: '/dashboard/kanban',
-  //       icon: <ClipboardListIcon fontSize="small" />
-  //     },
-  //     {
-  //       title: 'Mail',
-  //       path: '/dashboard/mail',
-  //       icon: <MailIcon fontSize="small" />
-  //     },
-  //     {
-  //       title: 'Chat',
-  //       path: '/dashboard/chat',
-  //       icon: <ChatAltIcon fontSize="small" />
-  //     },
-  //     {
-  //       title: 'Calendar',
-  //       path: '/dashboard/calendar',
-  //       icon: <CalendarIcon fontSize="small" />
-  //     }
-  //   ]
-  // }
+const sectionsUser = [
+  {
+    title: "General",
+    items: [
+      // {
+      //   title: 'Overview',
+      //   path: '/dashboard/overview',
+      //   icon: <ChartSquareBarIcon fontSize="small" />
+      // },
+      {
+        title: "Session",
+        path: "/",
+        icon: <ChartSquareBarIcon fontSize="small" />,
+      },
+      {
+        title: "Agenda",
+        path: "/agenda",
+        icon: <ChartPieIcon fontSize="small" />,
+      },
+      {
+        title: "Vault",
+        path: "/Vault",
+        icon: <ShoppingBagIcon fontSize="small" />,
+      },
+      {
+        title: "Chat",
+        path: "/content",
+        icon: <ChartSquareBarIcon fontSize="small" />,
+      },
+      // {
+      //   title: 'Account',
+      //   path: '/dashboard/account',
+      //   icon: <UserIcon fontSize="small" />
+      // }
+    ],
+  },
 ];
 
 const DashboardSidebar = (props) => {
-  console.log(props);
   const { onMobileClose, openMobile } = props;
   const location = useLocation();
   // const { user } = useAuth();
@@ -310,18 +283,31 @@ const DashboardSidebar = (props) => {
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
-          {sections.map((section) => (
-            <NavSection
-              key={section.title}
-              pathname={location.pathname}
-              sx={{
-                "& + &": {
-                  mt: 3,
-                },
-              }}
-              {...section}
-            />
-          ))}
+          {props.userReducer.currentUser?.isMod
+            ? sectionsMod.map((section) => (
+                <NavSection
+                  key={section.title}
+                  pathname={location.pathname}
+                  sx={{
+                    "& + &": {
+                      mt: 3,
+                    },
+                  }}
+                  {...section}
+                />
+              ))
+            : sectionsUser.map((section) => (
+                <NavSection
+                  key={section.title}
+                  pathname={location.pathname}
+                  sx={{
+                    "& + &": {
+                      mt: 3,
+                    },
+                  }}
+                  {...section}
+                />
+              ))}
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>

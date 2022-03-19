@@ -24,6 +24,7 @@ import SignUp from "./Login/signup";
 import ProtectedRoute from "./ProtectedRoute";
 
 import ContentMessage from "./Component/ContentMessage.js";
+import ModeratorRoute from "./ModeratorRoute";
 
 // // Declarative routing model
 // return (
@@ -59,19 +60,35 @@ const routes = [
       },
       {
         path: "/loggedinUsers",
-        element: <LoggedinUsers />,
+        element: (
+          <ModeratorRoute>
+            <LoggedinUsers />
+          </ModeratorRoute>
+        ),
       },
       {
         path: "/registeredusers",
-        element: <RegisteredUsers />,
+        element: (
+          <ModeratorRoute>
+            <RegisteredUsers />
+          </ModeratorRoute>
+        ),
       },
       {
         path: "/stats",
-        element: <Stats />,
+        element: (
+          <ModeratorRoute>
+            <Stats />
+          </ModeratorRoute>
+        ),
       },
       {
         path: "/settings",
-        element: <Settings />,
+        element: (
+          <ModeratorRoute>
+            <Settings />
+          </ModeratorRoute>
+        ),
       },
 
       { path: "*", element: <NoMatch /> },
