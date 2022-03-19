@@ -43,32 +43,32 @@ const allModels = require("./models/db");
 //multer object
 const multer = require("multer");
 // the dest attribute determines where the the uploaded file will be stored
-const fileUpload = multer({
-  dest: "files",
-});
+//const fileUpload = multer({
+//dest: "files",
+//});
 
 // backend api
 app.use("/api/v1", indexController);
 
 // File upload routes with multer middleware
 // use .single() to receive one file and .array() for multiple
-app.post("/file", fileUpload.single("pdf"), (req, res) => {
-  // multer stores relevant information to the file attribute in the req
-  console.log(req.file);
-  res.json("/file api");
-});
+// app.post("/file", fileUpload.single("pdf"), (req, res) => {
+//   // multer stores relevant information to the file attribute in the req
+//   console.log(req.file);
+//   res.json("/file api");
+// });
 
 // File get routes
 // gets the created file
-app.get("/file/:filename", (req, res) => {
-  // gets the filename
-  const { filename } = req.params;
-  const dirname = path.resolve();
-  const fullfilepath = path.join(dirname, "files/" + filename);
-  res.json("/file/:filename api");
-  // this will send back the file when requested
-  return res.sendFile(fullfilepath);
-});
+// app.get("/file/:filename", (req, res) => {
+//   // gets the filename
+//   const { filename } = req.params;
+//   const dirname = path.resolve();
+//   const fullfilepath = path.join(dirname, "files/" + filename);
+//   res.json("/file/:filename api");
+//   // this will send back the file when requested
+//   return res.sendFile(fullfilepath);
+// });
 
 // Test database
 try {
