@@ -14,6 +14,7 @@ const cors = require('cors');
 const http = require('http')
 const socketIo = require('socket.io');
 const server = http.createServer(app);
+const {joinUser, getCurrentUser, disconnectUser} = require('chatusers');
 
 const io = socketIo(server, {
     cors: {
@@ -52,6 +53,33 @@ io.on('connection', (socket) => {
     })
     socket.on('disconnect', (reason) => {
         console.log(reason);
+    });
+
+    socket.on('joinRoom', ({username, room}) => {
+        const user = joinUser(socket.id, username, room);
+        socket.join(user.room);
+
+        socket.emit('message', {
+            userId: user.id,
+            username: user.username,
+            text: `Welcome ${user.username}`
+        });
+
+        socket.broadcast.to(user.room).emit('message', {
+            userId: user.id,
+            username: user.username,
+            text: `${user.username} has joined the chat.`
+        });
+    });
+
+    socket.on('chat', (text) => {
+        const user = getCurrentUser(socket.id);
+
+        io.to(user.room).emit('message', {
+            userId: user.id,
+            username: user.username,
+            text: text
+        });
     });
 });
 
