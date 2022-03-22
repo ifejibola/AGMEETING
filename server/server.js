@@ -16,9 +16,9 @@ const socketIo = require('socket.io');
 const server = http.createServer(app);
 
 const io = socketIo(server, {
-   cors: {
-       origin: 'http://localhost:3000'
-   }
+    cors: {
+        origin: 'http://localhost:3000'
+    }
 });
 
 app.use(express.json());
@@ -47,7 +47,9 @@ app.get("*", (req, res) => {
 
 io.on('connection', (socket) => {
     console.log('A new client has connected.');
-    socket.join('chat-room');
+    socket.on('message', (msg) => {
+        io.emit('message', msg);
+    })
     socket.on('disconnect', (reason) => {
         console.log(reason);
     });

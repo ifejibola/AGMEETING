@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import routes from "./routes";
 
 import {createCustomTheme} from '../config/theme';
@@ -10,7 +10,6 @@ import {ThemeProvider} from "@mui/material/styles";
 import {CssBaseline} from "@mui/material";
 import SettingsDrawer from "./SettingsDrawer";
 import {ToastContainer} from "material-react-toastify";
-import {io} from 'socket.io-client';
 import 'material-react-toastify/dist/ReactToastify.css';
 
 
@@ -25,15 +24,6 @@ export default function App() {
     });
 
     const content = useRoutes(routes);
-
-    useEffect(() => {
-        const socket = io();
-        socket.on('connect', () => console.log(socket.id));
-        socket.on('connect_error', () => {
-            setTimeout(() => socket.connect(), 5000);
-        });
-        socket.on('disconnect', () => console.log('The client disconnected.'));
-    });
 
     return (
         <ErrorBoundary>
