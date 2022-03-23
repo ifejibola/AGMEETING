@@ -45,7 +45,12 @@ router.post("/login", (req, res, next) => {
         if (err) {
           return;
         }
-        const body = { id: user.id, email: user.email, isMod: user.isMod };
+        const body = {
+          id: user.id,
+          email: user.email,
+          isMod: user.isMod,
+          moderatorId: user.moderatorId,
+        };
         const accessToken = jwt.sign(
           { user: body },
           process.env.ACCESS_TOKEN_KEY,
