@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { Box, Button, Divider, Drawer, Link, Typography, useMediaQuery } from '@mui/material';
-import ChartPieIcon from '../../icons/ChartPie';
-import ChartSquareBarIcon from '../../icons/ChartSquareBar';
+import { Box, Button, Divider, Drawer, Typography, useMediaQuery } from '@mui/material';
 import Logo from '../../Logo';
 import NavSection from '../../NavSection';
 import Scrollbar from '../../Scrollbar';
 import Modal from './Interactions'
 import VotesModal from "../Votes/VotesModal";
 import { AdminPanelSettings, Event, SettingsAccessibility, Summarize, Work } from '@material-ui/icons';
+import ContentMessage from "./ContentMessage";
 const sections = [
   {
     title: 'General',
@@ -90,6 +89,14 @@ const DashboardSidebar = (props) => {
     setIsVotesApplication(true);
   };
 
+  const [isContentMessageOpen, setIsContentMessage] = useState(false);
+  const handleContentMessageClose = () => {
+    setIsContentMessage(false);
+  };
+  const handleContentMessageOpen =() => {
+    setIsContentMessage(true);
+  };
+
   const content = (
     <Box
       sx={{
@@ -158,8 +165,7 @@ const DashboardSidebar = (props) => {
               onClick={handleApplyVotesModalOpen}
               fullWidth
               sx={{
-                mt: 2,
-                mb: 4
+                mt: 2
               }}
               to="#"
               variant="contained"
@@ -170,6 +176,24 @@ const DashboardSidebar = (props) => {
               onApply={handleApplyVotesModalClose}
               onClose={handleApplyVotesModalClose}
               open={isVotesApplicationOpen}
+          />
+          <Button
+              color="primary"
+              onClick={handleContentMessageOpen}
+              fullWidth
+              sx={{
+                mt: 2,
+                mb: 4
+              }}
+              to="#"
+              variant="contained"
+          >
+            Content Messages
+          </Button>
+          <ContentMessage
+              onApply={handleContentMessageClose}
+              onClose={handleContentMessageClose}
+              open={isContentMessageOpen}
           />
           <Divider/>
           <Typography
