@@ -15,6 +15,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const menuOptions = [
     'As General Message',
@@ -27,16 +28,16 @@ const ContentMessage = (props) => {
     const {onClose, onApply, open, ...other} = props;
     const [menuOption, setMenuOption] = useState(menuOptions[0]);
     const [value, setValue] = useState('');
+
     const handleChange = (event) => {
         setValue(event.target.value);
     };
 
-    const handleApply = () => {
-        toast.success('Request sent!');
-        if (onApply) {
-            onApply();
-        }
-    };
+    const sendMessage = () => {
+        axios.post('http://localhost:3000/api/chat', {message: value}, {withCredentials: true}).then(() => {
+            onClose();
+        });
+    }
 
     return (
         <Dialog
@@ -67,8 +68,8 @@ const ContentMessage = (props) => {
                                     </IconButton>
                                 </Grid>
                                 <Grid item>
-                                    <IconButton>
-                                        <CloseIcon fontSize="small" onClick={onClose}/>
+                                    <IconButton onClick={onClose}>
+                                        <CloseIcon fontSize="small"/>
                                     </IconButton>
                                 </Grid>
                             </Grid>
@@ -138,7 +139,7 @@ const ContentMessage = (props) => {
                                     <Button
                                         color="primary"
                                         fullWidth
-                                        onClick={handleApply}
+                                        onClick={sendMessage}
                                         variant="contained"
                                     >
                                         Send Message

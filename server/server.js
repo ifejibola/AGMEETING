@@ -14,7 +14,7 @@ const cors = require('cors');
 const http = require('http')
 const socketIo = require('socket.io');
 const server = http.createServer(app);
-const {joinUser, getCurrentUser, disconnectUser} = require('chatusers');
+const {joinUser, getCurrentUser, disconnectUser} = require('./chatusers.js');
 
 const io = socketIo(server, {
     cors: {
@@ -37,6 +37,7 @@ app.use(cookieParser('keyboard cat'));
 require('./routes/user.routes')(app);
 require('./routes/meeting.routes')(app);
 require('./routes/item.routes')(app);
+require('./routes/chat.routes')(app, io);
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, '../dist', 'index.html'), function (err) {

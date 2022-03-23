@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import routes from "./routes";
 
 import {createCustomTheme} from '../config/theme';
@@ -9,11 +9,19 @@ import {useRoutes} from "react-router";
 import {ThemeProvider} from "@mui/material/styles";
 import {CssBaseline} from "@mui/material";
 import SettingsDrawer from "./SettingsDrawer";
-import {ToastContainer} from "material-react-toastify";
+import {toast, ToastContainer} from "material-react-toastify";
 import 'material-react-toastify/dist/ReactToastify.css';
+import {io} from "socket.io-client";
 
 
 export default function App() {
+    useEffect(() => {
+        const socket = io();
+        socket.on('message', (msg) => {
+            toast.success(msg);
+        });
+    }, []);
+
     const {settings} = useSettings();
 
     const theme = createCustomTheme({

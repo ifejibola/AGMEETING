@@ -65,7 +65,7 @@ const NavBar = (props) => {
                     </Box>}
                 {!user &&
                     <Box sx={{ml: 2}}>
-                        <RouterLink to="/login"  style={{textDecoration: 'none', color: '#FFF'}}>
+                        <RouterLink to="/login" style={{textDecoration: 'none', color: '#FFF'}}>
                             <h4>
                                 Login
                             </h4>
@@ -74,7 +74,7 @@ const NavBar = (props) => {
                 }
                 {!user &&
                     <Box sx={{ml: 2}}>
-                        <RouterLink to="/register"  style={{textDecoration: 'none', color: '#FFF'}}>
+                        <RouterLink to="/register" style={{textDecoration: 'none', color: '#FFF'}}>
                             <h4>
                                 Register
                             </h4>

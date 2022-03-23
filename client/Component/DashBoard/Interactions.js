@@ -10,23 +10,10 @@ import {
     Typography,
     Divider
 } from "@mui/material";
-import {io} from "socket.io-client";
 
 const Modal = (props) => {
     const {authorAvatar, authorName, onApply, onClose, open, ...other} = props;
     const [value, setValue] = useState("");
-
-    const socket = io();
-
-    socket.on('message', (msg) => {
-        console.log('Message: ' + msg);
-    });
-
-    const sendMessage = () => {
-        const message = 'Hello this is a test message.';
-        socket.emit('message', message);
-    };
-
     const handleChange = (event) => {
         setValue(event.target.value);
     };
@@ -76,7 +63,7 @@ const Modal = (props) => {
                         </Grid>
 
                         <Grid item xs={6}>
-                            <Button variant="contained" fullWidth color="success" onClick={sendMessage}>
+                            <Button variant="contained" fullWidth color="success">
                                 Comment FOR
                             </Button>
                         </Grid>
