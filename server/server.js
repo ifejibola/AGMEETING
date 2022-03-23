@@ -14,11 +14,12 @@ const cors = require('cors');
 const http = require('http')
 const socketIo = require('socket.io');
 const server = http.createServer(app);
+const {joinUser, getCurrentUser, disconnectUser} = require('chatusers');
 
 const io = socketIo(server, {
-   cors: {
-       origin: 'http://localhost:3000'
-   }
+    cors: {
+        origin: 'http://localhost:3000'
+    }
 });
 
 app.use(express.json());
@@ -47,9 +48,38 @@ app.get("*", (req, res) => {
 
 io.on('connection', (socket) => {
     console.log('A new client has connected.');
-    socket.join('chat-room');
+    socket.on('message', (msg) => {
+        io.emit('message', msg);
+    })
     socket.on('disconnect', (reason) => {
         console.log(reason);
+    });
+
+    socket.on('joinRoom', ({username, room}) => {
+        const user = joinUser(socket.id, username, room);
+        socket.join(user.room);
+
+        socket.emit('message', {
+            userId: user.id,
+            username: user.username,
+            text: `Welcome ${user.username}`
+        });
+
+        socket.broadcast.to(user.room).emit('message', {
+            userId: user.id,
+            username: user.username,
+            text: `${user.username} has joined the chat.`
+        });
+    });
+
+    socket.on('chat', (text) => {
+        const user = getCurrentUser(socket.id);
+
+        io.to(user.room).emit('message', {
+            userId: user.id,
+            username: user.username,
+            text: text
+        });
     });
 });
 

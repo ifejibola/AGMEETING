@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import PropTypes from "prop-types";
 import toast from "react-hot-toast";
 import Grid from "@mui/material/Grid";
-import { Close } from '@material-ui/icons';
+import {Close} from '@material-ui/icons';
 import {
     Box,
     Button,
@@ -10,10 +10,22 @@ import {
     Typography,
     Divider
 } from "@mui/material";
+import {io} from "socket.io-client";
 
 const Modal = (props) => {
     const {authorAvatar, authorName, onApply, onClose, open, ...other} = props;
     const [value, setValue] = useState("");
+
+    const socket = io();
+
+    socket.on('message', (msg) => {
+        console.log('Message: ' + msg);
+    });
+
+    const sendMessage = () => {
+        const message = 'Hello this is a test message.';
+        socket.emit('message', message);
+    };
 
     const handleChange = (event) => {
         setValue(event.target.value);
@@ -31,9 +43,9 @@ const Modal = (props) => {
         <Dialog maxWidth="sm" onClose={onClose} open={open} {...other}>
             <Box sx={{p: 3}}>
 
-            <Grid container justifyContent="flex-end">
-            <Button startIcon={<Close/>} onClick={onClose} />
-                            </Grid>
+                <Grid container justifyContent="flex-end">
+                    <Button startIcon={<Close/>} onClick={onClose}/>
+                </Grid>
 
                 <Typography
                     align="center"
@@ -43,8 +55,8 @@ const Modal = (props) => {
                 >
                     Interaction
                     <Grid item xs={12}>
-                        <Divider variant='fullWidth' />
-                        </Grid>
+                        <Divider variant='fullWidth'/>
+                    </Grid>
                 </Typography>
                 <Box sx={{flexGrow: 1}}>
                     <Grid container spacing={2}>
@@ -60,11 +72,11 @@ const Modal = (props) => {
                         </Grid>
 
                         <Grid item xs={12}>
-                        <Divider variant='fullWidth' />
+                            <Divider variant='fullWidth'/>
                         </Grid>
 
                         <Grid item xs={6}>
-                            <Button variant="contained" fullWidth color="success">
+                            <Button variant="contained" fullWidth color="success" onClick={sendMessage}>
                                 Comment FOR
                             </Button>
                         </Grid>
@@ -80,7 +92,7 @@ const Modal = (props) => {
                         </Grid>
 
                         <Grid item xs={12}>
-                        <Divider variant='fullWidth' />
+                            <Divider variant='fullWidth'/>
                         </Grid>
 
                         <Grid item xs={4}>
@@ -115,7 +127,7 @@ const Modal = (props) => {
                         </Grid>
 
                         <Grid item xs={12}>
-                        <Divider variant='fullWidth' />
+                            <Divider variant='fullWidth'/>
                         </Grid>
 
                         <Grid item xs={12}>
