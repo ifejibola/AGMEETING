@@ -10,3 +10,8 @@
 
 - Created socket.io functionality on the backend.
 - Connected socket.io functionality to the frontend.
+
+### Ryan's Tasks 
+
+- Created Content Message Component for frontend
+- Fixed various UI Inconsistencies 
