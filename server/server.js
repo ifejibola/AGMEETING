@@ -16,11 +16,6 @@ const socketIo = require('socket.io');
 const server = http.createServer(app);
 const multer = require('multer');
 
-
-const io = socketIo(server, {   
-   cors: {
-       origin: 'http://localhost:3000'
-   }
 const {joinUser, getCurrentUser, disconnectUser} = require('./chatusers.js');
 
 const io = socketIo(server, {
