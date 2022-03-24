@@ -9,12 +9,19 @@ import {useRoutes} from "react-router";
 import {ThemeProvider} from "@mui/material/styles";
 import {CssBaseline} from "@mui/material";
 import SettingsDrawer from "./SettingsDrawer";
-import {ToastContainer} from "material-react-toastify";
-import {io} from 'socket.io-client';
+import {toast, ToastContainer} from "material-react-toastify";
 import 'material-react-toastify/dist/ReactToastify.css';
+import {io} from "socket.io-client";
 
 
 export default function App() {
+    useEffect(() => {
+        const socket = io();
+        socket.on('message', (msg) => {
+            toast.success(msg);
+        });
+    }, []);
+
     const {settings} = useSettings();
 
     const theme = createCustomTheme({
@@ -25,15 +32,6 @@ export default function App() {
     });
 
     const content = useRoutes(routes);
-
-    useEffect(() => {
-        const socket = io();
-        socket.on('connect', () => console.log(socket.id));
-        socket.on('connect_error', () => {
-            setTimeout(() => socket.connect(), 5000);
-        });
-        socket.on('disconnect', () => console.log('The client disconnected.'));
-    });
 
     return (
         <ErrorBoundary>

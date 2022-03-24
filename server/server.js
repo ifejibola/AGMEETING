@@ -21,6 +21,12 @@ const io = socketIo(server, {
    cors: {
        origin: 'http://localhost:3000'
    }
+const {joinUser, getCurrentUser, disconnectUser} = require('./chatusers.js');
+
+const io = socketIo(server, {
+    cors: {
+        origin: 'http://localhost:3000'
+    }
 });
 
 //multer local storage
@@ -50,6 +56,7 @@ app.use(cookieParser('keyboard cat'));
 require('./routes/user.routes')(app);
 require('./routes/meeting.routes')(app);
 require('./routes/item.routes')(app);
+require('./routes/chat.routes')(app, io);
 
 app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, '../dist', 'index.html'), function (err) {
@@ -86,9 +93,38 @@ app.post('/uploadmultiple', upload.array('myFiles', 12), (req, res, next) => {
 
 io.on('connection', (socket) => {
     console.log('A new client has connected.');
-    socket.join('chat-room');
+    socket.on('message', (msg) => {
+        io.emit('message', msg);
+    })
     socket.on('disconnect', (reason) => {
         console.log(reason);
+    });
+
+    socket.on('joinRoom', ({username, room}) => {
+        const user = joinUser(socket.id, username, room);
+        socket.join(user.room);
+
+        socket.emit('message', {
+            userId: user.id,
+            username: user.username,
+            text: `Welcome ${user.username}`
+        });
+
+        socket.broadcast.to(user.room).emit('message', {
+            userId: user.id,
+            username: user.username,
+            text: `${user.username} has joined the chat.`
+        });
+    });
+
+    socket.on('chat', (text) => {
+        const user = getCurrentUser(socket.id);
+
+        io.to(user.room).emit('message', {
+            userId: user.id,
+            username: user.username,
+            text: text
+        });
     });
 });
 

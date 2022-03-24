@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import PropTypes from "prop-types";
 import toast from "react-hot-toast";
 import Grid from "@mui/material/Grid";
-import { Close } from '@material-ui/icons';
+import {Close} from '@material-ui/icons';
 import {
     Box,
     Button,
@@ -14,7 +14,6 @@ import {
 const Modal = (props) => {
     const {authorAvatar, authorName, onApply, onClose, open, ...other} = props;
     const [value, setValue] = useState("");
-
     const handleChange = (event) => {
         setValue(event.target.value);
     };
@@ -31,9 +30,9 @@ const Modal = (props) => {
         <Dialog maxWidth="sm" onClose={onClose} open={open} {...other}>
             <Box sx={{p: 3}}>
 
-            <Grid container justifyContent="flex-end">
-            <Button startIcon={<Close/>} onClick={onClose} />
-                            </Grid>
+                <Grid container justifyContent="flex-end">
+                    <Button startIcon={<Close/>} onClick={onClose}/>
+                </Grid>
 
                 <Typography
                     align="center"
@@ -43,8 +42,8 @@ const Modal = (props) => {
                 >
                     Interaction
                     <Grid item xs={12}>
-                        <Divider variant='fullWidth' />
-                        </Grid>
+                        <Divider variant='fullWidth'/>
+                    </Grid>
                 </Typography>
                 <Box sx={{flexGrow: 1}}>
                     <Grid container spacing={2}>
@@ -60,7 +59,7 @@ const Modal = (props) => {
                         </Grid>
 
                         <Grid item xs={12}>
-                        <Divider variant='fullWidth' />
+                            <Divider variant='fullWidth'/>
                         </Grid>
 
                         <Grid item xs={6}>
@@ -80,7 +79,7 @@ const Modal = (props) => {
                         </Grid>
 
                         <Grid item xs={12}>
-                        <Divider variant='fullWidth' />
+                            <Divider variant='fullWidth'/>
                         </Grid>
 
                         <Grid item xs={4}>
@@ -115,7 +114,7 @@ const Modal = (props) => {
                         </Grid>
 
                         <Grid item xs={12}>
-                        <Divider variant='fullWidth' />
+                            <Divider variant='fullWidth'/>
                         </Grid>
 
                         <Grid item xs={12}>
