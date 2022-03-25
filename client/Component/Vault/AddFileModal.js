@@ -9,9 +9,6 @@ import axios from 'axios';
 const AddFileModal = (props) => {
     const { onApply, onClose, open, ...other } = props;
     const [value, setValue] = useState('');
-    const handleChange = (event) => {
-        setValue(event.target.value);
-    };
 
     const handleApply = () => {
         toast.success('Request sent!');
@@ -20,26 +17,31 @@ const AddFileModal = (props) => {
         }
     };
 
-    const state = {
-        selectedFile: null
-    };
+    const [file, setFile] = useState()
 
-    const onFileChange = event => {
-        useState({ selectedFile: event.target.files[0] });
-    };
-
-    const onFileUpload = () => {
-        const formData = new FormData();
-        formData.append(
-            "myFile",
-            state.selectedFile,
-            state.selectedFile.name
-        );
-
-        console.log(state.selectedFile);
-
-        axios.post("api/uploadfile", formData);
-    };
+    function handleChange(event) {
+      setFile(event.target.files[0])
+    }
+    
+    function handleSubmit(event) {
+      event.preventDefault()
+      const url = 'http://localhost:3000/uploadfile';
+      const formData = new FormData();
+      formData.append('myFile', file);
+      formData.append('fileName', file.name);
+      const config = {
+        headers: {
+          'content-type': 'multipart/form-data',
+        },
+      };
+      axios.post(url, formData, config).then((response) => {
+        console.log(response.data);
+      })
+      .catch(error => {
+          console.log(error.response)
+      });
+  
+    }
 
     return (
         <Dialog
@@ -61,9 +63,9 @@ const AddFileModal = (props) => {
                     <Grid item xs={12}>
                         <input
                             type="file"
-                            onChange={onFileChange}
+                            onChange={handleChange}
                         />
-                        <Button variant="contained" onClick={onFileUpload}>
+                        <Button variant="contained" onClick={handleSubmit}>
                             <UploadFile /> Upload
                         </Button>
                     </Grid>
