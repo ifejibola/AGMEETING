@@ -34,6 +34,7 @@ import PencilAltIcon from "../../icons/PencilAlt";
 import Plus from "../../icons/Plus";
 import { FileCopy, Person } from "@material-ui/icons";
 import axios from "axios";
+import { connect } from "react-redux";
 
 const now = new Date();
 
@@ -91,7 +92,7 @@ const getStatusLabel = (paymentStatus) => {
   return <Label color={color}>{text}</Label>;
 };
 
-const Vault = () => {
+const Vault = (props) => {
   const [fileUploadDialog, openFileUploadDialog] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileUploadSuccess, setFileUploadSuccess] = useState(false);
@@ -134,9 +135,11 @@ const Vault = () => {
         <CardHeader
           action={
             <>
-              <IconButton>
-                <DotsHorizontalIcon fontSize="small" onClick={open} />
-              </IconButton>
+              {props.user.isMod && (
+                <IconButton>
+                  <DotsHorizontalIcon fontSize="small" onClick={open} />
+                </IconButton>
+              )}
             </>
           }
           title="Vault"
@@ -255,4 +258,10 @@ const Vault = () => {
   );
 };
 
-export default Vault;
+const mapStateToProps = (state) => {
+  return {
+    user: state.userReducer.currentUser,
+  };
+};
+
+export default connect(mapStateToProps, null)(Vault);

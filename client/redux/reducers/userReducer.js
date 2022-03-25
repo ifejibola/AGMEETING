@@ -39,6 +39,7 @@ const userReducer = (state = {}, action) => {
         currentUser: {
           id: action.payload.id,
           email: action.payload.email,
+          isMod: action.payload.isMod,
           moderatorId: action.payload.moderatorId,
         },
         loading: false,
