@@ -11,7 +11,7 @@ const Participant = db.define(
       allowNull: false,
       primaryKey: true,
     },
-    meetingId: {
+    meeting_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
@@ -23,11 +23,11 @@ const Participant = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    isMod: {
+    is_mod: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
-    moderatorId: {
+    moderator_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
