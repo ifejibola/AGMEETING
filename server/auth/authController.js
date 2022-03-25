@@ -15,6 +15,7 @@ router.get(
   "/verifyToken",
   passport.authenticate("jwt", { session: false }),
   (req, res, next) => {
+    console.log("here");
     res.send("success");
   }
 );
@@ -77,7 +78,17 @@ router.post("/register", (req, res) => {
           password: hashedPassword,
           isMod: false,
         }).then((participant) => {
-          res.send(participant);
+          const accessToken = jwt.sign(
+            { user: body },
+            process.env.ACCESS_TOKEN_KEY,
+            { expiresIn: "4w" }
+          );
+          const refreshToken = jwt.sign(
+            { userId: user.id },
+            process.env.REFRESH_TOKEN_KEY,
+            { expiresIn: "4w" }
+          );
+          res.json({ participant, accessToken, refreshToken });
         });
       } else {
         res.send("failure");

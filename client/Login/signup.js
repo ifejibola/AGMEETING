@@ -66,7 +66,7 @@ function SignUp(props) {
       setSignupError("");
       //pass in the navigate function from the useNavigate hook with the route you want to navigate to to the action creator so that the callback can be called from the redux action creator
       props.onCreateAccount(data.get("email"), data.get("password"), () => {
-        navigate("/login");
+        navigate("/");
       });
     }
     //
