@@ -12,6 +12,11 @@ import React from "react";
 import { useState } from "react";
 //import {Grid} from '@material-ui/core';
 import { Link as RouterLink, useLocation } from "react-router-dom";
+import useChat from "./useChat";
+// import "./ChatRoom.css";
+
+// Soket.io code from https://medium.com/swlh/build-a-real-time-chat-app-with-react-hooks-and-socket-io-4859c9afecb0
+// https://github.com/pixochi/socket.io-react-hooks-chat
 
 var textHolder = "";
 
@@ -21,106 +26,42 @@ const defaultValues = {
 };
 
 const ContentMessage = () => {
-  const [text, setText] = useState(defaultValues);
+  const { roomId } = 1;
+  const { messages, sendMessage } = useChat(1); // Creates a websocket and manages messaging
+  const [newMessage, setNewMessage] = React.useState(""); // Message to be sent
 
-  const setInText = (event) => {
-    setText({
-      inText: event.target.value,
-    });
+  const handleNewMessageChange = (event) => {
+    setNewMessage(event.target.value);
   };
 
-  const handleClick = (event) => {
-    textHolder = textHolder + ("Username: " + text.inText + "\n");
-    // Bad solution but at least multiple messages can be rendered now
-    // this approach might still work, but it's not ideal
-    setText({
-      outText: textHolder,
-      inText: "",
-    });
+  const handleSendMessage = () => {
+    sendMessage(newMessage);
+    setNewMessage("");
   };
 
   return (
-    <Box
-      sx={{
-        backgroundColor: "background.default",
-        p: 3,
-      }}
-    >
-      <Box
-        sx={{
-          backgroundColor: "background.paper",
-          p: 3,
-          borderRadius: 2,
-        }}
-      >
-        <Grid container spacing={1}>
-          <Grid item xs={12}>
-            <TextField
-              disabled
-              multiline
-              rows={15}
-              size="large"
-              fullWidth
-              label=""
-              variant="outlined"
-              value={text.outText}
-              sx={{
-                Height: "100%",
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              label=""
-              placeholder="Message"
-              fullWidth
-              variant="outlined"
-              onChange={setInText}
-              value={text.inText}
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <FormControl sx={{}} fullWidth>
-              <InputLabel id="input">Destination</InputLabel>
-              <Select
-                labelId="inputlab"
-                id="sel"
-                //value={destination}
-                label="Destination"
-                //onChange={handleChange}
-              >
-                <MenuItem value={1}>Option 1</MenuItem>
-                <MenuItem value={2}>Option 2</MenuItem>
-                <MenuItem value={3}>Option 3</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={4}>
-            <Button
-              size="large"
-              color="primary"
-              variant="contained"
-              fullWidth
-              sx={{ mt: 1 }}
-            >
-              Attachment
-            </Button>
-          </Grid>
-          <Grid item xs={4}>
-            <Button
-              size="large"
-              color="primary"
-              variant="contained"
-              fullWidth
-              sx={{ mt: 1 }}
-              onClick={handleClick}
-            >
-              Post Message
-            </Button>
-          </Grid>
-        </Grid>
-      </Box>
-    </Box>
+    <div className="chat-room-container">
+      <div className="messages-container">
+        <ol className="messages-list">
+          {messages.map((message) => (
+            <li>{message.body}</li>
+          ))}
+        </ol>
+      </div>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <textarea
+        value={newMessage}
+        onChange={handleNewMessageChange}
+        placeholder="Write message..."
+        className="new-message-input-field"
+      />
+      <button onClick={handleSendMessage} className="send-message-button">
+        Send
+      </button>
+    </div>
   );
 };
 

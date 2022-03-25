@@ -65,7 +65,12 @@ require("../config/passport");
 const { Server } = require("socket.io");
 const http = require("http");
 const server = http.createServer(app);
-const io = new Server(server);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+  },
+});
+const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
@@ -105,26 +110,29 @@ app.get("*", (req, res) => {
   // res.sendFile(path.join(__dirname + '/public/index.html'))
 });
 
+io.on("connection", (socket) => {
+  console.log("A user connected");
+  const { roomId } = socket.handshake.query;
+  socket.join(roomId);
+
+  socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
+    console.log("You've got mail!");
+    io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
+  });
+
+  socket.on("disconnect", () => {
+    socket.leave(roomId);
+  });
+});
+
 db.sequelize.sync().then(() => {
   app.listen(port, () => {
     console.log(`The app server is running on port: ${port}`);
   });
 });
 
-io.on("connection", (socket) => {
-  console.log("a user connected");
-});
-
 module.exports = app;
 
-// app.listen(port, () => {
-//     console.log(`The app server is running on port: ${port}`);
-// });
-
-var io2 = require("socket.io")(http);
-
-io2.on("connection", (socket) => {
-  /* socket object may be used to send specific messages to the new connected client */
-  console.log("new client connected");
-  socket.emit("connection", null);
+server.listen(4000, () => {
+  console.log(`The app server is running on port: ${port}`);
 });
