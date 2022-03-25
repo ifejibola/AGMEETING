@@ -25,6 +25,7 @@ const userReducer = (state = {}, action) => {
           id: action.payload.id,
           email: action.payload.email,
           isMod: action.payload.isMod,
+          moderatorId: action.payload.moderatorId,
         },
         loading: false,
       };
@@ -35,7 +36,11 @@ const userReducer = (state = {}, action) => {
     case CREATE_ACCOUNT_SUCCESS:
       return {
         ...state,
-        currentUser: { id: action.payload.id, email: action.payload.email },
+        currentUser: {
+          id: action.payload.id,
+          email: action.payload.email,
+          moderatorId: action.payload.moderatorId,
+        },
         loading: false,
       };
     case CREATE_ACCOUNT_FAILURE:
@@ -48,6 +53,7 @@ const userReducer = (state = {}, action) => {
           id: action.payload.id,
           email: action.payload.email,
           isMod: action.payload.isMod,
+          moderatorId: action.payload.moderatorId,
         },
         loading: false,
       };

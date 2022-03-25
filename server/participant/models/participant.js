@@ -27,6 +27,10 @@ const Participant = db.define(
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
+    moderatorId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
   },
   {
     freezeTableName: true,
