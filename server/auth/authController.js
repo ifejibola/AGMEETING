@@ -78,17 +78,7 @@ router.post("/register", (req, res) => {
           password: hashedPassword,
           isMod: false,
         }).then((participant) => {
-          const accessToken = jwt.sign(
-            { user: body },
-            process.env.ACCESS_TOKEN_KEY,
-            { expiresIn: "4w" }
-          );
-          const refreshToken = jwt.sign(
-            { userId: user.id },
-            process.env.REFRESH_TOKEN_KEY,
-            { expiresIn: "4w" }
-          );
-          res.json({ participant, accessToken, refreshToken });
+          res.json({ participant });
         });
       } else {
         res.send("failure");
