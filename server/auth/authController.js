@@ -15,6 +15,7 @@ router.get(
   "/verifyToken",
   passport.authenticate("jwt", { session: false }),
   (req, res, next) => {
+    console.log("here");
     res.send("success");
   }
 );
