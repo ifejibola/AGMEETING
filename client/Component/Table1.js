@@ -22,11 +22,6 @@ import useSettings from "../hooks/useSettings";
 
 const now = new Date();
 
-// const buttonStyle = {
-//   border: "none",
-//   backgroundColor: "rgba(0, 0, 0, 0)",
-// };
-
 const orders = [
   {
     id: "5eff2548979e396cb4b000ba",
@@ -150,14 +145,7 @@ const Table1 = () => {
       }}
     >
       <Card>
-        <CardHeader
-          action={
-            <IconButton>
-              {/* <DotsHorizontalIcon fontSize="small" /> */}
-            </IconButton>
-          }
-          title="Latest Orders"
-        />
+        <CardHeader action={<IconButton></IconButton>} title="Latest Orders" />
         <Divider />
         <Scrollbar>
           <Box sx={{ minWidth: 700 }}>

@@ -31,26 +31,6 @@ const session = require("express-session");
 
 const cookieParser = require("cookie-parser");
 
-// import and initialize multer
-const multer = require("multer");
-
-const fileStorageEngine = multer.diskStorage({
-  destination: (req, file, cb) => {
-    // where to store the file
-    cb(null, "./uploadedFiles");
-  },
-  filename: (req, file, cb) => {
-    // name file date + original name
-    cb(null, Date.now() + "--" + file.originalname);
-  },
-});
-
-const upload = multer({ storage: fileStorageEngine });
-
-app.post("/upload", upload.single("uploaded_file"), (req, res) => {
-  console.log(req.file);
-  res.send("single File upload sucess");
-});
 // After you declare "app"
 app.use(
   session({ secret: "some-secret", resave: false, saveUninitialized: true })
@@ -133,6 +113,7 @@ db.sequelize.sync().then(() => {
 
 module.exports = app;
 
+// Run chat server on seperate port
 server.listen(4000, () => {
-  console.log(`The app server is running on port: ${port}`);
+  console.log(`The chat server is running on port: ${port}`);
 });
