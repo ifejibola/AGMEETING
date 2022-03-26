@@ -15,3 +15,8 @@
 
 - Created Content Message Component for frontend
 - Fixed various UI Inconsistencies 
+
+### Garry's Tasks
+
+- Created file upload component for the frontend
+- Created weekly scrum report for week 23
