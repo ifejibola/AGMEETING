@@ -9,37 +9,37 @@ PRIMARY KEY (id)
 
 CREATE TABLE Participant(
 id INT GENERATED ALWAYS AS IDENTITY,
-meetingId INT,
+meeting_id INT,
 email VARCHAR(100),
 password VARCHAR(100),
-isMod BOOLEAN,
-
+is_mod BOOLEAN,
+moderator_id INT, 
 PRIMARY KEY(id)
 );
 
 CREATE TABLE Meeting(
 id INT GENERATED ALWAYS AS IDENTITY,
-modId INT, 
-adminId INT,
+mod_id INT, 
+admin_id INT,
 
 PRIMARY KEY(id),
-FOREIGN KEY (modId) REFERENCES Participant(id),
-FOREIGN KEY (adminId) REFERENCES Administrator(id)
+FOREIGN KEY (mod_id) REFERENCES Participant(id),
+FOREIGN KEY (admin_id) REFERENCES Administrator(id)
 );
 
 CREATE TABLE Item(
 id INT GENERATED ALWAYS AS IDENTITY,
-meetingId INT, 
-issuenumber INT, 
+meeting_id INT, 
+issue_number INT, 
 description VARCHAR(2000),
 filepath VARCHAR(300),
-votesFor INT, 
-votesAgainst INT, 
+votes_for INT, 
+votes_against INT, 
 abstain INT,
 
 PRIMARY KEY(id),
-FOREIGN KEY (meetingId) REFERENCES Meeting(id)
+FOREIGN KEY (meeting_id) REFERENCES Meeting(id)
 );
 
 ALTER TABLE Participant ADD CONSTRAINT fk1
-   FOREIGN KEY (meetingId) REFERENCES Meeting (id);
+   FOREIGN KEY (meeting_id) REFERENCES Meeting(id);

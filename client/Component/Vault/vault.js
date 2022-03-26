@@ -135,7 +135,7 @@ const Vault = (props) => {
         <CardHeader
           action={
             <>
-              {props.user.isMod && (
+              {props.user.is_mod && (
                 <IconButton>
                   <DotsHorizontalIcon fontSize="small" onClick={open} />
                 </IconButton>
