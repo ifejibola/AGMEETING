@@ -13,7 +13,17 @@ router.post("/users", async(req, res) =>{
   if(userWithEmail){
     return res.json({message: "User with that email already exists"});
   };
+
+  await client.create({
+    email: email,
+    name: name,
+    password: password
+  });
+
+  return res.json({ message: "New user created!"});
+
 })
+
 
 
 module.exports = router;
