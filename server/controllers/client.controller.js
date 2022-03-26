@@ -4,7 +4,7 @@ const client = require("../models/client");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
-router.post("/users", async(req, res) =>{
+router.post("/add-users", async(req, res) =>{
 
   const { email, name, password } = req.body;
 
