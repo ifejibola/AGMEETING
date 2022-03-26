@@ -1,0 +1,3 @@
+- Learn socket.io and start the implementation
+- Add more functionalities to each role of the application
+- Add adding users functionalities for admin 
