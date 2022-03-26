@@ -20,3 +20,9 @@ function getRoleById(id) {
     const requestOptions = { method: 'GET', headers: authHeader() };
     return fetch(`/users/${id}`, requestOptions).then(handleResponse);
 }
+
+function addUser(email, name, password){
+    const requestOptions = { method: 'GET', headers: authHeader() };
+    return fetch(`/add-users`, requestOptions).then(handleResponse);
+
+}
