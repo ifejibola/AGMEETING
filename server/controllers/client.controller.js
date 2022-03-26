@@ -1,10 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const client = require("../models/client");
+const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
-// respond with "hello world" when a GET request is made to the homepage
-router.get("/", function (req, res) {
-  res.send("got clients");
-});
+router.post("/users", async(req, res) =>{
+
+  const { email, name, password } = req.body;
+
+  const userWithEmail = await client.findOne({where : { email }})
+
+  if(userWithEmail){
+    return res.json({message: "User with that email already exists"});
+  };
+})
+
 
 module.exports = router;
