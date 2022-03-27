@@ -25,9 +25,7 @@ const AccountPopover = () => {
 
   // Get user's name for display
   const currentUser = authenticationService.currentUserValue;
-  console.log(currentUser.client_name);
-  console.log(currentUser.email);
-  console.log(currentUser.role);
+
   //TO DO: create a method to retrieve currentUserValue and return error if currentUserValue is null
 
   const handleOpen = () => {
@@ -64,7 +62,7 @@ const AccountPopover = () => {
             height: 32,
             width: 32,
           }}
-          alt={currentUser.client_name}
+          alt={currentUser?.client_name}
           src="../../../misc/img.png"
         />
       </Box>
