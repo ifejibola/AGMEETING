@@ -12,7 +12,6 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import axios from "axios";
 import {useEffect, useState} from "react";
 import { useNavigate } from "react-router-dom";
 import validator from "validator";
@@ -89,7 +88,9 @@ export default function SignIn(effect, deps) {
                     </Typography>
                     <div className="alert alert-info">
                         <strong>Normal User</strong> - Email: 2@gmail.com | Password: p1<br />
-                        <strong>Administrator</strong> - Email: 1@gmail.com | Password: p1
+                        <strong>Administrator</strong> - Email: 1@gmail.com | Password: p1<br />
+                        <strong>Moderator</strong> - Email: t5@gmail.com | Password: p5
+
                     </div>
                     <span
                         margin="normal"
