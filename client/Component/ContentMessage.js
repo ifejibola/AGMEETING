@@ -34,7 +34,9 @@ const ContentMessage = (props) => {
   };
 
   console.log(messages);
-  var test = messages.map((message) => message.content + "\n").join("");
+  var test = messages
+    .map((message) => message.userId + ": " + message.content + "\n")
+    .join("");
 
   return (
     <Box

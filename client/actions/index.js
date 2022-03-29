@@ -39,6 +39,8 @@ export const createAccount = (email, password, callback) => {
         dispatch({ type: "CREATE_ACCOUNT_SUCCESS", payload: data });
         if (data !== "failure") {
           localStorage.setItem("is_authenticated", true);
+          localStorage.setItem("access_token", data.accessToken);
+          localStorage.setItem("refresh_token", data.refreshToken);
           //calls the function that calls the navigate function from the useNavigation hook in the signup component
           callback();
           return;

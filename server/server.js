@@ -88,8 +88,4 @@ db.sequelize.sync({ force: true }).then(() => {
   });
 });
 
-io.on("connection", (socket) => {
-  console.log("a user connected");
-});
-
 module.exports = app;

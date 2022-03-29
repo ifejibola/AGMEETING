@@ -14,7 +14,7 @@ const Item = db.define(
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    issuenum: {
+    issue_number: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

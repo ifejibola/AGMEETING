@@ -24,8 +24,8 @@ const userReducer = (state = {}, action) => {
         currentUser: {
           id: action.payload.id,
           email: action.payload.email,
-          isMod: action.payload.isMod,
-          moderatorId: action.payload.moderatorId,
+          is_mod: action.payload.is_mod,
+          moderator_id: action.payload.moderator_id,
         },
         loading: false,
       };
@@ -39,7 +39,8 @@ const userReducer = (state = {}, action) => {
         currentUser: {
           id: action.payload.id,
           email: action.payload.email,
-          moderatorId: action.payload.moderatorId,
+          is_mod: action.payload.is_mod,
+          moderator_id: action.payload.moderator_id,
         },
         loading: false,
       };
@@ -52,8 +53,8 @@ const userReducer = (state = {}, action) => {
         currentUser: {
           id: action.payload.id,
           email: action.payload.email,
-          isMod: action.payload.isMod,
-          moderatorId: action.payload.moderatorId,
+          is_mod: action.payload.is_mod,
+          moderator_id: action.payload.moderator_id,
         },
         loading: false,
       };

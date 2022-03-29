@@ -15,6 +15,7 @@ router.get(
   "/verifyToken",
   passport.authenticate("jwt", { session: false }),
   (req, res, next) => {
+    console.log("here");
     res.send("success");
   }
 );
@@ -48,8 +49,8 @@ router.post("/login", (req, res, next) => {
         const body = {
           id: user.id,
           email: user.email,
-          isMod: user.isMod,
-          moderatorId: user.moderatorId,
+          is_mod: user.is_mod,
+          moderator_id: user.moderator_id,
         };
         const accessToken = jwt.sign(
           { user: body },
@@ -75,9 +76,9 @@ router.post("/register", (req, res) => {
         Participant.create({
           email: req.body.email,
           password: hashedPassword,
-          isMod: false,
+          is_mod: false,
         }).then((participant) => {
-          res.send(participant);
+          res.json({ participant });
         });
       } else {
         res.send("failure");
