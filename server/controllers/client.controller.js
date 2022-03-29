@@ -4,26 +4,30 @@ const client = require("../models/client");
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
 
-router.post("/add-users", async(req, res) =>{
+router.get("/users", passport.authenticate("jwt", {session: false} ),async(req, res) =>{
 
-  const { email, name, password } = req.body;
-
-  const userWithEmail = await client.findOne({where : { email }})
-
-  if(userWithEmail){
-    return res.json({message: "User with that email already exists"});
-  };
-
-  await client.create({
-    email: email,
-    name: name,
-    password: password
+  const allUsers = await client.findAll().catch((err)=> {
+    console.log("Error: ", err);
   });
 
-  return res.json({ message: "New user created!"});
+  if(!allUsers){
+    return res.json({message: "User with that email not exists"})
+  };
+
+  return res.json({ users: allUsers});
 
 })
 
+router.get("/users/:userId", passport.authenticate("jwt", {session: false} ), async(req, res) =>{
 
+  const userWithId = await client.findOne({ where: { id: req.params.userId }});
+
+  if(!userWithId){
+    return res.json({message: "User with that id not exists"});
+  };
+
+  return res.json({ user: userWithId});
+
+})
 
 module.exports = router;

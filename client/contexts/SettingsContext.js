@@ -26,8 +26,8 @@ export const restoreSettings = () => {
         roundedCorners: true,
         // theme: window.matchMedia('(prefers-color-scheme: dark)').matches
         theme: window.matchMedia('(prefers-color-scheme: light)').matches
-          ? THEMES.DARK
-          : THEMES.LIGHT
+          ? THEMES.LIGHT
+          : THEMES.DARK
       };
     }
   } catch (err) {
