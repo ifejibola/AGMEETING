@@ -10,7 +10,7 @@ const Item = db.define(
       allowNull: false,
       primaryKey: true,
     },
-    meetingid: {
+    meeting_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -26,11 +26,11 @@ const Item = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    votefor: {
+    votes_for: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    voteagainst: {
+    votes_against: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

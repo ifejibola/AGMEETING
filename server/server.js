@@ -31,26 +31,8 @@ const session = require("express-session");
 
 const cookieParser = require("cookie-parser");
 
-// import and initialize multer
-const multer = require("multer");
+const io = require("./socket");
 
-const fileStorageEngine = multer.diskStorage({
-  destination: (req, file, cb) => {
-    // where to store the file
-    cb(null, "./uploadedFiles");
-  },
-  filename: (req, file, cb) => {
-    // name file date + original name
-    cb(null, Date.now() + "--" + file.originalname);
-  },
-});
-
-const upload = multer({ storage: fileStorageEngine });
-
-app.post("/upload", upload.single("uploaded_file"), (req, res) => {
-  console.log(req.file);
-  res.send("single File upload sucess");
-});
 // After you declare "app"
 app.use(
   session({ secret: "some-secret", resave: false, saveUninitialized: true })
@@ -61,11 +43,6 @@ app.use(cookieParser("some-secret"));
 //passport
 const passport = require("passport");
 require("../config/passport");
-
-const { Server } = require("socket.io");
-const http = require("http");
-const server = http.createServer(app);
-const io = new Server(server);
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
@@ -105,7 +82,7 @@ app.get("*", (req, res) => {
   // res.sendFile(path.join(__dirname + '/public/index.html'))
 });
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   app.listen(port, () => {
     console.log(`The app server is running on port: ${port}`);
   });
@@ -116,15 +93,3 @@ io.on("connection", (socket) => {
 });
 
 module.exports = app;
-
-// app.listen(port, () => {
-//     console.log(`The app server is running on port: ${port}`);
-// });
-
-var io2 = require("socket.io")(http);
-
-io2.on("connection", (socket) => {
-  /* socket object may be used to send specific messages to the new connected client */
-  console.log("new client connected");
-  socket.emit("connection", null);
-});

@@ -28,7 +28,7 @@ export const setCurrentUser = (userInfo) => {
 };
 
 export const createAccount = (email, password, callback) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch({ type: "CREATE_ACCOUNT_REQUEST" });
     const req = axios
       .post(baseURL + "/authentication/register", {
@@ -75,7 +75,7 @@ export const login = (email, password, callback) => {
           localStorage.removeItem("acess_token");
           localStorage.removeItem("refresh_token");
           localStorage.setItem("is_authenticated", false);
-          return dispatch({ type: "LOGIN_SUCCESS", payload: data });
+          return dispatch({ type: "LOGIN_FAILURE" });
         }
       })
       .catch((err) => {

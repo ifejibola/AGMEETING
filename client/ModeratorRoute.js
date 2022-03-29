@@ -6,7 +6,7 @@ import { verifyToken } from "./actions";
 function ModeratorRoute(props) {
   const [isMod, setIsMod] = useState(null);
   useEffect(() => {
-    setIsMod(props.userReducer?.currentUser?.isMod);
+    setIsMod(props.userReducer?.currentUser?.is_mod);
     return () => {
       isMod;
     };

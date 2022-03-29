@@ -61,8 +61,8 @@ const SignIn = (props) => {
     }
     props.onLogin(data.get("email"), data.get("password"), () => {
       navigate("/");
+      setLoginError("Incorrect user or password try again");
     });
-    setLoginError("Incorrect user or password try again");
   };
 
   return (

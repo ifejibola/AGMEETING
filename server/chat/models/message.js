@@ -1,32 +1,39 @@
 const { Sequelize, DataTypes } = require("sequelize");
 const db = require("../../config/db");
 
-const Meeting = db.define(
-  "meeting",
+const Message = db.define(
+  "message",
   {
     // Model attributes are defined here
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      allowNull: false,
       primaryKey: true,
     },
-    mod_id: {
+    meeting_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    admin_id: {
+    moderator_id: {
       type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    content: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
     freezeTableName: true,
-    timestamps: false,
+    timestamps: true,
   }
 );
 
 // `sequelize.define` also returns the model
-console.log(Meeting === db.models.Meeting); // true
+console.log(Message === db.models.Message); // true
 
-module.exports = Meeting;
+module.exports = Message;
