@@ -11,6 +11,7 @@ import { useRoutes } from "react-router";
 import { ThemeProvider } from '@mui/material/styles';
 import { CssBaseline } from "@mui/material";
 import { createCustomTheme } from '../config/theme';
+import { ToastContainer } from "material-react-toastify";
 // import { Toaster } from "react-hot-toast";
 
 import RTL from './RTL'
@@ -44,7 +45,9 @@ function App(props) {
         <ErrorBoundary>
             <ThemeProvider theme={theme}>
                 <RTL direction={settings.direction}>
-                    {/* <CssBaseline /> */}
+                    <ToastContainer />
+
+                    <CssBaseline />
                     {/* <Toaster position="top-center" /> */}
                     {/* <SettingsDrawer /> */}
                     {content}

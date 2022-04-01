@@ -1,7 +1,10 @@
 import React from 'react'
 import { useRef, useState } from 'react';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
+// import toast from 'react-hot-toast';
+import axios from "axios";
+import useAuthentication from '../../hooks/useAuth';
+
 import {
     Avatar,
     Box,
@@ -14,7 +17,6 @@ import {
     Popover,
     Typography
 } from "@mui/material";
-// import useAuth from '../../hooks/useAuth';
 import CogIcon from '../../icons/Cog';
 import UserIcon from '../../icons/User';
 
@@ -23,6 +25,15 @@ const AccountPopover = () => {
     // const { user, logout } = useAuth();
     const navigate = useNavigate();
     const [open, setOpen] = useState(false);
+
+    const { user, saveUser } = useAuthentication();
+
+    let userName;
+    if (user.firstName || user.lastName) {
+        userName = (user.firstName ? user.firstName : '') + (user.lastName ? ' ' + user.lastName : '');
+    } else {
+        userName = 'USER #' + user.id;
+    }
 
     const handleOpen = () => {
         setOpen(true);
@@ -35,11 +46,21 @@ const AccountPopover = () => {
     const handleLogout = async () => {
         try {
             handleClose();
-            // await logout();
-            navigate('/');
+            if (user) {
+                axios.get('http://localhost:35/api/users/logout', { withCredentials: true }).then(() => {
+                    saveUser(null);
+                    // navigate('/');
+                    // toast.success('You have successfully logged out.');
+                }).catch((err) => {
+                    console.log(err.response.data);
+                    toast.error(err.response.data.message || 'There was an issue logging out.');
+                });
+            } else {
+                // toast.error('You are currently not logged in.');
+            }
         } catch (err) {
             console.error(err);
-            toast.error('Unable to logout.');
+            // toast.error('Unable to logout.');
         }
     };
 
@@ -80,14 +101,15 @@ const AccountPopover = () => {
                         color="textPrimary"
                         variant="subtitle2"
                     >
-                        {/* {user.name} */}
-                        USER
+                        {userName}
+                        {/* USER */}
                     </Typography>
                     <Typography
                         color="textSecondary"
                         variant="subtitle2"
                     >
-                        Devias
+                        {user.email}
+                        {/* Devias */}
                     </Typography>
                 </Box>
                 <Divider />

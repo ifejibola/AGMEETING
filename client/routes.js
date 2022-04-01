@@ -93,7 +93,7 @@ const routes = [
         element: <Login />
     },
     {
-        path: '/login2',
+        path: '/signin',
         element: <SignIn />
     },
     {

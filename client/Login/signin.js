@@ -1,4 +1,10 @@
 import * as React from 'react';
+
+import axios from "axios";
+import { toast } from "material-react-toastify";
+import { useNavigate } from "react-router-dom";
+import useAuthentication from '../hooks/useAuth';
+
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -29,6 +35,11 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignIn() {
+
+  const { saveUser } = useAuthentication();
+  const navigate = useNavigate();
+
+  //Handle
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -36,6 +47,19 @@ export default function SignIn() {
     console.log({
       email: data.get('email'),
       password: data.get('password'),
+    });
+
+    axios.post('http://localhost:35/api/users/login', {
+      email: data.get('email'),
+      password: data.get('password')
+    }, { withCredentials: true }).then((response) => {
+      console.log(response.data);
+      saveUser(response.data);
+      // navigate('/');
+      toast.success('You have successfully logged in!');
+    }).catch((err) => {
+      console.log(err.response.data);
+      toast.error(err.response.data.message || 'There was an issue logging in.');
     });
   };
 
@@ -84,7 +108,7 @@ export default function SignIn() {
             />
             <Button
               type="submit"
-              href="/"
+              // href="/"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}

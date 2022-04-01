@@ -2,7 +2,7 @@
   "development": {
     "username": "ife",
     "password": null,
-    "database": "agmeeting",
+    "database": "agm",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
