@@ -2,6 +2,10 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const bcrypt = require("bcrypt");
 const Participant = require("../server/participant/models/participant");
+const JWTstrategy = require("passport-jwt").Strategy;
+const ExtractJWT = require("passport-jwt").ExtractJwt;
+require("dotenv");
+
 // middleware for  login endpoint
 /**
  * Look up user info in the request body and try to find corresponding use, then see if the
@@ -20,6 +24,7 @@ const findId = async (id, done) => {
 };
 
 passport.use(
+  "login",
   new LocalStrategy(
     {
       usernameField: "email",
@@ -47,6 +52,8 @@ passport.use(
             console.log("Match", match);
 
             if (!match) {
+              console.log("here");
+              window.alert("Incorrect email or password.");
               return done(null, false, { message: "Incorrect password." });
             }
             console.log("***** Login Success .... *****");
@@ -60,6 +67,23 @@ passport.use(
           .catch((err) => done(err));
       };
       findEmail(email);
+    }
+  )
+);
+
+passport.use(
+  "jwt",
+  new JWTstrategy(
+    {
+      secretOrKey: process.env.ACCESS_TOKEN_KEY,
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    },
+    async (token, done) => {
+      try {
+        return done(null, token.user);
+      } catch (error) {
+        done(error);
+      }
     }
   )
 );

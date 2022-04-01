@@ -12,6 +12,8 @@ const initialState = {
   currentUser: {
     id: "",
     email: "",
+    is_mod: "",
+    moderator_id: "",
   },
 };
 

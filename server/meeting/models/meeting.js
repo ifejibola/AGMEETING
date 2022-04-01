@@ -11,11 +11,11 @@ const Meeting = db.define(
       allowNull: false,
       primaryKey: true,
     },
-    modId: {
+    mod_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    adminId: {
+    admin_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },

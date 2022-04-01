@@ -18,14 +18,10 @@ import { THEMES } from "../config/theme/constants";
 import ErrorBoundary from "./Errorbound";
 import useSettings from "./hooks/useSettings";
 import { io } from "socket.io-client";
+import jwtDecode from "jwt-decode";
+import { setCurrentUser } from "./actions";
 
-const mapStateToProps = (state) => {
-  return {
-    currentUser: state.currentUser,
-  };
-};
-
-function App({ currentUser }) {
+function App(props) {
   useEffect(() => {
     var socket = io();
   });
@@ -46,8 +42,12 @@ function App({ currentUser }) {
 
   useEffect(() => {
     console.log("app.js");
-    console.log(currentUser);
-  });
+    if (localStorage.getItem("access_token")) {
+      let access_token = localStorage.getItem("access_token");
+      const userInfo = jwtDecode(access_token).user;
+      props.setCurrentUser(userInfo);
+    }
+  }, []);
   //This component basically contains the content for the entire application, wraps it in the theme provider.
   return (
     <ErrorBoundary>
@@ -65,4 +65,18 @@ function App({ currentUser }) {
   );
 }
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setCurrentUser: (user) => {
+      dispatch(setCurrentUser(user));
+    },
+  };
+};
+
+const mapStateToProps = (state) => {
+  return {
+    userReducer: state.userReducer,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

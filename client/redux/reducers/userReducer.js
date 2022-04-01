@@ -1,36 +1,63 @@
+import {
+  CREATE_ACCOUNT,
+  STORE_USER,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  CREATE_ACCOUNT_REQUEST,
+  CREATE_ACCOUNT_SUCCESS,
+  CREATE_ACCOUNT_FAILURE,
+  SET_USER_INFO,
+} from "../userTypes";
 const userReducer = (state = {}, action) => {
   switch (action.type) {
-    case "STORE_USER":
+    case STORE_USER:
       state.currentUser = action.payload;
       break;
-    case "CREATE_ACCOUNT":
+    case CREATE_ACCOUNT:
       break;
-    case "LOGIN_REQUEST":
+    case LOGIN_REQUEST:
       return { ...state, loading: true };
-      break;
-    case "LOGIN_SUCCESS":
+    case LOGIN_SUCCESS:
       return {
         ...state,
-        currentUser: { id: action.payload.id, email: action.payload.email },
+        currentUser: {
+          id: action.payload.id,
+          email: action.payload.email,
+          is_mod: action.payload.is_mod,
+          moderator_id: action.payload.moderator_id,
+        },
         loading: false,
       };
-      break;
-    case "LOGIN_FAILURE":
+    case LOGIN_FAILURE:
       return { ...state, loading: false };
-      break;
-    case "CREATE_ACCOUNT_REQUEST":
+    case CREATE_ACCOUNT_REQUEST:
       return { ...state, loading: true };
-      break;
-    case "CREATE_ACCOUNT_SUCCESS":
+    case CREATE_ACCOUNT_SUCCESS:
       return {
         ...state,
-        currentUser: { id: action.payload.id, email: action.payload.email },
+        currentUser: {
+          id: action.payload.id,
+          email: action.payload.email,
+          is_mod: action.payload.is_mod,
+          moderator_id: action.payload.moderator_id,
+        },
         loading: false,
       };
-      break;
-    case "CREATE_ACCOUNT_FAILURE":
+    case CREATE_ACCOUNT_FAILURE:
       return { ...state, loading: false };
-      break;
+
+    case SET_USER_INFO:
+      return {
+        ...state,
+        currentUser: {
+          id: action.payload.id,
+          email: action.payload.email,
+          is_mod: action.payload.is_mod,
+          moderator_id: action.payload.moderator_id,
+        },
+        loading: false,
+      };
     default:
       return state;
   }
