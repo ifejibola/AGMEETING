@@ -9,7 +9,7 @@ import {
     TextField,
     Tooltip,
     Typography
-} from '@material-ui/core';
+} from '@mui/material';
 import {THEMES} from '../config/theme/constants';
 import useSettings from './hooks/useSettings';
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -76,6 +76,7 @@ const SettingsDrawer = () => {
                 PaperProps={{
                     sx: {
                         p: 2,
+                        pt: 13,
                         width: 320
                     }
                 }}
@@ -110,38 +111,43 @@ const SettingsDrawer = () => {
                         ))}
                     </TextField>
                 </Box>
-                <Box
-                    sx={{
-                        mt: 2,
-                        px: 1.5
-                    }}
-                >
-                    <FormControlLabel
-                        control={(
-                            <Switch
-                                checked={values.direction === 'rtl'}
-                                color="primary"
-                                edge="start"
-                                name="direction"
-                                onChange={(event) => handleChange('direction', event.target.checked
-                                    ? 'rtl'
-                                    : 'ltr')}
-                            />
-                        )}
-                        label={(
-                            <div>
-                                RTL
-                                <Typography
-                                    color="textSecondary"
-                                    component="p"
-                                    variant="caption"
-                                >
-                                    Change text direction
-                                </Typography>
-                            </div>
-                        )}
-                    />
-                </Box>
+
+                {/* RTL setting removed due to lag and non-use */}
+
+                {/*<Box*/}
+                {/*    sx={{*/}
+                {/*        mt: 2,*/}
+                {/*        px: 1.5*/}
+                {/*    }}*/}
+                {/*>*/}
+                {/*    <FormControlLabel*/}
+                {/*        control={(*/}
+                {/*            <Switch*/}
+                {/*                checked={values.direction === 'rtl'}*/}
+                {/*                color="primary"*/}
+                {/*                edge="start"*/}
+                {/*                name="direction"*/}
+                {/*                onChange={(event) => handleChange('direction', event.target.checked*/}
+                {/*                    ? 'rtl'*/}
+                {/*                    : 'ltr')}*/}
+                {/*            />*/}
+                {/*        )}*/}
+                {/*        label={(*/}
+                {/*            <div>*/}
+                {/*                RTL*/}
+                {/*                <Typography*/}
+                {/*                    color="textSecondary"*/}
+                {/*                    component="p"*/}
+                {/*                    variant="caption"*/}
+                {/*                >*/}
+                {/*                    Change text direction*/}
+                {/*                </Typography>*/}
+                {/*            </div>*/}
+                {/*        )}*/}
+                {/*    />*/}
+                {/*</Box>*/}
+
+
                 <Box
                     sx={{
                         mt: 2,

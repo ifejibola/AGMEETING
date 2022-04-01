@@ -1,11 +1,9 @@
 import React, {useState} from 'react'
-import numeral from 'numeral';
 import {format, subMinutes, subSeconds} from 'date-fns';
 import {
     Box,
     Button,
     Card,
-    Container,
     CardHeader,
     Checkbox,
     Divider,
@@ -18,17 +16,13 @@ import {
     TablePagination,
     TableRow,
     Typography
-} from '@material-ui/core';
+} from '@mui/material';
 import Label from '../../Label';
 import Scrollbar from '../../Scrollbar';
-import ArrowRightIcon from '../../icons/ArrowRight';
-import DotsHorizontalIcon from '../../icons/DotsHorizontal';
-import PencilAltIcon from '../../icons/PencilAlt';
 import Plus from '../../icons/Plus';
-
-import useSettings from '../../hooks/useSettings';
-import Votes from '../Votes/votes';
+import HelpOutlineIcon from '@mui/icons-material/HelpOutline';
 import Modal from './Modal'
+import AgendaHelpModal from "./AgendaHelpModal";
 
 const now = new Date();
 
@@ -117,7 +111,6 @@ const getStatusLabel = (status) => {
 const Agenda = () => {
 
     const [isApplicationOpen, setIsApplicationOpen] = useState(false);
-    const {settings} = useSettings();
 
     const handleApplyModalOpen = () => {
         setIsApplicationOpen(true);
@@ -126,56 +119,60 @@ const Agenda = () => {
     const handleApplyModalClose = () => {
         setIsApplicationOpen(false);
     };
+
+    //used for help modal
+    const [isHelpApplicationOpen, setIsHelpApplicationOpen] = useState(false);
+    const handleApplyHelpModalOpen = () => {
+        setIsHelpApplicationOpen(true);
+    };
+
+    const handleApplyHelpModalClose = () => {
+        setIsHelpApplicationOpen(false);
+    };
+
+
     return (
         <Box
             sx={{
                 backgroundColor: 'background.default',
-                p: 3
+                p: 3,
+                mt: 2
             }}
         >
-            {/* AGENDA MODAL */}
-            <Box
-                sx={{
-                    backgroundColor: 'background.default',
-                    minHeight: '100%',
-                    py: 8
-                }}
-            >
-                <Container maxWidth={settings.compact ? 'xl' : false}>
-                    <Grid
-                        container
-                        justifyContent="space-between"
-                        spacing={3}
-                    >
-
-                        <Grid item>
-                            <Box sx={{m: -1}}>
-
+            <Card>
+                <CardHeader
+                    action={(
+                        <IconButton
+                            onClick={handleApplyHelpModalOpen}
+                        >
+                            <HelpOutlineIcon fontSize="small"/>
+                        </IconButton>
+                    )}
+                    title={(
+                        <Grid container>
+                            <Grid>
+                                <Typography variant="title2">
+                                    Agenda
+                                </Typography>
+                            </Grid>
+                            <Grid>
                                 <Button
                                     color="primary"
                                     onClick={handleApplyModalOpen}
                                     startIcon={<Plus fontSize="small"/>}
-                                    sx={{m: 1}}
+                                    sx={{
+                                        ml: 2
+                                    }}
                                     variant="contained"
+                                    size="small"
                                 >
                                     Add Item
                                 </Button>
-                            </Box>
+                            </Grid>
                         </Grid>
-                    </Grid>
-
-                </Container>
-            </Box>
-            {/* AGENDA */}
-            <Card>
-                <CardHeader
-                    action={(
-                        <IconButton>
-                            <DotsHorizontalIcon fontSize="small"/>
-                        </IconButton>
                     )}
-                    title="Agenda"
                 />
+
                 <Divider/>
                 <Scrollbar>
                     <Box sx={{minWidth: 1150}}>
@@ -183,7 +180,6 @@ const Agenda = () => {
                             <TableHead>
                                 <TableRow>
                                     <TableCell padding="checkbox">
-                                        <Checkbox color="primary"/>
                                     </TableCell>
                                     <TableCell>
                                         Item Name
@@ -285,8 +281,6 @@ const Agenda = () => {
                     rowsPerPage={5}
                     rowsPerPageOptions={[5, 10, 25]}
                 />
-                {/* VOTES */}
-                <Votes/>
                 {/* Modal */}
                 <Modal
                     // authorAvatar={project.author.avatar}
@@ -294,6 +288,11 @@ const Agenda = () => {
                     onApply={handleApplyModalClose}
                     onClose={handleApplyModalClose}
                     open={isApplicationOpen}
+                />
+                <AgendaHelpModal
+                    onApply={handleApplyHelpModalClose}
+                    onClose={handleApplyHelpModalClose}
+                    open={isHelpApplicationOpen}
                 />
             </Card>
         </Box>

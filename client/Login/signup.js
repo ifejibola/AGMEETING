@@ -12,9 +12,13 @@ import {Grid} from "@mui/material";
 import {useState} from "react";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import {useDispatch, useSelector} from 'react-redux';
+import {register} from "../actions/auth";
 
 
 export default function SignUp() {
+    const {message} = useSelector(state => state.message);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [isAdmin, setIsAdmin] = useState(false);
     const [isModerator, setIsModerator] = useState(false);
@@ -38,21 +42,9 @@ export default function SignUp() {
         const meetingId = data.get('meetingId');
 
         if (password === password2) {
-            axios.post('http://localhost:3000/api/users/register', {
-                firstName: firstName,
-                lastName: lastName,
-                email: email,
-                password: password,
-                meetingId: meetingId,
-                isAdmin: isAdmin,
-                isModerator: isModerator
-            }, {withCredentials: true}).then((response) => {
+            dispatch(register(firstName, lastName, email, password, meetingId, isAdmin, isModerator)).then(() => {
                 navigate('/login');
-                console.log(response.data);
                 toast.success('You have registered successfully.');
-            }).catch((err) => {
-                console.log(err.response.data);
-                toast.error(err.response.data.message || 'There was an issue with registration.');
             });
         } else {
             toast.error('The passwords must match.');
