@@ -32,4 +32,23 @@ router.get("/agenda/:id", async (req, res) => {
     res.status(404);
   });
 
+router.post("/agenda/submit", async (req, res) =>{
+    try{
+        let data = req.body;
+        const a = await agenda.create({
+            meeting_id: null,
+            item_name: data['name'],
+            description: data['description'],
+            vote_for: data['vote_for'],
+            vote_against: data['vote_against'],
+            abstain: data['abstain']
+        });
+        res.status(200)
+    }
+    catch(err){
+        console.log("Error! ", err);
+        res.status(500)
+    }
+});
+
 module.exports = router;
