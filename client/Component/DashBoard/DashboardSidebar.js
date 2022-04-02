@@ -69,7 +69,7 @@ const sectionsMod = [
       {
         title: "Chat",
         path: "/content",
-        icon: <ChartSquareBarIcon fontSize="small" />,
+        icon: <ChatAltIcon fontSize="small" />,
       },
       // {
       //   title: 'Account',
