@@ -20,7 +20,7 @@ import { connect } from "react-redux";
 
 const ContentMessage = (props) => {
   const { roomId } = 1;
-  const { messages, sendMessage } = useChat(1); // Creates a websocket and manages messaging
+  const { messages, sendMessage } = useChat(props.user.moderator_id); // Creates a websocket and manages messaging
   const [newMessage, setNewMessage] = React.useState(""); // Message to be sent
 
   const handleNewMessageChange = (event) => {
@@ -28,11 +28,13 @@ const ContentMessage = (props) => {
   };
 
   const handleSendMessage = () => {
-    sendMessage(props.userReducer?.currentUser?.email + ": " + newMessage);
+    sendMessage(newMessage, props.user.id, null, props.user.moderator_id);
     setNewMessage("");
   };
 
-  var test = messages.map((message) => message.body + "\n").join("");
+  var test = messages
+    .map((message) => message.user_id + ": " + message.content + "\n")
+    .join("");
 
   return (
     <Box
@@ -149,7 +151,7 @@ const ContentMessage = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    userReducer: state.userReducer,
+    user: state.userReducer.currentUser,
   };
 };
 

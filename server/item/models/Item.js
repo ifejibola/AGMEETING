@@ -26,11 +26,11 @@ const Item = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    vote_for: {
+    votes_for: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    vote_against: {
+    votes_against: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
