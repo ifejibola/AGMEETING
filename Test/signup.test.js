@@ -1,10 +1,10 @@
-const signup = require("../client/login/signup");
 import React from "react";
 import { render, screen, cleanup, fireEvent } from "@testing-library/react";
+import Signup from "../client/login/signup";
 
 describe("handleSubmit function", () => {
   test("Email format Check", async () => {
-    render(<signup />);
+    render(<Signup />);
     // get fields needed for test
     var email = screen.getElementById("email");
     var password = screen.getElementById("password");
