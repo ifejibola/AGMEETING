@@ -1,28 +1,34 @@
 import {authHeader} from "../helpers/auth-header";
 import { handleResponse } from '../helpers/handle-response';
+import axios from "axios";
 
 export const userService = {
     getAll,
     getById
 };
 
-function getAll() {
-    const requestOptions = { method: 'GET', headers: authHeader() };
-    return fetch(`/users`, requestOptions).then(handleResponse);
+async function getAll() {
+    let customers = [];
+    await axios.get("http://localhost:3000/api/v1/users", {
+        headers: authHeader()
+    }).then(customersList => {
+        customers.push(...customersList.data.users);
+    }).catch((err)=> {
+        console.log("Error: ", err);
+    })
+
+    return customers;
 }
 
-function getById(id) {
-    const requestOptions = { method: 'GET', headers: authHeader() };
-    return fetch(`/users/${id}`, requestOptions).then(handleResponse);
-}
+async function getById(id) {
+    let customers = [];
+    await axios.get("http://localhost:3000/api/v1/users/"+id, {
+        headers: authHeader()
+    }).then(customersList => {
+        customers.push(...customersList.data.users);
+    }).catch((err)=> {
+        console.log("Error: ", err);
+    })
 
-function getRoleById(id) {
-    const requestOptions = { method: 'GET', headers: authHeader() };
-    return fetch(`/users/${id}`, requestOptions).then(handleResponse);
-}
-
-function addUser(email, name, password){
-    const requestOptions = { method: 'GET', headers: authHeader() };
-    return fetch(`/add-users`, requestOptions).then(handleResponse);
-
+    return customers;
 }
