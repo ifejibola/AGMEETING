@@ -111,9 +111,9 @@ db.sequelize.sync().then(() => {
   });
 });
 
-module.exports = app;
-
 // Run chat server on seperate port
 server.listen(4000, () => {
-  console.log(`The chat server is running on port: ${port}`);
+  //console.log(`The chat server is running on port: 4000`);
 });
+
+module.exports = app;

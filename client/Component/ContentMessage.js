@@ -14,7 +14,6 @@ import { useState } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import useChat from "./useChat";
 import { connect } from "react-redux";
-// import "./ChatRoom.css";
 
 // Soket.io code from https://medium.com/swlh/build-a-real-time-chat-app-with-react-hooks-and-socket-io-4859c9afecb0
 // https://github.com/pixochi/socket.io-react-hooks-chat
