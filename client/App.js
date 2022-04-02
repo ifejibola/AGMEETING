@@ -40,6 +40,8 @@ function App() {
   const content = useRoutes(Routes);
 
   useEffect(async () => {
+    // Check login authentication for every pages of the application (or every time the app rerender)
+    // Alternative solution would be using onEnter for every Route in route.js
     const currentUser = await authenticationService.currentUserValue;
     try {
       setUserStates({
@@ -47,7 +49,7 @@ function App() {
         role: currentUser.role,
       });
     } catch (err) {
-      console.log("error in setUserStates");
+      console.log("No user logged in");
     }
 
     console.log(currentUser);
