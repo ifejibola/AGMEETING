@@ -27,6 +27,8 @@ const administratorController = require("./admin/admin-controller");
 
 const authController = require("./auth/authController");
 
+const chatController = require("./chat/chat-controller");
+
 const session = require("express-session");
 
 const cookieParser = require("cookie-parser");
@@ -53,6 +55,7 @@ app.use("/meetings", meetingController);
 app.use("/items", itemController);
 app.use("/admins", administratorController);
 app.use("/authentication", authController);
+app.use("/chat", chatController);
 //passport
 app.use(passport.initialize());
 app.use(passport.session());

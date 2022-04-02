@@ -22,9 +22,9 @@ io.on("connection", (socket) => {
     io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
     console.log(data.userId);
     Message.create({
-      user_id: data.userId,
-      meeting_id: data.meetingId,
-      moderator_id: data.moderatorId,
+      user_id: data.user_id,
+      meeting_id: data.meeting_id,
+      moderator_id: data.moderator_id,
       content: data.content,
       timestamp: data.timestamp,
     }).then((data) => {
