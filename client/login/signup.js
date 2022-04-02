@@ -44,12 +44,8 @@ export default function SignUp() {
         const email = data.get("email");
         const password = data.get("password");
         const passwordAgain = data.get("passwordAgain");
+        const name = data.get("name");
 
-        console.log({
-            email: email,
-            password: password,
-            passwordAgain: passwordAgain
-        })
         // make sure email is valid
         if (!validator.isEmail(data.get("email"))) {
             setSignupError("Enter valid Email!");
@@ -61,12 +57,13 @@ export default function SignUp() {
         } else {
             setSignupError("");
 
-            await axios.post("http://localhost:3000/api/v1/register", {email, password})
+            await axios.post("http://localhost:3000/api/v1/register", {email, password, name})
                 .then(response => {
                     console.log(response);
-                    setSignupError("Successfully created your account, please go back to sign in page to continue");
+                    setSignupError(response.data.message);
                 })
                 .catch(error => {
+                    setSignupError("Email has been used. Please try a different email or forget password.");
                     console.log(error);
                 })
         }
@@ -126,15 +123,19 @@ export default function SignUp() {
                             id="passwordAgain"
                             autoComplete="current-password"
                         />
-                        <span
+                        <TextField
                             margin="normal"
-                            style={{
-                                fontWeight: "bold",
-                                color: "red",
-                            }}
-                        >
-              {signupError}
-            </span>
+                            required
+                            fullWidth
+                            name="name"
+                            label="Full Name"
+                            type="name"
+                            id="name"
+                            autoComplete="name"
+                        />
+                        <Typography component="h3" variant="h8" color={"#b30000"}>
+                            {signupError}
+                        </Typography>
                         <Button
                             type="submit"
                             fullWidth

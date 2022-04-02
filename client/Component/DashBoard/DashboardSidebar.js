@@ -67,17 +67,18 @@ const sectionsAdmin = [
         icon: <UsersIcon fontSize="small" />,
         children: [
           {
-            title: "Logged In Users",
-            path: "/loggedinUsers",
-          },
-          {
             title: "Registered Users",
             path: "/registeredusers",
+          },
+          {
+            title: "Add Users",
+            path: "/addusers",
           },
           {
             title: "Stats",
             path: "/stats",
           },
+
           // {
           //   title: 'Edit',
           //   path: '/dashboard/customers/1/edit'
