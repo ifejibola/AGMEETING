@@ -112,6 +112,7 @@ const SignIn = (props) => {
               label="Remember me"
             />
             <span
+              id="error"
               margin="normal"
               style={{
                 fontWeight: "bold",
@@ -122,6 +123,7 @@ const SignIn = (props) => {
               {loginError}
             </span>
             <Button
+              id="submit"
               type="submit"
               // href="/"
               fullWidth
