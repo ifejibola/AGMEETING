@@ -1,207 +1,216 @@
-import React from 'react'
-import numeral from 'numeral';
-import { format, subMinutes, subSeconds } from 'date-fns';
+import React, { useEffect, useState } from "react";
+import numeral from "numeral";
+import { subDays, subHours } from "date-fns";
 import {
-    Box,
-    Card,
-    CardHeader,
-    Checkbox,
-    Divider,
-    IconButton,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TablePagination,
-    TableRow,
-    Typography
-} from '@mui/material'
-import Label from '../../Label';
-import Scrollbar from '../../Scrollbar';
-import ArrowRightIcon from '../../icons/ArrowRight';
-import DotsHorizontalIcon from '../../icons/DotsHorizontal';
-import PencilAltIcon from '../../icons/PencilAlt';
+  Avatar,
+  Box,
+  Card,
+  Checkbox,
+  Divider,
+  IconButton,
+  InputAdornment,
+  Link,
+  Tab,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TablePagination,
+  TableRow,
+  Tabs,
+  TextField,
+  Typography,
+} from "@mui/material";
+import Scrollbar from "../../Scrollbar";
+import ArrowRightIcon from "../../icons/ArrowRight";
+import PencilAltIcon from "../../icons/PencilAlt";
+import SearchIcon from "../../icons/Search";
+import { vaultService } from "../../../server/services/vault.service";
 
 const now = new Date();
 
-const orders = [
-    {
-        id: '5ecb8a6d9f53bfae09e16115',
-        createdAt: subMinutes(subSeconds(now, 23), 32).getTime(),
-        currency: '',
-        customer: {
-            email: 'carson.darrin@devias.io',
-            name: 'Carson Darrin'
-        },
-        number: 'DEV-102',
-        paymentMethod: 'PDF',
-        status: 'pending',
-        totalAmount: 500.00
-    },
-    {
-        id: '5ecb8a738aa6f3e577c2b3ec',
-        createdAt: subMinutes(subSeconds(now, 51), 36).getTime(),
-        currency: '',
-        customer: {
-            email: 'fran.perez@devias.io',
-            name: 'Fran Perez'
-        },
-        number: 'DEV-101',
-        paymentMethod: 'DOC',
-        status: 'completed',
-        totalAmount: 500.00
-    },
-
+const tabs = [
+  {
+    label: "All",
+    value: "all",
+  },
+  {
+    label: "Accepts Marketing",
+    value: "hasAcceptedMarketing",
+  },
+  {
+    label: "Prospect",
+    value: "isProspect",
+  },
+  {
+    label: "Returning",
+    value: "isReturning",
+  },
 ];
 
-const getStatusLabel = (paymentStatus) => {
-    const map = {
-        canceled: {
-            color: 'error',
-            text: 'Canceled'
-        },
-        completed: {
-            color: 'success',
-            text: 'Completed'
-        },
-        pending: {
-            color: 'warning',
-            text: 'Pending'
-        },
-        rejected: {
-            color: 'error',
-            text: 'Rejected'
-        }
-    };
+const sortOptions = [
+  {
+    label: "Last update (newest)",
+    value: "updatedAt|desc",
+  },
+  {
+    label: "Last update (oldest)",
+    value: "updatedAt|asc",
+  },
+  {
+    label: "Total orders (highest)",
+    value: "orders|desc",
+  },
+  {
+    label: "Total orders (lowest)",
+    value: "orders|asc",
+  },
+];
 
-    const { text, color } = map[paymentStatus];
+const vault = () => {
+  const [files, setFiles] = useState([]);
 
-    return (
-        <Label color={color}>
-            {text}
-        </Label>
-    );
+  useEffect(async () => {
+    await vaultService
+      .getAll()
+      .then((filesList) => {
+        setFiles(filesList);
+      })
+      .catch((err) => {
+        console.log("Error: ", err);
+      });
+  }, []);
+
+  return (
+    <Box
+      sx={{
+        backgroundColor: "background.default",
+        p: 3,
+      }}
+    >
+      <Card>
+        <Divider />
+        <Box
+          sx={{
+            alignItems: "center",
+            display: "flex",
+            flexWrap: "wrap",
+            m: -1,
+            p: 2,
+          }}
+        >
+          <Box
+            sx={{
+              m: 1,
+              maxWidth: "100%",
+              width: 500,
+            }}
+          >
+            <TextField
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon fontSize="small" />
+                  </InputAdornment>
+                ),
+              }}
+              placeholder="Search customers"
+              variant="outlined"
+            />
+          </Box>
+          <Box
+            sx={{
+              m: 1,
+              width: 240,
+            }}
+          >
+            <TextField
+              label="Sort By"
+              name="sort"
+              select
+              SelectProps={{ native: true }}
+              variant="outlined"
+            >
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+          </Box>
+        </Box>
+        <Scrollbar>
+          <Box sx={{ minWidth: 700 }}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell padding="checkbox">
+                    <Checkbox color="primary" />
+                  </TableCell>
+                  <TableCell>File Name</TableCell>
+                  <TableCell>Comment</TableCell>
+                  <TableCell align="right">Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {files.map((file) => (
+                  <TableRow hover key={file.id}>
+                    <TableCell padding="checkbox">
+                      <Checkbox color="primary" />
+                    </TableCell>
+                    <TableCell>
+                      <Box
+                        sx={{
+                          alignItems: "center",
+                          display: "flex",
+                        }}
+                      >
+                        <Avatar
+                          alt={file.name}
+                          sx={{
+                            height: 42,
+                            width: 42,
+                          }}
+                        />
+                        <Box sx={{ ml: 1 }}>
+                          <Link color="inherit" variant="subtitle2">
+                            {file.name}
+                          </Link>
+                        </Box>
+                      </Box>
+                    </TableCell>
+                    <TableCell>
+                      <Typography color="textSecondary" variant="body2">
+                        {file.comment}
+                      </Typography>
+                    </TableCell>
+                    <TableCell align="right">
+                      <IconButton>
+                        <PencilAltIcon fontSize="small" />
+                      </IconButton>
+                      <IconButton>
+                        <ArrowRightIcon fontSize="small" />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Box>
+        </Scrollbar>
+        <TablePagination
+          component="div"
+          count={files.length}
+          onPageChange={() => {}}
+          onRowsPerPageChange={() => {}}
+          page={0}
+          rowsPerPage={5}
+          rowsPerPageOptions={[5, 10, 25]}
+        />
+      </Card>
+    </Box>
+  );
 };
 
-const Vault = () => (
-    <Box
-        sx={{
-            backgroundColor: 'background.default',
-            p: 3
-        }}
-    >
-        <Card>
-            <CardHeader
-                action={(
-                    <IconButton>
-                        <DotsHorizontalIcon fontSize="small" />
-                    </IconButton>
-                )}
-                title="Vault"
-            />
-            <Divider />
-            <Scrollbar>
-                <Box sx={{ minWidth: 1150 }}>
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableCell padding="checkbox">
-                                    <Checkbox color="primary" />
-                                </TableCell>
-                                <TableCell>
-                                    Number
-                                </TableCell>
-                                <TableCell>
-                                    File Name
-                                </TableCell>
-                                <TableCell>
-                                    Type
-                                </TableCell>
-                                <TableCell>
-                                    Size
-                                </TableCell>
-                                <TableCell>
-                                    Status
-                                </TableCell>
-                                <TableCell align="right">
-                                    Actions
-                                </TableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {orders.map((order) => (
-                                <TableRow
-                                    hover
-                                    key={order.id}
-                                >
-                                    <TableCell padding="checkbox">
-                                        <Checkbox color="primary" />
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography
-                                            color="textPrimary"
-                                            variant="subtitle2"
-                                        >
-                                            {order.number}
-                                        </Typography>
-                                        <Typography
-                                            color="textSecondary"
-                                            variant="body2"
-                                        >
-                                            {format(order.createdAt, 'dd MMM yyyy | HH:mm')}
-                                        </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        <Typography
-                                            color="textPrimary"
-                                            variant="subtitle2"
-                                        >
-                                            {order.customer.name}
-                                        </Typography>
-                                        <Typography
-                                            color="textSecondary"
-                                            variant="body2"
-                                        >
-                                            {order.customer.email}
-                                        </Typography>
-                                    </TableCell>
-                                    <TableCell>
-                                        {order.paymentMethod}
-                                    </TableCell>
-                                    <TableCell>
-                                        {numeral(order.totalAmount)
-                                            .format(`${order.currency}0,0.00`)}
-                                    </TableCell>
-                                    <TableCell>
-                                        {getStatusLabel(order.status)}
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <IconButton>
-                                            <PencilAltIcon fontSize="small" />
-                                        </IconButton>
-                                        <IconButton>
-                                            <ArrowRightIcon fontSize="small" />
-                                        </IconButton>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </Box>
-            </Scrollbar>
-            <TablePagination
-                component="div"
-                count={orders.length}
-                onPageChange={() => {
-                }}
-                onRowsPerPageChange={() => {
-                }}
-                page={0}
-                rowsPerPage={5}
-                rowsPerPageOptions={[5, 10, 25]}
-            />
-        </Card>
-    </Box>
-);
-
-export default Vault;
+export default vault;

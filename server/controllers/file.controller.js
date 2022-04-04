@@ -5,6 +5,8 @@ const express = require("express");
 const router = express.Router();
 //const { extname } = require("path");
 const files = require("../models/files");
+const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 // upload image controller
 
@@ -51,6 +53,23 @@ router.post("/file", upload.single("docFiles"), async (req, res) => {
   // multer stores relevant information to the file attribute in the req
   //console.log(req.file);
 });
+
+//gets all the files for the front end
+router.get(
+  "/allFiles",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const allFiles = await files.findAll().catch((err) => {
+      console.log("Error: ", err);
+    });
+
+    if (!allFiles) {
+      return res.json({ message: "this files does not exists" });
+    }
+
+    return res.json({ docFiles: allFiles });
+  }
+);
 
 //TODO: Fix this to get all files in the folder
 router.get("/file/:filename", (req, res) => {
