@@ -35,6 +35,8 @@ const cookieParser = require("cookie-parser");
 
 const io = require("./socket");
 
+const jwtDecode = require("jwt-decode");
+
 // After you declare "app"
 app.use(
   session({ secret: "some-secret", resave: false, saveUninitialized: true })
@@ -90,5 +92,12 @@ db.sequelize.sync({ force: true }).then(() => {
     console.log(`The app server is running on port: ${port}`);
   });
 });
+
+const getJwt = (req) => {
+  let jwt = jwtDecode(req.get("Authorization").split(" ")[1]);
+  return jwt;
+};
+
+exports.getJwt = getJwt;
 
 module.exports = app;

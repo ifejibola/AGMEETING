@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import numeral from "numeral";
 import { subDays, subHours } from "date-fns";
 import {
@@ -27,6 +27,8 @@ import PencilAltIcon from "../../icons/PencilAlt";
 import SearchIcon from "../../icons/Search";
 
 import Comments from "./Comments";
+import { baseURL } from "../../actions";
+import axios from "axios";
 
 const now = new Date();
 
@@ -151,145 +153,162 @@ const sortOptions = [
   },
 ];
 
-const LoggedinUsers = () => (
-  <Box
-    sx={{
-      backgroundColor: "background.default",
-      p: 3,
-    }}
-  >
-    <Card>
-      <Divider />
-      <Box
-        sx={{
-          alignItems: "center",
-          display: "flex",
-          flexWrap: "wrap",
-          m: -1,
-          p: 2,
-        }}
-      >
+const LoggedinUsers = (props) => {
+  const [meetingParticipants, setMeetingParticipants] = useState([]);
+  useEffect(() => {
+    const getMeetingParticipants = async () => {
+      axios
+        .get(baseURL + "/participants/meetingParticipants", {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        })
+        .then((data) => {
+          setMeetingParticipants(data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getMeetingParticipants();
+  }, []);
+
+  return (
+    <Box
+      sx={{
+        backgroundColor: "background.default",
+        p: 3,
+      }}
+    >
+      <Card>
+        <Divider />
         <Box
           sx={{
-            m: 1,
-            maxWidth: "100%",
-            width: 500,
+            alignItems: "center",
+            display: "flex",
+            flexWrap: "wrap",
+            m: -1,
+            p: 2,
           }}
         >
-          <TextField
-            fullWidth
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon fontSize="small" />
-                </InputAdornment>
-              ),
+          <Box
+            sx={{
+              m: 1,
+              maxWidth: "100%",
+              width: 500,
             }}
-            placeholder="Search customers"
-            variant="outlined"
-          />
-        </Box>
-        <Box
-          sx={{
-            m: 1,
-            width: 240,
-          }}
-        >
-          <TextField
-            label="Sort By"
-            name="sort"
-            select
-            SelectProps={{ native: true }}
-            variant="outlined"
           >
-            {sortOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </TextField>
+            <TextField
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon fontSize="small" />
+                  </InputAdornment>
+                ),
+              }}
+              placeholder="Search customers"
+              variant="outlined"
+            />
+          </Box>
+          <Box
+            sx={{
+              m: 1,
+              width: 240,
+            }}
+          >
+            <TextField
+              label="Sort By"
+              name="sort"
+              select
+              SelectProps={{ native: true }}
+              variant="outlined"
+            >
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+          </Box>
         </Box>
-      </Box>
-      <Scrollbar>
-        <Box sx={{ minWidth: 700 }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox color="primary" />
-                </TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Location</TableCell>
-                <TableCell>Orders</TableCell>
-                <TableCell>Role</TableCell>
-                <TableCell align="right">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {customers.map((customer) => (
-                <TableRow hover key={customer.id}>
+        <Scrollbar>
+          <Box sx={{ minWidth: 700 }}>
+            <Table>
+              <TableHead>
+                <TableRow>
                   <TableCell padding="checkbox">
                     <Checkbox color="primary" />
                   </TableCell>
-                  <TableCell>
-                    <Box
-                      sx={{
-                        alignItems: "center",
-                        display: "flex",
-                      }}
-                    >
-                      <Avatar
-                        src={customer.avatar}
-                        sx={{
-                          height: 42,
-                          width: 42,
-                        }}
-                      />
-                      <Box sx={{ ml: 1 }}>
-                        <Link color="inherit" variant="subtitle2">
-                          {customer.name}
-                        </Link>
-                        <Typography color="textSecondary" variant="body2">
-                          {customer.email}
-                        </Typography>
-                      </Box>
-                    </Box>
-                  </TableCell>
-                  <TableCell>
-                    {`${customer.city}, ${customer.state}, ${customer.country}`}
-                  </TableCell>
-                  <TableCell>{customer.totalOrders}</TableCell>
-                  <TableCell>
-                    {numeral(customer.totalAmountSpent).format(
-                      `${customer.currency}0,0.00`
-                    )}
-                  </TableCell>
-                  <TableCell align="right">
-                    <IconButton>
-                      <PencilAltIcon fontSize="small" />
-                    </IconButton>
-                    <IconButton>
-                      <ArrowRightIcon fontSize="small" />
-                    </IconButton>
-                  </TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell>Location</TableCell>
+                  <TableCell>Orders</TableCell>
+                  <TableCell>Role</TableCell>
+                  <TableCell align="right">Actions</TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Box>
-      </Scrollbar>
-      <TablePagination
-        component="div"
-        count={customers.length}
-        onPageChange={() => {}}
-        onRowsPerPageChange={() => {}}
-        page={0}
-        rowsPerPage={5}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
-      <Comments />
-    </Card>
-  </Box>
-);
+              </TableHead>
+              <TableBody>
+                {meetingParticipants.map((participant) => (
+                  <TableRow hover key={participant.id}>
+                    <TableCell padding="checkbox">
+                      <Checkbox color="primary" />
+                    </TableCell>
+                    <TableCell>
+                      <Box
+                        sx={{
+                          alignItems: "center",
+                          display: "flex",
+                        }}
+                      >
+                        <Avatar
+                          src={""}
+                          sx={{
+                            height: 42,
+                            width: 42,
+                          }}
+                        />
+                        <Box sx={{ ml: 1 }}>
+                          <Link color="inherit" variant="subtitle2">
+                            {participant.email}
+                          </Link>
+                          <Typography color="textSecondary" variant="body2">
+                            {participant.email}
+                          </Typography>
+                        </Box>
+                      </Box>
+                    </TableCell>
+                    <TableCell>{``}</TableCell>
+                    <TableCell>{}</TableCell>
+                    <TableCell>
+                      {participant.is_mod ? "Moderator" : "Participant"}
+                    </TableCell>
+                    <TableCell align="right">
+                      <IconButton>
+                        <PencilAltIcon fontSize="small" />
+                      </IconButton>
+                      <IconButton>
+                        <ArrowRightIcon fontSize="small" />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Box>
+        </Scrollbar>
+        <TablePagination
+          component="div"
+          count={customers.length}
+          onPageChange={() => {}}
+          onRowsPerPageChange={() => {}}
+          page={0}
+          rowsPerPage={5}
+          rowsPerPageOptions={[5, 10, 25]}
+        />
+        <Comments />
+      </Card>
+    </Box>
+  );
+};
 
 export default LoggedinUsers;

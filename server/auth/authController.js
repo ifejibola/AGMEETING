@@ -50,6 +50,7 @@ router.post("/login", (req, res, next) => {
           id: user.id,
           email: user.email,
           is_mod: user.is_mod,
+          is_admin: user.is_admin,
           moderator_id: user.moderator_id,
         };
         const accessToken = jwt.sign(
@@ -77,6 +78,7 @@ router.post("/register", (req, res) => {
           email: req.body.email,
           password: hashedPassword,
           is_mod: false,
+          is_admin: false,
         }).then((participant) => {
           res.json({ participant });
         });

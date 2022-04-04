@@ -3,6 +3,7 @@ const { default: jwtDecode } = require("jwt-decode");
 var router = express.Router();
 const passport = require("passport");
 const Message = require("./models/message");
+const server = require("../server");
 
 // respond with "hello world" when a GET request is made to the homepage
 router.get(
@@ -18,7 +19,7 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     console.log("here in messages");
-    let jwt = jwtDecode(req.get("Authorization").split(" ")[1]);
+    let jwt = server.getJwt(req);
     console.log(jwt.user.moderator_id);
     Message.findAll({
       where: {

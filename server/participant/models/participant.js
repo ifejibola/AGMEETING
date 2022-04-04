@@ -27,6 +27,11 @@ const Participant = db.define(
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
+    is_admin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
     moderator_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
