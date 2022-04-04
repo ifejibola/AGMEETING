@@ -22,6 +22,7 @@ import {
   Typography,
 } from "@mui/material";
 import Scrollbar from "../../Scrollbar";
+import EditModal from "./EditModal";
 import ArrowRightIcon from "../../icons/ArrowRight";
 import PencilAltIcon from "../../icons/PencilAlt";
 import SearchIcon from "../../icons/Search";
@@ -190,7 +191,7 @@ const RegisteredUsers = () => {
                                         <TableCell>{customer.company_id}</TableCell>
                                         <TableCell align="right">
                                             <IconButton>
-                                                <PencilAltIcon fontSize="small"/>
+                                                <EditModal/>
                                             </IconButton>
                                             <IconButton>
                                                 <ArrowRightIcon fontSize="small"/>

@@ -4,7 +4,8 @@ import axios from "axios";
 
 export const userService = {
     getAll,
-    getById
+    getById,
+    updateById
 };
 
 async function getAll() {
@@ -21,6 +22,19 @@ async function getAll() {
 }
 
 async function getById(id) {
+    let customers = [];
+    await axios.get("http://localhost:3000/api/v1/users/"+id, {
+        headers: authHeader()
+    }).then(customersList => {
+        customers.push(...customersList.data.users);
+    }).catch((err)=> {
+        console.log("Error: ", err);
+    })
+
+    return customers;
+}
+
+async function updateById(id) {
     let customers = [];
     await axios.get("http://localhost:3000/api/v1/users/"+id, {
         headers: authHeader()
