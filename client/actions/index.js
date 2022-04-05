@@ -12,6 +12,9 @@ import {
   CREATE_ACCOUNT_SUCCESS,
   CREATE_ACCOUNT_FAILURE,
   SET_USER_INFO,
+  GET_MEETING_PARTICIPANTS_SUCCESS,
+  GET_MEETING_PARTICIPANTS_FAILURE,
+  GET_MEETING_PARTICIPANTS_REQUEST,
 } from "../redux/userTypes";
 
 export const baseURL = "http://localhost:3000";
@@ -82,6 +85,28 @@ export const login = (email, password, callback) => {
       })
       .catch((err) => {
         dispatch("LOGIN_FAILURE");
+        localStorage.removeItem("acess_token");
+        localStorage.removeItem("refresh_token");
+      });
+  };
+};
+
+export const getMeetingParticipants = () => {
+  return async (dispatch) => {
+    dispatch({ type: GET_MEETING_PARTICIPANTS_REQUEST });
+    axios
+      .get(baseURL + "/participants/meetingParticipants", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      })
+      .then(({ data }) => {
+        console.log(data);
+        dispatch({ type: GET_MEETING_PARTICIPANTS_SUCCESS, payload: data });
+        return;
+      })
+      .catch((err) => {
+        dispatch({ type: GET_MEETING_PARTICIPANTS_FAILURE });
         localStorage.removeItem("acess_token");
         localStorage.removeItem("refresh_token");
       });

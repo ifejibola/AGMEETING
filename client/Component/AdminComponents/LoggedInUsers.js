@@ -20,15 +20,23 @@ import {
   Tabs,
   TextField,
   Typography,
+  Button,
+  Dialog,
+  DialogTitle,
+  Tooltip,
+  FormLabel,
+  DialogContent,
 } from "@mui/material";
 import Scrollbar from "../../Scrollbar";
 import ArrowRightIcon from "../../icons/ArrowRight";
 import PencilAltIcon from "../../icons/PencilAlt";
 import SearchIcon from "../../icons/Search";
+import Trash from "../../icons/Trash";
 
 import Comments from "./Comments";
-import { baseURL } from "../../actions";
+import { baseURL, getMeetingParticipants } from "../../actions";
 import axios from "axios";
+import { connect } from "react-redux";
 
 const now = new Date();
 
@@ -154,24 +162,66 @@ const sortOptions = [
 ];
 
 const LoggedinUsers = (props) => {
-  const [meetingParticipants, setMeetingParticipants] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [deleteDialog, setDeleteDialog] = useState(false);
+  const [error, setError] = useState(false);
   useEffect(() => {
-    const getMeetingParticipants = async () => {
-      axios
-        .get(baseURL + "/participants/meetingParticipants", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
-        })
-        .then((data) => {
-          setMeetingParticipants(data.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    };
-    getMeetingParticipants();
+    props.onGetMeetingParticpants();
   }, []);
+
+  const changeSelectedUsers = (e, participant) => {
+    if (e.target.checked) {
+      setSelectedUsers([...selectedUsers, participant]);
+    } else {
+      if (selectedUsers.length === 1) {
+        setSelectedUsers([]);
+      } else {
+        setSelectedUsers(
+          selectedUsers.splice(selectedUsers.indexOf(participant), 1)
+        );
+      }
+    }
+  };
+
+  const open = () => {
+    setDeleteDialog(true);
+  };
+
+  const close = () => {
+    setError(null);
+    setDeleteDialog(false);
+  };
+
+  const handleSubmit = () => {
+    if (
+      selectedUsers
+        .map((user) => {
+          return user.id;
+        })
+        .includes(props.currentUser.id)
+    ) {
+      throw "Failure: Cannot delete yourself";
+    } else {
+      setError(null);
+      axios
+        .post(
+          baseURL + "/participants/deleteParticipant",
+          selectedUsers.map((user) => user.id),
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("access_token"),
+            },
+          }
+        )
+        .then((data) => {
+          setSelectedUsers([]);
+          setError("User(s) deleted");
+        })
+        .catch((error) => {
+          setError("" + error);
+        });
+    }
+  };
 
   return (
     <Box
@@ -231,6 +281,48 @@ const LoggedinUsers = (props) => {
               ))}
             </TextField>
           </Box>
+          <Button
+            disabled={selectedUsers.length > 0 ? false : true}
+            onClick={() => {
+              open();
+            }}
+          >
+            <Trash></Trash>
+          </Button>
+          <Dialog open={deleteDialog} onClose={close}>
+            <DialogTitle>
+              Are You Sure You Want to Delete the Following Users?
+            </DialogTitle>
+            <DialogContent>
+              {selectedUsers.map((user) => {
+                return <Typography>{user.email}</Typography>;
+              })}
+              {error && <Typography sx={{ color: "red" }}>{error}</Typography>}
+            </DialogContent>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            ></Box>
+            <Button
+              onClick={() => {
+                try {
+                  handleSubmit();
+                } catch (e) {
+                  setError(e);
+                }
+              }}
+              color="primary"
+            >
+              Delete
+            </Button>
+            {/* {fileUploadSuccess && (
+              <Typography color={"red"}>Successfully uploaded file</Typography>
+            )} */}
+          </Dialog>
         </Box>
         <Scrollbar>
           <Box sx={{ minWidth: 700 }}>
@@ -248,10 +340,15 @@ const LoggedinUsers = (props) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {meetingParticipants.map((participant) => (
+                {props.meetingParticipants?.map((participant) => (
                   <TableRow hover key={participant.id}>
                     <TableCell padding="checkbox">
-                      <Checkbox color="primary" />
+                      <Checkbox
+                        color="primary"
+                        onChange={(e) => {
+                          changeSelectedUsers(e, participant);
+                        }}
+                      />
                     </TableCell>
                     <TableCell>
                       <Box
@@ -311,4 +408,19 @@ const LoggedinUsers = (props) => {
   );
 };
 
-export default LoggedinUsers;
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.userReducer.currentUser,
+    meetingParticipants: state.userReducer.meetingParticipants,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onGetMeetingParticpants: () => {
+      dispatch(getMeetingParticipants());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoggedinUsers);

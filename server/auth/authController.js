@@ -46,6 +46,7 @@ router.post("/login", (req, res, next) => {
         if (err) {
           return;
         }
+        console.log("the is admin is", user.is_admin);
         const body = {
           id: user.id,
           email: user.email,
