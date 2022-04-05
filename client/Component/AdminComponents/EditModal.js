@@ -10,6 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Container from "@mui/material/Container";
 import validator from "validator";
 import axios from "axios";
+import {userService} from "../../../server/services/user.service"
 
 const style = {
     position: 'absolute',
@@ -23,7 +24,7 @@ const style = {
     p: 4,
 };
 
-export default function EditModal() {
+export default function EditModal(id) {
     const [open, setOpen] = React.useState(false);
     const [updateError, setUpdateError] = React.useState("");
     const handleOpen = () => setOpen(true);
@@ -36,21 +37,20 @@ export default function EditModal() {
         const role = data.get("role");
         const name = data.get("name");
         // make sure email is valid
-        if (!validator.isEmail(data.get("email"))) {
+        if (email && !validator.isEmail(data.get("email"))) {
             setUpdateError("Enter valid Email!");
             return;
         }
         else {
-            setUpdateError("");
-            await axios.post("http://localhost:3000/api/v1/register", {email, password, role, name})
+            await userService.updateById(id, email, password, role, name)
                 .then(response => {
                     console.log(response);
-                    setUpdateError(response.data.message);
+                    setUpdateError(response);
                 })
                 .catch(error => {
                     setUpdateError("Email has been used. Please try a different email or forget password.");
                     console.log(error);
-                })
+                });
         }
     };
 
@@ -76,7 +76,7 @@ export default function EditModal() {
                         <Typography component="h1" variant="h8">
                             Update User
                         </Typography>
-                        <Typography component="h7" variant="h11">
+                        <Typography variant="h11">
                             *Leave field empty to keep current value
                         </Typography>
                         <Box

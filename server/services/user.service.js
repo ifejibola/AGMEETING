@@ -34,15 +34,16 @@ async function getById(id) {
     return customers;
 }
 
-async function updateById(id) {
-    let customers = [];
-    await axios.get("http://localhost:3000/api/v1/users/"+id, {
+async function updateById(id, email, password, role, name) {
+    let message;
+    await axios.post("http://localhost:3000/api/v1/update/users/"+id.id, {email, password, role, name},{
         headers: authHeader()
-    }).then(customersList => {
-        customers.push(...customersList.data.users);
+    }).then(response => {
+        message = response.data.message;
     }).catch((err)=> {
         console.log("Error: ", err);
+        message = "An error occurred in the frontend. Please try again later."
     })
 
-    return customers;
+    return message;
 }

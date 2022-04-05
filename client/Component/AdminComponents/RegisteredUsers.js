@@ -191,7 +191,7 @@ const RegisteredUsers = () => {
                                         <TableCell>{customer.company_id}</TableCell>
                                         <TableCell align="right">
                                             <IconButton>
-                                                <EditModal/>
+                                                <EditModal id={customer.id}/>
                                             </IconButton>
                                             <IconButton>
                                                 <ArrowRightIcon fontSize="small"/>
