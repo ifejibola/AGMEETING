@@ -1,51 +1,58 @@
 // check if this is correct
-const dbFile = require("../models/file");
 const multer = require("multer");
 const path = require("path");
 const express = require("express");
 const router = express.Router();
-const { extname } = require("path");
+//const { extname } = require("path");
+const files = require("../models/files");
 
 // upload image controller
 
+// let's multer where and how to store file
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // cb = callback function
-    // the filename will be date.now() to stop it from duplicating
-    // Example: 01/01/2001.pdf / 01/01/2001.docx
-    cb(null, "../files");
+    cb(null, "files");
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
+    // the filename will be date.now() to stop it from duplicating
+    // Example: 01/01/2001.pdf / 01/01/2001.docx
+    // saving it to files folder
+    cb(null, Date.now() + "--" + file.originalname);
   },
 });
 
 const upload = multer({
   storage: storage,
   // fileSize in bytes
-  // limits: {fileSize: '1000000'},
+  limits: { fileSize: "1000000" },
   fileFilter: (req, file, cb) => {
-    const fileTypes = /pdf|docx/;
-    const mimeType = fileTypes.test(file.mimetype);
-    const extname = fileTypes.test(path.extname(file.originalname));
-
-    if (mimeType && extname) {
-      return cb(null, true);
+    var ext = path.extname(file.originalname);
+    if (ext !== ".pdf" && ext !== ".docx") {
+      return cb(new Error("Only pdf and docx are allowed"));
     }
-    cb("File formate not accepted");
+    cb(null, true);
   },
-}).single("name");
-
-const fileUpload = multer({
-  dest: "files",
 });
+
 // TODO use upload instead to store at database
-router.post("/file", fileUpload.single("pdf"), (req, res) => {
+router.post("/file", upload.single("docFiles"), async (req, res) => {
+  const name = req.file.originalname;
+  const file_loc = req.file.path;
+  const newFile = new files({ name, file_loc });
+  const savedFile = newFile.save().catch((err) => {
+    console.log("Error: ", err);
+    res.json({ error: "Cannot upload the file at the moment" });
+  });
+
+  if (savedFile) {
+    res.json({ message: "File Uploaded" });
+  }
   // multer stores relevant information to the file attribute in the req
-  console.log(req.file);
-  res.json("/file api");
+  //console.log(req.file);
 });
 
+//TODO: Fix this to get all files in the folder
 router.get("/file/:filename", (req, res) => {
   // gets the filename
   const { filename } = req.params;

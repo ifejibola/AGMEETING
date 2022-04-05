@@ -4,6 +4,7 @@ const client = require("../models/client");
 
 router.post("/register", async (req, res) => {
 
+
     const {email, password, role, name} = req.body;
     const client_name = name;
     const alreadyExistedUser = await client.findOne({ where: { email }}).catch((err) => {

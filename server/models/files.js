@@ -2,35 +2,23 @@ const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const sequelize = require("../config/db");
 
-const agenda = sequelize.define(
-  "agenda",
+const files = sequelize.define(
+  "files",
   {
     id: {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true,
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
     },
-    meeting_id: {
-      type: Sequelize.STRING,
-    },
-    item_name: {
+    name: {
       type: Sequelize.STRING,
     },
     file_loc: {
       type: Sequelize.STRING,
     },
-    description: {
+    comment: {
       type: Sequelize.STRING,
-    },
-    vote_for: {
-      type: Sequelize.INTEGER,
-    },
-    vote_against: {
-      type: Sequelize.INTEGER,
-    },
-    abstain: {
-      type: Sequelize.INTEGER,
     },
   },
   {
@@ -41,4 +29,4 @@ const agenda = sequelize.define(
   }
 );
 
-module.exports = agenda;
+module.exports = files;

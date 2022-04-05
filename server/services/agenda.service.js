@@ -1,6 +1,7 @@
 export const AgendaService = {
     getAllAgenda,
-    getAgendaById
+    getAgendaById,
+    createAgenda
 };
 
 const headers =  {
@@ -16,4 +17,9 @@ function getAllAgenda() {
 function getAgendaById(id) {
     const requestOptions = { method: 'GET', headers: headers };
     return fetch(`/api/v1/agenda/${id}`, requestOptions).then(res=>res.json()).catch((error) => console.log(error));
+}
+
+function createAgenda(data) {
+    const requestOptions = { method: 'POST', headers: headers, body: data };
+    return fetch(`/api/v1/agenda/submit`, requestOptions).catch((error) => console.log(error));
 }
