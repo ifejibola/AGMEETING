@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import CogIcon from "../../icons/Cog";
 import UserIcon from "../../icons/User";
-import {authenticationService} from "../../../server/services/authentication.service";
+import { authenticationService } from "../../../server/services/authentication.service";
 
 const AccountPopover = () => {
   const anchorRef = useRef(null);
@@ -25,6 +25,7 @@ const AccountPopover = () => {
 
   // Get user's name for display
   const currentUser = authenticationService.currentUserValue;
+
   //TO DO: create a method to retrieve currentUserValue and return error if currentUserValue is null
 
   const handleOpen = () => {
@@ -61,8 +62,8 @@ const AccountPopover = () => {
             height: 32,
             width: 32,
           }}
-          alt={currentUser.client_name}
-          src='../../../misc/img.png'
+          alt={currentUser?.client_name}
+          src="../../../misc/img.png"
         />
       </Box>
       <Popover
@@ -80,13 +81,13 @@ const AccountPopover = () => {
       >
         <Box sx={{ p: 2 }}>
           <Typography color="textPrimary" variant="subtitle2">
-            User: {currentUser.client_name}
+            User: {currentUser?.client_name}
           </Typography>
           <Typography color="textSecondary" variant="subtitle2">
-            Email : {currentUser.email}
+            Email : {currentUser?.email}
           </Typography>
           <Typography color="textSecondary" variant="subtitle2">
-            Role : {currentUser.role}
+            Role : {currentUser?.role}
           </Typography>
         </Box>
         <Divider />

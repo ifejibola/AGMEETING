@@ -15,6 +15,8 @@ import Testpg from "./anothertestpg";
 
 import LoggedinUsers from "./Component/AdminComponents/LoggedInUsers";
 import RegisteredUsers from "./Component/AdminComponents/RegisteredUsers";
+import AddUsers from "./Component/AdminComponents/AddUsers";
+
 import Stats from "./Component/AdminComponents/Stats/Stats";
 import Settings from "./Component/AdminComponents/Settings/Settings";
 import EventDetails from "./Component/DashBoard/Events/EventDetails";
@@ -66,6 +68,10 @@ const routes = [
       {
         path: "/registeredusers",
         element: <RegisteredUsers />,
+      },
+      {
+        path: "/addusers",
+        element: <AddUsers />,
       },
       {
         path: "/stats",

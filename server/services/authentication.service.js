@@ -6,18 +6,23 @@ import axios from "axios";
 
 const user = localStorage.getItem('currentUser');
 let currentUserSubject;
+let tokenSubject;
 if (user === "undefined"){
     currentUserSubject = new BehaviorSubject();
+    tokenSubject = new BehaviorSubject();
 }
 else{
     currentUserSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
+    tokenSubject = new BehaviorSubject(localStorage.getItem('token'));
 }
 
 export const authenticationService = {
     login,
     logout,
     currentUser: currentUserSubject.asObservable(),
-    get currentUserValue () { return currentUserSubject.value }
+    token: tokenSubject.asObservable(),
+    get currentUserValue () { return currentUserSubject.value },
+    get tokenValue () { return tokenSubject.value }
 };
 
 function login(email, password) {
@@ -31,23 +36,13 @@ function login(email, password) {
         .then(handleResponse)
         .then(response => {
             // store user details and jwt token in local storage to keep user logged in between page refresh
-            const user = response.data['user']
-            const jwtToken = response.data['token']
-
+            const user = response.data['user'];
+            const jwtToken = response.data['token'];
             localStorage.setItem('currentUser', JSON.stringify(user));
+            localStorage.setItem('token', jwtToken);
             currentUserSubject.next(user);
             return user;
         });
-
-    // return fetch(`/users/authenticate`, requestOptions)
-    //     .then(handleResponse)
-    //     .then(user => {
-    //         // store user details and jwt token in local storage to keep user logged in between page refreshes
-    //         localStorage.setItem('currentUser', JSON.stringify(user));
-    //         currentUserSubject.next(user);
-    //
-    //         return user;
-    //     });
 }
 
 function logout() {

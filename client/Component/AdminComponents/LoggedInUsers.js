@@ -25,7 +25,6 @@ import Scrollbar from "../../Scrollbar";
 import ArrowRightIcon from "../../icons/ArrowRight";
 import PencilAltIcon from "../../icons/PencilAlt";
 import SearchIcon from "../../icons/Search";
-
 import Comments from "./Comments";
 
 const now = new Date();

@@ -1,39 +1,36 @@
 const { Sequelize, Model, DataTypes } = require("sequelize");
-const sequelize = require("../config/db");
-const company = require("./company");
 
-const client = sequelize.define(
-  "client",
+const sequelize = require("../config/db");
+
+const agenda = sequelize.define(
+  "agenda",
   {
     id: {
-      type: DataTypes.INTEGER,
+      allowNull: false,
       autoIncrement: true,
       primaryKey: true,
+      type: Sequelize.INTEGER,
     },
-    client_name: {
+    meeting_id: {
       type: Sequelize.STRING,
     },
-    email: {
+    item_name: {
       type: Sequelize.STRING,
     },
-    password: {
+    file_loc: {
       type: Sequelize.STRING,
     },
-    company_id: {
+    description: {
       type: Sequelize.STRING,
     },
-    role: {
-      type: DataTypes.ENUM({
-        values: ["admin", "moderator", "user"],
-      }),
+    vote_for: {
+      type: Sequelize.INTEGER,
     },
-    createdAt: {
-      allowNull: false,
-      type: DataTypes.DATE,
+    vote_against: {
+      type: Sequelize.INTEGER,
     },
-    updatedAt: {
-      allowNull: false,
-      type: DataTypes.DATE,
+    abstain: {
+      type: Sequelize.INTEGER,
     },
   },
   {
@@ -44,9 +41,4 @@ const client = sequelize.define(
   }
 );
 
-client.hasOne(company, {
-  foreignKey: "company_id",
-});
-company.belongsTo(client);
-
-module.exports = client;
+module.exports = agenda;

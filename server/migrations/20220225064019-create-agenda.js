@@ -9,7 +9,10 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       id: {
-        type: Sequelize.STRING
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER
       },
       meeting_id: {
         type: Sequelize.INTEGER,

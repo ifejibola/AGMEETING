@@ -29,7 +29,7 @@ import Plus from "../../icons/Plus";
 import useSettings from "../../hooks/useSettings";
 import Votes from "../Votes/votes";
 import Modal from "./Modal";
-
+import { AgendaService } from "../../../server/services/agenda.service"
 const now = new Date();
 
 const orders = [
@@ -125,7 +125,10 @@ const getStatusLabel = (paymentStatus) => {
   return <Label color={color}>{text}</Label>;
 };
 
+
+
 const Agenda = () => {
+
   const [isApplicationOpen, setIsApplicationOpen] = useState(false);
   const { settings } = useSettings();
 
@@ -136,6 +139,16 @@ const Agenda = () => {
   const handleApplyModalClose = () => {
     setIsApplicationOpen(false);
   };
+
+  const [rows, setRows] = useState([]);
+
+  useEffect(() => {
+    console.log("hello")
+    AgendaService.getAllAgenda()
+      .then(data => setRows(JSON.parse(JSON.stringify(data))))
+  }, [])
+  // let rows = await AgendaService.getAllAgenda();
+  // rows = JSON.parse(JSON.stringify(rows));
   return (
     <Box
       sx={{
@@ -151,7 +164,7 @@ const Agenda = () => {
           py: 8,
         }}
       >
-        <Container maxWidth={settings.compact ? "xl" : false}>
+        <Container>
           <Grid container justifyContent="space-between" spacing={3}>
             <Grid item>
               <Box sx={{ m: -1 }}>
@@ -188,43 +201,65 @@ const Agenda = () => {
                   <TableCell padding="checkbox">
                     <Checkbox color="primary" />
                   </TableCell>
-                  <TableCell>Number</TableCell>
-                  <TableCell>Customer</TableCell>
-                  <TableCell>Method</TableCell>
-                  <TableCell>Total</TableCell>
-                  <TableCell>Status</TableCell>
+                  <TableCell>ID</TableCell>
+                  <TableCell>Meeting ID</TableCell>
+                  <TableCell>Name</TableCell>
+                  <TableCell>description</TableCell>
+                  <TableCell>Vote For</TableCell>
+                  <TableCell>Vote Against</TableCell>
+                  <TableCell>Abstain</TableCell>
                   <TableCell align="right">Actions</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map((order) => (
-                  <TableRow hover key={order.id}>
+                {rows.map((row) => (
+                  <TableRow hover key={row.id}>
                     <TableCell padding="checkbox">
                       <Checkbox color="primary" />
                     </TableCell>
                     <TableCell>
                       <Typography color="textPrimary" variant="subtitle2">
-                        {order.number}
+                        {row.id}
                       </Typography>
+                      
+                    </TableCell>
+                    <TableCell>
                       <Typography color="textSecondary" variant="body2">
-                        {format(order.createdAt, "dd MMM yyyy | HH:mm")}
-                      </Typography>
+                          {row.meeting_id? row.meeting_id: "n/a"}
+                        </Typography>
                     </TableCell>
                     <TableCell>
                       <Typography color="textPrimary" variant="subtitle2">
-                        {order.customer.name}
-                      </Typography>
-                      <Typography color="textSecondary" variant="body2">
-                        {order.customer.email}
+                        {row.item_name}
                       </Typography>
                     </TableCell>
-                    <TableCell>{order.paymentMethod}</TableCell>
                     <TableCell>
-                      {numeral(order.totalAmount).format(
-                        `${order.currency}0,0.00`
-                      )}
+                      <Typography color="textSecondary" variant="body2">
+                          {row.description}
+                        </Typography>
                     </TableCell>
-                    <TableCell>{getStatusLabel(order.status)}</TableCell>
+                    <TableCell>
+                        <Typography color="textSecondary" variant="body2">
+                          {row.vote_for}
+                        </Typography>
+                    </TableCell>
+                    <TableCell>
+                        <Typography color="textSecondary" variant="body2">
+                          {row.vote_against}
+                        </Typography>
+                    </TableCell>
+                    <TableCell>
+                        <Typography color="textSecondary" variant="body2">
+                          {row.abstain}
+                        </Typography>
+                    </TableCell>
+                    {/* <TableCell>{order.paymentMethod}</TableCell>
+                        <TableCell>
+                          {numeral(order.totalAmount).format(
+                            `${order.currency}0,0.00`
+                          )}
+                        </TableCell>
+                        <TableCell>{getStatusLabel(order.status)}</TableCell> */}
                     <TableCell align="right">
                       <IconButton>
                         <PencilAltIcon fontSize="small" />
@@ -242,8 +277,8 @@ const Agenda = () => {
         <TablePagination
           component="div"
           count={orders.length}
-          onPageChange={() => {}}
-          onRowsPerPageChange={() => {}}
+          onPageChange={() => { }}
+          onRowsPerPageChange={() => { }}
           page={0}
           rowsPerPage={5}
           rowsPerPageOptions={[5, 10, 25]}
@@ -259,6 +294,7 @@ const Agenda = () => {
       </Card>
     </Box>
   );
+
 };
 
 export default Agenda;
