@@ -6,7 +6,7 @@ NPM Version : 12.18.2
 
 npm install
 
-# Running backend
+# Starting and running database
 *Make sure you have postgreSQL installed, PgAdmin 4 is recommened to install to keep track of the database
 
 Please follow these steps:
