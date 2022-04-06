@@ -41,7 +41,6 @@ const theme = createTheme();
 export default function SignIn(effect, deps) {
 
     const navigate = useNavigate();
-    const [token, setToken] = useState("")
     const [signinError, setSigninError] = React.useState("");
 
     const handleSubmit = async (event) => {

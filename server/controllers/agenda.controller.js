@@ -30,7 +30,8 @@ router.get("/agenda/:id", async (req, res) => {
         console.log("Error! ", err)
     }
     res.status(404);
-  });
+});
+
 
 router.post("/agenda/submit", async (req, res) =>{
     try{

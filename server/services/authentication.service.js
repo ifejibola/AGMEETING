@@ -25,19 +25,20 @@ export const authenticationService = {
     get tokenValue () { return tokenSubject.value }
 };
 
-function login(email, password) {
+async function login(email, password) {
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email, password})
     };
 
-    return axios.post("http://localhost:3000/api/v1/login", {email, password})
+    return await axios.post("http://localhost:3000/api/v1/login", {email, password})
         .then(handleResponse)
         .then(response => {
             // store user details and jwt token in local storage to keep user logged in between page refresh
             const user = response.data['user'];
             const jwtToken = response.data['token'];
+            console.log(jwtToken);
             localStorage.setItem('currentUser', JSON.stringify(user));
             localStorage.setItem('token', jwtToken);
             currentUserSubject.next(user);
