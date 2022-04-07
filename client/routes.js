@@ -45,6 +45,10 @@ const routes = [
     element: <About />
   },
   {
+    path: "/Message",
+    element: <Test />
+  },
+  {
     path: "/",
     element: <DashboardLayout />,
     children: [
