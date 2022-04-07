@@ -4,7 +4,8 @@ import axios from "axios";
 
 export const userService = {
     getAll,
-    getById
+    getById,
+    updateById
 };
 
 async function getAll() {
@@ -31,4 +32,18 @@ async function getById(id) {
     })
 
     return customers;
+}
+
+async function updateById(id, email, password, role, name) {
+    let message;
+    await axios.post("http://localhost:3000/api/v1/update/users/"+id.id, {email, password, role, name},{
+        headers: authHeader()
+    }).then(response => {
+        message = response.data.message;
+    }).catch((err)=> {
+        console.log("Error: ", err);
+        message = "An error occurred in the frontend. Please try again later."
+    })
+
+    return message;
 }
