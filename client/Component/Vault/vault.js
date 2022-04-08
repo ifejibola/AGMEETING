@@ -4,12 +4,14 @@ import { subDays, subHours } from "date-fns";
 import {
   Avatar,
   Box,
+  Button,
   Card,
   Checkbox,
   Divider,
   IconButton,
   InputAdornment,
   Link,
+  Modal,
   Tab,
   Table,
   TableBody,
@@ -26,8 +28,22 @@ import ArrowRightIcon from "../../icons/ArrowRight";
 import PencilAltIcon from "../../icons/PencilAlt";
 import SearchIcon from "../../icons/Search";
 import { vaultService } from "../../../server/services/vault.service";
+import FileModal from "./fileModal";
 
 const now = new Date();
+
+// From Material UI
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
 
 const tabs = [
   {
@@ -103,7 +119,7 @@ const vault = () => {
             sx={{
               m: 1,
               maxWidth: "100%",
-              width: 500,
+              width: 350,
             }}
           >
             <TextField
@@ -115,7 +131,7 @@ const vault = () => {
                   </InputAdornment>
                 ),
               }}
-              placeholder="Search customers"
+              placeholder="Search File Name"
               variant="outlined"
             />
           </Box>
@@ -138,6 +154,14 @@ const vault = () => {
                 </option>
               ))}
             </TextField>
+          </Box>
+          <Box
+            sx={{
+              m: 1,
+              width: 240,
+            }}
+          >
+            <FileModal />
           </Box>
         </Box>
         <Scrollbar>

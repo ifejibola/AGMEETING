@@ -50,7 +50,7 @@ try {
     allModels.client
       .findAll()
       .then((results) => {
-        console.log(results);
+        //console.log(results);
       })
       .catch((err) => console.log(err));
   });
