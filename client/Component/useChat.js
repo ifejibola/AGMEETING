@@ -21,7 +21,6 @@ const useChat = (roomId) => {
         },
       })
       .then((data) => {
-        console.log(data.data);
         setMessages(data.data);
       });
   };
@@ -33,7 +32,6 @@ const useChat = (roomId) => {
     });
 
     getMessages();
-    console.log(socketRef.current);
 
     // Listens for incoming messagess
     socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {

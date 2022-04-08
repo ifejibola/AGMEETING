@@ -205,7 +205,6 @@ const DashboardSidebar = (props) => {
   const lgUp = useMediaQuery("(min-width:980px)");
 
   useEffect(() => {
-    console.log("here in sidebar");
     if (openMobile && onMobileClose) {
       onMobileClose();
     }

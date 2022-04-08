@@ -19,7 +19,6 @@ io.on("connection", (socket) => {
   socket.join(roomId);
 
   socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
-    console.log(data.userId);
     Message.create({
       user_id: data.user_id,
       meeting_id: data.meeting_id,
@@ -27,7 +26,6 @@ io.on("connection", (socket) => {
       content: data.content,
       timestamp: data.timestamp,
     }).then((data) => {
-      console.log("created message");
       io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
     });
   });

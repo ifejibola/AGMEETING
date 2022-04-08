@@ -41,7 +41,6 @@ function App(props) {
   const content = useRoutes(Routes);
 
   useEffect(() => {
-    console.log("app.js");
     if (localStorage.getItem("access_token")) {
       let access_token = localStorage.getItem("access_token");
       const userInfo = jwtDecode(access_token).user;

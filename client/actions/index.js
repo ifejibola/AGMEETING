@@ -68,7 +68,6 @@ export const login = (email, password, callback) => {
       })
       .then(({ data }) => {
         if (data !== "No user") {
-          console.log("here");
           localStorage.setItem("access_token", data.accessToken);
           localStorage.setItem("refresh_token", data.refreshToken);
           localStorage.setItem("is_authenticated", true);
@@ -101,7 +100,6 @@ export const getMeetingParticipants = () => {
         },
       })
       .then(({ data }) => {
-        console.log(data);
         dispatch({ type: GET_MEETING_PARTICIPANTS_SUCCESS, payload: data });
         return;
       })

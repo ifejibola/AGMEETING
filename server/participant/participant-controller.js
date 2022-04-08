@@ -25,7 +25,6 @@ router.get(
       },
     })
       .then((users) => {
-        console.log(users);
         res.send(users);
       })
       .catch((err) => {
@@ -39,7 +38,6 @@ router.post(
   "/deleteParticipant",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log(req.body);
     jwt = server.getJwt(req);
     if (!jwt.user.is_mod) {
       res.status(401);
@@ -51,7 +49,6 @@ router.post(
       },
     })
       .then((users) => {
-        console.log("successfully deleted");
         res.status(200).json("success");
       })
       .catch((err) => {

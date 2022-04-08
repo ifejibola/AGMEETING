@@ -67,7 +67,6 @@ const userReducer = (state = {}, action) => {
     case GET_MEETING_PARTICIPANTS_REQUEST:
       return { ...state, loading: true };
     case GET_MEETING_PARTICIPANTS_SUCCESS:
-      console.log("here");
       return { ...state, meetingParticipants: action.payload, loading: false };
     case GET_MEETING_PARTICIPANTS_FAILURE:
       return { ...state, loading: false };

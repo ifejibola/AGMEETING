@@ -65,9 +65,7 @@ app.use(passport.session());
 try {
   db.sequelize.authenticate().then(() => {
     console.log("Connection has been established successfully.");
-    Participant.findAll().then((results) => {
-      console.log(results);
-    });
+    Participant.findAll().then((results) => {});
   });
 } catch (error) {
   console.error("Unable to connect to the database:", error);
