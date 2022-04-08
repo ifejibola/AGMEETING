@@ -37,6 +37,7 @@ function App() {
     theme: settings.theme,
   });
 
+  // Another approach is to pass userStates to each of the route as well as the token to make full use of state property
   const content = useRoutes(Routes);
 
   useEffect(async () => {
