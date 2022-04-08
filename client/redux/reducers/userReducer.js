@@ -8,6 +8,9 @@ import {
   CREATE_ACCOUNT_SUCCESS,
   CREATE_ACCOUNT_FAILURE,
   SET_USER_INFO,
+  GET_MEETING_PARTICIPANTS_FAILURE,
+  GET_MEETING_PARTICIPANTS_SUCCESS,
+  GET_MEETING_PARTICIPANTS_REQUEST,
 } from "../userTypes";
 const userReducer = (state = {}, action) => {
   switch (action.type) {
@@ -25,6 +28,7 @@ const userReducer = (state = {}, action) => {
           id: action.payload.id,
           email: action.payload.email,
           is_mod: action.payload.is_mod,
+          is_admin: action.payload.is_admin,
           moderator_id: action.payload.moderator_id,
         },
         loading: false,
@@ -40,6 +44,7 @@ const userReducer = (state = {}, action) => {
           id: action.payload.id,
           email: action.payload.email,
           is_mod: action.payload.is_mod,
+          is_admin: action.payload.is_admin,
           moderator_id: action.payload.moderator_id,
         },
         loading: false,
@@ -54,10 +59,17 @@ const userReducer = (state = {}, action) => {
           id: action.payload.id,
           email: action.payload.email,
           is_mod: action.payload.is_mod,
+          is_admin: action.payload.is_admin,
           moderator_id: action.payload.moderator_id,
         },
         loading: false,
       };
+    case GET_MEETING_PARTICIPANTS_REQUEST:
+      return { ...state, loading: true };
+    case GET_MEETING_PARTICIPANTS_SUCCESS:
+      return { ...state, meetingParticipants: action.payload, loading: false };
+    case GET_MEETING_PARTICIPANTS_FAILURE:
+      return { ...state, loading: false };
     default:
       return state;
   }

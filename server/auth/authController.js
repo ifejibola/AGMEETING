@@ -15,7 +15,6 @@ router.get(
   "/verifyToken",
   passport.authenticate("jwt", { session: false }),
   (req, res, next) => {
-    console.log("here");
     res.send("success");
   }
 );
@@ -46,10 +45,12 @@ router.post("/login", (req, res, next) => {
         if (err) {
           return;
         }
+        console.log("the is admin is", user.is_admin);
         const body = {
           id: user.id,
           email: user.email,
           is_mod: user.is_mod,
+          is_admin: user.is_admin,
           moderator_id: user.moderator_id,
         };
         const accessToken = jwt.sign(
@@ -77,6 +78,7 @@ router.post("/register", (req, res) => {
           email: req.body.email,
           password: hashedPassword,
           is_mod: false,
+          is_admin: false,
         }).then((participant) => {
           res.json({ participant });
         });

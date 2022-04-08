@@ -115,7 +115,6 @@ const Vault = (props) => {
     axios
       .post(baseURL + "/items/upload", formData)
       .then((res) => {
-        console.log(res);
         if (res.status == 200) {
           setFileUploadSuccess(true);
         }

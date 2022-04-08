@@ -13,31 +13,29 @@ const useChat = (roomId) => {
   const [messages, setMessages] = useState([]); // Sent and received messages
   const socketRef = useRef();
 
+  const getMessages = async (roomId) => {
+    axios
+      .get(baseURL + "/chat/roomMessages", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      })
+      .then((data) => {
+        setMessages(data.data);
+      });
+  };
+
   useEffect(() => {
     // Creates a WebSocket connection
     socketRef.current = socketIOClient(SOCKET_SERVER_URL, {
       query: { roomId },
     });
 
-    const getMessages = async (roomId) => {
-      axios
-        .get(baseURL + "/chat/roomMessages", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("access_token"),
-          },
-        })
-        .then((data) => {
-          console.log(data.data);
-          setMessages(data.data);
-        });
-    };
-
     getMessages();
-    console.log(socketRef.current);
 
     // Listens for incoming messagess
     socketRef.current.on(NEW_CHAT_MESSAGE_EVENT, (message) => {
-      console.log(message);
+      getMessages();
       const incomingMessage = {
         ...message,
         // ownedByCurrentUser: message.senderId === socketRef.current.id,
@@ -61,6 +59,7 @@ const useChat = (roomId) => {
       moderator_id: moderatorId,
       meeting_id: meetingId,
     });
+    getMessages();
   };
 
   return { messages, sendMessage };

@@ -3,6 +3,8 @@ const { default: jwtDecode } = require("jwt-decode");
 var router = express.Router();
 const passport = require("passport");
 const Message = require("./models/message");
+const server = require("../server");
+const Participant = require("../participant/models/participant");
 
 // respond with "hello world" when a GET request is made to the homepage
 router.get(
@@ -17,13 +19,16 @@ router.get(
   "/roomMessages",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("here in messages");
-    let jwt = jwtDecode(req.get("Authorization").split(" ")[1]);
-    console.log(jwt.user.moderator_id);
+    let jwt = server.getJwt(req);
     Message.findAll({
       where: {
         moderator_id: jwt.user.moderator_id,
       },
+      include: [
+        {
+          model: Participant,
+        },
+      ],
     })
       .then((messages) => {
         res.status(200).send(messages);

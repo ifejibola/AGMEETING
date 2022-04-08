@@ -15,6 +15,7 @@ const initialState = {
     is_mod: "",
     moderator_id: "",
   },
+  meetingParticipants: [],
 };
 
 export default createStore(rootReducer, initialState, composedEnhancer);
