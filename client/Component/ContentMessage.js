@@ -7,6 +7,10 @@ import {
   Select,
   MenuItem,
   Grid,
+  Typography,
+  List,
+  ListItem,
+  Paper,
 } from "@mui/material";
 import React from "react";
 import { useState } from "react";
@@ -32,9 +36,9 @@ const ContentMessage = (props) => {
     setNewMessage("");
   };
 
-  var test = messages
-    .map((message) => message.user_id + ": " + message.content + "\n")
-    .join("");
+  // var test = messages
+  //   .map((message) => {return(message.participant.email + ": " + message.content + "\n")})
+  //   .join("");
 
   return (
     <Box
@@ -45,7 +49,7 @@ const ContentMessage = (props) => {
     >
       <Grid container spacing={1}>
         <Grid item xs={12}>
-          <TextField
+          {/* <TextField
             disabled
             multiline
             rows={15}
@@ -53,11 +57,52 @@ const ContentMessage = (props) => {
             fullWidth
             label=""
             variant="outlined"
-            value={test}
             sx={{
               Height: "100%",
             }}
-          />
+          > */}
+          <Paper
+            style={{
+              maxHeight: 300,
+              overflow: "auto",
+              background: "none",
+              paddingLeft: "15px",
+              paddingRight: "15px",
+            }}
+          >
+            <List>
+              {messages.map((message) => {
+                return message.participant?.id == props.user.id ? (
+                  <div
+                    style={{
+                      background: "#5664d2",
+                      padding: "10px",
+                      margin: "10px",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    <Typography>{message.participant?.email + ":"}</Typography>
+                    <Typography>{message.content}</Typography>
+                    <br />
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      background: "grey",
+                      padding: "10px",
+                      margin: "10px",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    <Typography>{message.participant?.email + ":"}</Typography>
+                    <Typography>{message.content}</Typography>
+                    <br />
+                  </div>
+                );
+              })}
+            </List>
+          </Paper>
+          {/* </TextField> */}
           {/* <ol className="messages-list">
             {messages.map((message) => (
             <li>{message.body}</li>

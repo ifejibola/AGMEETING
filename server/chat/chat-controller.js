@@ -4,6 +4,7 @@ var router = express.Router();
 const passport = require("passport");
 const Message = require("./models/message");
 const server = require("../server");
+const Participant = require("../participant/models/participant");
 
 // respond with "hello world" when a GET request is made to the homepage
 router.get(
@@ -18,15 +19,19 @@ router.get(
   "/roomMessages",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    console.log("here in messages");
     let jwt = server.getJwt(req);
-    console.log(jwt.user.moderator_id);
     Message.findAll({
       where: {
         moderator_id: jwt.user.moderator_id,
       },
+      include: [
+        {
+          model: Participant,
+        },
+      ],
     })
       .then((messages) => {
+        console.log(messages);
         res.status(200).send(messages);
       })
       .catch((err) => {

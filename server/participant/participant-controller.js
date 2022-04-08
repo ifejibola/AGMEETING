@@ -51,7 +51,8 @@ router.post(
       },
     })
       .then((users) => {
-        res.status(200).send("successs");
+        console.log("successfully deleted");
+        res.status(200).json("success");
       })
       .catch((err) => {
         console.log(err);
