@@ -40,16 +40,20 @@ function Copyright(props) {
 
 const theme = createTheme();
 
+//Sign in component, where the user logs in
 const SignIn = (props) => {
   const [emailError, setEmailError] = useState(false);
   const [failedLogin, setFailedLogin] = useState(false);
   const [loginError, setLoginError] = useState(null);
+  //access and unused refresh tokens are stored in local storage at the moment, will probably want to change this implementation of JWT tokens at some point in the future
   useEffect(() => {
     if (localStorage.getItem("is_authenticated")) {
       localStorage.removeItem("is_authenticated");
     }
   }, []);
   let navigate = useNavigate();
+
+  //called when the user clicks the button to log in
 
   const handleSubmit = (event) => {
     event.preventDefault();

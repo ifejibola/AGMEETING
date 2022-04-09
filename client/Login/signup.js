@@ -37,7 +37,7 @@ function Copyright(props) {
 }
 
 const theme = createTheme();
-
+//Component for registering new users
 function SignUp(props) {
   const [signupError, setSignupError] = React.useState("");
   const navigate = useNavigate();

@@ -3,6 +3,7 @@ import { Route, Navigate } from "react-router-dom";
 import { connect } from "react-redux";
 import { verifyToken } from "./actions";
 
+//"Stricter" protected routes that only allow moderators to access them, wraps moderator components
 function ModeratorRoute(props) {
   const [isMod, setIsMod] = useState(null);
   useEffect(() => {
