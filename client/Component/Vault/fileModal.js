@@ -66,6 +66,9 @@ const FileModal = () => {
       >
         <form onSubmit={onSubmitForm}>
           <Box sx={style}>
+            <Typography>
+              <strong>* Only pdf and docx file extension allows.</strong>
+            </Typography>
             <TextField
               name="FileName"
               value={fileName}

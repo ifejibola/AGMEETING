@@ -45,25 +45,6 @@ const style = {
   p: 4,
 };
 
-const tabs = [
-  {
-    label: "All",
-    value: "all",
-  },
-  {
-    label: "Accepts Marketing",
-    value: "hasAcceptedMarketing",
-  },
-  {
-    label: "Prospect",
-    value: "isProspect",
-  },
-  {
-    label: "Returning",
-    value: "isReturning",
-  },
-];
-
 const sortOptions = [
   {
     label: "Last update (newest)",
