@@ -5,6 +5,8 @@ const express = require("express");
 const router = express.Router();
 //const { extname } = require("path");
 const files = require("../models/files");
+const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 // upload image controller
 
@@ -22,6 +24,8 @@ const storage = multer.diskStorage({
   },
 });
 
+// TODO need to test this
+// Try sending jpeg and other files
 const upload = multer({
   storage: storage,
   // fileSize in bytes
@@ -35,15 +39,19 @@ const upload = multer({
   },
 });
 
-// TODO use upload instead to store at database
-router.post("/file", upload.single("docFiles"), async (req, res) => {
-  const name = req.file.originalname;
+router.post("/file", upload.single("theFile"), async (req, res) => {
+  // TODO: file name comes from front end
+  console.log(req);
+  const name = req.body.FileName;
   const file_loc = req.file.path;
-  const newFile = new files({ name, file_loc });
+  const comment = req.body.commentFile;
+  const newFile = new files({ name, file_loc, comment });
+  console.log(req.body);
   const savedFile = newFile.save().catch((err) => {
     console.log("Error: ", err);
     res.json({ error: "Cannot upload the file at the moment" });
   });
+  console.log(newFile);
 
   if (savedFile) {
     res.json({ message: "File Uploaded" });
@@ -51,6 +59,23 @@ router.post("/file", upload.single("docFiles"), async (req, res) => {
   // multer stores relevant information to the file attribute in the req
   //console.log(req.file);
 });
+
+//gets all the files for the front end
+router.get(
+  "/allFiles",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    const allFiles = await files.findAll().catch((err) => {
+      console.log("Error: ", err);
+    });
+
+    if (!allFiles) {
+      return res.json({ message: "this files does not exists" });
+    }
+
+    return res.json({ docFiles: allFiles });
+  }
+);
 
 //TODO: Fix this to get all files in the folder
 router.get("/file/:filename", (req, res) => {

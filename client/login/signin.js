@@ -88,8 +88,9 @@ export default function SignIn(effect, deps) {
                     <div className="alert alert-info">
                         <strong>Normal User</strong> - Email: 2@gmail.com | Password: p1<br />
                         <strong>Administrator</strong> - Email: 1@gmail.com | Password: p1<br />
-                        <strong>Moderator</strong> - Email: t5@gmail.com | Password: p5
-
+                        <strong>Moderator</strong> - Email: t5@gmail.com | Password: p5<br />
+                        *Chat function only available for user now.<br />
+                        *File upload function is in Vault tab.
                     </div>
                     <span
                         margin="normal"

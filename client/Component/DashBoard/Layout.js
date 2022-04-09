@@ -8,12 +8,7 @@ import NavBar from "./NavBar";
 import DashboardSidebar from "./DashboardSidebar";
 import About from "../../About";
 import Session from "../Session";
-import { connect } from "react-redux";
-const mapStateToProps = (state) => {
-  return {
-    currentUser: state.currentUser,
-  };
-};
+
 
 const DashboardLayoutRoot = experimentalStyled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
@@ -73,4 +68,4 @@ const DashboardLayout = ({ currentUser }) => {
   );
 };
 
-export default connect(mapStateToProps)(DashboardLayout);
+export default DashboardLayout;

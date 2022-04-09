@@ -16,10 +16,20 @@ npx sequelize-cli db:migrate
 npx sequelize-cli db:seed:all
 ```
 # Starting/Running App:
-
+```
 npm run dev:build-client
 
 npm run dev:start
+```
+# Functionalities
 
-Ife Ajibola – ife@ncra.ca
+- Users will be directed to login page and can register in signup page if not registered.
+- Users, Moderator, Admin can upload file in Vault tab.
+- Admin can control users in Users tab:
+  - See all users in Registered Users tab
+  - Update users by clicking pencil icon in Action column in Registered Users tab
+  - Add new users in Add User tab 
+
+
+Supervisor: Ife Ajibola – ife@ncra.ca
  
