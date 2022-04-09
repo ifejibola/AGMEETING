@@ -32,6 +32,7 @@ const ContentMessage = (props) => {
     setNewMessage(event.target.value);
   };
 
+  //called when a message is sent
   const handleSendMessage = () => {
     if (newMessage !== "") {
       sendMessage(newMessage, props.user.id, null, props.user.moderator_id);

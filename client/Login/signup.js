@@ -17,6 +17,7 @@ import { createAccount } from "../actions";
 import { connect, ReactReduxContext } from "react-redux";
 import { useNavigate } from "react-router";
 import store from "../redux/store";
+import PasswordStrengthBar from "react-password-strength-bar";
 
 function Copyright(props) {
   return (
@@ -28,7 +29,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        AGMeeting
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -40,6 +41,7 @@ const theme = createTheme();
 //Component for registering new users
 function SignUp(props) {
   const [signupError, setSignupError] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -107,6 +109,9 @@ function SignUp(props) {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <TextField
               margin="normal"
@@ -118,6 +123,7 @@ function SignUp(props) {
               id="passwordAgain"
               autoComplete="current-password"
             />
+            <PasswordStrengthBar password={password}></PasswordStrengthBar>
             <span
               margin="normal"
               style={{

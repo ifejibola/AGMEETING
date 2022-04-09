@@ -220,6 +220,7 @@ const LoggedinUsers = (props) => {
         .then((data) => {
           setSelectedUsers([]);
           setError("User(s) deleted");
+          props.onGetMeetingParticpants();
         })
         .catch((error) => {
           setError("" + error);
