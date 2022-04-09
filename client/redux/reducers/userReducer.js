@@ -12,6 +12,8 @@ import {
   GET_MEETING_PARTICIPANTS_SUCCESS,
   GET_MEETING_PARTICIPANTS_REQUEST,
 } from "../userTypes";
+
+//Reducer for participants (account creation, login, getting meeting users etc...)
 const userReducer = (state = {}, action) => {
   switch (action.type) {
     case STORE_USER:

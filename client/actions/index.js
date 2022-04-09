@@ -17,12 +17,15 @@ import {
   GET_MEETING_PARTICIPANTS_REQUEST,
 } from "../redux/userTypes";
 
+import {
+  GET_MEETING_ITEMS_SUCCESS,
+  GET_MEETING_ITEMS_FAILURE,
+  GET_MEETING_ITEMS_REQUEST,
+} from "../redux/itemTypes";
+
 export const baseURL = "http://localhost:3000";
-// const auth = {
-//   Authorization: {
-//     Bearer:
-//   }
-// }
+
+//Redux action creators
 
 export const setCurrentUser = (userInfo) => {
   return async (dispatch) => {
@@ -105,8 +108,25 @@ export const getMeetingParticipants = () => {
       })
       .catch((err) => {
         dispatch({ type: GET_MEETING_PARTICIPANTS_FAILURE });
-        localStorage.removeItem("acess_token");
-        localStorage.removeItem("refresh_token");
+      });
+  };
+};
+
+export const getMeetingItems = () => {
+  return async (dispatch) => {
+    dispatch({ type: GET_MEETING_ITEMS_REQUEST });
+    axios
+      .get(baseURL + "/items/getMeetingItems", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      })
+      .then(({ data }) => {
+        dispatch({ type: GET_MEETING_ITEMS_SUCCESS, payload: data });
+        return;
+      })
+      .catch((err) => {
+        dispatch({ type: GET_MEETING_ITEMS_FAILURE });
       });
   };
 };

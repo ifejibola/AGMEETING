@@ -5,6 +5,7 @@ import { baseURL, verifyToken } from "./actions";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 
+//Protected route to ensure user is logged in, wraps most of the application
 function ProtectedRoute(props) {
   const [isAuthenticated, setIsAuthenticated] = useState(null);
   useEffect(() => {

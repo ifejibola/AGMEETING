@@ -1,3 +1,5 @@
+//Redux types for participants
+
 export const STORE_USER = "STORE_USER";
 export const CREATE_ACCOUNT = "CREATE_ACCOUNT";
 export const LOGIN_REQUEST = "LOGIN_REQUEST";

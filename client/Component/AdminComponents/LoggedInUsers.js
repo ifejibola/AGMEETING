@@ -161,14 +161,17 @@ const sortOptions = [
   },
 ];
 
+//Moderator component to view the users within their meeting, protected by the ModeratorRoute component
 const LoggedinUsers = (props) => {
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [deleteDialog, setDeleteDialog] = useState(false);
   const [error, setError] = useState(false);
+  //get all the meeting participants
   useEffect(() => {
     props.onGetMeetingParticpants();
   }, []);
 
+  //can select users for deletion, called when this list of users changes
   const changeSelectedUsers = (e, participant) => {
     if (e.target.checked) {
       setSelectedUsers([...selectedUsers, participant]);
@@ -192,6 +195,7 @@ const LoggedinUsers = (props) => {
     setDeleteDialog(false);
   };
 
+  //called when the button to delete the selected users is clicked
   const handleSubmit = () => {
     if (
       selectedUsers
