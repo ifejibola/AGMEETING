@@ -1,3 +1,4 @@
+// This is just a placeholder for agenda controller
 const express = require("express");
 const router = express.Router();
 const agenda = require("../models/agenda");

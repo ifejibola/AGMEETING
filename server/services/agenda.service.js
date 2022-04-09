@@ -1,3 +1,4 @@
+// This is just a placeholder for agenda service
 export const AgendaService = {
     getAllAgenda,
     getAgendaById,
