@@ -33,10 +33,11 @@ const userReducer = (state = {}, action) => {
           is_admin: action.payload.is_admin,
           moderator_id: action.payload.moderator_id,
         },
+        failedLogin: false,
         loading: false,
       };
     case LOGIN_FAILURE:
-      return { ...state, loading: false };
+      return { ...state, failedLogin: true, loading: false };
     case CREATE_ACCOUNT_REQUEST:
       return { ...state, loading: true };
     case CREATE_ACCOUNT_SUCCESS:

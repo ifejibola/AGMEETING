@@ -63,7 +63,7 @@ export const createAccount = (email, password, callback) => {
 
 export const login = (email, password, callback) => {
   return async (dispatch) => {
-    dispatch({ type: "LOGIN_REQUEST" });
+    dispatch({ type: LOGIN_REQUEST });
     axios
       .post(baseURL + "/authentication/login", {
         email,
@@ -75,18 +75,20 @@ export const login = (email, password, callback) => {
           localStorage.setItem("refresh_token", data.refreshToken);
           localStorage.setItem("is_authenticated", true);
           const accessToken = jwtDecode(data.accessToken);
-          dispatch({ type: "LOGIN_SUCCESS", payload: accessToken.user });
-          callback();
+          dispatch({ type: LOGIN_SUCCESS, payload: accessToken.user });
+          console.log(callback);
+          callback("/");
           return;
         } else {
           localStorage.removeItem("acess_token");
           localStorage.removeItem("refresh_token");
           localStorage.setItem("is_authenticated", false);
-          return dispatch({ type: "LOGIN_FAILURE" });
+          return dispatch({ type: LOGIN_FAILURE });
         }
       })
       .catch((err) => {
-        dispatch("LOGIN_FAILURE");
+        console.log(err);
+        dispatch({ type: LOGIN_FAILURE });
         localStorage.removeItem("acess_token");
         localStorage.removeItem("refresh_token");
       });

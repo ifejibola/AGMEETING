@@ -45,13 +45,20 @@ const SignIn = (props) => {
   const [emailError, setEmailError] = useState(false);
   const [failedLogin, setFailedLogin] = useState(false);
   const [loginError, setLoginError] = useState(null);
+  let navigate = useNavigate();
   //access and unused refresh tokens are stored in local storage at the moment, will probably want to change this implementation of JWT tokens at some point in the future
   useEffect(() => {
     if (localStorage.getItem("is_authenticated")) {
       localStorage.removeItem("is_authenticated");
     }
   }, []);
-  let navigate = useNavigate();
+
+  useEffect(() => {
+    if (props.userReducer.failedLogin === true) {
+      setFailedLogin(true);
+      setLoginError("Incorrect username or password");
+    }
+  }, [props.userReducer.failedLogin]);
 
   //called when the user clicks the button to log in
 
@@ -63,10 +70,7 @@ const SignIn = (props) => {
     } else {
       setEmailError(false);
     }
-    props.onLogin(data.get("email"), data.get("password"), () => {
-      navigate("/");
-      setLoginError("Incorrect user or password try again");
-    });
+    props.onLogin(data.get("email"), data.get("password"), navigate);
   };
 
   return (
@@ -115,17 +119,19 @@ const SignIn = (props) => {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <span
-              id="error"
-              margin="normal"
-              style={{
-                fontWeight: "bold",
-                color: "red",
-                display: "block",
-              }}
-            >
-              {loginError}
-            </span>
+            {props.userReducer.failedLogin && (
+              <span
+                id="error"
+                margin="normal"
+                style={{
+                  fontWeight: "bold",
+                  color: "red",
+                  display: "block",
+                }}
+              >
+                {loginError}
+              </span>
+            )}
             <Button
               id="submit"
               type="submit"
@@ -164,8 +170,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onLogin: (email, password, callback) => {
-      dispatch(login(email, password, callback));
+    onLogin: (email, password, callback1, callback2) => {
+      dispatch(login(email, password, callback1, callback2));
     },
   };
 };
