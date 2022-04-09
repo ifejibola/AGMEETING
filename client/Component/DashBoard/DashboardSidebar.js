@@ -25,7 +25,6 @@ import Logo from '../../Logo';
 import NavSection from '../../NavSection';
 import Scrollbar from '../../Scrollbar';
 // import { Receipt } from '@material-ui/icons';
-import { connect } from "react-redux";
 
 import Modal from "./Interactions";
 import {authenticationService} from "../../../server/services/authentication.service";

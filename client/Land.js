@@ -13,7 +13,6 @@ import {
   Typography,
   experimentalStyled,
 } from "@mui/material";
-import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const mapStateToProps = (state) => {
@@ -93,4 +92,4 @@ function Land({ dispatch, currentUser, userList }) {
   );
 }
 
-export default connect(mapStateToProps)(Land);
+export default Land;
