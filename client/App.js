@@ -26,10 +26,7 @@ function App() {
   const { settings } = useSettings();
   const navigate = useNavigate();
   const location = useLocation();
-  const [userStates, setUserStates] = useState({
-    currentUser: null,
-    role: "",
-  });
+
   const theme = createCustomTheme({
     direction: settings.direction,
     responsiveFontSizes: settings.responsiveFontSizes,
@@ -44,14 +41,6 @@ function App() {
     // Check login authentication for every pages of the application (or every time the app rerender)
     // Alternative solution would be using onEnter for every Route in route.js
     const currentUser = await authenticationService.currentUserValue;
-    try {
-      setUserStates({
-        currentUser: currentUser,
-        role: currentUser.role,
-      });
-    } catch (err) {
-      console.log("No user logged in");
-    }
 
     console.log(currentUser);
 

@@ -1,3 +1,4 @@
+
 import { BehaviorSubject } from 'rxjs';
 
 import { handleResponse } from '../helpers/handle-response';
@@ -7,6 +8,10 @@ import axios from "axios";
 const user = localStorage.getItem('currentUser');
 let currentUserSubject;
 let tokenSubject;
+// BehaviorSubject is a type of subject, a subject is a special type of observable so you can subscribe to messages like any other observable
+// We use BehaviorSubject because it needs an initial value
+// Observable is a feature that provides support for delivering messages between different parts of your single-page application,
+// Observable responsible for handling multiple values, asynchronous programming
 if (user === "undefined"){
     currentUserSubject = new BehaviorSubject();
     tokenSubject = new BehaviorSubject();
@@ -19,7 +24,7 @@ else{
 export const authenticationService = {
     login,
     logout,
-    currentUser: currentUserSubject.asObservable(),
+    currentUser: currentUserSubject.asObservable(), // The purpose of this is to prevent leaking the "observer side" of the Subject out of an API
     token: tokenSubject.asObservable(),
     get currentUserValue () { return currentUserSubject.value },
     get tokenValue () { return tokenSubject.value }

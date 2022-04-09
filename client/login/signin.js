@@ -38,7 +38,7 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function SignIn(effect, deps) {
+export default function SignIn() {
 
     const navigate = useNavigate();
     const [signinError, setSigninError] = React.useState("");
