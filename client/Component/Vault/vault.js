@@ -174,6 +174,7 @@ const vault = () => {
                   </TableCell>
                   <TableCell>File Name</TableCell>
                   <TableCell>Comment</TableCell>
+                  <TableCell>File Path</TableCell>
                   <TableCell align="right">Actions</TableCell>
                 </TableRow>
               </TableHead>
@@ -200,6 +201,11 @@ const vault = () => {
                     <TableCell>
                       <Typography color="textSecondary" variant="body2">
                         {file.comment}
+                      </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Typography color="textSecondary" variant="body2">
+                        {file.file_loc}
                       </Typography>
                     </TableCell>
                     <TableCell align="right">
