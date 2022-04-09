@@ -190,13 +190,6 @@ const vault = () => {
                           display: "flex",
                         }}
                       >
-                        <Avatar
-                          alt={file.name}
-                          sx={{
-                            height: 42,
-                            width: 42,
-                          }}
-                        />
                         <Box sx={{ ml: 1 }}>
                           <Link color="inherit" variant="subtitle2">
                             {file.name}

@@ -22,19 +22,3 @@ async function getAll() {
 
   return files;
 }
-
-// async function getById(id) {
-//   let customers = [];
-//   await axios
-//     .get("http://localhost:3000/api/v1/users/" + id, {
-//       headers: authHeader(),
-//     })
-//     .then((customersList) => {
-//       customers.push(...customersList.data.users);
-//     })
-//     .catch((err) => {
-//       console.log("Error: ", err);
-//     });
-
-//   return customers;
-// }
