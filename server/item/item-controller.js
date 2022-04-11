@@ -20,7 +20,6 @@ router.post(
       res.status(401);
       return;
     }
-    console.log(req.file);
     Item.create({
       meeting_id: jwt.user.id,
       description: req.file.mimetype,
@@ -36,10 +35,6 @@ router.get(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     let jwt = server.getJwt(req);
-    if (!jwt.user.is_mod) {
-      res.status(401);
-      return;
-    }
     Item.findAll({
       where: {
         meeting_id: jwt.user.moderator_id,
