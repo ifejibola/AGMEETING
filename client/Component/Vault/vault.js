@@ -80,6 +80,8 @@ const vault = () => {
       });
   }, []);
 
+  // TODO add download on click in the front end code
+
   return (
     <Box
       sx={{
@@ -193,7 +195,12 @@ const vault = () => {
                     </TableCell>
                     <TableCell align="right">
                       <IconButton>
-                        <PencilAltIcon fontSize="small" />
+                        <PencilAltIcon
+                          fontSize="small"
+                          onClick={() =>
+                            vaultService.downloadFile(file.id, file.file_loc)
+                          }
+                        />
                       </IconButton>
                       <IconButton>
                         <ArrowRightIcon fontSize="small" />
