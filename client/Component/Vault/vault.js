@@ -29,8 +29,10 @@ import PencilAltIcon from "../../icons/PencilAlt";
 import SearchIcon from "../../icons/Search";
 import { vaultService } from "../../../server/services/vault.service";
 import FileModal from "./fileModal";
+import { authenticationService } from "../../../server/services/authentication.service";
 
 const now = new Date();
+const currentUser = authenticationService.currentUserValue;
 
 // From Material UI
 const style = {
@@ -77,6 +79,8 @@ const vault = () => {
         console.log("Error: ", err);
       });
   }, []);
+
+  // TODO add download on click in the front end code
 
   return (
     <Box
@@ -142,7 +146,7 @@ const vault = () => {
               width: 240,
             }}
           >
-            <FileModal />
+            {currentUser?.role === "moderator" ? <FileModal /> : ""}
           </Box>
         </Box>
         <Scrollbar>
@@ -191,7 +195,12 @@ const vault = () => {
                     </TableCell>
                     <TableCell align="right">
                       <IconButton>
-                        <PencilAltIcon fontSize="small" />
+                        <PencilAltIcon
+                          fontSize="small"
+                          onClick={() =>
+                            vaultService.downloadFile(file.id, file.file_loc)
+                          }
+                        />
                       </IconButton>
                       <IconButton>
                         <ArrowRightIcon fontSize="small" />
