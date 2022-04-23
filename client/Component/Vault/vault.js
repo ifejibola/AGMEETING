@@ -26,6 +26,8 @@ import {
 import Scrollbar from "../../Scrollbar";
 import ArrowRightIcon from "../../icons/ArrowRight";
 import PencilAltIcon from "../../icons/PencilAlt";
+import DownloadIcon from "../../icons/Download";
+
 import SearchIcon from "../../icons/Search";
 import { vaultService } from "../../../server/services/vault.service";
 import FileModal from "./fileModal";
@@ -195,15 +197,12 @@ const vault = () => {
                     </TableCell>
                     <TableCell align="right">
                       <IconButton>
-                        <PencilAltIcon
+                        <DownloadIcon
                           fontSize="small"
                           onClick={() =>
                             vaultService.downloadFile(file.id, file.file_loc)
                           }
                         />
-                      </IconButton>
-                      <IconButton>
-                        <ArrowRightIcon fontSize="small" />
                       </IconButton>
                     </TableCell>
                   </TableRow>
