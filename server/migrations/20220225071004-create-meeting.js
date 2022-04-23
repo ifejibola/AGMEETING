@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      moderator_id: {
+      mod_id: {
         type: Sequelize.INTEGER,
         references: {
           model:{
@@ -32,6 +32,15 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      company_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model:{
+            tableName: 'company'
+          },
+          key: 'id'
+        }
       },
       updatedAt: {
         allowNull: false,

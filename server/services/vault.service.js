@@ -4,7 +4,6 @@ import axios from "axios";
 
 export const vaultService = {
   getAll,
-  //getById,
 };
 
 async function getAll() {

@@ -1,5 +1,4 @@
 import {authHeader} from "../helpers/auth-header";
-import { handleResponse } from '../helpers/handle-response';
 import axios from "axios";
 
 export const userService = {

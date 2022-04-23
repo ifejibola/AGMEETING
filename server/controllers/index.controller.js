@@ -4,6 +4,7 @@ const loginApi = require("./login.controller");
 const testingAuthApi = require("./testing.controller");
 const fileApi = require("./file.controller");
 const clientApi = require("./client.controller");
+const meetingApi = require("./meeting.controller")
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.use(loginApi);
 router.use(testingAuthApi);
 router.use(fileApi);
 router.use(clientApi);
+router.use(meetingApi);
 
 module.exports = router;
