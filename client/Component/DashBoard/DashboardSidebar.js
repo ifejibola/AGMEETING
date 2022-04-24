@@ -69,7 +69,7 @@ const sectionsMod = [
       {
         title: "Chat",
         path: "/content",
-        icon: <ChartSquareBarIcon fontSize="small" />,
+        icon: <ChatAltIcon fontSize="small" />,
       },
       // {
       //   title: 'Account',
@@ -205,7 +205,6 @@ const DashboardSidebar = (props) => {
   const lgUp = useMediaQuery("(min-width:980px)");
 
   useEffect(() => {
-    console.log("here in sidebar");
     if (openMobile && onMobileClose) {
       onMobileClose();
     }
@@ -270,12 +269,12 @@ const DashboardSidebar = (props) => {
             </RouterLink>
             <Box sx={{ ml: 2 }}>
               <Typography color="textPrimary" variant="subtitle2">
-                {props.userReducer?.currentUser?.email}
+                {props.user.email}
               </Typography>
               <Typography color="textSecondary" variant="body2">
                 Your plan:{" "}
                 <Link color="primary" component={RouterLink} to="/pricing">
-                  {props.userReducer?.currentUser?.email}'s plan
+                  {props.user.email}'s plan
                 </Link>
               </Typography>
             </Box>
@@ -283,7 +282,7 @@ const DashboardSidebar = (props) => {
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
-          {props.userReducer.currentUser?.isMod
+          {props.user?.is_mod
             ? sectionsMod.map((section) => (
                 <NavSection
                   key={section.title}
@@ -390,7 +389,7 @@ DashboardSidebar.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    userReducer: state.userReducer,
+    user: state.userReducer.currentUser,
   };
 };
 

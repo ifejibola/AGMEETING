@@ -16,7 +16,7 @@ const Item = db.define(
     },
     issue_number: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     description: {
       type: DataTypes.STRING,
@@ -26,17 +26,21 @@ const Item = db.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    vote_for: {
+    votes_for: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
-    vote_against: {
+    votes_against: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     abstain: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
+    },
+    file_name: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {

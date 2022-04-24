@@ -7,33 +7,41 @@ import {
   Select,
   MenuItem,
   Grid,
+  Paper,
+  List,
+  Typography,
 } from "@mui/material";
-import React from "react";
-import { useState } from "react";
+import React, { useEffect } from "react";
+import { useState, useRef } from "react";
 //import {Grid} from '@material-ui/core';
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import useChat from "./useChat";
 import { connect } from "react-redux";
-// import "./ChatRoom.css";
 
 // Soket.io code from https://medium.com/swlh/build-a-real-time-chat-app-with-react-hooks-and-socket-io-4859c9afecb0
 // https://github.com/pixochi/socket.io-react-hooks-chat
 
 const ContentMessage = (props) => {
+  const lastMessageRef = useRef(null);
+  const messageContainerRef = useRef(null);
   const { roomId } = 1;
-  const { messages, sendMessage } = useChat(1); // Creates a websocket and manages messaging
+  const { messages, sendMessage } = useChat(props.user.moderator_id); // Creates a websocket and manages messaging
   const [newMessage, setNewMessage] = React.useState(""); // Message to be sent
 
   const handleNewMessageChange = (event) => {
     setNewMessage(event.target.value);
   };
 
+  //called when a message is sent
   const handleSendMessage = () => {
-    sendMessage(props.userReducer?.currentUser?.email + ": " + newMessage);
-    setNewMessage("");
+    if (newMessage !== "") {
+      sendMessage(newMessage, props.user.id, null, props.user.moderator_id);
+      setNewMessage("");
+    } else {
+      setNewMessage("");
+      return;
+    }
   };
-
-  var test = messages.map((message) => message.body + "\n").join("");
 
   return (
     <Box
@@ -44,24 +52,85 @@ const ContentMessage = (props) => {
     >
       <Grid container spacing={1}>
         <Grid item xs={12}>
-          <TextField
-            disabled
-            multiline
-            rows={15}
-            size="large"
-            fullWidth
-            label=""
-            variant="outlined"
-            value={test}
-            sx={{
-              Height: "100%",
+          <Paper
+            ref={messageContainerRef}
+            style={{
+              maxHeight: 300,
+              minHeight: 300,
+              overflow: "auto",
+              background: "none",
+              paddingLeft: "15px",
+              paddingRight: "15px",
             }}
-          />
-          {/* <ol className="messages-list">
-            {messages.map((message) => (
-            <li>{message.body}</li>
-            ))}
-            </ol>} */}
+          >
+            <List>
+              {messages.map((message, i) => {
+                return message.participant?.id == props.user.id ? (
+                  i == messages.length - 1 ? (
+                    <div
+                      id="lastMessage"
+                      ref={lastMessageRef}
+                      style={{
+                        background: "#5664d2",
+                        padding: "10px",
+                        margin: "10px",
+                        borderRadius: "20px",
+                      }}
+                    >
+                      <Typography>
+                        {message.participant?.email + ":"}
+                      </Typography>
+                      <Typography>{message.content}</Typography>
+                      <br />
+                    </div>
+                  ) : (
+                    <div
+                      style={{
+                        background: "#5664d2",
+                        padding: "10px",
+                        margin: "10px",
+                        borderRadius: "20px",
+                      }}
+                    >
+                      <Typography>
+                        {message.participant?.email + ":"}
+                      </Typography>
+                      <Typography>{message.content}</Typography>
+                      <br />
+                    </div>
+                  )
+                ) : i == messages.length - 1 ? (
+                  <div
+                    id="lastMessage"
+                    ref={lastMessageRef}
+                    style={{
+                      background: "grey",
+                      padding: "10px",
+                      margin: "10px",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    <Typography>{message.participant?.email + ":"}</Typography>
+                    <Typography>{message.content}</Typography>
+                    <br />
+                  </div>
+                ) : (
+                  <div
+                    style={{
+                      background: "grey",
+                      padding: "10px",
+                      margin: "10px",
+                      borderRadius: "20px",
+                    }}
+                  >
+                    <Typography>{message.participant?.email + ":"}</Typography>
+                    <Typography>{message.content}</Typography>
+                    <br />
+                  </div>
+                );
+              })}
+            </List>
+          </Paper>
         </Grid>
         <Grid item xs={12}>
           {/* <TextField
@@ -89,7 +158,7 @@ const ContentMessage = (props) => {
             <Select
               labelId="inputlab"
               id="sel"
-              //value={destination}
+              defaultValue={""}
               label="Destination"
               //onChange={handleChange}
             >
@@ -124,33 +193,12 @@ const ContentMessage = (props) => {
         </Grid>
       </Grid>
     </Box>
-    // <div className="messages-container">
-    //   <ol className="messages-list">
-    //     {messages.map((message) => (
-    //       <li>{message.body}</li>
-    //     ))}
-    //   </ol>
-    // </div>
-    // <br></br>
-    // <br></br>
-    // <br></br>
-    // <br></br>
-    // <textarea
-    //   value={newMessage}
-    //   onChange={handleNewMessageChange}
-    //   placeholder="Write message..."
-    //   className="new-message-input-field"
-    // />
-    // <button onClick={handleSendMessage} className="send-message-button">
-    //   Send
-    // </button>
-    // </Box>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    userReducer: state.userReducer,
+    user: state.userReducer.currentUser,
   };
 };
 

@@ -7,8 +7,13 @@ const columns = [
   { field: "item", headerName: "Item Name (job title)", width: 250 },
   { field: "example", headerName: "Example", width: 150 },
   { field: "status", headerName: "Status", width: 110 },
-  { field: "placeholder", headerName: "placeholder", type: "singleSelect", width: 110 },
-  { field: "email", headerName: "Email", width: 150 }
+  {
+    field: "placeholder",
+    headerName: "placeholder",
+    type: "singleSelect",
+    width: 110,
+  },
+  { field: "email", headerName: "Email", width: 150 },
 ];
 
 const rows = [
@@ -20,11 +25,11 @@ const rows = [
     placeholder: null,
     email: null,
   },
-  { 
-    id: 2, 
-    item: "Marco Botton Tuttofare", 
-    example: 38, 
-    status: null, 
+  {
+    id: 2,
+    item: "Marco Botton Tuttofare",
+    example: 38,
+    status: null,
     placeholder: null,
     email: null,
   },
@@ -44,27 +49,27 @@ const rows = [
     placeholder: null,
     email: null,
   },
-  { 
-    id: 5, 
-    item: "Data Grid Documents", 
-    example: null, 
-    status: null, 
+  {
+    id: 5,
+    item: "Data Grid Documents",
+    example: null,
+    status: null,
     placeholder: null,
-    email: null, 
+    email: null,
   },
-  { 
-    id: 6, 
-    item: "{65L", 
-    example: 0, 
-    status: "35", 
+  {
+    id: 6,
+    item: "{65L",
+    example: 0,
+    status: "35",
     placeholder: null,
-    email: null, 
+    email: null,
   },
 ];
 
 export default function RegisteredUsers() {
-  return (  
-    <div style={{ display: 'flex', height: 400, width: '90%' }}>
+  return (
+    <div style={{ display: "flex", height: 400, width: "90%" }}>
       <DataGrid
         rows={rows}
         columns={columns}

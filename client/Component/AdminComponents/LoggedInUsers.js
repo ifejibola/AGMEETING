@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import numeral from "numeral";
 import { subDays, subHours } from "date-fns";
 import {
@@ -20,13 +20,23 @@ import {
   Tabs,
   TextField,
   Typography,
+  Button,
+  Dialog,
+  DialogTitle,
+  Tooltip,
+  FormLabel,
+  DialogContent,
 } from "@mui/material";
 import Scrollbar from "../../Scrollbar";
 import ArrowRightIcon from "../../icons/ArrowRight";
 import PencilAltIcon from "../../icons/PencilAlt";
 import SearchIcon from "../../icons/Search";
+import Trash from "../../icons/Trash";
 
 import Comments from "./Comments";
+import { baseURL, getMeetingParticipants } from "../../actions";
+import axios from "axios";
+import { connect } from "react-redux";
 
 const now = new Date();
 
@@ -151,145 +161,271 @@ const sortOptions = [
   },
 ];
 
-const LoggedinUsers = () => (
-  <Box
-    sx={{
-      backgroundColor: "background.default",
-      p: 3,
-    }}
-  >
-    <Card>
-      <Divider />
-      <Box
-        sx={{
-          alignItems: "center",
-          display: "flex",
-          flexWrap: "wrap",
-          m: -1,
-          p: 2,
-        }}
-      >
+//Moderator component to view the users within their meeting, protected by the ModeratorRoute component
+const LoggedinUsers = (props) => {
+  const [selectedUsers, setSelectedUsers] = useState([]);
+  const [deleteDialog, setDeleteDialog] = useState(false);
+  const [error, setError] = useState(false);
+  //get all the meeting participants
+  useEffect(() => {
+    props.onGetMeetingParticpants();
+  }, []);
+
+  //can select users for deletion, called when this list of users changes
+  const changeSelectedUsers = (e, participant) => {
+    if (e.target.checked) {
+      setSelectedUsers([...selectedUsers, participant]);
+    } else {
+      if (selectedUsers.length === 1) {
+        setSelectedUsers([]);
+      } else {
+        setSelectedUsers(
+          selectedUsers.splice(selectedUsers.indexOf(participant), 1)
+        );
+      }
+    }
+  };
+
+  const open = () => {
+    setDeleteDialog(true);
+  };
+
+  const close = () => {
+    setError(null);
+    setDeleteDialog(false);
+  };
+
+  //called when the button to delete the selected users is clicked
+  const handleSubmit = () => {
+    if (
+      selectedUsers
+        .map((user) => {
+          return user.id;
+        })
+        .includes(props.currentUser.id)
+    ) {
+      throw "Failure: Cannot delete yourself";
+    } else {
+      setError(null);
+      axios
+        .post(
+          baseURL + "/participants/deleteParticipant",
+          selectedUsers.map((user) => user.id),
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("access_token"),
+            },
+          }
+        )
+        .then((data) => {
+          setSelectedUsers([]);
+          setError("User(s) deleted");
+          props.onGetMeetingParticpants();
+        })
+        .catch((error) => {
+          setError("" + error);
+        });
+    }
+  };
+
+  return (
+    <Box
+      sx={{
+        backgroundColor: "background.default",
+        p: 3,
+      }}
+    >
+      <Card>
+        <Divider />
         <Box
           sx={{
-            m: 1,
-            maxWidth: "100%",
-            width: 500,
+            alignItems: "center",
+            display: "flex",
+            flexWrap: "wrap",
+            m: -1,
+            p: 2,
           }}
         >
-          <TextField
-            fullWidth
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon fontSize="small" />
-                </InputAdornment>
-              ),
+          <Box
+            sx={{
+              m: 1,
+              maxWidth: "100%",
+              width: 500,
             }}
-            placeholder="Search customers"
-            variant="outlined"
-          />
-        </Box>
-        <Box
-          sx={{
-            m: 1,
-            width: 240,
-          }}
-        >
-          <TextField
-            label="Sort By"
-            name="sort"
-            select
-            SelectProps={{ native: true }}
-            variant="outlined"
           >
-            {sortOptions.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </TextField>
+            <TextField
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon fontSize="small" />
+                  </InputAdornment>
+                ),
+              }}
+              placeholder="Search customers"
+              variant="outlined"
+            />
+          </Box>
+          <Box
+            sx={{
+              m: 1,
+              width: 240,
+            }}
+          >
+            <TextField
+              label="Sort By"
+              name="sort"
+              select
+              SelectProps={{ native: true }}
+              variant="outlined"
+            >
+              {sortOptions.map((option) => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </TextField>
+          </Box>
+          <Button
+            disabled={selectedUsers.length > 0 ? false : true}
+            onClick={() => {
+              open();
+            }}
+          >
+            <Trash></Trash>
+          </Button>
+          <Dialog open={deleteDialog} onClose={close}>
+            <DialogTitle>
+              Are You Sure You Want to Delete the Following Users?
+            </DialogTitle>
+            <DialogContent>
+              {selectedUsers.map((user) => {
+                return <Typography>{user.email}</Typography>;
+              })}
+              {error && <Typography sx={{ color: "red" }}>{error}</Typography>}
+            </DialogContent>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                flexDirection: "column",
+              }}
+            ></Box>
+            <Button
+              onClick={() => {
+                try {
+                  handleSubmit();
+                } catch (e) {
+                  setError(e);
+                }
+              }}
+              color="primary"
+            >
+              Delete
+            </Button>
+            {/* {fileUploadSuccess && (
+              <Typography color={"red"}>Successfully uploaded file</Typography>
+            )} */}
+          </Dialog>
         </Box>
-      </Box>
-      <Scrollbar>
-        <Box sx={{ minWidth: 700 }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell padding="checkbox">
-                  <Checkbox color="primary" />
-                </TableCell>
-                <TableCell>Name</TableCell>
-                <TableCell>Location</TableCell>
-                <TableCell>Orders</TableCell>
-                <TableCell>Role</TableCell>
-                <TableCell align="right">Actions</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {customers.map((customer) => (
-                <TableRow hover key={customer.id}>
+        <Scrollbar>
+          <Box sx={{ minWidth: 700 }}>
+            <Table>
+              <TableHead>
+                <TableRow>
                   <TableCell padding="checkbox">
                     <Checkbox color="primary" />
                   </TableCell>
-                  <TableCell>
-                    <Box
-                      sx={{
-                        alignItems: "center",
-                        display: "flex",
-                      }}
-                    >
-                      <Avatar
-                        src={customer.avatar}
-                        sx={{
-                          height: 42,
-                          width: 42,
+                  <TableCell>Name</TableCell>
+                  <TableCell>Location</TableCell>
+                  <TableCell>Orders</TableCell>
+                  <TableCell>Role</TableCell>
+                  <TableCell align="right">Actions</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {props.meetingParticipants?.map((participant) => (
+                  <TableRow hover key={participant.id}>
+                    <TableCell padding="checkbox">
+                      <Checkbox
+                        color="primary"
+                        onChange={(e) => {
+                          changeSelectedUsers(e, participant);
                         }}
                       />
-                      <Box sx={{ ml: 1 }}>
-                        <Link color="inherit" variant="subtitle2">
-                          {customer.name}
-                        </Link>
-                        <Typography color="textSecondary" variant="body2">
-                          {customer.email}
-                        </Typography>
+                    </TableCell>
+                    <TableCell>
+                      <Box
+                        sx={{
+                          alignItems: "center",
+                          display: "flex",
+                        }}
+                      >
+                        <Avatar
+                          src={""}
+                          sx={{
+                            height: 42,
+                            width: 42,
+                          }}
+                        />
+                        <Box sx={{ ml: 1 }}>
+                          <Link color="inherit" variant="subtitle2">
+                            {participant.email}
+                          </Link>
+                          <Typography color="textSecondary" variant="body2">
+                            {participant.email}
+                          </Typography>
+                        </Box>
                       </Box>
-                    </Box>
-                  </TableCell>
-                  <TableCell>
-                    {`${customer.city}, ${customer.state}, ${customer.country}`}
-                  </TableCell>
-                  <TableCell>{customer.totalOrders}</TableCell>
-                  <TableCell>
-                    {numeral(customer.totalAmountSpent).format(
-                      `${customer.currency}0,0.00`
-                    )}
-                  </TableCell>
-                  <TableCell align="right">
-                    <IconButton>
-                      <PencilAltIcon fontSize="small" />
-                    </IconButton>
-                    <IconButton>
-                      <ArrowRightIcon fontSize="small" />
-                    </IconButton>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Box>
-      </Scrollbar>
-      <TablePagination
-        component="div"
-        count={customers.length}
-        onPageChange={() => {}}
-        onRowsPerPageChange={() => {}}
-        page={0}
-        rowsPerPage={5}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
-      <Comments />
-    </Card>
-  </Box>
-);
+                    </TableCell>
+                    <TableCell>{``}</TableCell>
+                    <TableCell>{}</TableCell>
+                    <TableCell>
+                      {participant.is_mod ? "Moderator" : "Participant"}
+                    </TableCell>
+                    <TableCell align="right">
+                      <IconButton>
+                        <PencilAltIcon fontSize="small" />
+                      </IconButton>
+                      <IconButton>
+                        <ArrowRightIcon fontSize="small" />
+                      </IconButton>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Box>
+        </Scrollbar>
+        <TablePagination
+          component="div"
+          count={customers.length}
+          onPageChange={() => {}}
+          onRowsPerPageChange={() => {}}
+          page={0}
+          rowsPerPage={5}
+          rowsPerPageOptions={[5, 10, 25]}
+        />
+        <Comments />
+      </Card>
+    </Box>
+  );
+};
 
-export default LoggedinUsers;
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.userReducer.currentUser,
+    meetingParticipants: state.userReducer.meetingParticipants,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onGetMeetingParticpants: () => {
+      dispatch(getMeetingParticipants());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoggedinUsers);

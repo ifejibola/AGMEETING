@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import numeral from "numeral";
 import { format, subMinutes, subSeconds } from "date-fns";
 import {
@@ -31,10 +31,13 @@ import Scrollbar from "../../Scrollbar";
 import ArrowRightIcon from "../../icons/ArrowRight";
 import DotsHorizontalIcon from "../../icons/DotsHorizontal";
 import PencilAltIcon from "../../icons/PencilAlt";
+import Download from "../../icons/Download";
 import Plus from "../../icons/Plus";
-import { FileCopy, Person } from "@material-ui/icons";
+import { FileCopy, FileDownload, Person } from "@material-ui/icons";
 import axios from "axios";
 import { connect } from "react-redux";
+import { baseURL, getMeetingItems } from "../../actions";
+import download from "downloadjs";
 
 const now = new Date();
 
@@ -97,6 +100,10 @@ const Vault = (props) => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileUploadSuccess, setFileUploadSuccess] = useState(false);
 
+  useEffect(() => {
+    props.onGetMeetingItems();
+  }, []);
+
   const open = () => {
     openFileUploadDialog(true);
   };
@@ -108,20 +115,44 @@ const Vault = (props) => {
     setSelectedFile(target.files[0]);
   };
 
+  //handle item upload
   const handleSubmit = () => {
     const formData = new FormData();
     formData.append("uploaded_file", selectedFile);
-    const baseURL = "http://localhost:3000";
     axios
-      .post(baseURL + "/items/upload", formData)
+      .post(baseURL + "/items/upload", formData, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      })
       .then((res) => {
-        console.log(res);
         if (res.status == 200) {
           setFileUploadSuccess(true);
         }
       })
       .catch((err) => {
         alert("failed to upload");
+      });
+  };
+
+  //handle item donwnload
+  const getItem = (filePath, fileName, mimeType) => {
+    axios
+      .get(baseURL + "/items/getItem", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+        params: {
+          filepath: filePath,
+          fileName: fileName,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        download(res.data, fileName, mimeType);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
   return (
@@ -202,41 +233,44 @@ const Vault = (props) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {orders.map((order) => (
-                  <TableRow hover key={order.id}>
+                {props.items?.map((item) => (
+                  <TableRow hover key={item.id}>
                     <TableCell padding="checkbox">
                       <Checkbox color="primary" />
                     </TableCell>
                     <TableCell>
                       <Typography color="textPrimary" variant="subtitle2">
-                        {order.number}
-                      </Typography>
-                      <Typography color="textSecondary" variant="body2">
-                        {format(order.createdAt, "dd MMM yyyy | HH:mm")}
+                        {item.id}
                       </Typography>
                     </TableCell>
                     <TableCell>
                       <Typography color="textPrimary" variant="subtitle2">
-                        {order.customer.name}
+                        {item.file_name}
                       </Typography>
                       <Typography color="textSecondary" variant="body2">
-                        {order.customer.email}
+                        {item.description}
                       </Typography>
                     </TableCell>
-                    <TableCell>{order.paymentMethod}</TableCell>
-                    <TableCell>
-                      {numeral(order.totalAmount).format(
-                        `${order.currency}0,0.00`
-                      )}
-                    </TableCell>
-                    <TableCell>{getStatusLabel(order.status)}</TableCell>
+                    <TableCell>{""}</TableCell>
+                    <TableCell>{""}</TableCell>
+                    <TableCell>{""}</TableCell>
                     <TableCell align="right">
                       <IconButton>
                         <PencilAltIcon fontSize="small" />
                       </IconButton>
-                      <IconButton>
-                        <ArrowRightIcon fontSize="small" />
-                      </IconButton>
+                      <a download>
+                        <IconButton
+                          onClick={() => {
+                            getItem(
+                              item.filepath,
+                              item.file_name,
+                              item.description
+                            );
+                          }}
+                        >
+                          <Download fontSize="small" />
+                        </IconButton>
+                      </a>
                     </TableCell>
                   </TableRow>
                 ))}
@@ -261,7 +295,16 @@ const Vault = (props) => {
 const mapStateToProps = (state) => {
   return {
     user: state.userReducer.currentUser,
+    items: state.itemReducer.meetingItems,
   };
 };
 
-export default connect(mapStateToProps, null)(Vault);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onGetMeetingItems: () => {
+      dispatch(getMeetingItems());
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Vault);

@@ -27,9 +27,15 @@ const administratorController = require("./admin/admin-controller");
 
 const authController = require("./auth/authController");
 
+const chatController = require("./chat/chat-controller");
+
 const session = require("express-session");
 
 const cookieParser = require("cookie-parser");
+
+const io = require("./socket");
+
+const jwtDecode = require("jwt-decode");
 
 // After you declare "app"
 app.use(
@@ -42,16 +48,6 @@ app.use(cookieParser("some-secret"));
 const passport = require("passport");
 require("../config/passport");
 
-const { Server } = require("socket.io");
-const http = require("http");
-const server = http.createServer(app);
-const io = require("socket.io")(server, {
-  cors: {
-    origin: "*",
-  },
-});
-const NEW_CHAT_MESSAGE_EVENT = "newChatMessage";
-
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.static(path.join(__dirname, "../dist")));
@@ -61,6 +57,7 @@ app.use("/meetings", meetingController);
 app.use("/items", itemController);
 app.use("/admins", administratorController);
 app.use("/authentication", authController);
+app.use("/chat", chatController);
 //passport
 app.use(passport.initialize());
 app.use(passport.session());
@@ -68,9 +65,7 @@ app.use(passport.session());
 try {
   db.sequelize.authenticate().then(() => {
     console.log("Connection has been established successfully.");
-    Participant.findAll().then((results) => {
-      console.log(results);
-    });
+    Participant.findAll().then((results) => {});
   });
 } catch (error) {
   console.error("Unable to connect to the database:", error);
@@ -90,30 +85,17 @@ app.get("*", (req, res) => {
   // res.sendFile(path.join(__dirname + '/public/index.html'))
 });
 
-io.on("connection", (socket) => {
-  console.log("A user connected");
-  const { roomId } = socket.handshake.query;
-  socket.join(roomId);
-
-  socket.on(NEW_CHAT_MESSAGE_EVENT, (data) => {
-    console.log("You've got mail!");
-    io.in(roomId).emit(NEW_CHAT_MESSAGE_EVENT, data);
-  });
-
-  socket.on("disconnect", () => {
-    socket.leave(roomId);
-  });
-});
-
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ force: true }).then(() => {
   app.listen(port, () => {
     console.log(`The app server is running on port: ${port}`);
   });
 });
 
-module.exports = app;
+const getJwt = (req) => {
+  let jwt = jwtDecode(req.get("Authorization").split(" ")[1]);
+  return jwt;
+};
 
-// Run chat server on seperate port
-server.listen(4000, () => {
-  console.log(`The chat server is running on port: ${port}`);
-});
+exports.getJwt = getJwt;
+
+module.exports = app;

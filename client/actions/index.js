@@ -12,14 +12,20 @@ import {
   CREATE_ACCOUNT_SUCCESS,
   CREATE_ACCOUNT_FAILURE,
   SET_USER_INFO,
+  GET_MEETING_PARTICIPANTS_SUCCESS,
+  GET_MEETING_PARTICIPANTS_FAILURE,
+  GET_MEETING_PARTICIPANTS_REQUEST,
 } from "../redux/userTypes";
 
+import {
+  GET_MEETING_ITEMS_SUCCESS,
+  GET_MEETING_ITEMS_FAILURE,
+  GET_MEETING_ITEMS_REQUEST,
+} from "../redux/itemTypes";
+
 export const baseURL = "http://localhost:3000";
-// const auth = {
-//   Authorization: {
-//     Bearer:
-//   }
-// }
+
+//Redux action creators
 
 export const setCurrentUser = (userInfo) => {
   return async (dispatch) => {
@@ -28,7 +34,7 @@ export const setCurrentUser = (userInfo) => {
 };
 
 export const createAccount = (email, password, callback) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     dispatch({ type: "CREATE_ACCOUNT_REQUEST" });
     const req = axios
       .post(baseURL + "/authentication/register", {
@@ -57,7 +63,7 @@ export const createAccount = (email, password, callback) => {
 
 export const login = (email, password, callback) => {
   return async (dispatch) => {
-    dispatch({ type: "LOGIN_REQUEST" });
+    dispatch({ type: LOGIN_REQUEST });
     axios
       .post(baseURL + "/authentication/login", {
         email,
@@ -65,25 +71,64 @@ export const login = (email, password, callback) => {
       })
       .then(({ data }) => {
         if (data !== "No user") {
-          console.log("here");
           localStorage.setItem("access_token", data.accessToken);
           localStorage.setItem("refresh_token", data.refreshToken);
           localStorage.setItem("is_authenticated", true);
           const accessToken = jwtDecode(data.accessToken);
-          dispatch({ type: "LOGIN_SUCCESS", payload: accessToken.user });
-          callback();
+          dispatch({ type: LOGIN_SUCCESS, payload: accessToken.user });
+          console.log(callback);
+          callback("/");
           return;
         } else {
           localStorage.removeItem("acess_token");
           localStorage.removeItem("refresh_token");
           localStorage.setItem("is_authenticated", false);
-          return dispatch({ type: "LOGIN_SUCCESS", payload: data });
+          return dispatch({ type: LOGIN_FAILURE });
         }
       })
       .catch((err) => {
-        dispatch("LOGIN_FAILURE");
+        console.log(err);
+        dispatch({ type: LOGIN_FAILURE });
         localStorage.removeItem("acess_token");
         localStorage.removeItem("refresh_token");
+      });
+  };
+};
+
+export const getMeetingParticipants = () => {
+  return async (dispatch) => {
+    dispatch({ type: GET_MEETING_PARTICIPANTS_REQUEST });
+    axios
+      .get(baseURL + "/participants/meetingParticipants", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      })
+      .then(({ data }) => {
+        dispatch({ type: GET_MEETING_PARTICIPANTS_SUCCESS, payload: data });
+        return;
+      })
+      .catch((err) => {
+        dispatch({ type: GET_MEETING_PARTICIPANTS_FAILURE });
+      });
+  };
+};
+
+export const getMeetingItems = () => {
+  return async (dispatch) => {
+    dispatch({ type: GET_MEETING_ITEMS_REQUEST });
+    axios
+      .get(baseURL + "/items/getMeetingItems", {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      })
+      .then(({ data }) => {
+        dispatch({ type: GET_MEETING_ITEMS_SUCCESS, payload: data });
+        return;
+      })
+      .catch((err) => {
+        dispatch({ type: GET_MEETING_ITEMS_FAILURE });
       });
   };
 };

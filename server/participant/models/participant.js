@@ -1,4 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
+const Message = require("../../chat/models/message");
 const db = require("../../config/db");
 
 const Participant = db.define(
@@ -27,6 +28,11 @@ const Participant = db.define(
       type: DataTypes.BOOLEAN,
       allowNull: false,
     },
+    is_admin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
     moderator_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
@@ -38,6 +44,8 @@ const Participant = db.define(
   }
 );
 
+Participant.hasMany(Message, { foreignKey: "user_id" });
+Message.belongsTo(Participant, { foreignKey: "user_id" });
 // `sequelize.define` also returns the model
 console.log(Participant === db.models.Participant); // true
 

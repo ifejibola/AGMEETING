@@ -17,8 +17,6 @@ const findId = async (id, done) => {
       id: id,
     },
   }).then(async (user) => {
-    console.log("name: ", user.name);
-    console.log("deserialize id: ", user.id);
     return done(null, user.id);
   });
 };
@@ -52,8 +50,6 @@ passport.use(
             console.log("Match", match);
 
             if (!match) {
-              console.log("here");
-              window.alert("Incorrect email or password.");
               return done(null, false, { message: "Incorrect password." });
             }
             console.log("***** Login Success .... *****");

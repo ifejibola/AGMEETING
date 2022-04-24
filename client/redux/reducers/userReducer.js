@@ -8,7 +8,12 @@ import {
   CREATE_ACCOUNT_SUCCESS,
   CREATE_ACCOUNT_FAILURE,
   SET_USER_INFO,
+  GET_MEETING_PARTICIPANTS_FAILURE,
+  GET_MEETING_PARTICIPANTS_SUCCESS,
+  GET_MEETING_PARTICIPANTS_REQUEST,
 } from "../userTypes";
+
+//Reducer for participants (account creation, login, getting meeting users etc...)
 const userReducer = (state = {}, action) => {
   switch (action.type) {
     case STORE_USER:
@@ -25,12 +30,14 @@ const userReducer = (state = {}, action) => {
           id: action.payload.id,
           email: action.payload.email,
           is_mod: action.payload.is_mod,
+          is_admin: action.payload.is_admin,
           moderator_id: action.payload.moderator_id,
         },
+        failedLogin: false,
         loading: false,
       };
     case LOGIN_FAILURE:
-      return { ...state, loading: false };
+      return { ...state, failedLogin: true, loading: false };
     case CREATE_ACCOUNT_REQUEST:
       return { ...state, loading: true };
     case CREATE_ACCOUNT_SUCCESS:
@@ -40,6 +47,7 @@ const userReducer = (state = {}, action) => {
           id: action.payload.id,
           email: action.payload.email,
           is_mod: action.payload.is_mod,
+          is_admin: action.payload.is_admin,
           moderator_id: action.payload.moderator_id,
         },
         loading: false,
@@ -54,10 +62,17 @@ const userReducer = (state = {}, action) => {
           id: action.payload.id,
           email: action.payload.email,
           is_mod: action.payload.is_mod,
+          is_admin: action.payload.is_admin,
           moderator_id: action.payload.moderator_id,
         },
         loading: false,
       };
+    case GET_MEETING_PARTICIPANTS_REQUEST:
+      return { ...state, loading: true };
+    case GET_MEETING_PARTICIPANTS_SUCCESS:
+      return { ...state, meetingParticipants: action.payload, loading: false };
+    case GET_MEETING_PARTICIPANTS_FAILURE:
+      return { ...state, loading: false };
     default:
       return state;
   }

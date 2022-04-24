@@ -17,6 +17,7 @@ import { createAccount } from "../actions";
 import { connect, ReactReduxContext } from "react-redux";
 import { useNavigate } from "react-router";
 import store from "../redux/store";
+import PasswordStrengthBar from "react-password-strength-bar";
 
 function Copyright(props) {
   return (
@@ -28,7 +29,7 @@ function Copyright(props) {
     >
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
-        Your Website
+        AGMeeting
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -37,9 +38,10 @@ function Copyright(props) {
 }
 
 const theme = createTheme();
-
+//Component for registering new users
 function SignUp(props) {
   const [signupError, setSignupError] = React.useState("");
+  const [password, setPassword] = React.useState("");
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -48,19 +50,16 @@ function SignUp(props) {
     // make sure email is valid
     if (!validator.isEmail(data.get("email"))) {
       setSignupError("Enter valid Email!");
-      console.log("here");
       return;
     }
     // check passwords are matching
     if (data.get("password") !== data.get("passwordAgain")) {
       setSignupError("Passwords must match");
-      console.log("here");
       return;
     }
     //check both passwords have been entered
     else if (!data.get("password") || !data.get("passwordAgain")) {
       setSignupError("Please enter a password twice");
-      console.log("here");
       return;
     } else {
       setSignupError("");
@@ -110,6 +109,9 @@ function SignUp(props) {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
             />
             <TextField
               margin="normal"
@@ -121,6 +123,7 @@ function SignUp(props) {
               id="passwordAgain"
               autoComplete="current-password"
             />
+            <PasswordStrengthBar password={password}></PasswordStrengthBar>
             <span
               margin="normal"
               style={{
