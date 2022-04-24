@@ -34,4 +34,28 @@ router.get("/meetings/user/:userId", passport.authenticate("jwt", {session: fals
 
 })
 
+router.get("/meetings/add/:meetingId/:userId", passport.authenticate("jwt", {session: false} ),async(req, res) =>{
+
+    const user_id = req.params.userId;
+    const meeting_id = req.params.meetingId;
+    const meetingByUser = await userMeetingJunction.findOne({ where: { user_id: user_id, meeting_id: meeting_id}}).catch((err)=> {
+        console.log("Error: ", err);
+    });
+
+    if(meetingByUser){
+        return res.json({message: "You are already in this meeting."})
+    }
+
+    const newUserMeeting = new userMeetingJunction({meeting_id, user_id});
+    console.log(newUserMeeting)
+    const saved = await newUserMeeting.save().catch((err) => {
+        console.log("Error: ", err);
+        res.json({error: "Cannot join meeting at the moment."});
+    });
+
+    if(saved)
+        res.json({message: "Successfully joined the meeting. Please go to Registered Meeting tab for meetings that you have joined."});
+
+})
+
 module.exports = router;

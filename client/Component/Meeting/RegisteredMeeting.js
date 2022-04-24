@@ -29,6 +29,7 @@ import PencilAltIcon from "../../icons/PencilAlt";
 import SearchIcon from "../../icons/Search";
 import { meetingService } from "../../../server/services/meeting.service";
 import {authenticationService} from "../../../server/services/authentication.service";
+import axios from "axios";
 
 
 // From Material UI
@@ -64,15 +65,14 @@ const sortOptions = [
 ];
 
 const RegisteredMeeting = () => {
-    const [files, setFiles] = useState([]);
+    const [meetings, setMeetings] = useState([]);
     const currentUser = authenticationService.currentUserValue;
-
     useEffect(async () => {
         await meetingService
             .getByUserId(currentUser.id)
             .then((filesList) => {
                 //console.log(filesList)
-                setFiles(filesList);
+                setMeetings(filesList);
             })
             .catch((err) => {
                 console.log("Error: ", err);
@@ -155,17 +155,13 @@ const RegisteredMeeting = () => {
                                         <Checkbox color="primary" />
                                     </TableCell>
                                     <TableCell>Meeting ID</TableCell>
-                                    <TableCell>Mod User ID</TableCell>
-                                    <TableCell>Admin User ID</TableCell>
-                                    <TableCell>Company ID</TableCell>
-                                    <TableCell>Time Start</TableCell>
-                                    <TableCell>Time End</TableCell>
-                                    <TableCell align="right">Actions</TableCell>
+                                    <TableCell>User ID</TableCell>
+                                    <TableCell>Time Join</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {files.map((file) => (
-                                    <TableRow hover key={file.id}>
+                                {meetings.map((meeting) => (
+                                    <TableRow hover key={meeting.meeting_id}>
                                         <TableCell padding="checkbox">
                                             <Checkbox color="primary" />
                                         </TableCell>
@@ -178,38 +174,20 @@ const RegisteredMeeting = () => {
                                             >
                                                 <Box sx={{ ml: 1 }}>
                                                     <Link color="inherit" variant="subtitle2">
-                                                        {file.id}
+                                                        {meeting.meeting_id}
                                                     </Link>
                                                 </Box>
                                             </Box>
                                         </TableCell>
                                         <TableCell>
                                             <Typography color="textSecondary" variant="body2">
-                                                {file.mod_id}
+                                                {meeting.user_id}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
                                             <Typography color="textSecondary" variant="body2">
-                                                {file.admin_id}
+                                                {meeting.createdAt}
                                             </Typography>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Typography color="textSecondary" variant="body2">
-                                                {file.company_id}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Typography color="textSecondary" variant="body2">
-                                                {file.time_start}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell>
-                                            <Typography color="textSecondary" variant="body2">
-                                                {file.time_end}
-                                            </Typography>
-                                        </TableCell>
-                                        <TableCell align="right">
-                                            <Button variant="outlined">Join</Button>
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -219,7 +197,7 @@ const RegisteredMeeting = () => {
                 </Scrollbar>
                 <TablePagination
                     component="div"
-                    count={files.length}
+                    count={meetings.length}
                     onPageChange={() => {}}
                     onRowsPerPageChange={() => {}}
                     page={0}

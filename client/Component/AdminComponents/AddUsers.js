@@ -25,6 +25,15 @@ export default function AddUsers() {
             setSignupError("Enter valid Email!");
             return;
         }
+        if (!password) {
+            setSignupError("Passwords must not be empty");
+        }
+        else if (!role) {
+            setSignupError("Role must not be empty");
+        }
+        else if (!name) {
+            setSignupError("Full name must not be empty");
+        }
         else {
             setSignupError("");
             await axios.post("http://localhost:3000/api/v1/register", {email, password, role, name})

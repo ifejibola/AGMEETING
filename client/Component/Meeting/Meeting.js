@@ -28,6 +28,10 @@ import ArrowRightIcon from "../../icons/ArrowRight";
 import PencilAltIcon from "../../icons/PencilAlt";
 import SearchIcon from "../../icons/Search";
 import { meetingService } from "../../../server/services/meeting.service";
+import validator from "validator";
+import {userService} from "../../../server/services/user.service";
+import axios from "axios";
+import {authenticationService} from "../../../server/services/authentication.service";
 
 
 // From Material UI
@@ -63,14 +67,15 @@ const sortOptions = [
 ];
 
 const Meeting = () => {
-    const [files, setFiles] = useState([]);
+    const [meetings, setMeetings] = useState([]);
+    const currentUser = authenticationService.currentUserValue;
 
     useEffect(async () => {
         await meetingService
             .getAll()
             .then((filesList) => {
                 //console.log(filesList)
-                setFiles(filesList);
+                setMeetings(filesList);
             })
             .catch((err) => {
                 console.log("Error: ", err);
@@ -162,8 +167,8 @@ const Meeting = () => {
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {files.map((file) => (
-                                    <TableRow hover key={file.id}>
+                                {meetings.map((meeting) => (
+                                    <TableRow hover key={meeting.id}>
                                         <TableCell padding="checkbox">
                                             <Checkbox color="primary" />
                                         </TableCell>
@@ -176,38 +181,40 @@ const Meeting = () => {
                                             >
                                                 <Box sx={{ ml: 1 }}>
                                                     <Link color="inherit" variant="subtitle2">
-                                                        {file.id}
+                                                        {meeting.id}
                                                     </Link>
                                                 </Box>
                                             </Box>
                                         </TableCell>
                                         <TableCell>
                                             <Typography color="textSecondary" variant="body2">
-                                                {file.mod_id}
+                                                {meeting.mod_id}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
                                             <Typography color="textSecondary" variant="body2">
-                                                {file.admin_id}
+                                                {meeting.admin_id}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
                                             <Typography color="textSecondary" variant="body2">
-                                                {file.company_id}
+                                                {meeting.company_id}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
                                             <Typography color="textSecondary" variant="body2">
-                                                {file.time_start}
+                                                {meeting.time_start}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
                                             <Typography color="textSecondary" variant="body2">
-                                                {file.time_end}
+                                                {meeting.time_end}
                                             </Typography>
                                         </TableCell>
-                                        <TableCell align="right">
-                                            <Button variant="outlined">Join</Button>
+                                        <TableCell align="right" >
+                                            <Button variant="outlined" onClick={() => {
+                                                addUserMeeting(meeting.id, currentUser.id);
+                                            }}>Join</Button>
                                         </TableCell>
                                     </TableRow>
                                 ))}
@@ -217,7 +224,7 @@ const Meeting = () => {
                 </Scrollbar>
                 <TablePagination
                     component="div"
-                    count={files.length}
+                    count={meetings.length}
                     onPageChange={() => {}}
                     onRowsPerPageChange={() => {}}
                     page={0}
@@ -228,5 +235,11 @@ const Meeting = () => {
         </Box>
     );
 };
+
+function addUserMeeting(meetingId, userId) {
+    meetingService.addUserMeeting(meetingId, userId).then(response => {
+        alert(response);
+    });
+}
 
 export default Meeting;

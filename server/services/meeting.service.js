@@ -4,6 +4,7 @@ import axios from "axios";
 export const meetingService = {
     getAll,
     getByUserId,
+    addUserMeeting
 };
 
 async function getAll() {
@@ -11,7 +12,6 @@ async function getAll() {
     await axios.get("http://localhost:3000/api/v1/meetings", {
         headers: authHeader()
     }).then(meetingsList => {
-
         meetings.push(...meetingsList.data.meetings);
     }).catch((err)=> {
         console.log("Error: ", err);
@@ -31,4 +31,18 @@ async function getByUserId(id) {
     })
 
     return meetings;
+}
+
+async function addUserMeeting(meetingId, userId) {
+    let message;
+    await axios.get("http://localhost:3000/api/v1/meetings/add/" + meetingId + "/" + userId, {
+        headers: authHeader()
+    }).then(response => {
+        message = response.data.message;
+    }).catch((err)=> {
+        console.log("Error: ", err);
+        message = "An error occurred in the frontend. Please try again later."
+    })
+
+    return message;
 }
