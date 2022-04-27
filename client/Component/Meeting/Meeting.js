@@ -32,7 +32,8 @@ import validator from "validator";
 import {userService} from "../../../server/services/user.service";
 import axios from "axios";
 import {authenticationService} from "../../../server/services/authentication.service";
-
+import Plus from "../../icons/Plus";
+import AddModal from "./AddModal"
 
 // From Material UI
 const style = {
@@ -140,14 +141,7 @@ const Meeting = () => {
                             ))}
                         </TextField>
                     </Box>
-                    <Box
-                        sx={{
-                            m: 1,
-                            width: 240,
-                        }}
-                    >
-                        {/*/<FileModal />*/}
-                    </Box>
+                    {currentUser.role == "admin" && <AddModal id={currentUser.id} />}
                 </Box>
                 <Scrollbar>
                     <Box sx={{ minWidth: 700 }}>

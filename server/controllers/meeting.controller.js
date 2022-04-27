@@ -23,12 +23,6 @@ router.get("/meetings", passport.authenticate("jwt", {session: false} ),async(re
 // Get meetings by userId
 router.get("/meetings/user/:userId", passport.authenticate("jwt", {session: false} ),async(req, res) =>{
 
-    // const meetingsByUser = await userMeetingJunction.findAll({
-    //     where: { user_id: req.params.userId },
-    // }).catch((err)=> {
-    //     console.log("Error: ", err);
-    // });
-
     const meetingsByUser = await client.findAll({
         where: { id: req.params.userId },
         include: {
@@ -64,11 +58,26 @@ router.get("/meetings/add/:meetingId/:clientId", passport.authenticate("jwt", {s
     console.log(newUserMeeting)
     const saved = await newUserMeeting.save().catch((err) => {
         console.log("Error: ", err);
-        res.json({error: "Cannot join meeting at the moment."});
+        res.json({message: "Cannot join meeting at the moment."});
     });
 
     if(saved)
         res.json({message: "Successfully joined the meeting. Please go to Registered Meeting tab to see meetings that you have joined."});
+
+})
+
+router.post("/meetings/add", passport.authenticate("jwt", {session: false} ),async(req, res) =>{
+
+    const {modId, adminId, companyId, timeStart, timeEnd} = req.body;
+
+    const newMeeting = new meeting({mod_id: modId, admin_id: adminId, company_id: companyId, time_start: timeStart, time_end: timeEnd});
+    const saved = await newMeeting.save().catch((err) => {
+        console.log("Error: ", err);
+        res.json({message: "Either moderator/company Id does not exist. Please try again."});
+    });
+
+    if(saved)
+        res.json({message: "Successfully create a new meeting."});
 
 })
 

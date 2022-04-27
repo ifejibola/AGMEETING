@@ -30,6 +30,7 @@ import SearchIcon from "../../icons/Search";
 import { meetingService } from "../../../server/services/meeting.service";
 import {authenticationService} from "../../../server/services/authentication.service";
 import axios from "axios";
+import Plus from "../../icons/Plus";
 
 
 // From Material UI
@@ -136,14 +137,6 @@ const RegisteredMeeting = () => {
                                 </option>
                             ))}
                         </TextField>
-                    </Box>
-                    <Box
-                        sx={{
-                            m: 1,
-                            width: 240,
-                        }}
-                    >
-                        {/*/<FileModal />*/}
                     </Box>
                 </Box>
                 <Scrollbar>
