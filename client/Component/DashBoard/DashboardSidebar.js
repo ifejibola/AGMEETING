@@ -49,6 +49,11 @@ const sectionsAdmin = [
         path: "/Vault",
         icon: <ShoppingBagIcon fontSize="small" />,
       },
+      {
+        title: "Create Meeting",
+        path: "/Message",
+        icon: <ChatAltIcon fontSize='small'/>,
+      }
     ],
   },
 
@@ -71,7 +76,7 @@ const sectionsAdmin = [
           {
             title: "Stats",
             path: "/stats",
-          },
+          }
         ],
       },
       {
@@ -117,7 +122,7 @@ const sectionsClient = [
         icon: <ShoppingBagIcon fontSize="small" />,
       },
       {
-        title: "Message",
+        title: "Join Meeting",
         path: "/Message",
         icon: <ChatAltIcon fontSize='small'/>,
       }
