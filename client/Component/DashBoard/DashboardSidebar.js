@@ -50,7 +50,7 @@ const sectionsAdmin = [
         icon: <ShoppingBagIcon fontSize="small" />,
       },
       {
-        title: "Create Meeting",
+        title: "Create Chatroom",
         path: "/Message",
         icon: <ChatAltIcon fontSize='small'/>,
       }
@@ -122,7 +122,7 @@ const sectionsClient = [
         icon: <ShoppingBagIcon fontSize="small" />,
       },
       {
-        title: "Join Meeting",
+        title: "Join Chatroom",
         path: "/Message",
         icon: <ChatAltIcon fontSize='small'/>,
       }
