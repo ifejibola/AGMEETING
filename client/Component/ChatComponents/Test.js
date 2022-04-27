@@ -47,8 +47,10 @@ const Test = () => {
 
     return (
       userRole === "admin" || userRole === "moderator" ?
+      
       <div className="App">
         {!showChat ? (
+          <>
           <div className="joinChatContainer">
             <h3>Create A Chatroom</h3>
             {/* <input
@@ -67,9 +69,24 @@ const Test = () => {
             />
             <button onClick={createRoom}>Create</button>
           </div>
+          <div className="joinChatContainer">
+          <h5>Current available chatrooms</h5>
+              <table>
+                <tbody>
+                {roomList.length===0 ? 'No room available!': roomList.map((room)=>(
+                  <tr>
+                    <td><Typography>{room}</Typography></td>
+                    <td><button onClick={(e)=>{setRoom(room);joinRoom(room);}}>Join</button></td>
+                  </tr>
+                  ))}
+                </tbody>
+              </table>
+          </div>
+          </>
         ) : (
           <Chat socket={socket} username={username} room={room} />
         )}
+        
       </div>
 
       :
