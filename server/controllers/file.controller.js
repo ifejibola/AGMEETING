@@ -14,7 +14,7 @@ const passport = require("passport");
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     // cb = callback function
-    cb(null, "files");
+    cb(null, "./files");
   },
   filename: (req, file, cb) => {
     // the filename will be date.now() to stop it from duplicating
@@ -29,7 +29,7 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   // fileSize in bytes
-  limits: { fileSize: "1000000" },
+  limits: { fileSize: "10000000" },
   fileFilter: (req, file, cb) => {
     var ext = path.extname(file.originalname);
     if (ext !== ".pdf" && ext !== ".docx") {
@@ -73,20 +73,45 @@ router.get(
       return res.json({ message: "this files does not exists" });
     }
 
-    return res.json({ docFiles: allFiles });
+    return res.json({ theFiles: allFiles });
   }
 );
 
-//TODO: Fix this to get all files in the folder
-router.get("/file/:filename", (req, res) => {
-  // gets the filename
-  const { filename } = req.params;
-  const dirname = path.resolve();
-  const fullfilepath = path.join(dirname, "files/" + filename);
-  res.json("/file/:filename api");
-  // this will send back the file when requested
-  return res.sendFile(fullfilepath);
+router.get("/download/:fileId", async (req, res) => {
+  // try {
+  //   const file = await files.findById(req.params.id);
+  //   res.set({
+  //     "Content-Type": ".pdf",
+  //   });
+  //   res.sendFile(path.join(__dirname, "..", file.file_loc));
+  // } catch (error) {
+  //   res.status(400).send("Error while downloading file. Try again later.");
+  // }
+
+  const fileWithId = await files
+    .findOne({ where: { id: req.params.fileId } })
+    .catch((err) => {
+      console.log("Error: ", err);
+    });
+  if (!fileWithId) {
+    return res.json({ message: "file with that id not exists" });
+  }
+
+  res.set({
+    "Content-Type": "application/octet-stream; charset=utf-8",
+  });
+  return res.sendFile(path.join(__dirname, "../", "../", fileWithId.file_loc));
 });
+
+// router.get("/file/:filename", (req, res) => {
+//   // gets the filename
+//   const { filename } = req.params;
+//   const dirname = path.resolve();
+//   const fullfilepath = path.join(dirname, "files/" + filename);
+//   res.json("/file/:filename api");
+//   // this will send back the file when requested
+//   return res.sendFile(fullfilepath);
+// });
 
 // TODO update model with fileName instead of name
 //.single({front-end name})
