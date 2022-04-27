@@ -99,6 +99,10 @@ const sectionsClient = [
             title: "All Meetings",
             path: "/meeting",
           },
+          {
+            title: "Registered Meetings",
+            path: "/registeredmeeting",
+          },
         ],
         icon: <Calendar fontSize="small" />,
       },

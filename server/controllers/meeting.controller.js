@@ -68,7 +68,7 @@ router.get("/meetings/add/:meetingId/:clientId", passport.authenticate("jwt", {s
     });
 
     if(saved)
-        res.json({message: "Successfully joined the meeting. Please go to Registered Meeting tab for meetings that you have joined."});
+        res.json({message: "Successfully joined the meeting. Please go to Registered Meeting tab to see meetings that you have joined."});
 
 })
 

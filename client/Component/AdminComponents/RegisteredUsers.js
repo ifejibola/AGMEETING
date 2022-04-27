@@ -76,8 +76,12 @@ const RegisteredUsers = () => {
   useEffect(async () => {
     await userService
       .getAll()
-      .then((customersList) => {
-        setCustomers(customersList);
+      .then((customersList) =>{
+        console.log(customersList)
+        const sortedCustomerList = customersList.sort(function(a, b) {
+          return a.id - b.id;
+        });
+        setCustomers(sortedCustomerList);
       })
       .catch((err) => {
         console.log("Error: ", err);
@@ -151,6 +155,7 @@ const RegisteredUsers = () => {
                   <TableCell padding="checkbox">
                     <Checkbox color="primary" />
                   </TableCell>
+                  <TableCell>User Id</TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell>Email</TableCell>
                   <TableCell>Role</TableCell>
@@ -164,6 +169,7 @@ const RegisteredUsers = () => {
                     <TableCell padding="checkbox">
                       <Checkbox color="primary" />
                     </TableCell>
+                    <TableCell>{customer.id}</TableCell>
                     <TableCell>
                       <Box
                         sx={{
@@ -171,13 +177,6 @@ const RegisteredUsers = () => {
                           display: "flex",
                         }}
                       >
-                        <Avatar
-                          alt={customer.client_name}
-                          sx={{
-                            height: 42,
-                            width: 42,
-                          }}
-                        />
                         <Box sx={{ ml: 1 }}>
                           <Link color="inherit" variant="subtitle2">
                             {customer.client_name}
@@ -195,9 +194,6 @@ const RegisteredUsers = () => {
                     <TableCell align="right">
                       <IconButton>
                         <EditModal id={customer.id} />
-                      </IconButton>
-                      <IconButton>
-                        <ArrowRightIcon fontSize="small" />
                       </IconButton>
                     </TableCell>
                   </TableRow>
