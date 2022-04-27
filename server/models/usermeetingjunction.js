@@ -6,7 +6,7 @@ const meeting = require("./meeting")
 const userMeetingJunction = sequelize.define(
     'usermeetingjunction',
     {
-        meeting_id: {
+        meetingId: {
             type: DataTypes.INTEGER,
             references: {
                 model: meeting,
@@ -14,7 +14,7 @@ const userMeetingJunction = sequelize.define(
             },
             primaryKey: true,
         },
-        user_id: {
+        clientId: {
             type: DataTypes.INTEGER,
             references: {
                 model: client,

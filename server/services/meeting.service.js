@@ -29,7 +29,6 @@ async function getByUserId(id) {
     }).catch((err)=> {
         console.log("Error: ", err);
     })
-
     return meetings;
 }
 

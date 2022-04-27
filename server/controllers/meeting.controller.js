@@ -4,6 +4,7 @@ const meeting = require("../models/meeting");
 const userMeetingJunction = require("../models/usermeetingjunction")
 const jwt = require("jsonwebtoken");
 const passport = require("passport");
+const client = require("../models/client");
 
 router.get("/meetings", passport.authenticate("jwt", {session: false} ),async(req, res) =>{
 
@@ -22,9 +23,22 @@ router.get("/meetings", passport.authenticate("jwt", {session: false} ),async(re
 // Get meetings by userId
 router.get("/meetings/user/:userId", passport.authenticate("jwt", {session: false} ),async(req, res) =>{
 
-    const meetingsByUser = await userMeetingJunction.findAll({ where: { user_id: req.params.userId }}).catch((err)=> {
+    // const meetingsByUser = await userMeetingJunction.findAll({
+    //     where: { user_id: req.params.userId },
+    // }).catch((err)=> {
+    //     console.log("Error: ", err);
+    // });
+
+    const meetingsByUser = await client.findAll({
+        where: { id: req.params.userId },
+        include: {
+            model: meeting,
+        }
+    }).catch((err)=> {
         console.log("Error: ", err);
     });
+
+
 
     if(!meetingsByUser){
         return res.json({message: "You have no meeting right now."})
@@ -34,11 +48,11 @@ router.get("/meetings/user/:userId", passport.authenticate("jwt", {session: fals
 
 })
 
-router.get("/meetings/add/:meetingId/:userId", passport.authenticate("jwt", {session: false} ),async(req, res) =>{
+router.get("/meetings/add/:meetingId/:clientId", passport.authenticate("jwt", {session: false} ),async(req, res) =>{
 
-    const user_id = req.params.userId;
-    const meeting_id = req.params.meetingId;
-    const meetingByUser = await userMeetingJunction.findOne({ where: { user_id: user_id, meeting_id: meeting_id}}).catch((err)=> {
+    const clientId = req.params.clientId;
+    const meetingId = req.params.meetingId;
+    const meetingByUser = await userMeetingJunction.findOne({ where: { clientId: clientId, meetingId: meetingId}}).catch((err)=> {
         console.log("Error: ", err);
     });
 
@@ -46,7 +60,7 @@ router.get("/meetings/add/:meetingId/:userId", passport.authenticate("jwt", {ses
         return res.json({message: "You are already in this meeting."})
     }
 
-    const newUserMeeting = new userMeetingJunction({meeting_id, user_id});
+    const newUserMeeting = new userMeetingJunction({meetingId: meetingId, clientId: clientId});
     console.log(newUserMeeting)
     const saved = await newUserMeeting.save().catch((err) => {
         console.log("Error: ", err);

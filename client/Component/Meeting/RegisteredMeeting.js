@@ -71,8 +71,8 @@ const RegisteredMeeting = () => {
         await meetingService
             .getByUserId(currentUser.id)
             .then((filesList) => {
-                //console.log(filesList)
-                setMeetings(filesList);
+                console.log(filesList[0].meetings)
+                setMeetings(filesList[0].meetings);
             })
             .catch((err) => {
                 console.log("Error: ", err);
@@ -155,13 +155,15 @@ const RegisteredMeeting = () => {
                                         <Checkbox color="primary" />
                                     </TableCell>
                                     <TableCell>Meeting ID</TableCell>
-                                    <TableCell>User ID</TableCell>
-                                    <TableCell>Time Join</TableCell>
+                                    <TableCell>Time Start</TableCell>
+                                    <TableCell>Time End</TableCell>
+                                    <TableCell>Company Id</TableCell>
+                                    <TableCell>Admin Id</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {meetings.map((meeting) => (
-                                    <TableRow hover key={meeting.meeting_id}>
+                                    <TableRow hover key={meeting.id}>
                                         <TableCell padding="checkbox">
                                             <Checkbox color="primary" />
                                         </TableCell>
@@ -174,19 +176,29 @@ const RegisteredMeeting = () => {
                                             >
                                                 <Box sx={{ ml: 1 }}>
                                                     <Link color="inherit" variant="subtitle2">
-                                                        {meeting.meeting_id}
+                                                        {meeting.id}
                                                     </Link>
                                                 </Box>
                                             </Box>
                                         </TableCell>
                                         <TableCell>
                                             <Typography color="textSecondary" variant="body2">
-                                                {meeting.user_id}
+                                                {meeting.time_start}
                                             </Typography>
                                         </TableCell>
                                         <TableCell>
                                             <Typography color="textSecondary" variant="body2">
-                                                {meeting.createdAt}
+                                                {meeting.time_end}
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography color="textSecondary" variant="body2">
+                                                {meeting.company_id}
+                                            </Typography>
+                                        </TableCell>
+                                        <TableCell>
+                                            <Typography color="textSecondary" variant="body2">
+                                                {meeting.admin_id}
                                             </Typography>
                                         </TableCell>
                                     </TableRow>
