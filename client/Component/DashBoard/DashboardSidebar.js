@@ -14,6 +14,7 @@ import Scrollbar from '../../Scrollbar';
 
 import Modal from "./Interactions";
 import {authenticationService} from "../../../server/services/authentication.service";
+import Calendar from "../../icons/Calendar";
 const currentUser = authenticationService.currentUserValue;
 const sectionsAdmin = [
   {
@@ -23,6 +24,20 @@ const sectionsAdmin = [
         title: "Session",
         path: "/",
         icon: <ChartSquareBarIcon fontSize="small" />,
+      },
+      {
+        title: "Meeting",
+        children: [
+          {
+            title: "All Meetings",
+            path: "/meeting",
+          },
+          {
+            title: "Registered Meetings",
+            path: "/registeredmeeting",
+          },
+        ],
+        icon: <Calendar fontSize="small" />,
       },
       {
         title: "Agenda",
@@ -76,6 +91,16 @@ const sectionsClient = [
         title: "Session",
         path: "/",
         icon: <ChartSquareBarIcon fontSize="small" />,
+      },
+      {
+        title: "Meeting",
+        children: [
+          {
+            title: "All Meetings",
+            path: "/meeting",
+          },
+        ],
+        icon: <Calendar fontSize="small" />,
       },
       {
         title: "Agenda",

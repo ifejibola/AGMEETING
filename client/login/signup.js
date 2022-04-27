@@ -51,8 +51,11 @@ export default function SignUp() {
             setSignupError("Enter valid Email!");
             return;
         }
-        // check passwords are matching
-        if (password != passwordAgain) {
+        // check passwords are matching or empty
+        if (!password) {
+            setSignupError("Passwords must not be empty");
+        }
+        else if (password != passwordAgain) {
             setSignupError("Passwords must match");
         } else {
             setSignupError("");

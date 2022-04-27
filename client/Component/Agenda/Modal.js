@@ -36,11 +36,11 @@ const Modal = (props) => {
           gutterBottom
           variant="h4"
         >
-          The project requires an introduction
+          Add new agenda for the meeting
         </Typography>
         <Typography align="center" color="textSecondary" variant="subtitle2">
-          Write down a short note with your application regarding why you think
-          you&apos;d be a good fit for this position.
+          Add new agenda by filling all the indicated fields. Please be specific and professional about the agenda
+          you want to share.
         </Typography>
         <Box sx={{ mt: 3 }}>
           <TextField
