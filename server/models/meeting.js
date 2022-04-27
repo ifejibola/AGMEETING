@@ -18,7 +18,7 @@ const meeting = sequelize.define(
             type: DataTypes.INTEGER,
         },
         company_id: {
-            type: Sequelize.STRING,
+            type: DataTypes.INTEGER,
         },
         time_start: {
             allowNull: false,
