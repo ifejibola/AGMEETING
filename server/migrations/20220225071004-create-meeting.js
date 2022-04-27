@@ -26,8 +26,22 @@ module.exports = {
           key: 'id'
         }
       },
+      company_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model:{
+            tableName: 'company'
+          },
+          key: 'id'
+        }
+      },
       time_start: {
+        allowNull: false,
         type: Sequelize.DATE
+      },
+      time_end: {
+        allowNull: false,
+        type: DataTypes.DATE,
       },
       createdAt: {
         allowNull: false,
