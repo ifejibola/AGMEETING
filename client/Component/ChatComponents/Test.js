@@ -50,7 +50,7 @@ const Test = () => {
       <div className="App">
         {!showChat ? (
           <div className="joinChatContainer">
-            <h3>Create A Room</h3>
+            <h3>Create A Chatroom</h3>
             {/* <input
               type="text"
               placeholder="John..."
@@ -78,7 +78,7 @@ const Test = () => {
         {
         !showChat ? (
           <div className="joinChatContainer">
-            <h3>Join A Meeting</h3>
+            <h3>Join A Chatroom</h3>
             <div>
               <table>
                 <tbody>
