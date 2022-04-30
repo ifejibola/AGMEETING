@@ -13,7 +13,7 @@ module.exports = {
                 },
                 primaryKey: true,
             },
-            userId: {
+            clientId: {
                 type: Sequelize.INTEGER,
                 references: {
                     model:{
