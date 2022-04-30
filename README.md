@@ -3,9 +3,9 @@
 NPM Version : 12.18.2
 
 # Installation
-
+```
 npm install
-
+```
 # Starting and running database
 *Make sure you have postgreSQL installed, PgAdmin 4 is recommened to install to keep track of the database
 
@@ -38,7 +38,7 @@ npm run dev:start
 - Other users can join the chatrooms that admin create and start real-time conversation
 ## Meeting management:
 - Admin can create meeting and assign moderator to the meeting
-- other users can join the meeting 
+- Other users can join the meeting 
 
 
 Supervisor: Ife Ajibola – ife@ncra.ca
