@@ -20,7 +20,7 @@ router.post("/login", async(req, res) =>{
         return res.json({message: "Email or password does not match"});
     }
 
-    const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, process.env.JWT_SECRET, { expiresIn: '30m' })
+    const jwtToken = jwt.sign({ id: userWithEmail.id, email: userWithEmail.email }, process.env.JWT_SECRET, { expiresIn: '7d' })
 
     res.json({ message: "Welcome back! ", token: jwtToken, user: userWithEmail});
 })

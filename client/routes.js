@@ -8,6 +8,8 @@ import Land from "./Land";
 import GroupedList3 from "./Component/Session/Session";
 import Agenda from "./Component/Agenda/agenda";
 import Vault from "./Component/Vault/vault";
+import Meeting from "./Component/Meeting/Meeting"
+import RegisteredMeeting from "./Component/Meeting/RegisteredMeeting"
 
 import About from "./About";
 import NoMatch from "./NoMatch";
@@ -22,7 +24,6 @@ import EventDetails from "./Component/DashBoard/Events/EventDetails";
 import SignIn from "./login/signin";
 import SignUp from "./login/signup";
 import LandingPage from "./LandingPage";
-
 //Programmatic routing model this basically contains all the routes for the applications, new routes must be added to this array after the components are created.
 const routes = [
   {
@@ -49,6 +50,14 @@ const routes = [
       {
         path: "/agenda",
         element: <Agenda />,
+      },
+      {
+        path: "/meeting",
+        element: <Meeting />,
+      },
+      {
+        path: "/registeredmeeting",
+        element: <RegisteredMeeting />,
       },
       {
         path: "/vault",

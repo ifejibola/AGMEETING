@@ -1,6 +1,5 @@
 
 import { BehaviorSubject } from 'rxjs';
-
 import { handleResponse } from '../helpers/handle-response';
 import axios from "axios";
 
@@ -54,5 +53,7 @@ async function login(email, password) {
 function logout() {
     // remove user from local storage to log user out
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
     currentUserSubject.next(null);
+    tokenSubject.next(null);
 }

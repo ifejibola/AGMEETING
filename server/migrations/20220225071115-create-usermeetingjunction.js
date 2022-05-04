@@ -2,29 +2,26 @@
 module.exports = {
     async up(queryInterface, Sequelize) {
         await queryInterface.createTable('usermeetingjunction', {
-            id: {
-                allowNull: false,
-                autoIncrement: true,
-                primaryKey: true,
-                type: Sequelize.INTEGER
-            },
-            meeting_id: {
+            meetingId: {
                 type: Sequelize.INTEGER,
                 references: {
                     model:{
                         tableName: 'meeting'
                     },
                     key: 'id'
-                }
+                    ,
+                },
+                primaryKey: true,
             },
-            user_id: {
+            clientId: {
                 type: Sequelize.INTEGER,
                 references: {
                     model:{
                         tableName: 'client'
                     },
                     key: 'id'
-                }
+                },
+                primaryKey: true,
             },
             createdAt: {
                 allowNull: false,

@@ -14,6 +14,7 @@ import Scrollbar from '../../Scrollbar';
 
 import Modal from "./Interactions";
 import {authenticationService} from "../../../server/services/authentication.service";
+import Calendar from "../../icons/Calendar";
 const currentUser = authenticationService.currentUserValue;
 const sectionsAdmin = [
   {
@@ -25,6 +26,20 @@ const sectionsAdmin = [
         icon: <ChartSquareBarIcon fontSize="small" />,
       },
       {
+        title: "Meeting",
+        children: [
+          {
+            title: "All Meetings",
+            path: "/meeting",
+          },
+          {
+            title: "Your Meetings",
+            path: "/registeredmeeting",
+          },
+        ],
+        icon: <Calendar fontSize="small" />,
+      },
+      {
         title: "Agenda",
         path: "/agenda",
         icon: <ChartPieIcon fontSize="small" />,
@@ -34,6 +49,11 @@ const sectionsAdmin = [
         path: "/Vault",
         icon: <ShoppingBagIcon fontSize="small" />,
       },
+      {
+        title: "Create Chatroom",
+        path: "/Message",
+        icon: <ChatAltIcon fontSize='small'/>,
+      }
     ],
   },
 
@@ -56,7 +76,7 @@ const sectionsAdmin = [
           {
             title: "Stats",
             path: "/stats",
-          },
+          }
         ],
       },
       {
@@ -78,6 +98,20 @@ const sectionsClient = [
         icon: <ChartSquareBarIcon fontSize="small" />,
       },
       {
+        title: "Meeting",
+        children: [
+          {
+            title: "All Meetings",
+            path: "/meeting",
+          },
+          {
+            title: "Your Meetings",
+            path: "/registeredmeeting",
+          },
+        ],
+        icon: <Calendar fontSize="small" />,
+      },
+      {
         title: "Agenda",
         path: "/agenda",
         icon: <ChartPieIcon fontSize="small" />,
@@ -88,7 +122,7 @@ const sectionsClient = [
         icon: <ShoppingBagIcon fontSize="small" />,
       },
       {
-        title: "Message",
+        title: "Join Chatroom",
         path: "/Message",
         icon: <ChatAltIcon fontSize='small'/>,
       }

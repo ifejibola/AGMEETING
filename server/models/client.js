@@ -44,9 +44,13 @@ const client = sequelize.define(
   }
 );
 
-client.hasOne(company, {
+company.hasMany(client, {
   foreignKey: "company_id",
 });
-company.belongsTo(client);
+client.belongsTo(company,  {
+    foreignKey: {
+        name: "company_id"
+    }
+});
 
 module.exports = client;

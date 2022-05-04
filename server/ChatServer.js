@@ -4,7 +4,9 @@ const cors = require('cors')
 const{Server} =require("socket.io")
 const http = require('http')
 
-const PORT  = process.env.PORT || 4000
+const PORT  = process.env.PORT || 5000
+
+// var rooms = [];
 
 app.use(cors());
 const server = http.createServer(app)
@@ -28,8 +30,25 @@ io.on("connection", (socket)=>{
   socket.on("disconnect" , ()=>{
     console.log("user disconnected", socket.id);
   });
+  socket.on("listRoom", function(){
+    socket.emit('allRooms', getActiveRooms());
+  });
 });
 
 server.listen(PORT, ()=>{
-console.log('chat server online')
+console.log('chat server running...')
 });
+
+
+function getActiveRooms() {
+  // Convert map into 2D list:
+  // ==> [['4ziBKG9XFS06NdtVAAAH', Set(1)], ['room1', Set(2)], ...]
+  const arr = Array.from(io.sockets.adapter.rooms);
+  // Filter rooms whose name exist in set:
+  // ==> [['room1', Set(2)], ['room2', Set(2)]]
+  const filtered = arr.filter(room => !room[1].has(room[0]))
+  // Return only the room name: 
+  // ==> ['room1', 'room2']
+  const res = filtered.map(i => i[0]);
+  return res;
+}
